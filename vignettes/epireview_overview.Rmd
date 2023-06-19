@@ -1,0 +1,9 @@
+---
+title: "Epireview"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Epireview}
+  %\usepackage[utf8]{inputenc}
+---
