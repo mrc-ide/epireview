@@ -13,6 +13,9 @@ This will have all the up to date Tables & Figures for Marburg
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 source('../R/quality_assessment.R')
+library(tidyverse)
+library(patchwork)
+library(ggplot2)
 ```
 
 

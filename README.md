@@ -1,5 +1,14 @@
 # epireview
 
+<!-- badges: start -->
+[![R build status](https://github.com/mrc-ide/EpiEstim/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
+<!-- badges: end -->
+
+epireview is a tool to obtain the latest data from the Priority Pathogen Review Group (PERG) and contains tools to update data from new, peer-reviewed papers for existing pathogens in the database or to add entirely new pathogens.
+To install the latest version, use:
+```r
+devtools::install_github("mrc-ide/epireview", build_vignettes = TRUE)
+```
 
 ## Project overview
 The COVID-19 pandemic has highlighted the critical role that mathematical modelling can play in supporting evidence-based decision-making during outbreaks (e.g. to project the expected epidemic size, the required hospital capacity and assess the potential population-level impact of interventions). However, early in an epidemic, modelling efforts can be hampered and delayed by the lack of a centralised resource summarising existing model structures and input parameters for the disease of interest. Literature reviews are therefore often conducted during epidemics to identify plausible parameter ranges and/or existing mathematical model structures (e.g. Van Kerkhove et al. Scientific data 2015) and are mostly limited to individual parameters. We propose that such literature reviews would be best conducted in advance of the next epidemic and be comprehensive across all relevant transmission and modelling parameters, with results stored in a dynamic database that could be updated as new information becomes available. This would streamline real-time modelling pipelines and in turn enable more rapid generation of evidence to support timely decision making. A group of ~20 volunteer researchers currently or formerly at Imperial College London with an interest in outbreaks are working together to systematically review the mathematical models and parameters for the nine World Health Organization (WHO) 2019 blue-print priority pathogens: Nairo virus (Crimean-Congo haemorrhagic fever), Ebola virus, Henipa virus, Lassa mammarenavirus, Marburg virus, Middle East respiratory syndrome coronavirus (MERS-CoV), Rift Valley fever virus, Severe Acute Respiratory Syndrome coronavirus (SARS-CoV-1), and Zika virus. These are pathogens, or strains thereof, for which there are no approved vaccines or treatments and hence where we anticipate mathematical modelling is likely to play a major role in supporting the epidemic response. We do not include SARS-CoV-2 because vaccines exist for this pathogen and the body of literature far exceeds the capacity of our team. For each pathogen, we will review published mathematical models, information on transmission, evolution, natural history and severity, as well as seroprevalence studies and reported sizes of previous outbreaks (see Table 1). The quality of each paper will also be assessed as part of the review. 
