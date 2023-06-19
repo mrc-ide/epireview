@@ -5,10 +5,6 @@
 #' marburg_quality_assessment_plots()
 #' @export (the export tag just allows the function to be exported)
 
-library(ggplot2)
-library(tidyverse)
-library(patchwork)
-
 quality_assessment_plots <- function(location_prepend='',pathogen='marburg')
 {
   quality <- read_csv(paste0(location_prepend,"data/",pathogen,"_article.csv"))
