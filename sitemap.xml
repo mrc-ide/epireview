@@ -24,4 +24,10 @@
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/index.html</loc>
   </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/load_data.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/quality_assessment_plots.html</loc>
+  </url>
 </urlset>
