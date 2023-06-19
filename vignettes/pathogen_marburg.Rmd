@@ -1,0 +1,22 @@
+---
+title: "Marburg Virus Disease"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{pathogen_marburg}
+  %\usepackage[utf8]{inputenc}
+---
+
+This will have all the up to date Tables & Figures for Marburg
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+source('../R/marburg/quality_assessment.R')
+```
+
+
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+marburg_quality_assessment_plots(location_prepend = '../')
+```
+
