@@ -15,7 +15,11 @@ append_new_entry_to_table <- function(pathogen=NA, table_type=NA, new_row=NA, va
 
   # check that schemas match
   if(!((sum( colnames(new_row) == colnames(old_table) ) / length( colnames(new_row )) ) == 1))
-    break
+    stop('Schemas of new row and data sets do not match')
+
+  # check that the entry doesn't exist already -- create same for other table types as well
+  if( table_type=='article' & new_row$article_id %in% old_table$article_id)
+    stop('article_id already exists in the data set')
 
   new_table <- rbind(old_table,new_row)
 
