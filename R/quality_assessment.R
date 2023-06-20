@@ -9,6 +9,7 @@
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme_bw xlab ylab
 #' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs ggplot_add
+#' @importFrom patchwork wrap_plots
 #' @examples
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
@@ -76,7 +77,7 @@ quality_assessment_plots <- function(pathogen = NA)
     coord_flip() +
     theme(legend.position = 'bottom')
 
-  return(QA_answers + labs(tag = "A") + QA_time_series + labs(tag = "B"))
+  return(wrap_plots(QA_answers + labs(tag = "A") + QA_time_series + labs(tag = "B")))
 }
 
 
