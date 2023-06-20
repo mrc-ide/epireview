@@ -17,7 +17,9 @@ load_data <- function(table_type = NA, pathogen = NA)
     stop("pathogen name must be supplied")
   }
 
-  data_tbl <- read.csv(paste0('data/', pathogen, '_', table_type, '.csv'))
+  data_tbl <- readr::read_csv(system.file("data",
+                                          paste0(pathogen, "_", table_type, ".csv"),
+                                          package = "epireview"))
   return(data_tbl)
 }
 
