@@ -2,6 +2,12 @@
 #'
 #' @param pathogen pathogen data set to consider
 #' @return two plots for quality assessment
+#' @importFrom readr read_csv
+#' @importFrom dplyr %>% filter group_by ungroup count n starts_with mutate
+#' case_when summarize
+#' @importFrom tidyr pivot_longer
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme_bw xlab ylab
+#' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs
 #' @examples
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
