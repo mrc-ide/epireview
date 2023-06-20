@@ -6,6 +6,9 @@
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
 
+library(tidyverse)
+library(patchwork)
+
 quality_assessment_plots <- function(pathogen = NA)
   {
 
