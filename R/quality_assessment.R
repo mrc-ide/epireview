@@ -5,9 +5,10 @@
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% filter group_by ungroup count n starts_with mutate
 #' case_when summarize
+#' @importFrom readr read_csv
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme_bw xlab ylab
-#' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs
+#' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs ggplot_add
 #' @examples
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
@@ -20,9 +21,9 @@ quality_assessment_plots <- function(pathogen = NA)
     stop("pathogen name must be supplied")
   }
 
-  quality <- readr::read_csv(system.file("data",
-                                         paste0(pathogen, "_article.csv"),
-                                         package = "epireview"))
+  quality <- read_csv(system.file("data",
+                                  paste0(pathogen, "_article.csv"),
+                                  package = "epireview"))
 
   # time series plot
   QA_time_series <- quality %>%
