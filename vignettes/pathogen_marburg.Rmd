@@ -20,6 +20,6 @@ library(ggplot2)
 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-quality_assessment_plots(pathogen = 'marburg', vignette = TRUE)
+quality_assessment_plots(pathogen = "marburg")
 ```
 

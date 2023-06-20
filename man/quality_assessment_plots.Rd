@@ -4,12 +4,10 @@
 \alias{quality_assessment_plots}
 \title{Plots for the quality assessment of the included studies}
 \usage{
-quality_assessment_plots(pathogen = NA, vignette = NA)
+quality_assessment_plots(pathogen = NA)
 }
 \arguments{
 \item{pathogen}{pathogen data set to consider}
-
-\item{vignette}{if TRUE file path changes so that data can be accessed}
 }
 \value{
 two plots for quality assessment

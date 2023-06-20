@@ -1,24 +1,21 @@
 #' Plots for the quality assessment of the included studies
 #'
 #' @param pathogen pathogen data set to consider
-#' @param vignette if TRUE file path changes so that data can be accessed
 #' @return two plots for quality assessment
 #' @examples
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
 
-quality_assessment_plots <- function(pathogen = NA, vignette = NA)
+quality_assessment_plots <- function(pathogen = NA)
   {
 
   if(is.na(pathogen)){
     stop("pathogen name must be supplied")
   }
 
-  if(is.na(vignette)){
-    quality <- read_csv(paste0("data/", pathogen, "_article.csv"))
-  } else {
-    quality <- read_csv(paste0("../data/", pathogen, "_article.csv"))
-  }
+  quality <- readr::read_csv(system.file("data",
+                                         paste0(pathogen, "_article.csv"),
+                                         package = "epireview"))
 
   # time series plot
   QA_time_series <- quality %>%
