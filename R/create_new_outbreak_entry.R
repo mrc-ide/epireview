@@ -33,7 +33,7 @@ create_new_outbreak_entry <- function(pathogen = NA,
   new_row              <- as_tibble_row(new_outbreak)
 
   # generate the below quanties
-  new_row$article_id   <- max(old_outbreaks$outbreak_id) + 1
+  new_row$outbreak_id  <- max(old_outbreaks$outbreak_id) + 1
 
   new_row              <- new_row %>% dplyr::select(colnames(old_outbreaks))
 
