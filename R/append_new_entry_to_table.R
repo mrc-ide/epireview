@@ -27,6 +27,8 @@ append_new_entry_to_table <- function(pathogen=NA, table_type=NA, new_row=NA, va
   {
     if(table_type=='article')     # if not valid it will fail here.
       create_new_article_entry(pathogen = pathogen, new_article = new_row %>% as.vector())
+    if(table_type=='outbreak')     # if not valid it will fail here.
+      create_new_outbreak_entry(pathogen = pathogen, new_outbreak = new_row %>% as.vector())
   }
 
   if(write_table) write.csv(new_table,paste0('data/', pathogen, '_', table_type, '.csv'))
