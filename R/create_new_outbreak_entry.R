@@ -41,14 +41,23 @@ create_new_outbreak_entry <- function(pathogen = NA,
   if(!(new_row$article_id %in% articles$article_id & articles[articles$article_id==new_row$article_id,]$covidence_id == new_row$covidence_id))
     stop('Article_id + Covidence_id pair does not exist in article data')
 
+  #available options for fields
+  file_path_ob  <- system.file("data", "access_db_dropdown_outbreaks.csv", package = "epireview")
+  if(file_path_ob=="") file_path_ob <- "data/access_db_dropdown_outbreaks.csv"
+  model_options <- read_csv(file_path_ob)
   #validate that the entries make sense
 
   # (1) Valid outbreak_country -- should check against approved list
   if(!is.character(new_row$outbreak_country) | is.na(new_row$outbreak_country))
     stop('No outbreak_country set')
+  for( country in strsplit(new_outbreak$outbreak_country,",")[[1]])
+    if(!(country %in% model_options$`Outbreak country`))
+      stop(paste(country,'not valid'))
   # (2) Need valid outbreak_date_year
   if(new_row$outbreak_date_year < 1800 | new_row$outbreak_date_year > (as.integer(substring(Sys.Date(),1,4))+2))
     stop('Publication year outside allowed range')
+  if(!is.character(new_row$cases_mode_detection) | is.na(new_row$cases_mode_detection) | !(new_row$cases_mode_detection %in% model_options$`Detection mode`))
+    stop(paste0('Case dection mode ',new_row$cases_mode_detection), ' not recognised')
 
   return(new_row)
 }
