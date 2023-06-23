@@ -1,5 +1,5 @@
 ---
-title: "Marburg Virus Disease"
+title: "Marburg Virus Disease (MVD)"
 date: "Latest update: `r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
@@ -10,7 +10,19 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-This will have all the up to date Tables & Figures for Marburg
+In 2018, the World Health Organization (WHO) published a list of nine known pathogens (in addition to an unknown _Pathogen X_) for research and development (R&D) prioritisation, due to both their epidemic and pandemic potential and the absence of licensed vaccines or therapeutics. Among these prioritised pathogens is MVD, a  highly-lethal infectious _Filoviridae_ single-stranded RNA virus first described in Germany and Serbia (formerly Yugoslavia) in 1967. Subsequent outbreaks of this virus have primarily occurred in sub-Saharan Africa. The Pathogen Epidemiology Review Group (PERG) has published a Systemtic Review for MVD, if you use any of our results please cite our paper:
+
+> @article{marburg_systematic_review_2023,
+ author={},  
+ year={2023},  
+ title={{Marburg Virus Disease outbreaks, mathematical models, and disease parameters: a Systematic Review}},  
+ journal={},  
+ doi={},  
+}
+
+All Tables and Figures from the paper are re-produced below on the **latest** available data in our data set. 
+
+
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -31,6 +43,7 @@ library(flextable)
 ```
 
 ## Outbreaks
+
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
 file_path_ob <- system.file("data", "marburg_outbreak.csv", package = "epireview")
 if(file_path_ob=="") file_path_ob <- paste0('../data/marburg_outbreak.csv')
