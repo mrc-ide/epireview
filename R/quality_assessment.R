@@ -15,16 +15,16 @@
 #' @export
 
 
-quality_assessment_plots <- function(pathogen = NA)
+quality_assessment_plots <- function(pathogen = NA, prepend="")
   {
 
   if(is.na(pathogen)){
     stop("pathogen name must be supplied")
   }
 
-  quality <- read_csv(system.file("data",
-                                  paste0(pathogen, "_article.csv"),
-                                  package = "epireview"))
+  file_path <- system.file("data", paste0(pathogen, "_article.csv"), package = "epireview")
+  if(file_path=="") file_path <- paste0(prepend,'data/',pathogen, "_article.csv")
+  quality   <- read_csv(file_path)
 
   # time series plot
   QA_time_series <- quality %>%
