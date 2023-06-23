@@ -2,7 +2,7 @@
 #'
 #' @param df data with outbreak information
 #' @param pathogen name of pathogen
-#' @return return data for new row to be added with append_new_entry_to_table function
+#' @return returns flextable
 #' @examples
 #'
 #' @export
