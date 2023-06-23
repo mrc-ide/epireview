@@ -13,13 +13,48 @@ This will have all the up to date Tables & Figures for Marburg
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 source('../R/quality_assessment.R')
+source('../R/outbreak_table.R')
+source('../R/date_start.R')
 library(tidyverse)
 library(patchwork)
 library(ggplot2)
+library(flextable)
 ```
 
+## Outbreaks
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_ob <- system.file("data", paste0(pathogen, "_outbreak.csv"), package = "epireview")
+if(file_path_ob=="") file_path_ob <- paste0('../data/marburg_outbreak.csv')
+outbreak     <- read_csv(file_path_ob)
+
+file_path_ar <- system.file("data", paste0(pathogen, "_article.csv"), package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname,year_publication),
+                  all.x=TRUE, by="covidence_id") %>%
+  mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
+         outbreak_country = str_replace_all(outbreak_country,";",", "),
+         outbreak_country = str_replace_all(outbreak_country, "Yuogslavia", "Yugoslavia"),
+         outbreak_country = str_replace_all(outbreak_country, "Congo, Dem. Rep.", "Democratic Republic of the Congo"),
+         outbreak_location = str_replace_all(outbreak_location, "Marburg (23), Frankfurt am Main (6), Belgrade (2)",
+                                             "Marburg, Frankfurt am Main, Belgrade"),
+         cases_mode_detection = gsub("[()]", "", str_replace_all(cases_mode_detection, "(PCR etc)", " "))) %>%
+  dplyr::arrange(article_label, -year_publication)
+
+
+outbreak_table(df,'marburg')
+```
+
+## Parameters
+
+
+## Quality Assessment
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-quality_assessment_plots(pathogen = "marburg")
+test <- system.file("data", paste0(pathogen, "_outbreak.csv"), package = "epireview")
+if(test=="") file_prepend = "../" else file_prepend = ""
+
+quality_assessment_plots(pathogen = "marburg",prepend = file_prepend)
 ```
 
