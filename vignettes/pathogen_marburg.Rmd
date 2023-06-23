@@ -52,7 +52,7 @@ outbreak_table(df,'marburg')
 ## Quality Assessment
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-test <- system.file("data", paste0(pathogen, "_outbreak.csv"), package = "epireview")
+test <- system.file("data", paste0("marburg_outbreak.csv"), package = "epireview")
 if(test=="") file_prepend = "../" else file_prepend = ""
 
 quality_assessment_plots(pathogen = "marburg",prepend = file_prepend)
