@@ -23,11 +23,11 @@ library(flextable)
 
 ## Outbreaks
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-file_path_ob <- system.file("data", paste0(pathogen, "_outbreak.csv"), package = "epireview")
+file_path_ob <- system.file("data", "marburg_outbreak.csv", package = "epireview")
 if(file_path_ob=="") file_path_ob <- paste0('../data/marburg_outbreak.csv')
 outbreak     <- read_csv(file_path_ob)
 
-file_path_ar <- system.file("data", paste0(pathogen, "_article.csv"), package = "epireview")
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
@@ -52,7 +52,7 @@ outbreak_table(df,'marburg')
 ## Quality Assessment
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-test <- system.file("data", paste0("marburg_outbreak.csv"), package = "epireview")
+test <- system.file("data", "marburg_outbreak.csv", package = "epireview")
 if(test=="") file_prepend = "../" else file_prepend = ""
 
 quality_assessment_plots(pathogen = "marburg",prepend = file_prepend)
