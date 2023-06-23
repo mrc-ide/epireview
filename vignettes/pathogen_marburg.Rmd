@@ -22,7 +22,12 @@ In 2018, the World Health Organization (WHO) published a list of nine known path
 
 All Tables and Figures from the paper are re-produced below on the **latest** available data in our data set. 
 
-
+```{css echo=FALSE}
+.flextable-shadow-host{
+  overflow: scroll;
+  white-space: nowrap;
+}
+```
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
