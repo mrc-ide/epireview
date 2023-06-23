@@ -40,8 +40,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname,year_publication),
-                  all.x=TRUE, by="covidence_id") %>%
+df <- left_join(outbreak, articles %>% dplyr::select(article_id, first_author_surname,year_publication),  by="article_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
          outbreak_country = str_replace_all(outbreak_country,";",", "),
          outbreak_country = str_replace_all(outbreak_country, "Yuogslavia", "Yugoslavia"),
@@ -50,7 +49,6 @@ df <- merge(outbreak, articles %>% dplyr::select(covidence_id, first_author_surn
                                              "Marburg, Frankfurt am Main, Belgrade"),
          cases_mode_detection = gsub("[()]", "", str_replace_all(cases_mode_detection, "(PCR etc)", " "))) %>%
   dplyr::arrange(article_label, -year_publication)
-
 
 outbreak_table(df,'marburg')
 ```
@@ -67,8 +65,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
-            all.x = TRUE, by = 'article_id') %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication), by = 'article_id') %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
          population_country = str_replace_all(population_country, ";", ", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -96,8 +93,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
-            all.x = TRUE, by = 'article_id') %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication), by = 'article_id') %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
          population_country = str_replace_all(population_country, ";", ", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -116,8 +112,7 @@ forest_plot_severity(df)
 ```
 Naive CFRs computed from outbreak data
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df_out <- merge(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication),
-                all.x = TRUE, by = "covidence_id") %>%
+df_out <- left_join(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication), by = "covidence_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
          outbreak_country = str_replace_all(outbreak_country, ";", ", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -173,8 +168,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
-            all.x=TRUE, by="article_id") %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication), by="article_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
          population_country = str_replace_all(population_country,";",", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -192,8 +186,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
-            all.x = TRUE, by = 'article_id') %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication), by = 'article_id') %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
          population_country = str_replace_all(population_country, ";", ", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -221,8 +214,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
-            all.x=TRUE, by="article_id") %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication), by="article_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
          population_country = str_replace_all(population_country,";",", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -241,8 +233,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
-            all.x = TRUE, by = 'article_id') %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication), by = 'article_id') %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
          population_country = str_replace_all(population_country, ";", ", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
@@ -270,8 +261,7 @@ file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
 if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
-df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
-            all.x=TRUE, by="article_id") %>%
+df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication), by="article_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
          population_country = str_replace_all(population_country,";",", ")) %>%
   dplyr::arrange(article_label, -year_publication) %>%
