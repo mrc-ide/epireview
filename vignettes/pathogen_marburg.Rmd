@@ -1,7 +1,9 @@
 ---
 title: "Marburg Virus Disease"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+date: "Latest update: `r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{pathogen_marburg}
@@ -14,6 +16,13 @@ This will have all the up to date Tables & Figures for Marburg
 knitr::opts_chunk$set(echo = FALSE)
 source('../R/quality_assessment.R')
 source('../R/outbreak_table.R')
+source('../R/forest_plot_mutations.R')
+source('../R/forest_plot_r.R')
+source('../R/forest_plot_delays.R')
+source('../R/forest_plot_severity.R')
+source('../R/delay_table.R')
+source('../R/risk_table.R')
+source('../R/seroprevalence_table.R')
 source('../R/date_start.R')
 library(tidyverse)
 library(patchwork)
@@ -48,6 +57,228 @@ outbreak_table(df,'marburg')
 
 ## Parameters
 
+### Reproduction numbers
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
+            all.x = TRUE, by = 'article_id') %>%
+  mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
+         population_country = str_replace_all(population_country, ";", ", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) %>%
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, (parameter_uncertainty_type == "Range" & !is.na(parameter_lower_bound) & parameter_class == "Human delay"), NA),
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, (parameter_uncertainty_type=="Range" & !is.na(parameter_upper_bound) & parameter_class == "Human delay"), NA)) %>%
+  rowwise() %>% 
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, parameter_data_id == 43, parameter_uncertainty_lower_value * 1e-4),   # need to adjust for scaling
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, parameter_data_id == 43, parameter_uncertainty_upper_value * 1e-4)) %>%             # need to adjust for scaling
+  mutate(parameter_value = replace(parameter_value, parameter_data_id == 34, 0.93),
+         cfr_ifr_method = replace(cfr_ifr_method, str_starts(parameter_type,"Severity") & is.na(cfr_ifr_method), "Unknown")) %>%
+  mutate(parameter_value_type = ifelse(parameter_data_id == 16, 'Other', parameter_value_type),
+         parameter_value_type = ordered(parameter_value_type, levels = c('Mean','Median','Standard Deviation','Other','Unspecified') )) 
+
+forest_plot_R(df)
+```
+
+### Severity
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
+            all.x = TRUE, by = 'article_id') %>%
+  mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
+         population_country = str_replace_all(population_country, ";", ", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) %>%
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, (parameter_uncertainty_type == "Range" & !is.na(parameter_lower_bound) & parameter_class == "Human delay"), NA),
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, (parameter_uncertainty_type=="Range" & !is.na(parameter_upper_bound) & parameter_class == "Human delay"), NA)) %>%
+  rowwise() %>% 
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, parameter_data_id == 43, parameter_uncertainty_lower_value * 1e-4),   # need to adjust for scaling
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, parameter_data_id == 43, parameter_uncertainty_upper_value * 1e-4)) %>%             # need to adjust for scaling
+  mutate(parameter_value = replace(parameter_value, parameter_data_id == 34, 0.93),
+         cfr_ifr_method = replace(cfr_ifr_method, str_starts(parameter_type,"Severity") & is.na(cfr_ifr_method), "Unknown")) %>%
+  mutate(parameter_value_type = ifelse(parameter_data_id == 16, 'Other', parameter_value_type),
+         parameter_value_type = ordered(parameter_value_type, levels = c('Mean','Median','Standard Deviation','Other','Unspecified') )) 
+
+forest_plot_severity(df)
+```
+Naive CFRs computed from outbreak data
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+df_out <- merge(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication),
+                all.x = TRUE, by = "covidence_id") %>%
+  mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
+         outbreak_country = str_replace_all(outbreak_country, ";", ", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) %>%
+  filter(!is.na(deaths) & !is.na(cases_confirmed)) %>% 
+  mutate(cases_suspected = replace_na(cases_suspected, 0),
+         parameter_value = deaths/(cases_confirmed + cases_suspected)*100,
+         cfr_ifr_numerator = deaths,
+         cfr_ifr_denominator = cases_confirmed + cases_suspected,
+         cfr_ifr_method = "Naive",
+         parameter_class = "Severity",
+         parameter_type = "Severity - case fatality rate (CFR)",
+         parameter_uncertainty_lower_value = NA,
+         parameter_uncertainty_upper_value = NA,
+         outbreak_year_cnt = str_replace(paste0(outbreak_country, " (",outbreak_start_year, ")"), "NA", "unknown") ) %>%
+  dplyr::arrange(outbreak_year_cnt) %>% distinct()
+df_out$parameter_data_id <- seq(1, dim(df_out)[1], 1)
+
+df_out <- df_out %>% mutate(outbreak_country_v2=replace(outbreak_country,str_starts(outbreak_country,"Germany"),"Germany"),
+                            outbreak_start_v2 = outbreak_start_year )
+
+# nasty hack to deal with historic outbreak data + data capture
+df_out[df_out$outbreak_id==20,]$outbreak_start_v2 <- 1968
+df_out[df_out$outbreak_id==10,]$outbreak_start_v2 <- 2004
+
+selection <- df_out %>% mutate(outbreak_country_v2=replace(outbreak_country,str_starts(outbreak_country,"Germany"),"Germany")) %>%
+  dplyr::select(outbreak_country,outbreak_country_v2,outbreak_start_v2,cfr_ifr_denominator,parameter_data_id) %>% group_by(outbreak_country_v2,outbreak_start_v2) %>% summarize(max=max(cfr_ifr_denominator))
+
+selection_index <- rep(0,dim(selection)[1])
+
+for(i in 1:length(selection_index))
+{
+  sec <- selection[i,]
+  ind <- df_out %>% filter(outbreak_country_v2==sec$outbreak_country_v2 & outbreak_start_v2==sec$outbreak_start_v2 & cfr_ifr_denominator==sec$max) %>% pull(parameter_data_id)
+  selection_index[i] <- ind[length(ind)]
+}
+selection_index <- na.omit(unique(selection_index))
+
+df_out$keep_record <- 0
+df_out[selection_index,]$keep_record <- 1
+
+forest_plot_severity(df_out,outbreak_naive = TRUE)
+```
+
+
+### Delays
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
+            all.x=TRUE, by="article_id") %>%
+  mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
+         population_country = str_replace_all(population_country,";",", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) 
+
+delay_table(df,'marburg')
+```
+
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
+            all.x = TRUE, by = 'article_id') %>%
+  mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
+         population_country = str_replace_all(population_country, ";", ", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) %>%
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, (parameter_uncertainty_type == "Range" & !is.na(parameter_lower_bound) & parameter_class == "Human delay"), NA),
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, (parameter_uncertainty_type=="Range" & !is.na(parameter_upper_bound) & parameter_class == "Human delay"), NA)) %>%
+  rowwise() %>% 
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, parameter_data_id == 43, parameter_uncertainty_lower_value * 1e-4),   # need to adjust for scaling
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, parameter_data_id == 43, parameter_uncertainty_upper_value * 1e-4)) %>%             # need to adjust for scaling
+  mutate(parameter_value = replace(parameter_value, parameter_data_id == 34, 0.93),
+         cfr_ifr_method = replace(cfr_ifr_method, str_starts(parameter_type,"Severity") & is.na(cfr_ifr_method), "Unknown")) %>%
+  mutate(parameter_value_type = ifelse(parameter_data_id == 16, 'Other', parameter_value_type),
+         parameter_value_type = ordered(parameter_value_type, levels = c('Mean','Median','Standard Deviation','Other','Unspecified') )) 
+
+forest_plot_delay(df)
+```
+
+### Seroprevalence
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
+            all.x=TRUE, by="article_id") %>%
+  mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
+         population_country = str_replace_all(population_country,";",", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) 
+
+sero_table(df,'marburg')
+```
+
+### Genetic mutations
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname, year_publication),
+            all.x = TRUE, by = 'article_id') %>%
+  mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
+         population_country = str_replace_all(population_country, ";", ", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) %>%
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, (parameter_uncertainty_type == "Range" & !is.na(parameter_lower_bound) & parameter_class == "Human delay"), NA),
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, (parameter_uncertainty_type=="Range" & !is.na(parameter_upper_bound) & parameter_class == "Human delay"), NA)) %>%
+  rowwise() %>% 
+  mutate(parameter_uncertainty_lower_value = replace(parameter_uncertainty_lower_value, parameter_data_id == 43, parameter_uncertainty_lower_value * 1e-4),   # need to adjust for scaling
+         parameter_uncertainty_upper_value = replace(parameter_uncertainty_upper_value, parameter_data_id == 43, parameter_uncertainty_upper_value * 1e-4)) %>%             # need to adjust for scaling
+  mutate(parameter_value = replace(parameter_value, parameter_data_id == 34, 0.93),
+         cfr_ifr_method = replace(cfr_ifr_method, str_starts(parameter_type,"Severity") & is.na(cfr_ifr_method), "Unknown")) %>%
+  mutate(parameter_value_type = ifelse(parameter_data_id == 16, 'Other', parameter_value_type),
+         parameter_value_type = ordered(parameter_value_type, levels = c('Mean','Median','Standard Deviation','Other','Unspecified') )) 
+
+forest_plot_mutations(df)
+```
+
+## Risk Factors
+```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
+file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
+if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
+params       <- read_csv(file_path_pa)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
+
+df <- merge(params, articles %>% dplyr::select(article_id, first_author_surname,year_publication),
+            all.x=TRUE, by="article_id") %>%
+  mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
+         population_country = str_replace_all(population_country,";",", ")) %>%
+  dplyr::arrange(article_label, -year_publication) %>%
+  dplyr::filter(article_id %in% c(17,15) == FALSE) 
+
+risk_table(df,'marburg')
+```
 
 ## Quality Assessment
 
