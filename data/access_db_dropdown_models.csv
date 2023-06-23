@@ -1,0 +1,12 @@
+Model type,Stochastic or deterministic ,Transmission route,Compartment type,Assumptions,Interventions
+Compartmental,Stochastic,Airborne or close contact,SIS,Homogeneous mixing,Vaccination
+Branching process,Deterministic,Human to human (direct non-sexual contact),SIR,Latent period is same as incubation period,Quarantine
+Agent / Individual based,,Vector to human,SEIR,Heterogenity in transmission rates - between groups,Vector Control
+Other,,Animal reservoir to human,Other compartmental,Heterogenity in transmission rates - over time,Treatment
+Unspecified,,Sexual,Not compartmental,Age dependent susceptibility,Contact tracing
+,,Unspecified,,Unspecified,Hospitals
+,,,,,Treatment Centres
+,,,,,Safe burials
+,,,,,Behaviour changes
+,,,,,Other
+,,,,,Unspecified
