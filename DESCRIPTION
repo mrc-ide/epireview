@@ -16,7 +16,9 @@ Imports:
     dplyr,
     tidyr,
     readr,
-    patchwork
+    patchwork,
+    flextable,
+    tm
 Suggests:
     knitr,
     testthat (>= 3.0.0)
