@@ -15,9 +15,12 @@ load_data <- function(table_type = NA, pathogen = NA)
          one of either 'article', 'parameter', 'outbreak' or 'model'")
   }
 
-  data_tbl <- read_csv(system.file("data",
-                                   paste0(pathogen, "_", table_type, ".csv"),
-                                   package = "epireview"))
+  file_path <- system.file("data", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")
+
+  if(file_path=="")
+    file_path <- paste0("data/",pathogen, "_", table_type, ".csv")
+
+  data_tbl <- read_csv(file_path)
   return(data_tbl)
 }
 
