@@ -16,7 +16,7 @@
 #'                                        list( "covidence_id"         = as.integer(2059))   ))
 #'
 #' @export
-create_new_outbreak_entry <- function(pathogen = NA,
+create_new_model_entry <- function(pathogen = NA,
                                       new_model = c(    list( "article_id"           = as.integer(NA)),
                                                         list( "model_type"           = as.character(NA)),
                                                         list( "compartmental_type"   = as.character(NA)),
@@ -48,46 +48,30 @@ create_new_outbreak_entry <- function(pathogen = NA,
   model_options <- read_csv(file_path_ob)
 
   #validate that the entries make sense
-  if(!is.character(new_row$model_type) | is.na(new_row$model_type) )
-    stop(paste0('Model type not set'))
-  for( model in strsplit(new_row$model_type,",")[[1]])
-    if(!(model %in% model_options$`Model type`))
-      stop(paste(model,'not valid'))
+  rules <- validator(
+    model_type_is_character         = is.character(model_type),
+    model_types_valid               = strsplit(model_type,",")[[1]] %vin% na.omit(model_options$`Model type`),
+    compartmental_type_is_character = is.character(compartmental_type),
+    compartmental_type_valid        = strsplit(compartmental_type,",")[[1]] %vin% na.omit(model_options$`Compartment type`),
+    stoch_deter_is_character        = is.character(stoch_deter),
+    stoch_deter_valid               = strsplit(stoch_deter,",")[[1]] %vin% na.omit(model_options$`Stochastic or deterministic`),
+    intervention_type_is_character  = is.character(interventions_type),
+    intervention_type_valid         = strsplit(interventions_type,",")[[1]] %vin% na.omit(model_options$Interventions),
+    transmission_route_is_character = is.character(transmission_route),
+    transmission_route_valid        = strsplit(transmission_route,",")[[1]] %vin% na.omit(model_options$`Transmission route`),
+    assumptions_is_character        = is.character(assumptions),
+    assumptions_valid               = strsplit(assumptions,",")[[1]] %vin% na.omit(model_options$Assumptions),
+    code_available_check            = code_available %in% c(0,1,NA),
+    theoretical_model_check         = theoretical_model %in% c(0,1,NA)
+  )
 
-  if(!is.character(new_row$compartmental_type) | is.na(new_row$compartmental_type) )
-    stop(paste0('Compartmental type not set'))
-  for( model in strsplit(new_row$compartmental_type,",")[[1]])
-    if(!(model %in% model_options$`Compartment type`))
-      stop(paste(model,'not valid'))
+  rules_output  <- confront(new_row, rules)
+  rules_summary <- summary(rules_output)
 
-  if(!is.character(new_row$stoch_deter) | is.na(new_row$stoch_deter) )
-    stop(paste0('Stochastic/Deterministic not set'))
-  for( model in strsplit(new_row$stoch_deter,",")[[1]])
-    if(!(model %in% model_options$`Stochastic or deterministic`))
-      stop(paste(model,'not valid'))
+  print(as_tibble(rules_summary) %>% filter(fails>0))
 
-  if(!is.character(new_row$interventions_type) | is.na(new_row$interventions_type) )
-    stop(paste0('Intervention not set'))
-  for( model in strsplit(new_row$interventions_type,",")[[1]])
-    if(!(model %in% model_options$Interventions))
-      stop(paste(model,'not valid'))
-
-  if(!is.character(new_row$transmission_route) | is.na(new_row$transmission_route) )
-    stop(paste0('Transmission route not set'))
-  for( model in strsplit(new_row$transmission_route,",")[[1]])
-    if(!(model %in% model_options$`Transmission route`))
-      stop(paste(model,'not valid'))
-
-  if(!is.character(new_row$assumptions) | is.na(new_row$assumptions) )
-    stop(paste0('Transmission route not set'))
-  for( model in strsplit(new_row$assumptions,",")[[1]])
-    if(!(model %in% model_options$Assumptions))
-      stop(paste(model,'not valid'))
-
-  if(!(new_row$code_available %in% c(0,1,NA)))
-    stop('code_available outside allowed values')
-  if(!(new_row$theoretical_model %in% c(0,1,NA)))
-    stop('theoretical_model outside allowed values')
+  if(sum(rules_summary$fails)>0)
+    stop(as_tibble(rules_summary) %>% filter(fails>0) )
 
   return(new_row)
 }

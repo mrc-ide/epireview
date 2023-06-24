@@ -4,7 +4,25 @@
 #' @param new_outbreak all the required details for the new outbreak
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @examples
-#'
+#' create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"           = as.integer(1)),
+#'                                                       list( "outbreak_start_day"   = as.integer(NA)),
+#'                                                       list( "outbreak_start_month" = as.character(NA)),
+#'                                                       list( "outbreak_start_year"  = as.integer(1999)),
+#'                                                       list( "outbreak_end_day"     = as.integer(NA)),
+#'                                                       list( "outbreak_end_month"   = as.character(NA)),
+#'                                                       list( "outbreak_date_year"   = as.integer(2001)),
+#'                                                       list( "outbreak_duration_months" = as.integer(NA)),
+#'                                                       list( "outbreak_size"        = as.integer(2)),
+#'                                                       list( "asymptomatic_transmission" = as.integer(0)),
+#'                                                       list( "outbreak_country"     = as.character("Tanzania")),
+#'                                                       list( "outbreak_location"    = as.character(NA)),
+#'                                                       list( "cases_confirmed"      = as.integer(NA)),
+#'                                                       list( "cases_mode_detection" = as.character(NA)),
+#'                                                       list( "cases_suspected"      = as.integer(NA)),
+#'                                                       list( "cases_asymptomatic"   = as.integer(NA)),
+#'                                                       list( "deaths"               = as.integer(2)),
+#'                                                       list( "cases_severe_hospitalised" = as.integer(NA)),
+#'                                                       list( "covidence_id"         = as.integer(2059)) ))
 #' @export
 create_new_outbreak_entry <- function(pathogen = NA,
                                      new_outbreak = c( list( "article_id"           = as.integer(NA)),
@@ -46,18 +64,26 @@ create_new_outbreak_entry <- function(pathogen = NA,
   if(file_path_ob=="") file_path_ob <- "data/access_db_dropdown_outbreaks.csv"
   model_options <- read_csv(file_path_ob)
   #validate that the entries make sense
+  rules <- validator(
+    outbreak_country_is_character     = is.character(outbreak_country),
+    outbreak_country_valid            = strsplit(outbreak_country,",")[[1]] %vin% na.omit(model_options$`Outbreak country`),
+    cases_mode_detection_is_character = is.character(cases_mode_detection),
+    cases_mode_detection_valid        = strsplit(cases_mode_detection,",")[[1]] %vin% na.omit(model_options$`Detection mode`),
+    outbreak_date_year_is_integer     = is.integer(outbreak_date_year),
+    outbreak_date_year_after_1800     = outbreak_date_year > 1800,
+    outbreak_date_year_not_future     = outbreak_date_year < (as.integer(substring(Sys.Date(),1,4))+2)
+  )
 
-  # (1) Valid outbreak_country -- should check against approved list
-  if(!is.character(new_row$outbreak_country) | is.na(new_row$outbreak_country))
-    stop('No outbreak_country set')
-  for( country in strsplit(new_outbreak$outbreak_country,",")[[1]])
-    if(!(country %in% model_options$`Outbreak country`))
-      stop(paste(country,'not valid'))
-  # (2) Need valid outbreak_date_year
-  if(new_row$outbreak_date_year < 1800 | new_row$outbreak_date_year > (as.integer(substring(Sys.Date(),1,4))+2))
-    stop('Publication year outside allowed range')
-  if(!is.character(new_row$cases_mode_detection) | is.na(new_row$cases_mode_detection) | !(new_row$cases_mode_detection %in% model_options$`Detection mode`))
-    stop(paste0('Case dection mode ',new_row$cases_mode_detection), ' not recognised')
+  rules_output  <- confront(new_row, rules)
+  rules_summary <- summary(rules_output)
+
+  print(as_tibble(rules_summary) %>% filter(fails>0))
+
+  if(sum(rules_summary$fails)>0)
+    stop(as_tibble(rules_summary) %>% filter(fails>0) )
+
+
+
 
   return(new_row)
 }
