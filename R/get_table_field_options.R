@@ -1,6 +1,6 @@
 #' Utility to obtain available table options to pick from
 #'
-#' @param table_type which type of table (either article, parameter, outbreak,
+#' @param table_type which type of table (either parameter, outbreak,
 #' model) should be loaded
 #' @param field
 #' @return return data for table_type and pathogen
