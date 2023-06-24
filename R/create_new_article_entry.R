@@ -59,6 +59,10 @@ create_new_article_entry <- function(pathogen = NA,
   new_row               <- new_row %>% rowwise() %>% mutate(score = mean(c(qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7),na.rm=TRUE)) %>%
     dplyr::select(colnames(old_articles))
 
+  # check that article doesn't exist already in data by looking for doi (if it exists)
+  if(is.character(new_row$doi) & new_row$doi %in% na.omit(old_articles$doi))
+    stop('doi exists in data already!')
+
   #validate that the entries make sense
   rules <- validator(
     first_author_first_name_is_character = is.character(first_author_first_name),
