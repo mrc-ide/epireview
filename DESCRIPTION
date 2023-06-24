@@ -18,7 +18,8 @@ Imports:
     readr,
     patchwork,
     flextable,
-    tm
+    tm,
+    validate
 Suggests:
     knitr,
     testthat (>= 3.0.0)
