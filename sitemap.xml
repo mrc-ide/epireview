@@ -25,12 +25,54 @@
     <loc>https://mrc-ide.github.io/epireview/index.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/append_new_entry_to_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/create_new_article_entry.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/create_new_model_entry.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/create_new_outbreak_entry.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/date_start.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/delay_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_R.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_delay.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_mutations.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_severity.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/get_available_table_field_options.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/index.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/load_data.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/outbreak_table.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/quality_assessment_plots.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/risk_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/sero_table.html</loc>
   </url>
 </urlset>
