@@ -8,10 +8,10 @@
 #' @examples
 #' get_available_table_field_options("model",field='Model type')
 #' @export
-get_available_table_field_options <- function(table_type=NA,field="all")
+get_available_table_field_options <- function(table_type=NA,field="all",vignette_prepend = "")
 {
   file_path_ob  <- system.file("data", paste0("access_db_dropdown_", table_type,"s.csv"), package = "epireview")
-  if(file_path_ob=="") file_path_ob <- paste0("data/access_db_dropdown_", table_type,"s.csv")
+  if(file_path_ob=="") file_path_ob <- paste0(vignette_prepend,"data/access_db_dropdown_", table_type,"s.csv")
   model_options <- read_csv(file_path_ob)
 
   if(field=="all")
