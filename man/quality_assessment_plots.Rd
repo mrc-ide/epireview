@@ -4,7 +4,7 @@
 \alias{quality_assessment_plots}
 \title{Plots for the quality assessment of the included studies}
 \usage{
-quality_assessment_plots(pathogen = NA)
+quality_assessment_plots(pathogen = NA, prepend = "")
 }
 \arguments{
 \item{pathogen}{pathogen data set to consider}
