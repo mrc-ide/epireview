@@ -8,7 +8,7 @@
 #' @examples
 #' load_data("outbreak","marburg")
 #' @export
-load_data <- function(table_type = NA, pathogen = NA)
+load_data <- function(table_type = NA, pathogen = NA, vignette_prepend = "")
 {
   if(is.na(table_type) || is.na(pathogen)){
     stop("table_type and pathogen name must be supplied. table_type can be
@@ -18,7 +18,7 @@ load_data <- function(table_type = NA, pathogen = NA)
   file_path <- system.file("data", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")
 
   if(file_path=="")
-    file_path <- paste0("data/",pathogen, "_", table_type, ".csv")
+    file_path <- paste0(vignette_prepend,"data/",pathogen, "_", table_type, ".csv")
 
   data_tbl <- read_csv(file_path)
   return(data_tbl)
