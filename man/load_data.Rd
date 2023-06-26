@@ -4,7 +4,7 @@
 \alias{load_data}
 \title{Load data for a particular pathogen}
 \usage{
-load_data(table_type = NA, pathogen = NA)
+load_data(table_type = NA, pathogen = NA, vignette_prepend = "")
 }
 \arguments{
 \item{table_type}{which type of table (either article, parameter, outbreak,
