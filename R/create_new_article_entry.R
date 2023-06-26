@@ -43,15 +43,16 @@ create_new_article_entry <- function(pathogen = NA,
                                                        list( "qa_a4"                   = as.integer(NA)),
                                                        list( "qa_d5"                   = as.integer(NA)),
                                                        list( "qa_d6"                   = as.integer(NA)),
-                                                       list( "qa_d7"                   = as.integer(NA))   ))
+                                                       list( "qa_d7"                   = as.integer(NA))),
+                                     vignette_prepend = "")
 {
   #read current article data for pathogen
-  old_articles         <- as_tibble(load_data(table_type = 'article',pathogen = pathogen))
+  old_articles         <- as_tibble(load_data(table_type = 'article',pathogen = pathogen, vignette_prepend = vignette_prepend))
   new_row              <- as_tibble_row(new_article)
 
   # generate the below quanties
-  new_row$article_id   <- max(old_articles$article_id) + 1
-  new_row$covidence_id <- paste0('new_',max(old_articles$covidence_id) + 1)
+  new_row$article_id   <- max(old_articles$article_id) + 1             #in access db the article ids need to skip forward appropriately
+  new_row$covidence_id <- if(max(old_articles$covidence_id) > 1000000) max(old_articles$covidence_id) + 1 else max(old_articles$covidence_id) + 1000000  #this is to ensure we don't infer with natural covid_ids
   new_row$pathogen     <- switch(pathogen,"marburg"="Marburg virus",
                                  "ebola"="Ebola virus", NA)      #need to complete list for all pathogens
   new_row$double_extracted <- FALSE
