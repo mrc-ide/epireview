@@ -1,0 +1,51 @@
+---
+title: "Database field options"
+date: "Latest update: June 2023"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{pathogen_marburg}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{css echo=FALSE}
+.flextable-shadow-host{
+  overflow: scroll;
+  height: 400px;
+  white-space: nowrap;
+}
+```
+
+The field options for each table can be retrieved from `get_available_table_field_options(table_type = "model",field = 'Model type')` which would return the available options for the model type field in the Models dataset. Below we display _all_ options for _all_ table types. 
+
+## Model field options
+
+```{r model options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+library(tidyverse)
+library(flextable)
+source("../R/get_table_field_options.R")
+
+tbl <- get_available_table_field_options('model',vignette_prepend = "../")
+tbl %>% flextable()
+```
+
+
+## Parameter field options
+
+```{r parameter options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+tbl <- get_available_table_field_options('parameter',vignette_prepend = "../")
+tbl %>% flextable()
+```
+
+
+## Outbreak field options
+
+```{r outbreak options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+tbl <- get_available_table_field_options('outbreak',vignette_prepend = "../")
+tbl %>% flextable()
+```
+
+
+
