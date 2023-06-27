@@ -6,6 +6,13 @@
 \usage{
 date_start(start_day, start_month, start_year)
 }
+\arguments{
+\item{start_day}{start day}
+
+\item{start_month}{start month}
+
+\item{start_year}{start year}
+}
 \description{
 create a date
 }

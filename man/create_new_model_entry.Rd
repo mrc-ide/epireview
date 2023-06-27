@@ -18,6 +18,8 @@ create_new_model_entry(
 \item{pathogen}{name of pathogen}
 
 \item{new_model}{all the required details for the new outbreak}
+
+\item{vignette_prepend}{string to allowing loading data from vignettes}
 }
 \value{
 return data for new row to be added with append_new_entry_to_table function
@@ -26,7 +28,7 @@ return data for new row to be added with append_new_entry_to_table function
 Create new model entry
 }
 \examples{
-create_new_outbreak_entry('marburg',c( list( "article_id"           = as.integer(1)),
+create_new_model_entry('marburg',c( list( "article_id"           = as.integer(1)),
                                        list( "model_type"           = as.character("Compartmental")),
                                        list( "compartmental_type"   = as.character("SEIR,SIR")),
                                        list( "stoch_deter"          = as.character("Deterministic")),
@@ -35,6 +37,7 @@ create_new_outbreak_entry('marburg',c( list( "article_id"           = as.integer
                                        list( "code_available"       = as.logical(TRUE)),
                                        list( "transmission_route"   = as.character("Sexual")),
                                        list( "assumptions"          = as.character("Unspecified")),
-                                       list( "covidence_id"         = as.integer(2059))   ))
+                                       list( "covidence_id"         = as.integer(2059))),
+                         vignette_prepend = "")
 
 }

@@ -44,7 +44,8 @@ create_new_article_entry(
     as.character(NA)), list(population_study_end_year = as.integer(NA)), list(genome_site
     = as.character(NA)), list(genomic_sequence_available = as.logical(NA)),
     list(parameter_class = as.character(NA)), list(covidence_id = as.integer(NA)),
-    list(Uncertainty = as.character(NA)), list(`Survey year` = as.character(NA)))
+    list(Uncertainty = as.character(NA)), list(`Survey year` = as.character(NA))),
+  vignette_prepend = ""
 )
 
 create_new_article_entry(
@@ -86,13 +87,16 @@ create_new_article_entry(
     as.character(NA)), list(population_study_end_year = as.integer(NA)), list(genome_site
     = as.character(NA)), list(genomic_sequence_available = as.logical(NA)),
     list(parameter_class = as.character(NA)), list(covidence_id = as.integer(NA)),
-    list(Uncertainty = as.character(NA)), list(`Survey year` = as.character(NA)))
+    list(Uncertainty = as.character(NA)), list(`Survey year` = as.character(NA))),
+  vignette_prepend = ""
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_param}{all the required details for the new parameter...}
+
+\item{vignette_prepend}{string to allowing loading data from vignettes}
 
 \item{new_article}{all the required details for the new article}
 }
@@ -107,7 +111,7 @@ Create new article entry
 Create new parameter entry
 }
 \examples{
-create_new_article_entry('marburg',new_article = c( list( "first_author_first_name" = as.character("Joe")),
+create_new_article_entry(pathogen = "marburg", new_article = c( list( "first_author_first_name" = as.character("Joe")),
                                                     list( "first_author_surname"    = as.character("Blocks")),
                                                     list( "article_title"           = as.character("hello")),
                                                     list( "doi"                     = as.character(NA)),
@@ -125,5 +129,6 @@ create_new_article_entry('marburg',new_article = c( list( "first_author_first_na
                                                     list( "qa_a4"                   = as.integer(1)),
                                                     list( "qa_d5"                   = as.integer(0)),
                                                     list( "qa_d6"                   = as.integer(NA)),
-                                                    list( "qa_d7"                   = as.integer(1))))
+                                                    list( "qa_d7"                   = as.integer(1))),
+                              vignette_prepend = "" )
 }
