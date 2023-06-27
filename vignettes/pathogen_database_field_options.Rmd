@@ -6,7 +6,7 @@ output:
     toc: true
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{pathogen_marburg}
+  %\VignetteIndexEntry{pathogen_database_fields}
   %\usepackage[utf8]{inputenc}
 ---
 
