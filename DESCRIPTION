@@ -13,6 +13,7 @@ Description: Contains the latest open access pathogen data from the Pathogen Epi
 License: GPL (>=2)
 Imports:
     ggplot2,
+    tidyverse,
     tibble,
     dplyr,
     tidyr,
