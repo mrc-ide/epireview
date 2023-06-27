@@ -5,6 +5,7 @@
 #' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble_row
 #' @importFrom validate validator
 #' @importFrom validate confront
 #' @importFrom validate summary
