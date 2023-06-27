@@ -11,7 +11,8 @@ create_new_model_entry(
     list(theoretical_model = as.logical(NA)), list(interventions_type =
     as.character(NA)), list(code_available = as.logical(NA)), list(transmission_route =
     as.character(NA)), list(assumptions = as.character(NA)), list(covidence_id =
-    as.integer(NA)))
+    as.integer(NA))),
+  vignette_prepend = ""
 )
 }
 \arguments{
@@ -28,7 +29,7 @@ return data for new row to be added with append_new_entry_to_table function
 Create new model entry
 }
 \examples{
-create_new_model_entry('marburg',c( list( "article_id"           = as.integer(1)),
+create_new_model_entry('marburg',new_model = c( list( "article_id"           = as.integer(1)),
                                        list( "model_type"           = as.character("Compartmental")),
                                        list( "compartmental_type"   = as.character("SEIR,SIR")),
                                        list( "stoch_deter"          = as.character("Deterministic")),

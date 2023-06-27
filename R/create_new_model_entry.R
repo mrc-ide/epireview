@@ -4,8 +4,12 @@
 #' @param new_model all the required details for the new outbreak
 #' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
+#' @importFrom tibble as_tibble
+#' @importFrom validate validator
+#' @importFrom validate confront
+#' @importFrom validate summary
 #' @examples
-#' create_new_model_entry('marburg',c( list( "article_id"           = as.integer(1)),
+#' create_new_model_entry('marburg',new_model = c( list( "article_id"           = as.integer(1)),
 #'                                        list( "model_type"           = as.character("Compartmental")),
 #'                                        list( "compartmental_type"   = as.character("SEIR,SIR")),
 #'                                        list( "stoch_deter"          = as.character("Deterministic")),
@@ -28,11 +32,12 @@ create_new_model_entry <- function(pathogen = NA,
                                                         list( "code_available"       = as.logical(NA)),
                                                         list( "transmission_route"   = as.character(NA)),
                                                         list( "assumptions"          = as.character(NA)),
-                                                        list( "covidence_id"         = as.integer(NA))   ))
+                                                        list( "covidence_id"         = as.integer(NA))),
+                                   vignette_prepend = "")
 {
   #read current article data for pathogen
-  articles             <- as_tibble(load_data(table_type = 'article',pathogen = pathogen))
-  old_models           <- as_tibble(load_data(table_type = 'model',pathogen = pathogen))
+  articles             <- as_tibble(load_data(table_type = 'article',pathogen = pathogen),vignette_prepend=vignette_prepend)
+  old_models           <- as_tibble(load_data(table_type = 'model',pathogen = pathogen),vignette_prepend=vignette_prepend)
   new_row              <- as_tibble_row(new_model)
 
   # generate the below quanties
@@ -46,7 +51,7 @@ create_new_model_entry <- function(pathogen = NA,
 
   #available options for fields
   file_path_ob  <- system.file("data", "access_db_dropdown_models.csv", package = "epireview")
-  if(file_path_ob=="") file_path_ob <- "data/access_db_dropdown_models.csv"
+  if(file_path_ob=="") file_path_ob <- paste0(vignette_prepend,"data/access_db_dropdown_models.csv")
   model_options <- read_csv(file_path_ob)
 
   #validate that the entries make sense

@@ -3,6 +3,10 @@
 #' @param pathogen name of pathogen
 #' @param new_outbreak all the required details for the new outbreak
 #' @param vignette_prepend string to allowing loading data from vignettes
+#' @importFrom tibble as_tibble
+#' @importFrom validate validator
+#' @importFrom validate confront
+#' @importFrom validate summary
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @examples
 #' create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"           = as.integer(1)),
@@ -65,13 +69,14 @@ create_new_outbreak_entry <- function(pathogen = NA,
   #available options for fields
   file_path_ob  <- system.file("data", "access_db_dropdown_outbreaks.csv", package = "epireview")
   if(file_path_ob=="") file_path_ob <- past0(vignette_prepend,"data/access_db_dropdown_outbreaks.csv")
-  model_options <- read_csv(file_path_ob)
+  outbreak_options <- read_csv(file_path_ob)
+
   #validate that the entries make sense
   rules <- validator(
     outbreak_country_is_character     = is.character(outbreak_country),
-    outbreak_country_valid            = strsplit(outbreak_country,",")[[1]] %vin% na.omit(model_options$`Outbreak country`),
+    outbreak_country_valid            = strsplit(outbreak_country,",")[[1]] %vin% na.omit(outbreak_options$`Outbreak country`),
     cases_mode_detection_is_character = is.character(cases_mode_detection),
-    cases_mode_detection_valid        = strsplit(cases_mode_detection,",")[[1]] %vin% na.omit(model_options$`Detection mode`),
+    cases_mode_detection_valid        = strsplit(cases_mode_detection,",")[[1]] %vin% na.omit(outbreak_options$`Detection mode`),
     outbreak_date_year_is_integer     = is.integer(outbreak_date_year),
     outbreak_date_year_after_1800     = outbreak_date_year > 1800,
     outbreak_date_year_not_future     = outbreak_date_year < (as.integer(substring(Sys.Date(),1,4))+2)
