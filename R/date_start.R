@@ -1,8 +1,8 @@
 #' create a date
-#' @param start_day
-#' @param start_month
-#' @param start_year
-#' @NoRd
+#' @param start_day   start day
+#' @param start_month start month
+#' @param start_year  start year
+#' @export
 date_start <- function(start_day, start_month, start_year) {
   start_day <- as.character(start_day)
   start_year <- as.character(start_year)
