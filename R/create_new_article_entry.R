@@ -5,11 +5,14 @@
 #' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @importFrom tibble as_tibble
+#' @importFrom validate validator
+#' @importFrom validate confront
+#' @importFrom validate summary
 #' @examples
 #' create_new_article_entry(pathogen = "marburg", new_article = c( list( "first_author_first_name" = as.character("Joe")),
 #'                                                     list( "first_author_surname"    = as.character("Blocks")),
 #'                                                     list( "article_title"           = as.character("hello")),
-#'                                                     list( "doi"                     = as.character(NA)),
+#'                                                     list( "doi"                     = as.character("NA")),
 #'                                                     list( "journal"                 = as.character("ABC")),
 #'                                                     list( "year_publication"        = as.integer(2000)),
 #'                                                     list( "volume"                  = as.integer(NA)),
@@ -63,6 +66,9 @@ create_new_article_entry <- function(pathogen = NA,
   new_row               <- new_row %>% rowwise() %>% mutate(score = mean(c(qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7),na.rm=TRUE)) %>%
     dplyr::select(colnames(old_articles))
 
+  sprintf("%s",colnames(old_articles))
+  sprintf("%s",colnames(new_row))
+
   # check that article doesn't exist already in data by looking for doi (if it exists)
   if(is.character(new_row$doi) & new_row$doi %in% na.omit(old_articles$doi))
     stop('doi exists in data already!')
@@ -73,6 +79,7 @@ create_new_article_entry <- function(pathogen = NA,
     first_author_surname_is_character    = is.character(first_author_surname),
     article_title_is_character           = is.character(article_title),
     journal_is_character                 = is.character(journal),
+    doi_is_character                     = is.character(doi),
     transmission_route_is_character      = is.character(transmission_route),
     assumptions_is_character             = is.character(assumptions),
     code_available_check                 = code_available %in% c(0,1,NA),
@@ -89,9 +96,7 @@ create_new_article_entry <- function(pathogen = NA,
   )
 
   rules_output  <- confront(new_row, rules)
-  rules_summary <- summary(rules_output)
-
-  print(as_tibble(rules_summary) %>% filter(fails>0))
+  rules_summary <- validate::summary(rules_output)
 
   if(sum(rules_summary$fails)>0)
     stop(as_tibble(rules_summary) %>% filter(fails>0) )

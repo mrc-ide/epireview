@@ -140,7 +140,7 @@ library(tidyverse)
 library(validate)
 source('../R/create_new_parameter_entry.R')
 
-new_parameter <- create_new_article_entry(pathogen = 'marburg',
+new_parameter <- create_new_parameter_entry(pathogen = 'marburg',
                                      new_param   = c(  list( "article_id"            = as.integer(1)),
                                                        list( "parameter_type"        = as.character(NA)),
                                                        list( "parameter_value"       = as.double(NA)),
