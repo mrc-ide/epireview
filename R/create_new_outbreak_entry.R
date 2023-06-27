@@ -2,6 +2,7 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_outbreak all the required details for the new outbreak
+#' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @examples
 #' create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"           = as.integer(1)),
@@ -22,7 +23,8 @@
 #'                                                       list( "cases_asymptomatic"   = as.integer(NA)),
 #'                                                       list( "deaths"               = as.integer(2)),
 #'                                                       list( "cases_severe_hospitalised" = as.integer(NA)),
-#'                                                       list( "covidence_id"         = as.integer(2059)) ))
+#'                                                       list( "covidence_id"         = as.integer(2059))),
+#'                                          vignette_prepend = "")
 #' @export
 create_new_outbreak_entry <- function(pathogen = NA,
                                      new_outbreak = c( list( "article_id"           = as.integer(NA)),
@@ -43,11 +45,12 @@ create_new_outbreak_entry <- function(pathogen = NA,
                                                        list( "cases_asymptomatic"   = as.integer(NA)),
                                                        list( "deaths"               = as.integer(NA)),
                                                        list( "cases_severe_hospitalised" = as.integer(NA)),
-                                                       list( "covidence_id"         = as.integer(NA))   ))
+                                                       list( "covidence_id"         = as.integer(NA))),
+                                     vignette_prepend = "")
 {
   #read current article data for pathogen
-  articles             <- as_tibble(load_data(table_type = 'article',pathogen = pathogen))
-  old_outbreaks        <- as_tibble(load_data(table_type = 'outbreak',pathogen = pathogen))
+  articles             <- as_tibble(load_data(table_type = 'article',pathogen = pathogen, vignette_prepend = vignette_prepend))
+  old_outbreaks        <- as_tibble(load_data(table_type = 'outbreak',pathogen = pathogen, vignette_prepend = vignette_prepend))
   new_row              <- as_tibble_row(new_outbreak)
 
   # generate the below quanties
@@ -61,7 +64,7 @@ create_new_outbreak_entry <- function(pathogen = NA,
 
   #available options for fields
   file_path_ob  <- system.file("data", "access_db_dropdown_outbreaks.csv", package = "epireview")
-  if(file_path_ob=="") file_path_ob <- "data/access_db_dropdown_outbreaks.csv"
+  if(file_path_ob=="") file_path_ob <- past0(vignette_prepend,"data/access_db_dropdown_outbreaks.csv")
   model_options <- read_csv(file_path_ob)
   #validate that the entries make sense
   rules <- validator(
@@ -81,9 +84,6 @@ create_new_outbreak_entry <- function(pathogen = NA,
 
   if(sum(rules_summary$fails)>0)
     stop(as_tibble(rules_summary) %>% filter(fails>0) )
-
-
-
 
   return(new_row)
 }

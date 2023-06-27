@@ -2,9 +2,10 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_model all the required details for the new outbreak
+#' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @examples
-#' create_new_outbreak_entry('marburg',c( list( "article_id"           = as.integer(1)),
+#' create_new_model_entry('marburg',c( list( "article_id"           = as.integer(1)),
 #'                                        list( "model_type"           = as.character("Compartmental")),
 #'                                        list( "compartmental_type"   = as.character("SEIR,SIR")),
 #'                                        list( "stoch_deter"          = as.character("Deterministic")),
@@ -13,7 +14,8 @@
 #'                                        list( "code_available"       = as.logical(TRUE)),
 #'                                        list( "transmission_route"   = as.character("Sexual")),
 #'                                        list( "assumptions"          = as.character("Unspecified")),
-#'                                        list( "covidence_id"         = as.integer(2059))   ))
+#'                                        list( "covidence_id"         = as.integer(2059))),
+#'                          vignette_prepend = "")
 #'
 #' @export
 create_new_model_entry <- function(pathogen = NA,
