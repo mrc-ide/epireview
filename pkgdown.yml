@@ -4,8 +4,9 @@ pkgdown_sha: ~
 articles:
   epireview_overview: epireview_overview.html
   pathogen_database_field_options: pathogen_database_field_options.html
+  pathogen_database_update: pathogen_database_update.html
   pathogen_marburg: pathogen_marburg.html
-last_built: 2023-06-26T16:58Z
+last_built: 2023-06-27T15:40Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles
