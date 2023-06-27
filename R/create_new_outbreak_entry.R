@@ -4,6 +4,7 @@
 #' @param new_outbreak all the required details for the new outbreak
 #' @param vignette_prepend string to allowing loading data from vignettes
 #' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble_row
 #' @importFrom validate validator
 #' @importFrom validate confront
 #' @importFrom validate summary

@@ -5,6 +5,7 @@
 #' @param vignette_prepend string to allowing loading data from vignettes
 #' @return return data for new row to be added with append_new_entry_to_table function
 #' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble_row
 #' @importFrom validate validator
 #' @importFrom validate confront
 #' @importFrom validate summary
@@ -63,7 +64,7 @@ create_new_article_entry <- function(pathogen = NA,
                                  "ebola"="Ebola virus", NA)      #need to complete list for all pathogens
   new_row$double_extracted <- FALSE
 
-  new_row               <- new_row %>% rowwise() %>% mutate(score = mean(c(qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7),na.rm=TRUE)) %>%
+  new_row               <- new_row %>% dplyr::rowwise() %>% mutate(score = mean(c(qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7),na.rm=TRUE)) %>%
     dplyr::select(colnames(old_articles))
 
   sprintf("%s",colnames(old_articles))
