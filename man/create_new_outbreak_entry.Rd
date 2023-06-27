@@ -18,13 +18,16 @@ create_new_outbreak_entry(
     list(cases_mode_detection = as.character(NA)), list(cases_suspected =
     as.integer(NA)), list(cases_asymptomatic = as.integer(NA)), list(deaths =
     as.integer(NA)), list(cases_severe_hospitalised = as.integer(NA)), list(covidence_id
-    = as.integer(NA)))
+    = as.integer(NA))),
+  vignette_prepend = ""
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_outbreak}{all the required details for the new outbreak}
+
+\item{vignette_prepend}{string to allowing loading data from vignettes}
 }
 \value{
 return data for new row to be added with append_new_entry_to_table function
@@ -51,5 +54,6 @@ create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"        
                                                       list( "cases_asymptomatic"   = as.integer(NA)),
                                                       list( "deaths"               = as.integer(2)),
                                                       list( "cases_severe_hospitalised" = as.integer(NA)),
-                                                      list( "covidence_id"         = as.integer(2059)) ))
+                                                      list( "covidence_id"         = as.integer(2059))),
+                                         vignette_prepend = "")
 }
