@@ -24,9 +24,9 @@ Please provide all available data for the article. For the quality assessment we
 # load packages and source code
 library(tidyverse)
 library(validate)
-source('../R/create_new_article_entry.R')
-source('../R/append_new_entry_to_table.R')
-source('../R/load_data.R')
+source('R/create_new_article_entry.R')
+source('R/append_new_entry_to_table.R')
+source('R/load_data.R')
 
 new_article <- create_new_article_entry('marburg',new_article = c( list( "first_author_first_name" = as.character("Joe")),
                                                     list( "first_author_surname"    = as.character("Blocks")),
@@ -66,7 +66,7 @@ If the paper does not include a model you can skip this section. For this table 
 # load packages and source code
 library(tidyverse)
 library(validate)
-source('../R/create_new_model_entry.R')
+source('R/create_new_model_entry.R')
 
 new_model <- create_new_model_entry('marburg',c( list( "article_id"           = as.integer(1)),
                                     list( "model_type"           = as.character("Compartmental")),
@@ -97,7 +97,7 @@ If the paper does not include a model you can skip this section. For this table 
 # load packages and source code
 library(tidyverse)
 library(validate)
-source('../R/create_new_outbreak_entry.R')
+source('R/create_new_outbreak_entry.R')
 
 new_outbreak <- create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"           = as.integer(1)),
                                           list( "outbreak_start_day"   = as.integer(NA)),
@@ -138,7 +138,7 @@ If the paper does not include a model you can skip this section.
 # load packages and source code
 library(tidyverse)
 library(validate)
-source('../R/create_new_parameter_entry.R')
+source('R/create_new_parameter_entry.R')
 
 new_parameter <- create_new_parameter_entry(pathogen = 'marburg',
                                      new_param   = c(  list( "article_id"            = as.integer(1)),
