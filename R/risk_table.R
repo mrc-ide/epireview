@@ -6,7 +6,7 @@
 #' @examples
 #'
 #' @export
-risk_table <- function(df,pathogen){
+risk_table <- function(df,pathogen,supplement=FALSE){
   border_style = officer::fp_border(color="black", width=1)
   set_flextable_defaults(background.color = "white")
 
@@ -49,5 +49,50 @@ risk_table <- function(df,pathogen){
     hline(i = ~ index_of_change == 1) %>%
     bold(i = 1, bold = TRUE, part = "header")
 
-  return(risk_flextable_tbl)
+  risk_tbl <- df %>%
+    dplyr::mutate(riskfactor_occupation = str_replace_all(riskfactor_occupation, "burrial", "burial")) %>%
+    rowwise() %>%
+    dplyr::mutate(riskfactor_1 = str_split(riskfactor_name, ";")[[1]][1],
+                  riskfactor_2 = str_split(riskfactor_name, ";")[[1]][2],
+                  riskfactor_3 = str_split(riskfactor_name, ";")[[1]][3]) %>%
+    tidyr::pivot_longer(riskfactor_1:riskfactor_3, names_to = "riskfactor_num", values_to = "riskfactor_names") %>%
+    dplyr::mutate(riskfactor_name = if_else(riskfactor_names == "Occupation",
+                                            "Occupation - Funeral and burial services",
+                                            riskfactor_names)) %>%
+    dplyr::filter(is.na(riskfactor_name) == FALSE) %>%
+    dplyr::group_by(riskfactor_outcome, riskfactor_name, riskfactor_adjusted,
+                    riskfactor_significant) %>%
+    dplyr::summarise(sample_size = sum(population_sample_size, na.rm = TRUE)) %>%
+    tidyr::pivot_wider(names_from = riskfactor_significant,
+                       values_from = sample_size) %>%
+    dplyr::mutate(riskfactor_outcome = if_else(riskfactor_outcome == "Serology",
+                                               "Seropositivity",
+                                               riskfactor_outcome)) %>%
+    dplyr::select('Outcome' = riskfactor_outcome,
+                  'Risk factor' = riskfactor_name,
+                  'Adjusted' = riskfactor_adjusted,
+                  Significant, 'Not significant')
+
+  risk_main_flextable <- risk_tbl %>%
+    dplyr::arrange(Outcome, `Risk factor`, Adjusted) %>%
+    dplyr::group_by(Outcome) %>%
+    dplyr::mutate(index_of_change = row_number(),
+                  index_of_change = ifelse(index_of_change == max(index_of_change),1,0)) %>%
+    flextable(col_keys = c('Outcome', 'Risk factor', 'Adjusted',
+                           'Significant', 'Not significant')) %>%
+    fontsize(i = 1, size = 12, part = "header") %>%  # adjust font size of header
+    border_remove() %>%
+    autofit() %>%
+    theme_booktabs() %>%
+    vline(j = c(2,3,4), border = border_style) %>%
+    hline(i = ~ index_of_change == 1) %>%
+    bold(i = 1, bold = TRUE, part = "header")
+
+  if(supplement)
+  {
+    return(risk_flextable_tbl)
+  } else {
+    return( risk_main_flextable )
+  }
+
 }
