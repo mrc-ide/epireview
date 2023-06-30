@@ -50,8 +50,8 @@ forest_plot_severity <- function(df,outbreak_naive=FALSE) {
       theme_bw() + geom_point(size = 3) +
       scale_y_discrete(labels=setNames(df_plot2$outbreak_year_cnt,
                                        df_plot2$article_label_unique)) +
-      geom_rect(xmin=unique(df_cfr$pooled_low),xmax=unique(df_cfr$pooled_upp),
-                ymin=-Inf,ymax=Inf,alpha=0.02,col=NA,fill="grey") +
+      #geom_rect(xmin=unique(df_cfr$pooled_low),xmax=unique(df_cfr$pooled_upp),
+      #          ymin=-Inf,ymax=Inf,alpha=0.02,col=NA,fill="grey") +
       geom_segment(aes(y = article_label_unique, yend = article_label_unique,
                        x = lower_ci, xend = upper_ci,
                        group=parameter_data_id),
@@ -66,9 +66,9 @@ forest_plot_severity <- function(df,outbreak_naive=FALSE) {
       scale_color_brewer(palette = 'Dark2')+
       guides(colour = guide_legend(order=1,ncol=1),
              linetype = guide_legend(order=2,ncol=1))+
-      geom_vline(xintercept = unique(df_cfr$pooled),linetype="dashed") +
+      #geom_vline(xintercept = unique(df_cfr$pooled),linetype="dashed") +
       scale_linetype_manual(values = c("solid"),labels = function(x) str_wrap(x, width = 5))+
-      scale_fill_manual(values="grey") +
+      #scale_fill_manual(values="grey") +
       geom_vline(xintercept = c(0, 100), linetype = "dotted") +
       scale_x_continuous(breaks = seq(-20, 120, by = 20))
   } else {
@@ -106,12 +106,12 @@ forest_plot_severity <- function(df,outbreak_naive=FALSE) {
       # scale_colour_viridis_d(option="viridis",begin=0.2,end=0.8)+
       guides(colour = guide_legend(order=1,ncol=1),
              linetype = guide_legend(order=2,ncol=1))+
-      geom_vline(xintercept = unique(df_cfr$pooled),linetype="dashed")+
-      geom_rect(xmin=unique(df_cfr$pooled_low),xmax=unique(df_cfr$pooled_upp),
-                ymin=-Inf,ymax=Inf,alpha=0.05,col=NA,fill="grey"#,aes(fill="CFR - pooled 95% CI")
-      )+
+      #geom_vline(xintercept = unique(df_cfr$pooled),linetype="dashed")+
+      #geom_rect(xmin=unique(df_cfr$pooled_low),xmax=unique(df_cfr$pooled_upp),
+      #          ymin=-Inf,ymax=Inf,alpha=0.05,col=NA,fill="grey"#,aes(fill="CFR - pooled 95% CI")
+      #)+
       scale_linetype_manual(values = c("solid"),labels = function(x) str_wrap(x, width = 5))+
-      scale_fill_manual(values="grey") +
+      #scale_fill_manual(values="grey") +
       geom_vline(xintercept = c(0, 100), linetype = "dotted") +
       scale_x_continuous(breaks = seq(-20, 120, by = 20)) +
       xlim(c(-20, 120))
