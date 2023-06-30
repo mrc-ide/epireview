@@ -4,7 +4,7 @@
 \alias{risk_table}
 \title{Create risk table}
 \usage{
-risk_table(df, pathogen)
+risk_table(df, pathogen, supplement = FALSE)
 }
 \arguments{
 \item{df}{data with outbreak information}
