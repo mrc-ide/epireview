@@ -21,7 +21,8 @@ Imports:
     patchwork,
     flextable,
     tm,
-    validate
+    validate,
+    meta
 Suggests:
     knitr,
     testthat (>= 3.0.0)
