@@ -7,3 +7,17 @@ vignette: >
   %\VignetteIndexEntry{Epireview}
   %\usepackage[utf8]{inputenc}
 ---
+
+We developed the R package ***epireview*** to provide a central location to host and access the extracted data for the nine priority pathogens, allow for submissions of outbreak, model, and parameter data from new peer-reviewed papers via pull requests, and includes functions to produce the figures and tables included in this paper and update them with any additional data. This package will be updated as the overall project by the Pathogen Epidemiology Review Group (PERG) continues to extract modelling parameters for the rest of the nine priority pathogens as defined by WHO.
+
+There are several vignettes available:
+
+-   [**Marburg Virus Disease (MVD)**](<https://mrc-ide.github.io/epireview/articles/pathogen_marburg.html>) with tables and figures from this paper that will be updated as data are added to the database.
+
+-   [**Pathogen database options**](<https://mrc-ide.github.io/epireview/articles/pathogen_database_field_options.html>) that lists the options for each model, outbreak, or parameter field and describes how to access them using a function in the package.
+
+-   [**How to update database with new article data**](https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html)to explain the process of updating the database with new article, model, outbreak, or pathogen data.
+
+In addition to this the github repo has a [**wiki**](<https://github.com/mrc-ide/epireview/wiki>) which provides details on the data extraction together with examples and an overview of the quality assessment.
+
+We also provide an empty [access database file](<https://github.com/mrc-ide/epireview/blob/main/miscellaneous_files/DIDE%20Priority%20Pathogens%20-%20BLANK.accdb>) which can be used as a starting point for any new pathogens which are not already covered by this review. For updates to the existing datasets please follow the [*How to update the database with new article data*](https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html)guide.
