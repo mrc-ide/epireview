@@ -2,8 +2,11 @@
 #'
 #' @param df data with parameter information
 #' @return returns flextable
-#' @importFrom dplyr filter mutate group_by arrange
+#' @importFrom dplyr filter mutate group_by arrange desc
 #' @importFrom stringr str_to_sentence
+#' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete scale_x_continuous
+#' geom_segment geom_errorbar labs scale_color_brewer scale_shape_manual theme
+#' guides
 #'
 #' @examples
 #'
