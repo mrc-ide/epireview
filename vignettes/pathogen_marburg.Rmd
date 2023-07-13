@@ -13,11 +13,14 @@ vignette: >
 In 2018, the World Health Organization (WHO) published a list of nine known pathogens (in addition to an unknown _Pathogen X_) for research and development (R&D) prioritisation, due to both their epidemic and pandemic potential and the absence of licensed vaccines or therapeutics. Among these prioritised pathogens is MVD, a  highly-lethal infectious _Filoviridae_ single-stranded RNA virus first described in Germany and Serbia (formerly Yugoslavia) in 1967. Subsequent outbreaks of this virus have primarily occurred in sub-Saharan Africa. The Pathogen Epidemiology Review Group (PERG) has published a Systemtic Review for MVD, if you use any of our results please cite our paper:
 
 > @article{marburg_systematic_review_2023,
- author={},  
+ author = {Gina Cuomo-Dannenburg and Kelly McCain and Ruth McCabe and H Juliette T Unwin and Patrick Doohan and Rebecca K Nash and Joseph T Hicks and Kelly Charniga and Cyril Geismar and Ben Lambert and Dariya Nikitin and Janetta E Skarp and Jack Wardle and Pathogen Epidemiology Review Group and Mara Kont and Sangeeta Bhatia and Natsuko Imai and Sabine L van Elsland and Anne Cori and Christian Morgenstern},
  year={2023},  
  title={{Marburg Virus Disease outbreaks, mathematical models, and disease parameters: a Systematic Review}},  
- journal={},  
- doi={},  
+ doi = {10.1101/2023.07.10.23292424},
+ publisher = {Cold Spring Harbor Laboratory Press},
+ URL = {https://www.medrxiv.org/content/early/2023/07/12/2023.07.10.23292424},
+ eprint = {https://www.medrxiv.org/content/early/2023/07/12/2023.07.10.23292424.full.pdf},
+ journal = {medRxiv}
 }
 
 All Tables and Figures from the paper are re-produced below on the **latest** available data in our data set. For convenience we label the Figures and Tables with the same numbers as in the paper.
