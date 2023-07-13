@@ -24,10 +24,11 @@ create_new_article_entry(
 
 \item{new_article}{all the required details for the new article}
 
-\item{vignette_prepend}{string to allowing loading data from vignettes}
+\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
-return data for new row to be added with append_new_entry_to_table function
+return new row of data to be added to the article data set using the
+append_new_entry_to_table() function
 }
 \description{
 Create new article entry

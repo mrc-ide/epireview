@@ -5,8 +5,10 @@
 #' @param pathogen name of pathogen
 #' @param table_type table to be updated, either "article", "outbreak", "model"
 #' or "parameter"
-#' @param new_row the new row of data to be added to the table (must contain the
-#' same number of variables as the table to be updated)
+#' @param new_row the new row of data to be added to the table, this can be
+#' generated using either create_new_article_entry(), create_new_model_entry(),
+#' create_new_outbreak_entry(), or create_new_parameter_entry() (must contain
+#' the same number of variables as the table to be updated)
 #' @param validate check if the new row to be added passes minimum criteria
 #' (either TRUE or FALSE)
 #' @param write_table write appended table (either TRUE or FALSE). If TRUE the
