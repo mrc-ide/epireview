@@ -1,15 +1,13 @@
 #' Create forest plot for delays
 #'
-#' @param df data with parameter information
-#' @return returns flextable
+#' @param df processed data with parameter information (see vignette for each
+#' pathogen)
+#' @return returns flextable with a summary of the human delays
 #' @importFrom dplyr filter mutate group_by arrange desc
 #' @importFrom stringr str_to_sentence
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete scale_x_continuous
 #' geom_segment geom_errorbar labs scale_color_brewer scale_shape_manual theme
 #' guides
-#'
-#' @examples
-#'
 #' @export
 forest_plot_delay <- function(df){
 
@@ -38,7 +36,8 @@ forest_plot_delay <- function(df){
     arrange(desc(parameter_type_short), desc(parameter_value), desc(article_label))
 
   df_plot$article_label_unique <- make.unique(df_plot$article_label)
-  df_plot$article_label_unique <- factor(df_plot$article_label_unique, levels = df_plot$article_label_unique)
+  df_plot$article_label_unique <- factor(df_plot$article_label_unique,
+                                         levels = df_plot$article_label_unique)
 
   plot <- ggplot(df_plot, aes(col = parameter_type_short)) +
     theme_bw() +
@@ -70,7 +69,6 @@ forest_plot_delay <- function(df){
           strip.text = element_text(size = 20)) +
     guides(colour = guide_legend(order = 1, ncol = 1),
            linetype = guide_legend(order = 2, ncol = 1))
-
 
   return(plot)
 }

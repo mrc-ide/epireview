@@ -2,7 +2,7 @@
 % Please edit documentation in R/append_new_entry_to_table.R
 \name{append_new_entry_to_table}
 \alias{append_new_entry_to_table}
-\title{append_new_entry_to_table}
+\title{Append new entry to article, outbreak, model, or parameter table}
 \usage{
 append_new_entry_to_table(
   pathogen = NA,
@@ -16,15 +16,22 @@ append_new_entry_to_table(
 \arguments{
 \item{pathogen}{name of pathogen}
 
-\item{new_row}{all the required details for the new row}
+\item{table_type}{table to be updated, either "article", "outbreak", "model"
+or "parameter"}
 
-\item{validate}{check if the new row to be added passes minimum criteria}
+\item{new_row}{the new row of data to be added to the table (must contain the
+same number of variables as the table to be updated)}
 
-\item{write_table}{write appended table}
+\item{validate}{check if the new row to be added passes minimum criteria
+(either TRUE or FALSE)}
+
+\item{write_table}{write appended table (either TRUE or FALSE). If TRUE the
+new table will be written as a csv file in the data folder of a locally
+cloned repository.}
 }
 \value{
-Null (updates table)
+Null (updates relevant table in a locally cloned repository)
 }
 \description{
-append_new_entry_to_table
+NOTE: This can only be run in a locally cloned repository
 }
