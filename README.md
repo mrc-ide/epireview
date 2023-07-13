@@ -5,6 +5,7 @@
 <!-- badges: end -->
 
 epireview is a tool to obtain the latest data from the Pathogen Epidemiology Review Group (PERG) and contains tools to update data from new, peer-reviewed papers for existing pathogens in the database or to add entirely new pathogens.
+
 To install the latest version, use:
 ```r
 devtools::install_github("mrc-ide/epireview", build_vignettes = TRUE)
