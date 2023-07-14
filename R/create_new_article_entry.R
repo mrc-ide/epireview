@@ -9,49 +9,52 @@
 #' @importFrom validate validator confront summary
 #' @importFrom dplyr rowwise mutate select filter
 #' @examples
-#' create_new_article_entry(pathogen = "marburg", new_article = c( list( "first_author_first_name" = as.character("Joe")),
-#'                                                     list( "first_author_surname"    = as.character("Blocks")),
-#'                                                     list( "article_title"           = as.character("hello")),
-#'                                                     list( "doi"                     = as.character("NA")),
-#'                                                     list( "journal"                 = as.character("ABC")),
-#'                                                     list( "year_publication"        = as.integer(2000)),
-#'                                                     list( "volume"                  = as.integer(NA)),
-#'                                                     list( "issue"                   = as.integer(NA)),
-#'                                                     list( "page_first"              = as.integer(NA)),
-#'                                                     list( "page_last"               = as.integer(NA)),
-#'                                                     list( "paper_copy_only"         = as.logical(NA)),
-#'                                                     list( "notes"                   = as.character(NA)),
-#'                                                     list( "qa_m1"                   = as.integer(1)),
-#'                                                     list( "qa_m2"                   = as.integer(0)),
-#'                                                     list( "qa_a3"                   = as.integer(NA)),
-#'                                                     list( "qa_a4"                   = as.integer(1)),
-#'                                                     list( "qa_d5"                   = as.integer(0)),
-#'                                                     list( "qa_d6"                   = as.integer(NA)),
-#'                                                     list( "qa_d7"                   = as.integer(1))),
-#'                               vignette_prepend = "" )
+#' create_new_article_entry(
+#'   pathogen = "marburg",
+#'   new_article = c(list("first_author_first_name" = as.character("Joe")),
+#'                   list("first_author_surname"    = as.character("Blocks")),
+#'                   list("article_title"           = as.character("hello")),
+#'                   list("doi"                     = as.character("NA")),
+#'                   list("journal"                 = as.character("ABC")),
+#'                   list("year_publication"        = as.integer(2000)),
+#'                   list("volume"                  = as.integer(NA)),
+#'                   list("issue"                   = as.integer(NA)),
+#'                   list("page_first"              = as.integer(NA)),
+#'                   list("page_last"               = as.integer(NA)),
+#'                   list("paper_copy_only"         = as.logical(NA)),
+#'                   list("notes"                   = as.character(NA)),
+#'                   list("qa_m1"                   = as.integer(1)),
+#'                   list("qa_m2"                   = as.integer(0)),
+#'                   list("qa_a3"                   = as.integer(NA)),
+#'                   list("qa_a4"                   = as.integer(1)),
+#'                   list("qa_d5"                   = as.integer(0)),
+#'                   list("qa_d6"                   = as.integer(NA)),
+#'                   list("qa_d7"                   = as.integer(1))),
+#'   vignette_prepend = "" )
 #' @export
-create_new_article_entry <- function(pathogen = NA,
-                                     new_article = c(  list( "first_author_first_name" = as.character(NA)),
-                                                       list( "first_author_surname"    = as.character(NA)),
-                                                       list( "article_title"           = as.character(NA)),
-                                                       list( "doi"                     = as.character(NA)),
-                                                       list( "journal"                 = as.character(NA)),
-                                                       list( "year_publication"        = as.integer(NA)),
-                                                       list( "volume"                  = as.integer(NA)),
-                                                       list( "issue"                   = as.integer(NA)),
-                                                       list( "page_first"              = as.integer(NA)),
-                                                       list( "page_last"               = as.integer(NA)),
-                                                       list( "paper_copy_only"         = as.logical(NA)),
-                                                       list( "notes"                   = as.character(NA)),
-                                                       list( "qa_m1"                   = as.integer(NA)),
-                                                       list( "qa_m2"                   = as.integer(NA)),
-                                                       list( "qa_a3"                   = as.integer(NA)),
-                                                       list( "qa_a4"                   = as.integer(NA)),
-                                                       list( "qa_d5"                   = as.integer(NA)),
-                                                       list( "qa_d6"                   = as.integer(NA)),
-                                                       list( "qa_d7"                   = as.integer(NA))),
-                                     vignette_prepend = "")
-{
+create_new_article_entry <-
+  function(pathogen = NA,
+           new_article = c(list("first_author_first_name" = as.character(NA)),
+                           list("first_author_surname"    = as.character(NA)),
+                           list("article_title"           = as.character(NA)),
+                           list("doi"                     = as.character(NA)),
+                           list("journal"                 = as.character(NA)),
+                           list("year_publication"        = as.integer(NA)),
+                           list("volume"                  = as.integer(NA)),
+                           list("issue"                   = as.integer(NA)),
+                           list("page_first"              = as.integer(NA)),
+                           list("page_last"               = as.integer(NA)),
+                           list("paper_copy_only"         = as.logical(NA)),
+                           list("notes"                   = as.character(NA)),
+                           list("qa_m1"                   = as.integer(NA)),
+                           list("qa_m2"                   = as.integer(NA)),
+                           list("qa_a3"                   = as.integer(NA)),
+                           list("qa_a4"                   = as.integer(NA)),
+                           list("qa_d5"                   = as.integer(NA)),
+                           list("qa_d6"                   = as.integer(NA)),
+                           list("qa_d7"                   = as.integer(NA))),
+           vignette_prepend = "") {
+
   #read current article data for pathogen
   old_articles <- as_tibble(load_data(table_type = 'article',
                                       pathogen = pathogen,
@@ -81,9 +84,9 @@ create_new_article_entry <- function(pathogen = NA,
   sprintf("%s", colnames(old_articles))
   sprintf("%s", colnames(new_row))
 
-  # check that article doesn't exist already in data by looking for doi (if it exists)
+  # check if article already exists in data by looking for doi
   if(is.character(new_row$doi) & new_row$doi %in% na.omit(old_articles$doi))
-    stop('doi exists in data already!')
+    stop("doi exists in data already!")
 
   #validate that the entries make sense
   rules <- validator(
