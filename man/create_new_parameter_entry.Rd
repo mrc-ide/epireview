@@ -50,13 +50,37 @@ create_new_parameter_entry(
 \arguments{
 \item{pathogen}{name of pathogen}
 
-\item{new_param}{all the required details for the new parameter...}
+\item{new_param}{all the required details for the new parameter entry}
 
-\item{vignette_prepend}{string to allowing loading data from vignettes}
+\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
-return data for new row to be added with append_new_entry_to_table function
+new row of data to be added to the outbreak data set using the
+append_new_entry_to_table() function
 }
 \description{
 Create new parameter entry
+}
+\examples{
+create_new_parameter_entry <-
+  function(pathogen = "marburg",
+           new_param = c(list("article_id"            = as.integer(1)),
+                         list("parameter_type"        = as.character(NA)),
+                         list("parameter_value"       = as.double(NA)),
+                         list("parameter_unit"        = as.character(NA)),
+                         list("parameter_lower_bound" = as.double(NA)),
+                         list("parameter_upper_bound" = as.double(NA)),
+                         list("population_study_start_day"   = as.integer(NA)),
+                         list("population_study_start_month" = as.character(NA)),
+                         list("population_study_start_year"  = as.integer(NA)),
+                         list("population_study_end_day"     = as.integer(NA)),
+                         list("population_study_end_month"   = as.character(NA)),
+                         list("population_study_end_year"    = as.integer(NA)),
+                         list("genome_site"                  = as.character(NA)),
+                         list("genomic_sequence_available"   = as.logical(NA)),
+                         list("parameter_class"          = as.character(NA)),
+                         list("covidence_id"             = as.integer(2059)),
+                         list("Uncertainty"              = as.character(NA)),
+                         list("Survey year"              = as.character(NA))),
+           vignette_prepend = "")
 }

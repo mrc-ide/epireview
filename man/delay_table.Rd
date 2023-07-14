@@ -2,18 +2,23 @@
 % Please edit documentation in R/delay_table.R
 \name{delay_table}
 \alias{delay_table}
-\title{Create delay table}
+\title{Create table for human delay parameters}
 \usage{
 delay_table(df, pathogen)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with parameter information (see vignette for each
+pathogen)}
 
 \item{pathogen}{name of pathogen}
 }
 \value{
-returns flextable
+flextable with an overview of the delay parameter estimates
+extracted from the included studies
 }
 \description{
-Create delay table
+Create table for human delay parameters
+}
+\examples{
+delay_table(df, pathogen = "marburg")
 }
