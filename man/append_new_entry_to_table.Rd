@@ -32,7 +32,8 @@ new table will be written as a csv file in the data folder of a locally
 cloned repository.}
 }
 \value{
-Null (updates relevant table in a locally cloned repository)
+table with new entry (if write_table = TRUE the relevant table in a
+locally cloned repository is updated)
 }
 \description{
 NOTE: This can only be run in a locally cloned repository

@@ -18,27 +18,30 @@ create_new_model_entry(
 \arguments{
 \item{pathogen}{name of pathogen}
 
-\item{new_model}{all the required details for the new outbreak}
+\item{new_model}{all the required details for the new model}
 
-\item{vignette_prepend}{string to allowing loading data from vignettes}
+\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
-return data for new row to be added with append_new_entry_to_table function
+return new row of data to be added to the model data set using the
+append_new_entry_to_table() function
 }
 \description{
 Create new model entry
 }
 \examples{
-create_new_model_entry('marburg',new_model = c( list( "article_id"           = as.integer(1)),
-                                       list( "model_type"           = as.character("Compartmental")),
-                                       list( "compartmental_type"   = as.character("SEIR,SIR")),
-                                       list( "stoch_deter"          = as.character("Deterministic")),
-                                       list( "theoretical_model"    = as.logical(FALSE)),
-                                       list( "interventions_type"   = as.character("Vaccination")),
-                                       list( "code_available"       = as.logical(TRUE)),
-                                       list( "transmission_route"   = as.character("Sexual")),
-                                       list( "assumptions"          = as.character("Unspecified")),
-                                       list( "covidence_id"         = as.integer(2059))),
-                         vignette_prepend = "")
+create_new_model_entry(
+  pathogen = 'marburg',
+  new_model = c(list("article_id"           = as.integer(1)),
+                list("model_type"           = as.character("Compartmental")),
+                list("compartmental_type"   = as.character("SEIR, SIR")),
+                list("stoch_deter"          = as.character("Deterministic")),
+                list("theoretical_model"    = as.logical(FALSE)),
+                list("interventions_type"   = as.character("Vaccination")),
+                list("code_available"       = as.logical(TRUE)),
+                list("transmission_route"   = as.character("Sexual")),
+                list("assumptions"          = as.character("Unspecified")),
+                list("covidence_id"         = as.integer(2059))),
+  vignette_prepend = "")
 
 }
