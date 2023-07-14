@@ -6,7 +6,6 @@
 #' @importFrom tibble as_tibble as_tibble_row
 #' @importFrom validate validator confront summary
 #' @importFrom dplyr select
-#' @importFrom devtools load_data
 #' @importFrom readr read_csv
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
