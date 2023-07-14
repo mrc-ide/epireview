@@ -6,7 +6,7 @@
 #' @return flextable with an overview of the delay parameter estimates
 #' extracted from the included studies
 #' @importFrom officer fp_border
-#' @importFrom flextable flextable set_flextable_defaults col_keys fontsize
+#' @importFrom flextable flextable set_flextable_defaults fontsize
 #' border_remove autofit theme_booktabs vline hline bold add_footer_lines
 #' @importFrom dplyr filter mutate select arrange group_by row_number
 #' @importFrom stringr str_to_title str_replace

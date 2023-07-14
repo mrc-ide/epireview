@@ -7,7 +7,7 @@
 #' append_new_entry_to_table() function
 #' @importFrom tibble as_tibble as_tibble_row
 #' @importFrom validate validator confront summary
-#' @importFrom devtools load_data
+#' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @examples
 #' create_new_model_entry(
@@ -48,7 +48,7 @@ create_new_model_entry <-
 
   # generate the below quantities
   new_row$model_data_id <- max(old_models$model_data_id) + 1
-  new_row <- new_row %>% dplyr::select(colnames(old_models))
+  new_row <- new_row %>% select(colnames(old_models))
 
   # Need to check that article_id & covidence_id exist in the articles table.
   if (!(new_row$article_id %in% articles$article_id &
