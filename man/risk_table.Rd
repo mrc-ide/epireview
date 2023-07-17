@@ -10,10 +10,16 @@ risk_table(df, pathogen, supplement = FALSE)
 \item{df}{data with outbreak information}
 
 \item{pathogen}{name of pathogen}
+
+\item{supplement}{either TRUE or FALSE. If TRUE, returns supplementary
+figures.}
 }
 \value{
 returns flextable
 }
 \description{
 Create risk table
+}
+\examples{
+risk_table(df = data, pathogen = "marburg")
 }

@@ -7,11 +7,15 @@
 forest_plot_mutations(df)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with parameter information (see vignette for each
+pathogen)}
 }
 \value{
-returns flextable
+returns plot with a summary of genetic mutations
 }
 \description{
 Create forest plot for genetic mutations
+}
+\examples{
+forest_plot_mutations(df = data)
 }

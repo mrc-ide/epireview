@@ -7,13 +7,17 @@
 sero_table(df, pathogen)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with seroprevalence information (see vignette for
+each pathogen)}
 
 \item{pathogen}{name of pathogen}
 }
 \value{
-returns flextable
+returns flextable with a summary of seroprevalence data
 }
 \description{
 Create seroprevalence table
+}
+\examples{
+sero_table(df = data, pathogen = "marburg")
 }

@@ -2,18 +2,23 @@
 % Please edit documentation in R/outbreak_table.R
 \name{outbreak_table}
 \alias{outbreak_table}
-\title{Create outbreak table}
+\title{Create table with all outbreak data for a particular pathogen}
 \usage{
 outbreak_table(df, pathogen)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with outbreak information (see vignette for each
+pathogen)}
 
 \item{pathogen}{name of pathogen}
 }
 \value{
-returns flextable
+returns flextable summarising all extracted outbreaks for the
+specified pathogen
 }
 \description{
-Create outbreak table
+Create table with all outbreak data for a particular pathogen
+}
+\examples{
+outbreak_table(df = data, pathogen = "marburg")
 }

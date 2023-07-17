@@ -1,13 +1,15 @@
 #' Create forest plot for delays
 #'
-#' @param df processed data with parameter information (see vignette for each
+#' @param df processed data with human delay information (see vignette for each
 #' pathogen)
-#' @return returns flextable with a summary of the human delays
+#' @return returns plot with a summary of the human delays
 #' @importFrom dplyr filter mutate group_by arrange desc
-#' @importFrom stringr str_to_sentence
-#' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete scale_x_continuous
-#' geom_segment geom_errorbar labs scale_color_brewer scale_shape_manual theme
-#' guides element_text guide_legend
+#' @importFrom stringr str_to_sentence str_wrap
+#' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
+#' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
+#' scale_shape_manual theme guides element_text guide_legend
+#' @examples
+#' forest_plot_delay(df = data)
 #' @export
 forest_plot_delay <- function(df) {
 
@@ -16,14 +18,15 @@ forest_plot_delay <- function(df) {
   df_delay <- df %>%
     filter(parameter_class == parameter) %>%
     mutate(parameter_value = as.numeric(parameter_value)) %>%
-    mutate(parameter_type_short = gsub("^Human delay - ", "", parameter_type)) %>%
     mutate(parameter_type_short =
-             ifelse(
-               parameter_type_short == "time symptom to outcome" &
-                 riskfactor_outcome == "Death", "Time symptom to outcome (Death)",
-               ifelse(
-                 parameter_type_short == "time symptom to outcome" &
-                   riskfactor_outcome == "Other", "Time symptom to outcome (Other)",
+             gsub("^Human delay - ", "", parameter_type)) %>%
+    mutate(
+      parameter_type_short = ifelse(
+        parameter_type_short == "time symptom to outcome" &
+          riskfactor_outcome == "Death", "Time symptom to outcome (Death)",
+        ifelse(
+          parameter_type_short == "time symptom to outcome" &
+            riskfactor_outcome == "Other", "Time symptom to outcome (Other)",
                  parameter_type_short))) %>%
     mutate(parameter_type_short = str_to_sentence(parameter_type_short)) %>%
     group_by(parameter_type_short) %>%
