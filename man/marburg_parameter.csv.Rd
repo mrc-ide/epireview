@@ -3,11 +3,66 @@
 \docType{data}
 \name{marburg_parameter.csv}
 \alias{marburg_parameter.csv}
-\title{Data on the parameters identified in the systematic review of Marburg articles}
+\title{Data on the parameters identified in the systematic review of articles
+related to Marburg virus disease.}
 \format{
 A csv file containing the following parameters:
-
-XXYY
+\itemize{
+\item parameter_data_id
+\item article_id
+\item parameter_type
+\item parameter_value
+\item parameter_unit
+\item parameter_lower_bound
+\item parameter_upper_bound
+\item parameter_value_type
+\item parameter_uncertainty_single_value
+\item parameter_uncertainty_singe_type
+\item parameter_uncertainty_lower_value
+\item parameter_uncertainty_upper_value
+\item parameter_uncertainty_type
+\item cfr_ifr_numerator
+\item cfr_ifr_denominator
+\item distribution_type
+\item distribution_par1_value
+\item distribution_par1_type
+\item distribution_par1_uncertainty
+\item distribution_par2_value
+\item distribution_par2_type
+\item distribution_par2_uncertainty
+\item method_from_supplement
+\item method_moment_value
+\item cfr_ifr_method
+\item method_r
+\item method_disaggregated_by
+\item method_disaggregated
+\item method_disaggregated_only
+\item riskfactor_outcome
+\item riskfactor_name
+\item riskfactor_occupation
+\item riskfactor_significant
+\item riskfactor_adjusted
+\item population_sex
+\item population_sample_type
+\item population_group
+\item population_age_min
+\item population_age_max
+\item population_sample_size
+\item population_country
+\item population_location
+\item population_study_start_day
+\item population_study_start_month
+\item population_study_start_year
+\item population_study_end_day
+\item population_study_end_month
+\item population_study_end_year
+\item genome_site
+\item genomic_sequence_available
+\item parameter_class
+\item covidence_id
+\item Uncertainty
+\item Survey year
+}
 }
 \source{
 Cuomo-Dannenburg G, McCain K, McCabe R, Unwin HJT, Doohan P, Nash RK,
@@ -17,7 +72,6 @@ p. 2023.07.10.23292424.
 Available from: https://www.medrxiv.org/content/10.1101/2023.07.10.23292424v1
 }
 \description{
-This data set gives:
-
-XXYY
+This data set provides all extracted parameters for Marburg virus disease
+(MVD).
 }

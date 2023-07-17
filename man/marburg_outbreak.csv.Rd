@@ -3,11 +3,37 @@
 \docType{data}
 \name{marburg_outbreak.csv}
 \alias{marburg_outbreak.csv}
-\title{Data on the outbreaks identified in the systematic review of Marburg articles}
+\title{Data on the outbreaks identified in the systematic review of articles
+related to Marburg virus disease.}
 \format{
 A csv file containing the following parameters:
-
-XXYY
+\itemize{
+\item outbreak_id = ID variable for the outbreak.
+\item article_id = ID variable for the article the outbreak data came from.
+\item outbreak_start_day = Day that the outbreak started (numeric - DD).
+\item outbreak_start_month = Month that the outbreak started (three letter
+abbreviation e.g. "Aug").
+\item outbreak_start_year = Year that the outbreak started (numeric - YYYY).
+\item outbreak_end_day = Day that the outbreak ended (numeric - DD).
+\item outbreak_end_month = Month that the outbreak ended (three letter
+abbreviation e.g. "Aug").
+\item outbreak_date_year = Year that the outbreak ended (numeric - YYYY).
+\item outbreak_duration_months = Outbreak duration in months.
+\item outbreak_size = total outbreak size.
+\item asymptomatic_transmission = whether asymptomatic transmission occurred,
+either TRUE or FALSE.
+\item outbreak_country = country in which the outbreak occurred.
+\item outbreak_location = location that the outbreak occurred.
+\item cases_confirmed = total number of confirmed cases.
+\item cases_mode_detection = either diagnosed based on symptoms alone
+("Symptoms"), confirmed via a laboratory test such as PCR ("Molecular
+(PCR etc)"), "Not specified", or NA.
+\item cases_suspected = total number of suspected cases.
+\item cases_asymptomatic = total number of asymptomatic cases.
+\item deaths = total number of deaths.
+\item cases_severe_hospitalised = total number of severe hospitalised cases.
+\item covidence_id = article identifier used by the Imperial team.
+}
 }
 \source{
 Cuomo-Dannenburg G, McCain K, McCabe R, Unwin HJT, Doohan P, Nash RK,
@@ -17,7 +43,6 @@ p. 2023.07.10.23292424.
 Available from: https://www.medrxiv.org/content/10.1101/2023.07.10.23292424v1
 }
 \description{
-This data set gives:
-
-XXYY
+This data set provides all extracted data for outbreaks of Marburg virus
+disease (MVD).
 }
