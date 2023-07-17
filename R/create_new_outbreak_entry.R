@@ -57,11 +57,12 @@ create_new_outbreak_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-  articles <- as_tibble(load_data(table_type = "article",
-                                  pathogen = pathogen,
-                                  vignette_prepend = vignette_prepend))
-  old_outbreaks <- as_tibble(load_data(table_type = "outbreak",
-                                       vignette_prepend = vignette_prepend))
+  articles <- as_tibble(load_epidata(table_type = "article",
+                                     pathogen = pathogen,
+                                     vignette_prepend = vignette_prepend))
+  old_outbreaks <- as_tibble(load_epidata(table_type = "outbreak",
+                                          pathogen = pathogen,
+                                          vignette_prepend = vignette_prepend))
   new_row <- as_tibble_row(new_outbreak)
 
   # generate the below quantities
