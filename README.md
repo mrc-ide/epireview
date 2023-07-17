@@ -1,7 +1,7 @@
 # epireview
 
 <!-- badges: start -->
-[![R build status](https://github.com/mrc-ide/EpiEstim/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
+[![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
 <!-- badges: end -->
 
 epireview is a tool to obtain the latest data from the Pathogen Epidemiology Review Group (PERG) and contains tools to update data from new, peer-reviewed papers for existing pathogens in the database or to add entirely new pathogens.
