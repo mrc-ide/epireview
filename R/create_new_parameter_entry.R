@@ -90,12 +90,12 @@ create_new_parameter_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-  articles <- as_tibble(load_data(table_type = "article",
-                                 pathogen = pathogen,
-                                 vignette_prepend = vignette_prepend))
-  old_parameters <- as_tibble(load_data(table_type = "parameter",
-                                        pathogen = pathogen,
-                                        vignette_prepend = vignette_prepend))
+  articles <- as_tibble(load_epidata(table_type = "article",
+                                     pathogen = pathogen,
+                                     vignette_prepend = vignette_prepend))
+  old_parameters <- as_tibble(load_epidata(table_type = "parameter",
+                                           pathogen = pathogen,
+                                           vignette_prepend = vignette_prepend))
   new_row <- as_tibble_row(new_param)
 
   # generate the below quanties.

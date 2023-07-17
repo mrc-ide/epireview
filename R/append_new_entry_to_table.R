@@ -25,9 +25,9 @@ append_new_entry_to_table <- function(pathogen = NA,
                                       write_table = FALSE,
                                       vignette_prepend = "") {
 
-  old_table <- load_data(table_type = table_type,
-                         pathogen = pathogen,
-                         vignette_prepend = vignette_prepend)
+  old_table <- load_epidata(table_type = table_type,
+                            pathogen = pathogen,
+                            vignette_prepend = vignette_prepend)
 
   if (!((sum(colnames(new_row) == colnames(old_table)) /
         length(colnames(new_row))) == 1))

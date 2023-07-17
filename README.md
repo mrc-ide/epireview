@@ -32,7 +32,7 @@ One output of this project will be a database initially populated with all the i
 ## Pathogen overview and timeline
 
 | Pathogen  | Titles & Abstracts screened | Expected pre-print | Contact | doi|
-| --------- |              --------------:|           --------:|      -- | -- |
+| --------- |         -------------------:|           --------:|      -- | -- |
 | Marburg virus | 4,460 | June 2023 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1101/2023.07.10.23292424||
 | Ebola virus   | 9,563 | September 2023 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
 | Lassa Mammarenavirus  | 1,760 | October 2023   | pd315@ic.ac.uk ||
