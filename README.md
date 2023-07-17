@@ -1,6 +1,6 @@
 # epireview
 
-<img src="man/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;">
+<a href="https://github.com/mrc-ide/epireview"><img src="man/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;"></a>
 
 <!-- badges: start -->
 [![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
