@@ -7,11 +7,15 @@
 forest_plot_R(df)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with parameter information (see vignette for each
+pathogen)}
 }
 \value{
-returns flextable
+returns plot with a summary of reproduction number estimates
 }
 \description{
 Create forest plot for reproduction numbers
+}
+\examples{
+forest_plot_R(df = data)
 }

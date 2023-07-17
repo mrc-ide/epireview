@@ -7,11 +7,15 @@
 forest_plot_severity(df, outbreak_naive = FALSE)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with severity information e.g. IFR and CFR (see
+vignette for each pathogen)}
 }
 \value{
-returns flextable
+returns plot with a summary of IFR and CFR estimates
 }
 \description{
 Create forest plot for severity
+}
+\examples{
+forest_plot_severity(df = data)
 }

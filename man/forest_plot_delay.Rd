@@ -7,12 +7,15 @@
 forest_plot_delay(df)
 }
 \arguments{
-\item{df}{processed data with parameter information (see vignette for each
+\item{df}{processed data with human delay information (see vignette for each
 pathogen)}
 }
 \value{
-returns flextable with a summary of the human delays
+returns plot with a summary of the human delays
 }
 \description{
 Create forest plot for delays
+}
+\examples{
+forest_plot_delay(df = data)
 }
