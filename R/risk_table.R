@@ -8,6 +8,7 @@
 #' @importFrom officer fp_border
 #' @importFrom dplyr mutate mutate filter select rowwise summarise
 #' @importFrom tidyr pivot_longer pivot_wider
+#' @importFrom stringr str_replace_all str_split
 #' @importFrom flextable set_flextable_defaults flextable fontsize
 #' border_remove autofit theme_booktabs vline hline bold
 #' @examples
@@ -19,6 +20,14 @@ risk_table <- function(df,
 
   border_style <- fp_border(color = "black", width = 1)
   set_flextable_defaults(background.color = "white")
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  riskfactor_occupation <- riskfactor_name <- riskfactor_1 <- riskfactor_3 <-
+    riskfactor_names <- article_label <- population_country <- `Survey year` <-
+    riskfactor_outcome <- riskfactor_significant <- riskfactor_adjusted <-
+    population_sample_size <- population_sample_type <- population_group <-
+    method_moment_value <- Outcome <- Country <- index_of_change <-
+    sample_size <- Significant <- `Risk factor` <- Adjusted <- NULL
 
   risk_tbl_supp <- df %>%
     mutate(riskfactor_occupation =

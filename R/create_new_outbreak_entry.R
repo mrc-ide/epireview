@@ -4,9 +4,11 @@
 #' @param new_outbreak all the required details for the new outbreak
 #' @param vignette_prepend string to allow loading data in vignettes
 #' @importFrom tibble as_tibble as_tibble_row
-#' @importFrom validate validator confront summary
+#' @importFrom validate validator confront summary %vin%
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
+#' @importFrom stats na.omit
+#' @importFrom rlang .data
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
 #' @examples
@@ -70,7 +72,7 @@ create_new_outbreak_entry <-
   new_row              <- new_row %>% select(colnames(old_outbreaks))
 
   # Need to check that article_id & covidence_id exist in the articles table.
-  if (!(new_row$article_id %in% articles$article_id &
+  if (!(new_row$article_id %in% articles$article_id &&
        articles[articles$article_id == new_row$article_id, ]$covidence_id ==
        new_row$covidence_id))
     stop("Article_id + Covidence_id pair does not exist in article data")
@@ -84,24 +86,30 @@ create_new_outbreak_entry <-
   }
   outbreak_options <- read_csv(file_path_ob)
 
+  # Deal with R CMD Check "no visible binding for global variable"
+  outbreak_country <- cases_mode_detection <- outbreak_date_year <- NULL
+
   #validate that the entries make sense
   rules <- validator(
-    outbreak_country_is_character     = is.character(outbreak_country),
-    outbreak_country_valid            = strsplit(outbreak_country, ",")[[1]] %vin% na.omit(outbreak_options$`Outbreak country`),
+    outbreak_country_is_character = is.character(outbreak_country),
+    outbreak_country_valid = strsplit(outbreak_country, ",")[[1]] %vin%
+      na.omit(outbreak_options$`Outbreak country`),
     cases_mode_detection_is_character = is.character(cases_mode_detection),
-    cases_mode_detection_valid        = strsplit(cases_mode_detection, ",")[[1]] %vin% na.omit(outbreak_options$`Detection mode`),
-    outbreak_date_year_is_integer     = is.integer(outbreak_date_year),
-    outbreak_date_year_after_1800     = outbreak_date_year > 1800,
-    outbreak_date_year_not_future     = outbreak_date_year < (as.integer(substring(Sys.Date(), 1, 4)) + 2)
+    cases_mode_detection_valid = strsplit(cases_mode_detection, ",")[[1]] %vin%
+      na.omit(outbreak_options$`Detection mode`),
+    outbreak_date_year_is_integer = is.integer(outbreak_date_year),
+    outbreak_date_year_after_1800 = outbreak_date_year > 1800,
+    outbreak_date_year_not_future = outbreak_date_year <
+      (as.integer(substring(Sys.Date(), 1, 4)) + 2)
   )
 
   rules_output  <- confront(new_row, rules)
   rules_summary <- summary(rules_output)
 
-  print(as_tibble(rules_summary) %>% filter(fails > 0))
+  print(as_tibble(rules_summary) %>% filter(.data$fails > 0))
 
   if (sum(rules_summary$fails) > 0) {
-    stop(as_tibble(rules_summary) %>% filter(fails > 0))
+    stop(as_tibble(rules_summary) %>% filter(.data$fails > 0))
   }
 
   return(new_row)

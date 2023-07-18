@@ -8,8 +8,9 @@
 #' table_type, or a specific variable name that the user wants to return
 #' @param vignette_prepend string to allow loading data in vignettes
 #' @return data for specified table_type and field
-#' @importFrom dplyr mutate everything
+#' @importFrom dplyr mutate everything across
 #' @importFrom readr read_csv
+#' @importFrom stats na.omit
 #' @examples
 #' get_available_table_field_options(table_type = "model", field = "all")
 #'

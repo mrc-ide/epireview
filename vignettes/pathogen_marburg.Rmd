@@ -38,7 +38,7 @@ source('../R/quality_assessment.R')
 source('../R/outbreak_table.R')
 source('../R/forest_plot_mutations.R')
 source('../R/forest_plot_r.R')
-source('../R/forest_plot_delays.R')
+source('../R/forest_plot_delay.R')
 source('../R/forest_plot_severity.R')
 source('../R/delay_table.R')
 source('../R/risk_table.R')
@@ -48,6 +48,9 @@ library(tidyverse)
 library(patchwork)
 library(ggplot2)
 library(flextable)
+library(officer)
+library(tm)
+library(meta)
 ```
 
 ## Outbreaks
@@ -106,7 +109,7 @@ df <- left_join(params, articles %>% dplyr::select(article_id, first_author_surn
   mutate(parameter_value_type = ifelse(parameter_data_id == 16, 'Other', parameter_value_type),
          parameter_value_type = ordered(parameter_value_type, levels = c('Mean','Median','Standard Deviation','Other','Unspecified') )) 
 
-forest_plot_R(df)
+forest_plot_r(df)
 ```
 
 ### Severity
@@ -114,8 +117,6 @@ forest_plot_R(df)
 
 
 ```{r cfr_panel_A, echo=FALSE, fig.height=4, fig.width=9, message=FALSE, warning=FALSE}
-library(meta)
-
 file_path_pa <- system.file("data", "marburg_parameter.csv", package = "epireview")
 if(file_path_pa=="") file_path_pa <- paste0('../data/marburg_parameter.csv')
 params       <- read_csv(file_path_pa)

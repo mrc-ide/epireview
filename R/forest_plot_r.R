@@ -6,20 +6,30 @@
 #' @importFrom dplyr filter arrange mutate group_by
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
 #' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
-#' scale_shape_manual theme guides element_text guide_legend
+#' scale_shape_manual theme guides element_text guide_legend position_dodge
+#' scale_linetype_manual scale_colour_manual xlim
+#' @importFrom stats median
 #' @examples
-#' forest_plot_R(df = data)
+#' forest_plot_r(df = data)
 #' @export
-forest_plot_R <- function(df) {
+forest_plot_r <- function(df) {
 
   parameter <- "Reproduction number"
 
-  df_R <- df %>% filter(parameter_class == parameter) %>%
+  # Deal with R CMD Check "no visible binding for global variable"
+  parameter_value <- parameter_type <- first_author_surname <-
+    parameter_class <- article_label_unique <- parameter_type_short <-
+    article_label <- parameter_uncertainty_lower_value <-
+    parameter_uncertainty_upper_value <- parameter_data_id <- NULL
+
+  df_r <- df %>%
+    filter(parameter_class == parameter) %>%
     mutate(parameter_value = as.numeric(parameter_value)) %>%
     group_by(parameter_type) %>%
     arrange(first_author_surname)
 
-  df_plot <- df_R %>% filter(parameter_class == parameter) %>%
+  df_plot <- df_r %>%
+    filter(parameter_class == parameter) %>%
     mutate(parameter_value = as.numeric(parameter_value)) %>%
     group_by(parameter_type) %>%
     mutate(median = median(parameter_value, na.rm = TRUE))

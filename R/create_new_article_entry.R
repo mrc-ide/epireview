@@ -8,6 +8,9 @@
 #' @importFrom tibble as_tibble as_tibble_row
 #' @importFrom validate validator confront summary
 #' @importFrom dplyr rowwise mutate select filter
+#' @importFrom stats na.omit
+#' @importFrom utils globalVariables
+#' @importFrom rlang .data
 #' @examples
 #' create_new_article_entry(
 #'   pathogen = "marburg",
@@ -64,7 +67,7 @@ create_new_article_entry <-
 
   # generate the below quantities
   new_row$article_id <- max(old_articles$article_id) + 1
-  new_row$covidence_id <- if(max(old_articles$covidence_id) > 1000000){
+  new_row$covidence_id <- if (max(old_articles$covidence_id) > 1000000) {
     max(old_articles$covidence_id) + 1
     } else {
       max(old_articles$covidence_id) + 1000000
@@ -76,8 +79,10 @@ create_new_article_entry <-
                              "ebola" = "Ebola virus", NA)
   new_row$double_extracted <- FALSE
 
-  new_row <- new_row %>% rowwise() %>%
-    mutate(score = mean(c(qa_m1, qa_m2, qa_a3, qa_a4, qa_d5, qa_d6, qa_d7),
+  new_row <- new_row %>%
+    rowwise() %>%
+    mutate(score = mean(c(.data$qa_m1, .data$qa_m2, .data$qa_a3, .data$qa_a4,
+                          .data$qa_d5, .data$qa_d6, .data$qa_d7),
                         na.rm = TRUE)) %>%
     select(colnames(old_articles))
 
@@ -85,22 +90,29 @@ create_new_article_entry <-
   sprintf("%s", colnames(new_row))
 
   # check if article already exists in data by looking for doi
-  if(is.character(new_row$doi) & new_row$doi %in% na.omit(old_articles$doi))
+  if (is.character(new_row$doi) && new_row$doi %in% na.omit(old_articles$doi))
     stop("doi exists in data already!")
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  first_author_first_name <- first_author_surname <- article_title <-
+    journal <- doi <- transmission_route <- assumptions <- code_available <-
+    outbreak_date_year <- qa_m1 <- qa_m2 <- qa_a3 <- qa_a4 <- qa_d5 <- qa_d6 <-
+    qa_d7 <- NULL
 
   #validate that the entries make sense
   rules <- validator(
-    first_author_first_name_is_character = is.character(first_author_first_name),
-    first_author_surname_is_character    = is.character(first_author_surname),
-    article_title_is_character           = is.character(article_title),
-    journal_is_character                 = is.character(journal),
+    author_first_name_is_character = is.character(first_author_first_name),
+    author_surname_is_character    = is.character(first_author_surname),
+    article_title_is_character     = is.character(article_title),
+    journal_is_character           = is.character(journal),
     doi_is_character                     = is.character(doi),
     transmission_route_is_character      = is.character(transmission_route),
     assumptions_is_character             = is.character(assumptions),
-    code_available_check                 = code_available %in% c(0, 1, NA),
-    outbreak_date_year_is_integer        = is.integer(outbreak_date_year),
-    outbreak_date_year_after_1800        = outbreak_date_year > 1800,
-    outbreak_date_year_not_future        = outbreak_date_year < (as.integer(substring(Sys.Date(), 1, 4)) + 2),
+    code_available_check            = code_available %in% c(0, 1, NA),
+    outbreak_year_is_integer        = is.integer(outbreak_date_year),
+    outbreak_year_after_1800        = outbreak_date_year > 1800,
+    outbreak_year_not_future        = outbreak_date_year < (as.integer(
+                                            substring(Sys.Date(), 1, 4)) + 2),
     qa_m1                                = qa_m1 %in% c(0, 1, NA),
     qa_m2                                = qa_m2 %in% c(0, 1, NA),
     qa_a3                                = qa_a3 %in% c(0, 1, NA),
@@ -113,8 +125,8 @@ create_new_article_entry <-
   rules_output  <- confront(new_row, rules)
   rules_summary <- summary(rules_output)
 
-  if(sum(rules_summary$fails) > 0)
-    stop(as_tibble(rules_summary) %>% filter(fails > 0))
+  if (sum(rules_summary$fails) > 0)
+    stop(as_tibble(rules_summary) %>% filter(.data$fails > 0))
 
   return(new_row)
 }
