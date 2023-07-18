@@ -1,7 +1,7 @@
 #' Create table with all outbreak data for a particular pathogen
 #'
-#' @param df processed data with outbreak information (see vignette for each
-#' pathogen)
+#' @param df processed data with outbreak information produced by
+#' data_outbreak_table()
 #' @param pathogen name of pathogen
 #' @return returns flextable summarising all extracted outbreaks for the
 #' specified pathogen
@@ -11,7 +11,8 @@
 #' @importFrom tm removeNumbers
 #' @importFrom stringr str_replace_all
 #' @examples
-#' outbreak_table(df = data, pathogen = "marburg")
+#' df <- data_outbreak_table(pathogen = "marburg")
+#' outbreak_table(df = df, pathogen = "marburg")
 #' @export
 outbreak_table <- function(df, pathogen) {
 
