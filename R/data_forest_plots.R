@@ -1,16 +1,18 @@
-#' Process data for use in forest_plot_delay()
+#' Process data for use in forest_plot_delay(), forest_plot_mutations(),
+#' forest_plot_r() and forest_plot_severity()
 #'
 #' @param pathogen name of pathogen e.g. "marburg"
 #' @param exclude article IDs to exclude
-#' @return processed data to use as input for forest_plot_delay()
+#' @return processed data to use as input for forest_plot_delay(),
+#' forest_plot_mutations(), forest_plot_r() and forest_plot_severity()
 #' @importFrom readr read_csv
 #' @importFrom stringr str_starts
 #' @importFrom dplyr select arrange filter mutate rowwise
 #' @examples
-#' data_forest_plot_delay(pathogen = "marburg", exclude = c(15, 17))
+#' data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 #' @export
 
-data_forest_plot_delay <- function(pathogen, exclude) {
+data_forest_plots <- function(pathogen, exclude) {
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(
@@ -42,17 +44,16 @@ data_forest_plot_delay <- function(pathogen, exclude) {
     population_country = str_replace_all(population_country, ";", ",")) %>%
   arrange(article_label, -year_publication) %>%
   filter(article_id %in% exclude == FALSE) %>%
-  mutate(
-    parameter_uncertainty_lower_value =
-      replace(parameter_uncertainty_lower_value,
-              (parameter_uncertainty_type == "Range" &
-                 !is.na(parameter_lower_bound) &
-                 parameter_class == "Human delay"), NA),
-    parameter_uncertainty_upper_value =
-      replace(parameter_uncertainty_upper_value,
-              (parameter_uncertainty_type == "Range" &
-                 !is.na(parameter_upper_bound) &
-                 parameter_class == "Human delay"), NA))
+  mutate(parameter_uncertainty_lower_value =
+           replace(parameter_uncertainty_lower_value,
+                   (parameter_uncertainty_type == "Range" &
+                      !is.na(parameter_lower_bound) &
+                      parameter_class == "Human delay"), NA),
+         parameter_uncertainty_upper_value =
+           replace(parameter_uncertainty_upper_value,
+                   (parameter_uncertainty_type == "Range" &
+                      !is.na(parameter_upper_bound) &
+                      parameter_class == "Human delay"), NA))
 
 # pathogen specific edits
 if (pathogen == "marburg") {

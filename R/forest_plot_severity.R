@@ -1,7 +1,7 @@
 #' Create forest plot for severity
 #'
-#' @param df processed data with severity information e.g. IFR and CFR (see
-#' vignette for each pathogen)
+#' @param df processed data with severity information produced using
+#' data_forest_plots()
 #' @param outbreak_naive TRUE or FALSE. FALSE by default.
 #' @return returns plot with a summary of IFR and CFR estimates
 #' @importFrom dplyr filter arrange mutate group_by
@@ -11,7 +11,8 @@
 #' scale_linetype_manual position_dodge scale_colour_manual xlim
 #' @importFrom stats setNames reorder
 #' @examples
-#' forest_plot_severity(df = data)
+#' df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+#' forest_plot_severity(df = df)
 #' @export
 forest_plot_severity <- function(df, outbreak_naive = FALSE) {
 

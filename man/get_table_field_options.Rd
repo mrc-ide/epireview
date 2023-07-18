@@ -22,10 +22,10 @@ data for specified table_type and field
 Note: This will need to be extended when other pathogens are added
 }
 \examples{
-get_available_table_field_options(table_type = "model", field = "all")
+get_table_field_options(table_type = "model", field = "all")
 
-get_available_table_field_options(table_type = "model", field = "Model type")
+get_table_field_options(table_type = "model", field = "Model type")
 
-get_available_table_field_options(table_type = "parameter",
-                                  field = "Reproduction number method")
+get_table_field_options(table_type = "parameter",
+                        field = "Reproduction number method")
 }
