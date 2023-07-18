@@ -1,13 +1,14 @@
 #' Create forest plot for genetic mutations
 #'
-#' @param df processed data with parameter information (see vignette for each
-#' pathogen)
+#' @param df processed data with parameter information produced using
+#' data_forest_plots()
 #' @return returns plot with a summary of genetic mutations
 #' @importFrom dplyr filter mutate arrange group_by desc if_else
 #' @importFrom ggplot2 geom_vline xlim
 #' @importFrom stats setNames
 #' @examples
-#' forest_plot_mutations(df = data)
+#' df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+#' forest_plot_mutations(df = df)
 #' @export
 forest_plot_mutations <- function(df) {
 

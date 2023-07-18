@@ -1,7 +1,7 @@
 #' Create forest plot for reproduction numbers
 #'
-#' @param df processed data with parameter information (see vignette for each
-#' pathogen)
+#' @param df processed data with parameter information produced using
+#' data_forest_plots()
 #' @return returns plot with a summary of reproduction number estimates
 #' @importFrom dplyr filter arrange mutate group_by
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
@@ -10,7 +10,8 @@
 #' scale_linetype_manual scale_colour_manual xlim
 #' @importFrom stats median
 #' @examples
-#' forest_plot_r(df = data)
+#' df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+#' forest_plot_r(df = df)
 #' @export
 forest_plot_r <- function(df) {
 

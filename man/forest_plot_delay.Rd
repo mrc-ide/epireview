@@ -8,7 +8,7 @@ forest_plot_delay(df)
 }
 \arguments{
 \item{df}{processed data with human delay information produced using
-data_forest_plot_delay()}
+data_forest_plots()}
 }
 \value{
 returns plot with a summary of the human delays
@@ -17,6 +17,6 @@ returns plot with a summary of the human delays
 Create forest plot for human delays
 }
 \examples{
-df <- data_forest_plot_delay(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 forest_plot_delay(df = df)
 }

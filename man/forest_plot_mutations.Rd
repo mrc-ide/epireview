@@ -7,8 +7,8 @@
 forest_plot_mutations(df)
 }
 \arguments{
-\item{df}{processed data with parameter information (see vignette for each
-pathogen)}
+\item{df}{processed data with parameter information produced using
+data_forest_plots()}
 }
 \value{
 returns plot with a summary of genetic mutations
@@ -17,5 +17,6 @@ returns plot with a summary of genetic mutations
 Create forest plot for genetic mutations
 }
 \examples{
-forest_plot_mutations(df = data)
+df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+forest_plot_mutations(df = df)
 }
