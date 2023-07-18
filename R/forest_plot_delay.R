@@ -1,7 +1,7 @@
-#' Create forest plot for delays
+#' Create forest plot for human delays
 #'
-#' @param df processed data with human delay information (see vignette for each
-#' pathogen)
+#' @param df processed data with human delay information produced using
+#' data_forest_plot_delay()
 #' @return returns plot with a summary of the human delays
 #' @importFrom dplyr filter mutate group_by arrange desc
 #' @importFrom stringr str_to_sentence str_wrap
@@ -10,7 +10,8 @@
 #' scale_shape_manual theme guides element_text guide_legend
 #' @importFrom stats setNames median
 #' @examples
-#' forest_plot_delay(df = data)
+#' df <- data_forest_plot_delay(pathogen = "marburg", exclude = c(15, 17))
+#' forest_plot_delay(df = df)
 #' @export
 forest_plot_delay <- function(df) {
 

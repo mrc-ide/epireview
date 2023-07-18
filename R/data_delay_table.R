@@ -6,7 +6,7 @@
 #' @importFrom readr read_csv
 #' @importFrom dplyr left_join mutate select arrange filter
 #' @examples
-#' df <- data_delay_table(pathogen, exclude = c(17, 15))
+#' df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
 #' @export
 
 data_delay_table <- function(pathogen, exclude) {
@@ -26,7 +26,8 @@ data_delay_table <- function(pathogen, exclude) {
   articles <- read_csv(file_path_ar)
 
   # Deal with R CMD Check "no visible binding for global variable"
-  article_id <- first_author_surname <- year_publication <- NULL
+  article_id <- first_author_surname <- year_publication <-
+    population_country <- article_label <- NULL
 
   x <- left_join(params, articles %>%
                    select(article_id, first_author_surname, year_publication),

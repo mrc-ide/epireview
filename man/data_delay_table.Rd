@@ -18,5 +18,5 @@ processed data to use as input for delay_table()
 Process data for delay table
 }
 \examples{
-df <- data_delay_table(pathogen, exclude = c(17, 15))
+df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
 }

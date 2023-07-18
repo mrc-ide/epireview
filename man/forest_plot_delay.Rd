@@ -2,20 +2,21 @@
 % Please edit documentation in R/forest_plot_delay.R
 \name{forest_plot_delay}
 \alias{forest_plot_delay}
-\title{Create forest plot for delays}
+\title{Create forest plot for human delays}
 \usage{
 forest_plot_delay(df)
 }
 \arguments{
-\item{df}{processed data with human delay information (see vignette for each
-pathogen)}
+\item{df}{processed data with human delay information produced using
+data_forest_plot_delay()}
 }
 \value{
 returns plot with a summary of the human delays
 }
 \description{
-Create forest plot for delays
+Create forest plot for human delays
 }
 \examples{
-forest_plot_delay(df = data)
+df <- data_forest_plot_delay(pathogen = "marburg", exclude = c(15, 17))
+forest_plot_delay(df = df)
 }
