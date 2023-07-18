@@ -20,5 +20,6 @@ specified pathogen
 Create table with all outbreak data for a particular pathogen
 }
 \examples{
-outbreak_table(df = data, pathogen = "marburg")
+df <- data_outbreak_table(pathogen = "marburg")
+outbreak_table(df = df, pathogen = "marburg")
 }

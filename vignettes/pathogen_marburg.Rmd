@@ -35,6 +35,7 @@ All Tables and Figures from the paper are re-produced below on the **latest** av
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 source('../R/quality_assessment.R')
+source('../R/data_outbreak_table.R')
 source('../R/outbreak_table.R')
 source('../R/forest_plot_mutations.R')
 source('../R/forest_plot_r.R')
@@ -59,25 +60,8 @@ library(meta)
 **Table 1:** Overview of MVD outbreaks i.e. location, timing, and size, as reported in the studies included in this review. We report in bold the country and outbreak year, the location refers to the place of the actual outbreak in the country if known. Blank cells correspond to information which we were unable to find in or extract from the literature.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-file_path_ob <- system.file("data", "marburg_outbreak.csv", package = "epireview")
-if(file_path_ob=="") file_path_ob <- paste0('../data/marburg_outbreak.csv')
-outbreak     <- read_csv(file_path_ob)
-
-file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
-if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
-articles     <- read_csv(file_path_ar)
-
-df <- left_join(outbreak, articles %>% dplyr::select(article_id, first_author_surname,year_publication),  by="article_id") %>%
-  mutate(article_label = as.character(paste0(first_author_surname," ",year_publication)),
-         outbreak_country = str_replace_all(outbreak_country,";",", "),
-         outbreak_country = str_replace_all(outbreak_country, "Yuogslavia", "Yugoslavia"),
-         outbreak_country = str_replace_all(outbreak_country, "Congo, Dem. Rep.", "Democratic Republic of the Congo"),
-         outbreak_location = str_replace_all(outbreak_location, "Marburg (23), Frankfurt am Main (6), Belgrade (2)",
-                                             "Marburg, Frankfurt am Main, Belgrade"),
-         cases_mode_detection = gsub("[()]", "", str_replace_all(cases_mode_detection, "(PCR etc)", " "))) %>%
-  dplyr::arrange(article_label, -year_publication)
-
-outbreak_table(df,'marburg')
+df <- data_outbreak_table(pathogen = "marburg")
+outbreak_table(df, "marburg")
 ```
 
 ## Parameters
@@ -98,6 +82,14 @@ forest_plot_r(df)
 
 ```{r cfr_panel_A, echo=FALSE, fig.height=4, fig.width=9, message=FALSE, warning=FALSE}
 df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+
+file_path_ob <- system.file("data", "marburg_outbreak.csv", package = "epireview")
+if(file_path_ob=="") file_path_ob <- paste0('../data/marburg_outbreak.csv')
+outbreak     <- read_csv(file_path_ob)
+
+file_path_ar <- system.file("data","marburg_article.csv", package = "epireview")
+if(file_path_ar=="") file_path_ar <- paste0('../data/marburg_article.csv')
+articles     <- read_csv(file_path_ar)
 
 df_out <- left_join(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication), by = "covidence_id") %>%
   mutate(article_label = as.character(paste0(first_author_surname, " ", year_publication)),
