@@ -30,6 +30,8 @@ the same number of variables as the table to be updated)}
 \item{write_table}{write appended table (either TRUE or FALSE). If TRUE the
 new table will be written as a csv file in the data folder of a locally
 cloned repository.}
+
+\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 table with new entry (if write_table = TRUE the relevant table in a

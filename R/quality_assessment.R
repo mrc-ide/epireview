@@ -30,6 +30,9 @@ quality_assessment_plots <- function(pathogen = NA,
     file_path <- paste0(prepend, "data/", pathogen, "_article.csv")
   quality <- read_csv(file_path)
 
+  # Deal with R CMD Check "no visible binding for global variable"
+  year_publication <- score <- covidence_id <- Assessment <- Question <- NULL
+
   # time series plot
   qa_time_series <- quality %>%
     filter(!is.na(year_publication) & !is.na(pathogen)) %>%
@@ -72,7 +75,9 @@ quality_assessment_plots <- function(pathogen = NA,
                                levels = c("NA", "No", "Yes"))
 
   qa_answers <- answers %>%
-    group_by(Question, Assessment) %>% summarize(count = n()) %>% ungroup() %>%
+    group_by(Question, Assessment) %>%
+    summarize(count = n()) %>%
+    ungroup() %>%
     ggplot(aes(fill = Assessment, y = count, x = Question)) +
     geom_bar(position = "stack", stat = "identity") +
     theme_bw() +

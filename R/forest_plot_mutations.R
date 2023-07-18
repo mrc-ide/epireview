@@ -4,13 +4,20 @@
 #' pathogen)
 #' @return returns plot with a summary of genetic mutations
 #' @importFrom dplyr filter mutate arrange group_by desc if_else
-#' @importFrom ggplot2 geom_vline
+#' @importFrom ggplot2 geom_vline xlim
+#' @importFrom stats setNames
 #' @examples
 #' forest_plot_mutations(df = data)
 #' @export
 forest_plot_mutations <- function(df) {
 
   parameter <- "Mutations"
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  parameter_class <- parameter_value <- parameter_type <- genome_site <-
+    gene <- parameter_uncertainty_single_value <- article_label_unique <-
+    parameter_data_id <- parameter_uncertainty_lower_value <-
+    parameter_uncertainty_upper_value <- NULL
 
   df_mutations <- df %>%
     filter(parameter_class == parameter) %>%

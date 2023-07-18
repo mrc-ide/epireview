@@ -2,11 +2,14 @@
 #'
 #' @param df processed data with severity information e.g. IFR and CFR (see
 #' vignette for each pathogen)
+#' @param outbreak_naive TRUE or FALSE. FALSE by default.
 #' @return returns plot with a summary of IFR and CFR estimates
 #' @importFrom dplyr filter arrange mutate group_by
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
 #' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
 #' scale_shape_manual theme guides element_text guide_legend
+#' scale_linetype_manual position_dodge scale_colour_manual xlim
+#' @importFrom stats setNames reorder
 #' @examples
 #' forest_plot_severity(df = data)
 #' @export
@@ -14,11 +17,20 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
 
   parameter <- "Severity"
 
-  if(outbreak_naive) {
+  # Deal with R CMD Check "no visible binding for global variable"
+  keep_record <- parameter_class <- parameter_value <- parameter_type <-
+    article_label <- cfr_ifr_method <- outbreak_start_year <-
+    cfr_ifr_denominator <- outbreak_year_cnt <- article_label_unique <-
+    order_num <- lower_ci <- upper_ci <- parameter_data_id <-
+    parameter_uncertainty_lower_value <- parameter_lower_bound <-
+    parameter_uncertainty_upper_value <- parameter_upper_bound <- NULL
+
+  if (outbreak_naive) {
     df <- df %>% filter(keep_record == 1)
   }
 
-  df_cfr <- df %>% filter(parameter_class == parameter) %>%
+  df_cfr <- df %>%
+    filter(parameter_class == parameter) %>%
     mutate(parameter_value = as.numeric(parameter_value)) %>%
     group_by(parameter_type) %>%
     arrange(article_label)
@@ -37,7 +49,7 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
   df_plot$article_label_unique <- make.unique(df_plot$article_label)
   df_plot <- df_plot %>% mutate(order_num = seq(1, dim(df_plot)[1], 1))
 
-  if(outbreak_naive) {
+  if (outbreak_naive) {
     df_plot2 <- df_plot %>%
       arrange(outbreak_start_year) %>%
       mutate(order_num = row_number(),
@@ -46,9 +58,8 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
                                             cfr_ifr_denominator))) * 100,
              upper_ci = (p  + 1.96 * (sqrt((p * (1 - p)) /
                                              cfr_ifr_denominator))) * 100,
-             outbreak_year_cnt =
-               as.character(paste0(outbreak_year_cnt,
-                                   " [n =", cfr_ifr_denominator,"]")))
+             outbreak_year_cnt = as.character(paste0(
+               outbreak_year_cnt, " [n =", cfr_ifr_denominator, "]")))
 
     plot <- ggplot(df_plot2, aes(x = parameter_value,
                                  y = reorder(article_label_unique, -order_num),

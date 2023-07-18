@@ -14,8 +14,10 @@
 #' @param write_table write appended table (either TRUE or FALSE). If TRUE the
 #' new table will be written as a csv file in the data folder of a locally
 #' cloned repository.
+#' @param vignette_prepend string to allow loading data in vignettes
 #' @return table with new entry (if write_table = TRUE the relevant table in a
 #' locally cloned repository is updated)
+#' @importFrom utils write.csv
 #'
 #' @export
 append_new_entry_to_table <- function(pathogen = NA,
@@ -33,31 +35,31 @@ append_new_entry_to_table <- function(pathogen = NA,
         length(colnames(new_row))) == 1))
     stop("Schemas of new row and data sets do not match")
 
-  if (table_type == "article" & new_row$article_id %in% old_table$article_id)
+  if (table_type == "article" && new_row$article_id %in% old_table$article_id)
     stop("article_id already exists in the data set")
 
   new_table <- rbind(old_table, new_row)
 
   if (validate) {
-    if(table_type == "article")
+    if (table_type == "article")
       create_new_article_entry(pathogen = pathogen,
                                new_article = new_row %>% as.vector(),
                                vignette_prepend = vignette_prepend)
-    if(table_type == "outbreak")
+    if (table_type == "outbreak")
       create_new_outbreak_entry(pathogen = pathogen,
                                 new_outbreak = new_row %>% as.vector(),
                                 vignette_prepend = vignette_prepend)
-    if(table_type == "model")
+    if (table_type == "model")
       create_new_model_entry(pathogen = pathogen,
                              new_model = new_row %>% as.vector(),
                              vignette_prepend = vignette_prepend)
-    if(table_type == "parameter")
+    if (table_type == "parameter")
       create_new_parameter_entry(pathogen = pathogen,
                                  new_param = new_row %>% as.vector(),
                                  vignette_prepend = vignette_prepend)
   }
 
-  if(write_table)
+  if (write_table)
     write.csv(new_table, paste0(vignette_prepend, "data/", pathogen, "_",
                                 table_type, ".csv"))
 

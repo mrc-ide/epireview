@@ -13,6 +13,13 @@ sero_table <- function(df, pathogen) {
   border_style <- fp_border(color = "black", width = 1)
   set_flextable_defaults(background.color = "white")
 
+  # Deal with R CMD Check "no visible binding for global variable"
+  parameter_class <- parameter_value <- parameter_type <- article_label <-
+    population_country <- `Survey year` <- Uncertainty <-
+    parameter_uncertainty_type <- cfr_ifr_numerator <- cfr_ifr_denominator <-
+    population_group <- method_moment_value <- method_disaggregated_by <-
+    Country <- `Parameter type*` <- index_of_change <- NULL
+
   sero_tbl <- df %>%
     mutate(parameter_value = round(parameter_value, 2),
            parameter_type =

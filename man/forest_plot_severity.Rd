@@ -9,6 +9,8 @@ forest_plot_severity(df, outbreak_naive = FALSE)
 \arguments{
 \item{df}{processed data with severity information e.g. IFR and CFR (see
 vignette for each pathogen)}
+
+\item{outbreak_naive}{TRUE or FALSE. FALSE by default.}
 }
 \value{
 returns plot with a summary of IFR and CFR estimates

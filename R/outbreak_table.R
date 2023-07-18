@@ -9,13 +9,22 @@
 #' @importFrom dplyr filter select rowwise mutate distinct arrange group_by
 #' @importFrom flextable flextable set_flextable_defaults
 #' @importFrom tm removeNumbers
+#' @importFrom stringr str_replace_all
 #' @examples
 #' outbreak_table(df = data, pathogen = "marburg")
 #' @export
 outbreak_table <- function(df, pathogen) {
 
-  border_style = fp_border(color = "black", width = 1)
+  border_style <- fp_border(color = "black", width = 1)
   set_flextable_defaults(background.color = "white")
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  article_label <- outbreak_start_day <- outbreak_start_month <-
+  outbreak_start_year <- outbreak_end_day <- outbreak_end_month <-
+  outbreak_date_year <- outbreak_country <- outbreak_location <-
+  cases_confirmed <- cases_suspected <- cases_asymptomatic <-
+  cases_mode_detection <- cases_severe_hospitalised <- deaths <-
+  outbreak_start <- outbreak_end <- index_of_change <- NULL
 
   outbreak_tbl <- df %>%
     filter(is.na(outbreak_start_year) == FALSE) %>%

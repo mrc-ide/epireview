@@ -7,8 +7,8 @@
 delay_table(df, pathogen)
 }
 \arguments{
-\item{df}{processed data with parameter information (see vignette for each
-pathogen)}
+\item{df}{processed data with parameter information produced using
+data_delay_table()}
 
 \item{pathogen}{name of pathogen}
 }
@@ -20,5 +20,9 @@ extracted from the included studies
 Create table for human delay parameters
 }
 \examples{
-delay_table(df, pathogen = "marburg")
+# Process data
+df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
+
+# Get delay table
+delay_table(df = df, pathogen = "marburg")
 }

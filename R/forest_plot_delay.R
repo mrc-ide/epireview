@@ -8,12 +8,21 @@
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
 #' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
 #' scale_shape_manual theme guides element_text guide_legend
+#' @importFrom stats setNames median
 #' @examples
 #' forest_plot_delay(df = data)
 #' @export
 forest_plot_delay <- function(df) {
 
   parameter <- "Human delay"
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  parameter_class <- parameter_type <- parameter_type_short <-
+    article_label <- riskfactor_outcome <- first_author_surname <-
+    parameter_value <- article_label_unique <- parameter_value_type <-
+    parameter_lower_bound <- parameter_upper_bound <-
+    parameter_data_id <- parameter_uncertainty_lower_value <-
+    parameter_uncertainty_upper_value <- NULL
 
   df_delay <- df %>%
     filter(parameter_class == parameter) %>%

@@ -1,22 +1,33 @@
 #' Create table for human delay parameters
 #'
-#' @param df processed data with parameter information (see vignette for each
-#' pathogen)
+#' @param df processed data with parameter information produced using
+#' data_delay_table()
 #' @param pathogen name of pathogen
 #' @return flextable with an overview of the delay parameter estimates
 #' extracted from the included studies
 #' @importFrom officer fp_border
 #' @importFrom flextable flextable set_flextable_defaults fontsize
 #' border_remove autofit theme_booktabs vline hline bold add_footer_lines
-#' @importFrom dplyr filter mutate select arrange group_by row_number
+#' @importFrom dplyr filter mutate select arrange group_by row_number %>%
 #' @importFrom stringr str_to_title str_replace
 #' @examples
-#'delay_table(df, pathogen = "marburg")
+#' # Process data
+#' df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
+#'
+#' # Get delay table
+#' delay_table(df = df, pathogen = "marburg")
 #' @export
+
 delay_table <- function(df, pathogen) {
 
   border_style <- fp_border(color = "black", width = 1)
   set_flextable_defaults(background.color = "white")
+
+  # Deal with R CMD Check "no visible binding for global variable"
+  parameter_class <- parameter_type <- article_label <- population_country <-
+    `Survey year` <- parameter_value <- parameter_value_type <- Uncertainty <-
+    parameter_uncertainty_type <- population_group <- method_moment_value <-
+    riskfactor_outcome <- `Parameter type` <- Country <- index_of_change <- NULL
 
   delay_tbl <- df %>%
     filter(parameter_class == "Human delay") %>%
