@@ -7,7 +7,7 @@
 sero_table(df, pathogen)
 }
 \arguments{
-\item{df}{processed data with outbreak information produced by
+\item{df}{processed data with parameter information produced by
 data_param_table()}
 
 \item{pathogen}{name of pathogen}

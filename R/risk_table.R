@@ -1,11 +1,11 @@
 #' Create risk table
 #'
-#' @param df processed data with risk factor information produced by
+#' @param df processed data with parameter information produced by
 #' data_param_table()
 #' @param pathogen name of pathogen
 #' @param supplement either TRUE or FALSE. If TRUE, returns supplementary
-#' figures.
-#' @return returns flextable
+#' table.
+#' @return returns flextable with summary of risk factor data
 #' @importFrom officer fp_border
 #' @importFrom dplyr mutate mutate filter select rowwise summarise
 #' @importFrom tidyr pivot_longer pivot_wider

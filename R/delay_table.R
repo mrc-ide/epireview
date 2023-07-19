@@ -11,10 +11,7 @@
 #' @importFrom dplyr filter mutate select arrange group_by row_number %>%
 #' @importFrom stringr str_to_title str_replace
 #' @examples
-#' # Process data
 #' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
-#'
-#' # Get delay table
 #' delay_table(df = df, pathogen = "marburg")
 #' @export
 

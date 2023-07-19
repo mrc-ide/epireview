@@ -20,9 +20,6 @@ extracted from the included studies
 Create table for human delay parameters
 }
 \examples{
-# Process data
 df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
-
-# Get delay table
 delay_table(df = df, pathogen = "marburg")
 }

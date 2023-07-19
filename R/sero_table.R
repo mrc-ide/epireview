@@ -1,6 +1,6 @@
 #' Create seroprevalence table
 #'
-#' @param df processed data with outbreak information produced by
+#' @param df processed data with parameter information produced by
 #' data_param_table()
 #' @param pathogen name of pathogen
 #' @return returns flextable with a summary of seroprevalence data
