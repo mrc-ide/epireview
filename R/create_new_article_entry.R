@@ -10,7 +10,6 @@
 #' @importFrom dplyr rowwise mutate select filter
 #' @importFrom stats na.omit
 #' @importFrom utils globalVariables
-#' @importFrom rlang .data
 #' @examples
 #' create_new_article_entry(
 #'   pathogen = "marburg",
@@ -73,6 +72,12 @@ create_new_article_entry <-
       max(old_articles$covidence_id) + 1000000
     }
 
+  # Deal with R CMD Check "no visible binding for global variable"
+  first_author_first_name <- first_author_surname <- article_title <-
+    journal <- doi <- transmission_route <- assumptions <- code_available <-
+    outbreak_date_year <- qa_m1 <- qa_m2 <- qa_a3 <- qa_a4 <- qa_d5 <- qa_d6 <-
+    qa_d7 <- fails <- NULL
+
   # update this as new pathogens are added
   new_row$pathogen <- switch(pathogen,
                              "marburg" = "Marburg virus",
@@ -81,8 +86,7 @@ create_new_article_entry <-
 
   new_row <- new_row %>%
     rowwise() %>%
-    mutate(score = mean(c(.data$qa_m1, .data$qa_m2, .data$qa_a3, .data$qa_a4,
-                          .data$qa_d5, .data$qa_d6, .data$qa_d7),
+    mutate(score = mean(c(qa_m1, qa_m2, qa_a3, qa_a4, qa_d5, qa_d6, qa_d7),
                         na.rm = TRUE)) %>%
     select(colnames(old_articles))
 
@@ -92,12 +96,6 @@ create_new_article_entry <-
   # check if article already exists in data by looking for doi
   if (is.character(new_row$doi) && new_row$doi %in% na.omit(old_articles$doi))
     stop("doi exists in data already!")
-
-  # Deal with R CMD Check "no visible binding for global variable"
-  first_author_first_name <- first_author_surname <- article_title <-
-    journal <- doi <- transmission_route <- assumptions <- code_available <-
-    outbreak_date_year <- qa_m1 <- qa_m2 <- qa_a3 <- qa_a4 <- qa_d5 <- qa_d6 <-
-    qa_d7 <- NULL
 
   #validate that the entries make sense
   rules <- validator(
@@ -126,7 +124,7 @@ create_new_article_entry <-
   rules_summary <- summary(rules_output)
 
   if (sum(rules_summary$fails) > 0)
-    stop(as_tibble(rules_summary) %>% filter(.data$fails > 0))
+    stop(as_tibble(rules_summary) %>% filter(fails > 0))
 
   return(new_row)
 }

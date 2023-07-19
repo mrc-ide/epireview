@@ -10,7 +10,6 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
-#' @importFrom rlang .data
 #' @examples
 #' create_new_model_entry(
 #'   pathogen = 'marburg',
@@ -72,7 +71,7 @@ create_new_model_entry <-
   # Deal with R CMD Check "no visible binding for global variable"
   model_type <- compartmental_type <- stoch_deter <- interventions_type <-
     transmission_route <- assumptions <- code_available <- theoretical_model <-
-    NULL
+    fails <- NULL
 
   #validate that the entries make sense
   rules <- validator(
@@ -101,10 +100,10 @@ create_new_model_entry <-
   rules_output  <- confront(new_row, rules)
   rules_summary <- summary(rules_output)
 
-  print(as_tibble(rules_summary) %>% filter(.data$fails > 0))
+  print(as_tibble(rules_summary) %>% filter(fails > 0))
 
   if (sum(rules_summary$fails) > 0) {
-    stop(as_tibble(rules_summary) %>% filter(.data$fails > 0))
+    stop(as_tibble(rules_summary) %>% filter(fails > 0))
   }
 
   return(new_row)
