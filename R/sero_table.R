@@ -1,12 +1,13 @@
 #' Create seroprevalence table
 #'
-#' @param df processed data with seroprevalence information (see vignette for
-#' each pathogen)
+#' @param df processed data with outbreak information produced by
+#' data_param_table()
 #' @param pathogen name of pathogen
 #' @return returns flextable with a summary of seroprevalence data
 #' @importFrom officer fp_border
 #' @examples
-#' sero_table(df = data, pathogen = "marburg")
+#' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
+#' sero_table(df = df, pathogen = "marburg")
 #' @export
 sero_table <- function(df, pathogen) {
 

@@ -1,7 +1,7 @@
 #' Create risk table
 #'
 #' @param df processed data with risk factor information produced by
-#' data_risk_table()
+#' data_param_table()
 #' @param pathogen name of pathogen
 #' @param supplement either TRUE or FALSE. If TRUE, returns supplementary
 #' figures.
@@ -13,7 +13,7 @@
 #' @importFrom flextable set_flextable_defaults flextable fontsize
 #' border_remove autofit theme_booktabs vline hline bold
 #' @examples
-#' df <- data_risk_table(pathogen = "marburg", exclude = c(15, 17))
+#' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
 #' risk_table(df = df, pathogen = "marburg")
 #' @export
 risk_table <- function(df,

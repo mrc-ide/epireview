@@ -8,7 +8,7 @@ risk_table(df, pathogen, supplement = FALSE)
 }
 \arguments{
 \item{df}{processed data with risk factor information produced by
-data_risk_table()}
+data_param_table()}
 
 \item{pathogen}{name of pathogen}
 
@@ -22,6 +22,6 @@ returns flextable
 Create risk table
 }
 \examples{
-df <- data_risk_table(pathogen = "marburg", exclude = c(15, 17))
+df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
 risk_table(df = df, pathogen = "marburg")
 }

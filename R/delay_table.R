@@ -1,7 +1,7 @@
 #' Create table for human delay parameters
 #'
 #' @param df processed data with parameter information produced using
-#' data_delay_table()
+#' data_param_table()
 #' @param pathogen name of pathogen
 #' @return flextable with an overview of the delay parameter estimates
 #' extracted from the included studies
@@ -12,7 +12,7 @@
 #' @importFrom stringr str_to_title str_replace
 #' @examples
 #' # Process data
-#' df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
+#' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
 #'
 #' # Get delay table
 #' delay_table(df = df, pathogen = "marburg")
