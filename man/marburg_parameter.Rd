@@ -8,60 +8,97 @@ related to Marburg virus disease.}
 \format{
 A csv file containing the following parameters:
 \itemize{
-\item parameter_data_id
-\item article_id
-\item parameter_type
-\item parameter_value
-\item parameter_unit
-\item parameter_lower_bound
-\item parameter_upper_bound
-\item parameter_value_type
-\item parameter_uncertainty_single_value
-\item parameter_uncertainty_singe_type
-\item parameter_uncertainty_lower_value
-\item parameter_uncertainty_upper_value
-\item parameter_uncertainty_type
-\item cfr_ifr_numerator
-\item cfr_ifr_denominator
-\item distribution_type
-\item distribution_par1_value
-\item distribution_par1_type
-\item distribution_par1_uncertainty
-\item distribution_par2_value
-\item distribution_par2_type
-\item distribution_par2_uncertainty
-\item method_from_supplement
-\item method_moment_value
-\item cfr_ifr_method
-\item method_r
-\item method_disaggregated_by
-\item method_disaggregated
-\item method_disaggregated_only
-\item riskfactor_outcome
-\item riskfactor_name
-\item riskfactor_occupation
-\item riskfactor_significant
-\item riskfactor_adjusted
-\item population_sex
-\item population_sample_type
-\item population_group
-\item population_age_min
-\item population_age_max
-\item population_sample_size
-\item population_country
-\item population_location
-\item population_study_start_day
-\item population_study_start_month
-\item population_study_start_year
-\item population_study_end_day
-\item population_study_end_month
-\item population_study_end_year
-\item genome_site
-\item genomic_sequence_available
-\item parameter_class
-\item covidence_id
-\item Uncertainty
-\item Survey year
+\item parameter_data_id = ID variable for the parameter.
+\item article_id = ID variable for the article the outbreak data came from.
+\item parameter_type = extracted parameter (see marburg_dropdown_parameters
+for the full list of parameters extracted).
+\item parameter_value = extracted parameter value as stated in the article.
+\item parameter_unit = units of the extracted parameter (see
+marburg_dropdown_parameters for the full list of parameter units).
+\item parameter_lower_bound = minimum value of the parameter across any
+dimension of disaggregation.
+\item parameter_upper_bound = maximum value of the parameter across any
+dimension of disaggregation.
+\item parameter_value_type = whether the parameter value is the mean, median,
+standard deviation.
+\item parameter_uncertainty_single_value = extracted uncertainty if only a
+single value provided.
+\item parameter_uncertainty_single_type = uncertainty type if only a single
+value is reported e.g. "Standard Error (SE)" (see
+marburg_dropdown_parameters for the full list of options).
+\item parameter_uncertainty_lower_value = lower value of paired uncertainty.
+\item parameter_uncertainty_upper_value = upper value of paired uncertainty.
+\item parameter_uncertainty_type = uncertainty type if a pair of values are
+provided, e.g. "CI90\%", "CRI95\%" (see marburg_dropdown_parameters
+for the full list of options).
+\item cfr_ifr_numerator = numerator of the cfr or ifr provided in the article.
+\item cfr_ifr_denominator = denominator of the cfr or ifr provided in the
+article.
+\item distribution_type = if uncertainty is given as a distribution (see
+marburg_dropdown_parameters for the full list of options).
+\item distribution_par1_value = value for distribution parameter 1.
+\item distribution_par1_type = distribution parameter 1 type, e.g. shape, scale
+(see marburg_dropdown_parameters for the full list of options).
+\item distribution_par1_uncertainty = TRUE/FALSE.
+\item distribution_par2_value = value for distribution parameter 2.
+\item distribution_par2_type = distribution parameter 2 type, e.g. shape, scale
+(see marburg_dropdown_parameters for the full list of options).
+\item distribution_par2_uncertainty = TRUE/FALSE.
+\item method_from_supplement = whether the parameter was taken from the
+supplementary material of the article. TRUE/FALSE.
+\item method_moment_value = time period, either "Pre outbreak", Start outbreak",
+"Mid outbreak", "Post Outbreak", or "Other", if specified in the article.
+\item cfr_ifr_method = whether the method used to calculate the cfr/ifr was
+"Naive", "Adjusted", "Unknown".
+\item method_r = method used to estimate the reproduction number (see
+marburg_dropdown_parameters for the full list of options).
+\item method_disaggregated_by = how the parameter is disaggregated e.g. by Age,
+Sex, Region.
+\item method_disaggregated = whether the parameter is disaggregated (TRUE/FALSE).
+\item method_disaggregated_only = whether only disaggregated data is available
+(TRUE/FALSE).
+\item riskfactor_outcome = the outcome(s) for which the risk factor was
+evaluated e.g. "Death" or "Infection" (see marburg_dropdown_parameters
+for the full list of options).
+\item riskfactor_name = the potential risk factor(s) evaluated e.g. "Age" (see
+marburg_dropdown_parameters for the full list of options).
+\item riskfactor_occupation = specific occupation(s) if occupation is a risk
+factor (see marburg_dropdown_parameters for the full list of options).
+\item riskfactor_significant = either "Significant", "Not significant",
+"Unspecified" or NA.
+\item riskfactor_adjusted = either "Adjusted", "Not adjusted", "Unspecified".
+\item population_sex = the sex of the study population, either "Female", "Male",
+"Both", "Unspecified".
+\item population_sample_type = how the study was conducted e.g. "Hospital based",
+"Population based" (see 'Setting' in marburg_dropdown_parameters for the
+full list of options).
+\item population_group = population group e.g. "Healthcare workers" (see
+marburg_dropdown_parameters for the full list of options).
+\item population_age_min = minimum age in sample (if reported).
+\item population_age_max = maximum age in the sample (if reported).
+\item population_sample_size = total number of participants/samples tested.
+\item population_country = country/countries that the study took place in.
+\item population_location = location that the study took place e.g. region, city.
+\item population_study_start_day = day study started (numeric - DD)
+\item population_study_start_month = month study started (three letter
+abbreviation e.g. "Feb")
+\item population_study_start_year = year study started (numeric - YYYY)
+\item population_study_end_day = day study ended (numeric - DD)
+\item population_study_end_month = month study ended (three letter abbreviation
+e.g. "Feb")
+\item population_study_end_year = year study ended (numeric - YYYY)
+\item genome_site = the portion of the pathogen’s genome used to estimate any
+extracted parameters. I.e. the gene, gene segment, codon position, or a
+more generic description (‘whole genome’ or ‘intergenic positions’).
+\item genomic_sequence_available = whether the study sequenced new pathogen
+isolates and their accession numbers have been provided for retrieval
+from a public database. TRUE/FALSE.
+\item parameter_class = class of the extracted parameter. Either "Human delay",
+"Seroprevalence", "Severity", "Reproduction number", "Mutations",
+"Risk factors", or "Other transmission parameters".
+\item covidence_id = article identifier used by the Imperial team.
+\item Uncertainty = remove?
+\item Survey year = remove?
 }
 }
 \source{
