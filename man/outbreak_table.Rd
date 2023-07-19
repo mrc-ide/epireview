@@ -7,8 +7,8 @@
 outbreak_table(df, pathogen)
 }
 \arguments{
-\item{df}{processed data with outbreak information (see vignette for each
-pathogen)}
+\item{df}{processed data with outbreak information produced by
+data_outbreak_table()}
 
 \item{pathogen}{name of pathogen}
 }
