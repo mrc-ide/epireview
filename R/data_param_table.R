@@ -2,14 +2,15 @@
 #'
 #' @param pathogen name of pathogen e.g. "marburg"
 #' @param exclude article IDs to exclude
-#' @return processed data to use as input for delay_table()
+#' @return processed data to use as input for delay_table(), risk_table() and
+#' seroprevalence_table()
 #' @importFrom readr read_csv
 #' @importFrom dplyr left_join mutate select arrange filter
 #' @examples
-#' df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
+#' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
 #' @export
 
-data_delay_table <- function(pathogen, exclude) {
+data_param_table <- function(pathogen, exclude) {
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(

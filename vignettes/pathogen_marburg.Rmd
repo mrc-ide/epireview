@@ -34,19 +34,18 @@ All Tables and Figures from the paper are re-produced below on the **latest** av
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-source('../R/quality_assessment.R')
+source('../R/data_param_table.R')
+source('../R/data_forest_plots.R')
 source('../R/data_outbreak_table.R')
+source('../R/quality_assessment.R')
 source('../R/outbreak_table.R')
 source('../R/forest_plot_mutations.R')
 source('../R/forest_plot_r.R')
-source('../R/data_forest_plots.R')
 source('../R/forest_plot_delay.R')
 source('../R/forest_plot_severity.R')
-source('../R/data_delay_table.R')
 source('../R/delay_table.R')
-source('../R/data_risk_table.R')
 source('../R/risk_table.R')
-source('../R/seroprevalence_table.R')
+source('../R/sero_table.R')
 source('../R/date_start.R')
 library(tidyverse)
 library(patchwork)
@@ -169,7 +168,7 @@ forest_plot_severity(df_out,outbreak_naive = TRUE)
 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_delay_table(pathogen = "marburg", exclude = c(17, 15))
+df <- data_param_table(pathogen = "marburg", exclude = c(17, 15))
 delay_table(df, "marburg")
 ```
 
@@ -213,7 +212,7 @@ forest_plot_mutations(df)
 **Table 3:** Aggregated information on risk factors associated with MVD infection and seropositivity. Risk factors were mapped onto our risk factor classification (see Supplement) by interpreting the authors’ descriptions. Adjusted refers to whether estimates are adjusted (i.e. from a multivariate analysis) or not (i.e. from a univariate analysis), with unknown showing that this information is not clearly stated in the original study. Statistical significance was determined according to the original authors’ statistical approaches when specified, or using a p-value of 0.05 otherwise. The numbers in the significant and not significant columns represent the total sample size included in the analyses for this risk factor and outcome category.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_risk_table(pathogen = "marburg", exclude = c(15, 17))
+df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
 risk_table(df, "marburg")
 ```
 
