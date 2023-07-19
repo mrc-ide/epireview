@@ -7,16 +7,16 @@
 risk_table(df, pathogen, supplement = FALSE)
 }
 \arguments{
-\item{df}{processed data with risk factor information produced by
+\item{df}{processed data with parameter information produced by
 data_param_table()}
 
 \item{pathogen}{name of pathogen}
 
 \item{supplement}{either TRUE or FALSE. If TRUE, returns supplementary
-figures.}
+table.}
 }
 \value{
-returns flextable
+returns flextable with summary of risk factor data
 }
 \description{
 Create risk table
