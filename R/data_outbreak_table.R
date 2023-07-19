@@ -12,16 +12,16 @@ data_outbreak_table <- function(pathogen) {
 
   # Get file pathway for outbreak data
   file_path_ob <- system.file(
-    "data", paste0(pathogen, "_outbreak.csv"), package = "epireview")
+    "extdata", paste0(pathogen, "_outbreak.csv"), package = "epireview")
   if (file_path_ob == "")
-    file_path_ob <- paste0("../data/", pathogen, "_outbreak.csv")
+    file_path_ob <- paste0("../extdata/", pathogen, "_outbreak.csv")
   outbreak <- read_csv(file_path_ob)
 
   # Get file pathway for article data
   file_path_ar <- system.file(
-    "data", paste0(pathogen, "_article.csv"), package = "epireview")
+    "extdata", paste0(pathogen, "_article.csv"), package = "epireview")
   if (file_path_ar == "")
-    file_path_ar <- paste0("../data/", pathogen, "_article.csv")
+    file_path_ar <- paste0("../extdata/", pathogen, "_article.csv")
   articles <- read_csv(file_path_ar)
 
   # Deal with R CMD Check "no visible binding for global variable"

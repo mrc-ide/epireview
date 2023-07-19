@@ -60,7 +60,7 @@ append_new_entry_to_table <- function(pathogen = NA,
   }
 
   if (write_table)
-    write.csv(new_table, paste0(vignette_prepend, "data/", pathogen, "_",
+    write.csv(new_table, paste0(vignette_prepend, "extdata/", pathogen, "_",
                                 table_type, ".csv"))
 
   return(new_table)

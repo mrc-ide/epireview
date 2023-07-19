@@ -77,12 +77,12 @@ create_new_outbreak_entry <-
     stop("Article_id + Covidence_id pair does not exist in article data")
 
   #available options for fields
-  file_path_ob  <- system.file("data",
+  file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_outbreaks.csv"),
                                package = "epireview")
   if (file_path_ob == "") {
     file_path_ob <- paste0(vignette_prepend,
-                          "data/", pathogen, "_dropdown_outbreaks.csv")
+                          "extdata/", pathogen, "_dropdown_outbreaks.csv")
   }
   outbreak_options <- read_csv(file_path_ob)
 

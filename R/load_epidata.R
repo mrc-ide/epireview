@@ -19,11 +19,11 @@ load_epidata <- function(table_type = NA,
   }
 
   file_path <- system.file(
-    "data", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")
+    "extdata", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")
 
   if (file_path == "")
     file_path <- paste0(
-      vignette_prepend, "data/", pathogen, "_", table_type, ".csv")
+      vignette_prepend, "extdata/", pathogen, "_", table_type, ".csv")
 
   data_tbl <- read_csv(file_path)
   return(data_tbl)
