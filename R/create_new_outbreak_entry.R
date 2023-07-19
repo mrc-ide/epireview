@@ -8,7 +8,6 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
-#' @importFrom rlang .data
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
 #' @examples
@@ -87,7 +86,8 @@ create_new_outbreak_entry <-
   outbreak_options <- read_csv(file_path_ob)
 
   # Deal with R CMD Check "no visible binding for global variable"
-  outbreak_country <- cases_mode_detection <- outbreak_date_year <- NULL
+  outbreak_country <- cases_mode_detection <- outbreak_date_year <-
+    fails <- NULL
 
   #validate that the entries make sense
   rules <- validator(
@@ -106,10 +106,10 @@ create_new_outbreak_entry <-
   rules_output  <- confront(new_row, rules)
   rules_summary <- summary(rules_output)
 
-  print(as_tibble(rules_summary) %>% filter(.data$fails > 0))
+  print(as_tibble(rules_summary) %>% filter(fails > 0))
 
   if (sum(rules_summary$fails) > 0) {
-    stop(as_tibble(rules_summary) %>% filter(.data$fails > 0))
+    stop(as_tibble(rules_summary) %>% filter(fails > 0))
   }
 
   return(new_row)

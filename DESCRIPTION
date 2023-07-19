@@ -22,8 +22,7 @@ Imports:
     tm,
     officer,
     stringr,
-    validate,
-    rlang
+    validate
 Suggests:
     knitr,
     meta,
