@@ -31,11 +31,11 @@ get_table_field_options <- function(table_type = NA,
                                     vignette_prepend = "") {
 
   file_path_ob <- system.file(
-    "data", paste0(pathogen, "_dropdown_", table_type, "s.csv"),
+    "extdata", paste0(pathogen, "_dropdown_", table_type, "s.csv"),
     package = "epireview")
 
   if (file_path_ob == "") file_path_ob <- paste0(
-    vignette_prepend, "data/", pathogen, "_dropdown_", table_type, "s.csv")
+    vignette_prepend, "extdata/", pathogen, "_dropdown_", table_type, "s.csv")
   model_options <- read_csv(file_path_ob)
 
   if (field == "all") {

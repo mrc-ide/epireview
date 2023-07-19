@@ -103,21 +103,21 @@ create_new_article_entry <-
     author_surname_is_character    = is.character(first_author_surname),
     article_title_is_character     = is.character(article_title),
     journal_is_character           = is.character(journal),
-    doi_is_character                     = is.character(doi),
-    transmission_route_is_character      = is.character(transmission_route),
-    assumptions_is_character             = is.character(assumptions),
+    doi_is_character               = is.character(doi),
+    transmission_route_is_character = is.character(transmission_route),
+    assumptions_is_character        = is.character(assumptions),
     code_available_check            = code_available %in% c(0, 1, NA),
     outbreak_year_is_integer        = is.integer(outbreak_date_year),
     outbreak_year_after_1800        = outbreak_date_year > 1800,
     outbreak_year_not_future        = outbreak_date_year < (as.integer(
                                             substring(Sys.Date(), 1, 4)) + 2),
-    qa_m1                                = qa_m1 %in% c(0, 1, NA),
-    qa_m2                                = qa_m2 %in% c(0, 1, NA),
-    qa_a3                                = qa_a3 %in% c(0, 1, NA),
-    qa_a4                                = qa_a4 %in% c(0, 1, NA),
-    qa_d5                                = qa_d5 %in% c(0, 1, NA),
-    qa_d6                                = qa_d6 %in% c(0, 1, NA),
-    qa_d7                                = qa_d7 %in% c(0, 1, NA)
+    qa_m1                           = qa_m1 %in% c(0, 1, NA),
+    qa_m2                           = qa_m2 %in% c(0, 1, NA),
+    qa_a3                           = qa_a3 %in% c(0, 1, NA),
+    qa_a4                           = qa_a4 %in% c(0, 1, NA),
+    qa_d5                           = qa_d5 %in% c(0, 1, NA),
+    qa_d6                           = qa_d6 %in% c(0, 1, NA),
+    qa_d7                           = qa_d7 %in% c(0, 1, NA)
   )
 
   rules_output  <- confront(new_row, rules)
