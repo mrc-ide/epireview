@@ -7,8 +7,40 @@
 articles related to Marburg virus disease.}
 \format{
 A csv file containing the following parameters:
-
-XXYY
+\itemize{
+\item "article_id" = ID variable for the article.
+\item "pathogen" = pathogen name.
+\item "covidence_id" = article identifier used by the Imperial team.
+\item "first_author_first_name" = first author first name or initials.
+\item "article_title" = title of article.
+\item "doi" = the doi of the article.
+\item "journal" = journal that the article is published in.
+\item "year_publication" = year of article publication.
+\item "volume" = journal volume.
+\item "issue" = journal issue.
+\item "page_first" = first page number.
+\item "page_last" = last page number.
+\item "paper_copy_only" = if the article is not available online.
+\item "notes" = notes the extractor has made.
+\item "first_author_surname" = surname of the first author.
+\item "double_extracted" = either single extracted (0) or double extracted (1).
+\item "qa_m1" = quality assessment: "Is the methodological/statistical approach
+suitable? Q1. Clear and reproducible?" (either 0, 1, or NA)
+\item "qa_m2" = quality assessment: "Is the methodological/statistical approach
+suitable? Q2. Robust and appropriate for the aim?" (either 0, 1, or NA)
+\item "qa_a3" = quality assessment: "Are the assumptions appropriate? Q3. Clear
+and reproducible?" (either 0, 1, or NA)
+\item "qa_a4" = quality assessment: "Are the assumptions appropriate? Q4.
+Justified?" (either 0, 1, or NA)
+\item "qa_d5" = quality assessment: "Are the data appropriate for the selected
+methodological approach? Q5. Clearly described and reproducible?"
+(either 0, 1, or NA)
+\item "qa_d6" = quality assessment: "Are issues in data... Q6. Clearly discussed
+and acknowledged?" (either 0, 1, or NA)
+\item "qa_d7" = quality assessment: "Are issues in data... Q7. Accounted for in
+chosen methodological approach?" (either 0, 1, or NA)
+\item "score" = overall quality assessment score.
+}
 }
 \source{
 Cuomo-Dannenburg G, McCain K, McCabe R, Unwin HJT, Doohan P, Nash RK,

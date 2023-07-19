@@ -4,11 +4,18 @@
 \alias{get_table_field_options}
 \title{Utility to obtain available fields in a specified table}
 \usage{
-get_table_field_options(table_type = NA, field = "all", vignette_prepend = "")
+get_table_field_options(
+  table_type = NA,
+  pathogen = NA,
+  field = "all",
+  vignette_prepend = ""
+)
 }
 \arguments{
 \item{table_type}{which type of table (either "parameter", "outbreak", or
 "model") should be loaded}
+
+\item{pathogen}{pathogen name e.g. "marburg"}
 
 \item{field}{can either be "all" to return all fields in the specified
 table_type, or a specific variable name that the user wants to return}
@@ -22,10 +29,14 @@ data for specified table_type and field
 Note: This will need to be extended when other pathogens are added
 }
 \examples{
-get_table_field_options(table_type = "model", field = "all")
+get_table_field_options(table_type = "model",
+                       pathogen = "marburg",
+                       field = "all")
 
-get_table_field_options(table_type = "model", field = "Model type")
+get_table_field_options(table_type = "model",
+                       pathogen = "marburg",
+                       field = "Model type")
 
-get_table_field_options(table_type = "parameter",
+get_table_field_options(table_type = "parameter", pathogen = "marburg",
                         field = "Reproduction number method")
 }
