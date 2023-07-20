@@ -27,33 +27,36 @@ create_new_outbreak_entry(
 
 \item{new_outbreak}{all the required details for the new outbreak}
 
-\item{vignette_prepend}{string to allowing loading data from vignettes}
+\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
-return data for new row to be added with append_new_entry_to_table function
+return new row of data to be added to the outbreak data set using
+the append_new_entry_to_table() function
 }
 \description{
 Create new outbreak entry
 }
 \examples{
-create_new_outbreak_entry('marburg',new_outbreak = c( list( "article_id"           = as.integer(1)),
-                                                      list( "outbreak_start_day"   = as.integer(NA)),
-                                                      list( "outbreak_start_month" = as.character(NA)),
-                                                      list( "outbreak_start_year"  = as.integer(1999)),
-                                                      list( "outbreak_end_day"     = as.integer(NA)),
-                                                      list( "outbreak_end_month"   = as.character(NA)),
-                                                      list( "outbreak_date_year"   = as.integer(2001)),
-                                                      list( "outbreak_duration_months" = as.integer(NA)),
-                                                      list( "outbreak_size"        = as.integer(2)),
-                                                      list( "asymptomatic_transmission" = as.integer(0)),
-                                                      list( "outbreak_country"     = as.character("Tanzania")),
-                                                      list( "outbreak_location"    = as.character(NA)),
-                                                      list( "cases_confirmed"      = as.integer(NA)),
-                                                      list( "cases_mode_detection" = as.character(NA)),
-                                                      list( "cases_suspected"      = as.integer(NA)),
-                                                      list( "cases_asymptomatic"   = as.integer(NA)),
-                                                      list( "deaths"               = as.integer(2)),
-                                                      list( "cases_severe_hospitalised" = as.integer(NA)),
-                                                      list( "covidence_id"         = as.integer(2059))),
-                                         vignette_prepend = "")
+create_new_outbreak_entry(
+  pathogen = "marburg",
+  new_outbreak = c(list("article_id"           = as.integer(1)),
+                   list("outbreak_start_day"   = as.integer(NA)),
+                   list("outbreak_start_month" = as.character(NA)),
+                   list("outbreak_start_year"  = as.integer(1999)),
+                   list("outbreak_end_day"     = as.integer(NA)),
+                   list("outbreak_end_month"   = as.character(NA)),
+                   list("outbreak_date_year"   = as.integer(2001)),
+                   list("outbreak_duration_months" = as.integer(NA)),
+                   list("outbreak_size"        = as.integer(2)),
+                   list("asymptomatic_transmission" = as.integer(0)),
+                   list("outbreak_country"     = as.character("Tanzania")),
+                   list("outbreak_location"    = as.character(NA)),
+                   list("cases_confirmed"      = as.integer(NA)),
+                   list("cases_mode_detection" = as.character(NA)),
+                   list("cases_suspected"      = as.integer(NA)),
+                   list("cases_asymptomatic"   = as.integer(NA)),
+                   list("deaths"               = as.integer(2)),
+                   list("cases_severe_hospitalised" = as.integer(NA)),
+                   list("covidence_id"         = as.integer(2059))),
+  vignette_prepend = "")
 }

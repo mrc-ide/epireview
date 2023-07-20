@@ -7,11 +7,19 @@
 forest_plot_severity(df, outbreak_naive = FALSE)
 }
 \arguments{
-\item{df}{data with outbreak information}
+\item{df}{processed data with severity information produced using
+data_forest_plots()}
+
+\item{outbreak_naive}{whether to use unadjusted case and death counts (TRUE)
+or the adjusted case and death counts (FALSE). FALSE by default.}
 }
 \value{
-returns flextable
+returns plot with a summary of IFR and CFR estimates
 }
 \description{
 Create forest plot for severity
+}
+\examples{
+df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+forest_plot_severity(df = df)
 }
