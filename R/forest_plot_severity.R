@@ -2,7 +2,8 @@
 #'
 #' @param df processed data with severity information produced using
 #' data_forest_plots()
-#' @param outbreak_naive TRUE or FALSE. FALSE by default.
+#' @param outbreak_naive whether to use unadjusted case and death counts (TRUE)
+#' or the adjusted case and death counts (FALSE). FALSE by default.
 #' @return returns plot with a summary of IFR and CFR estimates
 #' @importFrom dplyr filter arrange mutate group_by
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
