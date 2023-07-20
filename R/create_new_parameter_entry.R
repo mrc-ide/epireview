@@ -29,9 +29,7 @@
 #'                list("genome_site"                  = as.character(NA)),
 #'                list("genomic_sequence_available"   = as.logical(NA)),
 #'                list("parameter_class"          = as.character(NA)),
-#'                list("covidence_id"             = as.integer(2059)),
-#'                list("Uncertainty"              = as.character(NA)),
-#'                list("Survey year"              = as.character(NA))),
+#'                list("covidence_id"             = as.integer(2059))),
 #'            vignette_prepend = "")
 #' @export
 create_new_parameter_entry <-
@@ -87,9 +85,7 @@ create_new_parameter_entry <-
                list("genome_site"                  = as.character(NA)),
                list("genomic_sequence_available"   = as.logical(NA)),
                list("parameter_class"          = as.character(NA)),
-               list("covidence_id"             = as.integer(NA)),
-               list("Uncertainty"              = as.character(NA)),
-               list("Survey year"              = as.character(NA))),
+               list("covidence_id"             = as.integer(NA))),
            vignette_prepend = "") {
 
   #read current article data for pathogen

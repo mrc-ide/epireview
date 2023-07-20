@@ -234,8 +234,6 @@ NULL
 #'      "Seroprevalence", "Severity", "Reproduction number", "Mutations",
 #'      "Risk factors", or "Other transmission parameters".
 #' - covidence_id = article identifier used by the Imperial team.
-#' - Uncertainty = remove?
-#' - Survey year = remove?
 #'
 #' @source Cuomo-Dannenburg G, McCain K, McCabe R, Unwin HJT, Doohan P, Nash RK,
 #' et al. Marburg Virus Disease outbreaks, mathematical models, and disease
