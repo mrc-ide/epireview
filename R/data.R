@@ -176,11 +176,13 @@ NULL
 #' - distribution_par1_value = value for distribution parameter 1.
 #' - distribution_par1_type = distribution parameter 1 type, e.g. shape, scale
 #'      (see marburg_dropdown_parameters for the full list of options).
-#' - distribution_par1_uncertainty = TRUE/FALSE.
+#' - distribution_par1_uncertainty = whether the article reported uncertainty
+#'      for the distribution parameter estimates (TRUE/FALSE).
 #' - distribution_par2_value = value for distribution parameter 2.
 #' - distribution_par2_type = distribution parameter 2 type, e.g. shape, scale
 #'      (see marburg_dropdown_parameters for the full list of options).
-#' - distribution_par2_uncertainty = TRUE/FALSE.
+#' - distribution_par2_uncertainty = whether the article reported uncertainty
+#'      for the distribution parameter estimates (TRUE/FALSE).
 #' - method_from_supplement = whether the parameter was taken from the
 #'      supplementary material of the article. TRUE/FALSE.
 #' - method_moment_value = time period, either "Pre outbreak", Start outbreak",
