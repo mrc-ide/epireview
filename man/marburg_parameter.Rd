@@ -39,11 +39,13 @@ marburg_dropdown_parameters for the full list of options).
 \item distribution_par1_value = value for distribution parameter 1.
 \item distribution_par1_type = distribution parameter 1 type, e.g. shape, scale
 (see marburg_dropdown_parameters for the full list of options).
-\item distribution_par1_uncertainty = TRUE/FALSE.
+\item distribution_par1_uncertainty = whether the article reported uncertainty
+for the distribution parameter estimates (TRUE/FALSE).
 \item distribution_par2_value = value for distribution parameter 2.
 \item distribution_par2_type = distribution parameter 2 type, e.g. shape, scale
 (see marburg_dropdown_parameters for the full list of options).
-\item distribution_par2_uncertainty = TRUE/FALSE.
+\item distribution_par2_uncertainty = whether the article reported uncertainty
+for the distribution parameter estimates (TRUE/FALSE).
 \item method_from_supplement = whether the parameter was taken from the
 supplementary material of the article. TRUE/FALSE.
 \item method_moment_value = time period, either "Pre outbreak", Start outbreak",
