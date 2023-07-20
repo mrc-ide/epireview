@@ -42,8 +42,7 @@ create_new_parameter_entry(
     list(population_study_end_day = as.integer(NA)), list(population_study_end_month =
     as.character(NA)), list(population_study_end_year = as.integer(NA)), list(genome_site
     = as.character(NA)), list(genomic_sequence_available = as.logical(NA)),
-    list(parameter_class = as.character(NA)), list(covidence_id = as.integer(NA)),
-    list(Uncertainty = as.character(NA)), list(`Survey year` = as.character(NA))),
+    list(parameter_class = as.character(NA)), list(covidence_id = as.integer(NA))),
   vignette_prepend = ""
 )
 }
@@ -80,8 +79,6 @@ create_new_parameter_entry <-
                list("genome_site"                  = as.character(NA)),
                list("genomic_sequence_available"   = as.logical(NA)),
                list("parameter_class"          = as.character(NA)),
-               list("covidence_id"             = as.integer(2059)),
-               list("Uncertainty"              = as.character(NA)),
-               list("Survey year"              = as.character(NA))),
+               list("covidence_id"             = as.integer(2059))),
            vignette_prepend = "")
 }

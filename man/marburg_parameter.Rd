@@ -97,8 +97,6 @@ from a public database. TRUE/FALSE.
 "Seroprevalence", "Severity", "Reproduction number", "Mutations",
 "Risk factors", or "Other transmission parameters".
 \item covidence_id = article identifier used by the Imperial team.
-\item Uncertainty = remove?
-\item Survey year = remove?
 }
 }
 \source{
