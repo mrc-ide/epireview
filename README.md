@@ -1,14 +1,18 @@
 # epireview
 
+<a href="https://github.com/mrc-ide/epireview"><img src="man/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;"></a>
+
 <!-- badges: start -->
-[![R build status](https://github.com/mrc-ide/EpiEstim/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
+[![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
 <!-- badges: end -->
 
-epireview is a tool to obtain the latest data from the Pathogen Epidemiology Review Group (PERG) and contains tools to update data from new, peer-reviewed papers for existing pathogens in the database or to add entirely new pathogens.
+epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
-To install the latest version, use:
+To install the latest version of epireview, use:
+
 ```r
-devtools::install_github("mrc-ide/epireview", build_vignettes = TRUE)
+install.packages('epireview', repos = c('https://mrc-ide.r-universe.dev',
+                                        'https://cloud.r-project.org'))
 ```
 
 ## Project overview
@@ -25,24 +29,19 @@ One output of this project will be a database initially populated with all the i
 4. Vignettes and the github wiki contain all required information on the data.
 5. We will add functionality to create/add new pathogens which are not currently included in the review. 
 
-## Pathogen overview and time-line
+## Pathogen overview and timeline
 
-| Pathogen       | Titles & Abstracts screened | Expected pre-print | Contact | doi|
-| ------------- | -------------:| -----:| -- |-- |
-| Marburg virus |         4,460 | June 2023      | cm401@ic.ac.uk, gc4018@ic.ac.uk|https://doi.org/10.1101/2023.07.10.23292424|
-| Ebola virus   |         9,563 | September 2023 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
+| Pathogen  | Titles & Abstracts screened | Expected pre-print | Contact | doi|
+| --------- |         -------------------:|           --------:|      -- | -- |
+| Marburg virus | 4,460 | June 2023 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1101/2023.07.10.23292424||
+| Ebola virus   | 9,563 | September 2023 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
 | Lassa Mammarenavirus  | 1,760 | October 2023   | pd315@ic.ac.uk ||
 | Henipa virus  |           959 | December 2023  | cw1716@ic.ac.uk ||
 | SARS-CoV-1    |        11,918 | January 2024   | acori@ic.ac.uk, cm401@ic.ac.uk || 
-| Nairo virus (CCHF) |     1,967| March 2024     |dn620@ic.ac.uk, svanelsl@ic.ac.uk||
-| Zika virus|              4,518| May 2024       |kem22@ic.ac.uk||
-| Rift Valley Fever Virus| 3,341| June 2024      |gc.4018@ic.ac.uk||
-| MERS-CoV|               10,382| July 2024      |acori@ic.ac.uk||
+| Nairo virus (CCHF) |     1,967| March 2024     | dn620@ic.ac.uk, svanelsl@ic.ac.uk||
+| Zika virus|              4,518| May 2024       | kem22@ic.ac.uk||
+| Rift Valley Fever Virus| 3,341| June 2024      | gc.4018@ic.ac.uk||
+| MERS-CoV|               10,382| July 2024      | acori@ic.ac.uk||
 | Comprehensive paper comparing pathogens |47,115|September 2024|acori@ic.ac.uk||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](cm401@ic.ac.uk).
-
-
-
-
-
