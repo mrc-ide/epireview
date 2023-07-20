@@ -4,7 +4,7 @@
     <loc>https://mrc-ide.github.io/epireview/404.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/LICENSE-text.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/LICENSE.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/articles/epireview_overview.html</loc>
@@ -43,6 +43,15 @@
     <loc>https://mrc-ide.github.io/epireview/reference/create_new_parameter_entry.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/data_forest_plots.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/data_outbreak_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/data_param_table.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/date_start.html</loc>
   </url>
   <url>
@@ -61,13 +70,34 @@
     <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_severity.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/get_available_table_field_options.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/get_table_field_options.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/load_data.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/load_epidata.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_article.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_dropdown_models.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_dropdown_outbreaks.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_dropdown_parameters.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_model.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_outbreak.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/marburg_parameter.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/outbreak_table.html</loc>

@@ -41,9 +41,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/epireview_overview.html">Epireview</a>
+    <a class="dropdown-item" href="articles/epireview_overview.html">epireview</a>
     <a class="dropdown-item" href="articles/pathogen_database_field_options.html">Database field options</a>
-    <a class="dropdown-item" href="articles/pathogen_database_update.html">How to update database with new article data</a>
+    <a class="dropdown-item" href="articles/pathogen_database_update.html">How to update the database with new article data</a>
     <a class="dropdown-item" href="articles/pathogen_marburg.html">Marburg Virus Disease (MVD)</a>
   </div>
 </li>
@@ -62,12 +62,14 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="epireview">epireview<a class="anchor" aria-label="anchor" href="#epireview"></a>
 </h1></div>
+<p><a href="https://github.com/mrc-ide/epireview" class="external-link"><img src="reference/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;"></a></p>
 <!-- badges: start -->
 
-<p>epireview is a tool to obtain the latest data from the Pathogen Epidemiology Review Group (PERG) and contains tools to update data from new, peer-reviewed papers for existing pathogens in the database or to add entirely new pathogens.</p>
-<p>To install the latest version, use:</p>
+<p>epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.</p>
+<p>To install the latest version of epireview, use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mrc-ide/epireview"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'epireview'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://mrc-ide.r-universe.dev'</span>,</span>
+<span>                                        <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="project-overview">Project overview<a class="anchor" aria-label="anchor" href="#project-overview"></a>
 </h2>
@@ -87,15 +89,15 @@
 </ol>
 </div>
 <div class="section level2">
-<h2 id="pathogen-overview-and-time-line">Pathogen overview and time-line<a class="anchor" aria-label="anchor" href="#pathogen-overview-and-time-line"></a>
+<h2 id="pathogen-overview-and-timeline">Pathogen overview and timeline<a class="anchor" aria-label="anchor" href="#pathogen-overview-and-timeline"></a>
 </h2>
 <table class="table">
 <colgroup>
-<col width="35%">
-<col width="37%">
-<col width="16%">
-<col width="5%">
-<col width="5%">
+<col width="21%">
+<col width="47%">
+<col width="21%">
+<col width="4%">
+<col width="4%">
 </colgroup>
 <thead><tr class="header">
 <th>Pathogen</th>
@@ -191,7 +193,8 @@
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>GPL (&gt;=2)</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
 
@@ -208,14 +211,16 @@
 <ul class="list-unstyled">
 <li>Rebecca Nash <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5213-4364" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Christian Morgenstern <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-3735-1130" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
+<li>Gina Cuomo-Dannenburg <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6821-0352" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Ruth McCabe <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6368-9103" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Kelly McCain <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2393-2217" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/mrc-ide/epireview/actions" class="external-link"><img src="https://github.com/mrc-ide/EpiEstim/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/mrc-ide/epireview/actions" class="external-link"><img src="https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
 
@@ -225,7 +230,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Rebecca Nash, Christian Morgenstern.</p>
+<p>Developed by Rebecca Nash, Christian Morgenstern, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -24,9 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/epireview_overview.html">Epireview</a>
+    <a class="dropdown-item" href="../articles/epireview_overview.html">epireview</a>
     <a class="dropdown-item" href="../articles/pathogen_database_field_options.html">Database field options</a>
-    <a class="dropdown-item" href="../articles/pathogen_database_update.html">How to update database with new article data</a>
+    <a class="dropdown-item" href="../articles/pathogen_database_update.html">How to update the database with new article data</a>
     <a class="dropdown-item" href="../articles/pathogen_marburg.html">Marburg Virus Disease (MVD)</a>
   </div>
 </li>
@@ -58,7 +58,7 @@
           
           <code><a href="append_new_entry_to_table.html">append_new_entry_to_table()</a></code> 
         </dt>
-        <dd>append_new_entry_to_table</dd>
+        <dd>Append new entry to article, outbreak, model, or parameter table</dd>
       </dl><dl><dt>
           
           <code><a href="create_new_article_entry.html">create_new_article_entry()</a></code> 
@@ -81,6 +81,22 @@
         <dd>Create new parameter entry</dd>
       </dl><dl><dt>
           
+          <code><a href="data_forest_plots.html">data_forest_plots()</a></code> 
+        </dt>
+        <dd>Process data for use in forest_plot_delay(), forest_plot_mutations(),
+forest_plot_r() and forest_plot_severity()</dd>
+      </dl><dl><dt>
+          
+          <code><a href="data_outbreak_table.html">data_outbreak_table()</a></code> 
+        </dt>
+        <dd>Process data for outbreak table</dd>
+      </dl><dl><dt>
+          
+          <code><a href="data_param_table.html">data_param_table()</a></code> 
+        </dt>
+        <dd>Process data for delay table</dd>
+      </dl><dl><dt>
+          
           <code><a href="date_start.html">date_start()</a></code> 
         </dt>
         <dd>create a date</dd>
@@ -88,17 +104,17 @@
           
           <code><a href="delay_table.html">delay_table()</a></code> 
         </dt>
-        <dd>Create delay table</dd>
+        <dd>Create table for human delay parameters</dd>
       </dl><dl><dt>
           
-          <code><a href="forest_plot_R.html">forest_plot_R()</a></code> 
+          <code><a href="forest_plot_R.html">forest_plot_r()</a></code> 
         </dt>
         <dd>Create forest plot for reproduction numbers</dd>
       </dl><dl><dt>
           
           <code><a href="forest_plot_delay.html">forest_plot_delay()</a></code> 
         </dt>
-        <dd>Create forest plot for delays</dd>
+        <dd>Create forest plot for human delays</dd>
       </dl><dl><dt>
           
           <code><a href="forest_plot_mutations.html">forest_plot_mutations()</a></code> 
@@ -111,24 +127,66 @@
         <dd>Create forest plot for severity</dd>
       </dl><dl><dt>
           
-          <code><a href="get_available_table_field_options.html">get_available_table_field_options()</a></code> 
+          <code><a href="get_table_field_options.html">get_table_field_options()</a></code> 
         </dt>
-        <dd>Utility to obtain available table options to pick from</dd>
+        <dd>Utility to obtain available fields in a specified table</dd>
       </dl><dl><dt>
           
-          <code><a href="load_data.html">load_data()</a></code> 
+          <code><a href="load_epidata.html">load_epidata()</a></code> 
         </dt>
         <dd>Load data for a particular pathogen</dd>
       </dl><dl><dt>
           
+          <code><a href="marburg_article.html">marburg_article</a></code> 
+        </dt>
+        <dd>Data on the articles identified and included in the systematic review of
+articles related to Marburg virus disease.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_dropdown_models.html">marburg_dropdown_models</a></code> 
+        </dt>
+        <dd>Dropdown menu options for model extractions in the systematic review of
+articles related to Marburg virus disease (MVD).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_dropdown_outbreaks.html">marburg_dropdown_outbreaks</a></code> 
+        </dt>
+        <dd>Dropdown menu options for outbreak extractions in the systematic review of
+articles related to Marburg virus disease (MVD).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_dropdown_parameters.html">marburg_dropdown_parameters</a></code> 
+        </dt>
+        <dd>Dropdown menu options for parameter extractions in the systematic review of
+articles related to Marburg virus disease (MVD).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_model.html">marburg_model</a></code> 
+        </dt>
+        <dd>Data on the models identified in the systematic review of articles related
+to Marburg virus disease.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_outbreak.html">marburg_outbreak</a></code> 
+        </dt>
+        <dd>Data on the outbreaks identified in the systematic review of articles
+related to Marburg virus disease.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="marburg_parameter.html">marburg_parameter</a></code> 
+        </dt>
+        <dd>Data on the parameters identified in the systematic review of articles
+related to Marburg virus disease.</dd>
+      </dl><dl><dt>
+          
           <code><a href="outbreak_table.html">outbreak_table()</a></code> 
         </dt>
-        <dd>Create outbreak table</dd>
+        <dd>Create table with all outbreak data for a particular pathogen</dd>
       </dl><dl><dt>
           
           <code><a href="quality_assessment_plots.html">quality_assessment_plots()</a></code> 
         </dt>
-        <dd>Plots for the quality assessment of the included studies</dd>
+        <dd>Plots for the quality assessment (QA) of the included studies</dd>
       </dl><dl><dt>
           
           <code><a href="risk_table.html">risk_table()</a></code> 
@@ -144,7 +202,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Rebecca Nash, Christian Morgenstern.</p>
+  <p></p><p>Developed by Rebecca Nash, Christian Morgenstern, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain.</p>
 </div>
 
 <div class="pkgdown-footer-right">
