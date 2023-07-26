@@ -17,7 +17,7 @@
 #' @param vignette_prepend string to allow loading data in vignettes
 #' @return table with new entry (if write_table = TRUE the relevant table in a
 #' locally cloned repository is updated)
-#' @importFrom utils write.csv
+#' @importFrom readr write_csv
 #'
 #' @export
 append_new_entry_to_table <- function(pathogen = NA,
@@ -60,7 +60,7 @@ append_new_entry_to_table <- function(pathogen = NA,
   }
 
   if (write_table)
-    write.csv(new_table, paste0(vignette_prepend, "extdata/", pathogen, "_",
+    write_csv(new_table, paste0(vignette_prepend, "inst/extdata/", pathogen, "_",
                                 table_type, ".csv"))
 
   return(new_table)
