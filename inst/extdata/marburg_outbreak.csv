@@ -22,5 +22,3 @@ outbreak_id,article_id,outbreak_start_day,outbreak_start_month,outbreak_start_ye
 27,62,NA,NA,2007,NA,NA,NA,NA,NA,0,Uganda,NA,4,NA,NA,NA,2,NA,1871
 28,62,NA,NA,2008,NA,NA,NA,NA,NA,0,United States,Colorado,1,NA,NA,NA,0,NA,1871
 29,62,NA,NA,2008,NA,NA,NA,NA,NA,0,Netherlands,NA,1,NA,NA,NA,1,NA,1871
-30,64,21,Mar,2023,2,Jun,2023,2,NA,0,Tanzania,Bukoba district (Kagera region),8,Molecular (PCR etc),1,NA,6,NA,1005648
-31,65,13,Feb,2023,8,Jun,2023,4,NA,0,Equatorial Guinea,,17,Molecular (PCR etc),23,NA,35,NA,1005649
