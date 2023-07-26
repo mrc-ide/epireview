@@ -8,7 +8,7 @@
 #' @importFrom readr read_csv
 #' @importFrom dplyr left_join mutate select arrange filter
 #' @examples
-#' df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
+#' df <- data_param_table(pathogen = "marburg", prepend = "", exclude = c(15, 17))
 #' @export
 
 data_param_table <- function(pathogen, prepend = "",exclude = NA) {
