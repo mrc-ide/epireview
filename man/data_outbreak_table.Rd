@@ -4,10 +4,12 @@
 \alias{data_outbreak_table}
 \title{Process data for outbreak table}
 \usage{
-data_outbreak_table(pathogen)
+data_outbreak_table(pathogen, prepend = "")
 }
 \arguments{
 \item{pathogen}{name of pathogen e.g. "marburg"}
+
+\item{prepend}{string to allow loading data in vignettes}
 }
 \value{
 processed data to use as input for outbreak_table()
