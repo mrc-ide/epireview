@@ -12,20 +12,20 @@
 #' data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 #' @export
 
-data_forest_plots <- function(pathogen, exclude) {
+data_forest_plots <- function(pathogen, exclude = NA) {
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(
     "extdata", paste0(pathogen, "_parameter.csv"), package = "epireview")
   if (file_path_pa == "")
-    file_path_pa <- paste0("../extdata/", pathogen, "_parameter.csv")
+    file_path_pa <- paste0("../inst/extdata/", pathogen, "_parameter.csv")
   params <- read_csv(file_path_pa)
 
   # Get file pathway for article data
   file_path_ar <- system.file(
     "extdata", paste0(pathogen, "_article.csv"), package = "epireview")
   if (file_path_ar == "")
-    file_path_ar <- paste0("../extdata/", pathogen, "_article.csv")
+    file_path_ar <- paste0("../inst/extdata/", pathogen, "_article.csv")
   articles <- read_csv(file_path_ar)
 
   # Deal with R CMD Check "no visible binding for global variable"
