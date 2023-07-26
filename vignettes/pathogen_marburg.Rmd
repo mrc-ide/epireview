@@ -84,11 +84,11 @@ forest_plot_r(df)
 df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 
 file_path_ob <- system.file("extdata", "marburg_outbreak.csv", package = "epireview")
-if(file_path_ob=="") file_path_ob <- paste0('../extdata/marburg_outbreak.csv')
+if(file_path_ob=="") file_path_ob <- paste0('../inst/extdata/marburg_outbreak.csv')
 outbreak     <- read_csv(file_path_ob)
 
 file_path_ar <- system.file("extdata","marburg_article.csv", package = "epireview")
-if(file_path_ar=="") file_path_ar <- paste0('../extdata/marburg_article.csv')
+if(file_path_ar=="") file_path_ar <- paste0('../inst/extdata/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
 df_out <- left_join(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication), by = "covidence_id") %>%
@@ -229,6 +229,6 @@ risk_table(df,'marburg',supplement=TRUE)
 **Figure S3:** (A) Count of papers for each quality assessment question scoring Yes, No or not applicable. (B) Quality Assessment Score defined as proportion of Yes votes for each paper relative to sum of Yes and No answers, removing NAs. The time trend is fitted using Local Polynomial Regression Fitting.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-quality_assessment_plots(pathogen = "marburg", prepend = file_prepend)
+quality_assessment_plots(pathogen = "marburg", prepend = "../")
 ```
 
