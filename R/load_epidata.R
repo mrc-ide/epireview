@@ -23,7 +23,7 @@ load_epidata <- function(table_type = NA,
 
   if (file_path == "")
     file_path <- paste0(
-      vignette_prepend, "extdata/", pathogen, "_", table_type, ".csv")
+      vignette_prepend, "inst/extdata/", pathogen, "_", table_type, ".csv")
 
   data_tbl <- read_csv(file_path)
   return(data_tbl)

@@ -27,7 +27,7 @@ quality_assessment_plots <- function(pathogen = NA,
   file_path <- system.file("extdata", paste0(pathogen, "_article.csv"),
                            package = "epireview")
   if (file_path == "")
-    file_path <- paste0(prepend, "extdata/", pathogen, "_article.csv")
+    file_path <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
   quality <- read_csv(file_path)
 
   # Deal with R CMD Check "no visible binding for global variable"
