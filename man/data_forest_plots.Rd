@@ -5,10 +5,12 @@
 \title{Process data for use in forest_plot_delay(), forest_plot_mutations(),
 forest_plot_r() and forest_plot_severity()}
 \usage{
-data_forest_plots(pathogen, exclude)
+data_forest_plots(pathogen, prepend = "", exclude = NA)
 }
 \arguments{
 \item{pathogen}{name of pathogen e.g. "marburg"}
+
+\item{prepend}{string to allow loading data in vignettes}
 
 \item{exclude}{article IDs to exclude}
 }

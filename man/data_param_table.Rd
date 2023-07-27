@@ -4,10 +4,12 @@
 \alias{data_param_table}
 \title{Process data for delay table}
 \usage{
-data_param_table(pathogen, exclude)
+data_param_table(pathogen, prepend = "", exclude = NA)
 }
 \arguments{
 \item{pathogen}{name of pathogen e.g. "marburg"}
+
+\item{prepend}{string to allow loading data in vignettes}
 
 \item{exclude}{article IDs to exclude}
 }
