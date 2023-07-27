@@ -58,13 +58,13 @@
     <loc>https://mrc-ide.github.io/epireview/reference/delay_table.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_R.html</loc>
-  </url>
-  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_delay.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_mutations.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_r.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_severity.html</loc>
