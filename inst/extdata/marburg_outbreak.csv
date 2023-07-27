@@ -1,24 +1,24 @@
 outbreak_id,article_id,outbreak_start_day,outbreak_start_month,outbreak_start_year,outbreak_end_day,outbreak_end_month,outbreak_date_year,outbreak_duration_months,outbreak_size,asymptomatic_transmission,outbreak_country,outbreak_location,cases_confirmed,cases_mode_detection,cases_suspected,cases_asymptomatic,deaths,cases_severe_hospitalised,covidence_id
-4,20,NA,Aug,1968,NA,Nov,1968,3,NA,TRUE,Germany;Yugoslavia,"Marburg (23), Frankfurt am Main (6), Belgrade (2)",31,Symptoms,NA,1,7,NA,2060
-5,23,18,Aug,1968,13,Nov,1968,3,NA,TRUE,Germany,"Marburg, Frankfurt am Main",23,Symptoms,NA,1,5,NA,2883
-6,23,18,Oct,2012,7,Nov,2012,NA,NA,FALSE,Uganda,Kabale; Ibanda; Mbarara; Kampala,15,Molecular (PCR etc),NA,NA,4,NA,2883
-7,21,NA,Oct,1998,NA,Aug,2000,NA,NA,TRUE,Democratic Republic of the Congo,Durba and Watsa villages,76,Molecular (PCR etc),33,0,NA,NA,2762
-10,33,NA,NA,2005,NA,NA,2005,NA,NA,FALSE,Angola,NA,252,Not specified,NA,NA,227,0,2696
-12,42,NA,Jul,2012,10,Nov,2012,NA,NA,FALSE,Uganda,"Ibanda, Kabale and Kamwenge Districts",15,Molecular (PCR etc),11,NA,15,NA,2241
-13,45,NA,Oct,1998,NA,May,1999,NA,NA,FALSE,Democratic Republic of the Congo,Durba and Watsa,73,Symptoms,NA,NA,61,0,2759
-14,49,10,Jun,2007,14,Sep,2007,NA,NA,FALSE,Uganda,Kamwenge and Ibanda,4,Molecular (PCR etc),NA,NA,1,0,4693
-17,57,NA,Oct,1998,NA,Sep,2000,NA,NA,FALSE,Democratic Republic of the Congo,Durba and Watsa,48,Molecular (PCR etc),106,NA,125,0,2819
-19,60,12,Feb,1975,NA,NA,NA,NA,NA,FALSE,South Africa;Zimbabwe,Johannesburg,3,Molecular (PCR etc),NA,NA,1,1,2573
-1,14,17,Sep,2014,28,Sep,2014,NA,NA,FALSE,Uganda,Kampala,1,Molecular (PCR etc),NA,NA,1,1,1930
-15,50,NA,Sep,2012,13,Nov,2012,NA,NA,FALSE,Uganda,Ibanda and Kabale,9,Molecular (PCR etc),5,NA,7,NA,2032
-16,54,NA,Oct,2004,NA,Jul,2005,NA,NA,FALSE,Angola,Uige Province,252,NA,NA,NA,227,0,1613
-26,31,NA,NA,2004,NA,NA,2005,NA,NA,FALSE,Angola,NA,252,NA,NA,NA,227,NA,1871
-8,31,NA,NA,1998,NA,NA,2000,NA,NA,FALSE,Democratic Republic of the Congo,,154,NA,NA,NA,128,NA,1871
-20,62,NA,NA,1967,NA,NA,NA,NA,NA,FALSE,Germany;Yugoslavia,NA,31,NA,NA,NA,7,NA,1871
-21,62,NA,NA,1980,NA,NA,NA,NA,NA,FALSE,Kenya,NA,2,NA,NA,NA,1,NA,1871
-22,62,NA,NA,1987,NA,NA,NA,NA,NA,FALSE,Kenya,NA,1,NA,NA,NA,1,NA,1871
-23,62,NA,NA,1988,NA,NA,NA,NA,NA,FALSE,Russian Federation,NA,1,NA,NA,NA,1,NA,1871
-24,62,NA,NA,1990,NA,NA,NA,NA,NA,FALSE,Russian Federation,NA,1,NA,NA,NA,0,NA,1871
-27,62,NA,NA,2007,NA,NA,NA,NA,NA,FALSE,Uganda,NA,4,NA,NA,NA,2,NA,1871
-28,62,NA,NA,2008,NA,NA,NA,NA,NA,FALSE,United States,Colorado,1,NA,NA,NA,0,NA,1871
-29,62,NA,NA,2008,NA,NA,NA,NA,NA,FALSE,Netherlands,NA,1,NA,NA,NA,1,NA,1871
+4,20,NA,Aug,1968,NA,Nov,1968,3,NA,1,Germany;Yugoslavia,"Marburg (23), Frankfurt am Main (6), Belgrade (2)",31,Symptoms,NA,1,7,NA,2060
+5,23,18,Aug,1968,13,Nov,1968,3,NA,1,Germany,"Marburg, Frankfurt am Main",23,Symptoms,NA,1,5,NA,2883
+6,23,18,Oct,2012,7,Nov,2012,NA,NA,0,Uganda,Kabale; Ibanda; Mbarara; Kampala,15,Molecular (PCR etc),NA,NA,4,NA,2883
+7,21,NA,Oct,1998,NA,Aug,2000,NA,NA,1,Democratic Republic of the Congo,Durba and Watsa villages,76,Molecular (PCR etc),33,0,NA,NA,2762
+10,33,NA,NA,2005,NA,NA,2005,NA,NA,0,Angola,NA,252,Not specified,NA,NA,227,0,2696
+12,42,NA,Jul,2012,10,Nov,2012,NA,NA,0,Uganda,"Ibanda, Kabale and Kamwenge Districts",15,Molecular (PCR etc),11,NA,15,NA,2241
+13,45,NA,Oct,1998,NA,May,1999,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,73,Symptoms,NA,NA,61,0,2759
+14,49,10,Jun,2007,14,Sep,2007,NA,NA,0,Uganda,Kamwenge and Ibanda,4,Molecular (PCR etc),NA,NA,1,0,4693
+17,57,NA,Oct,1998,NA,Sep,2000,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,48,Molecular (PCR etc),106,NA,125,0,2819
+19,60,12,Feb,1975,NA,NA,NA,NA,NA,0,South Africa;Zimbabwe,Johannesburg,3,Molecular (PCR etc),NA,NA,1,1,2573
+1,14,17,Sep,2014,28,Sep,2014,NA,NA,0,Uganda,Kampala,1,Molecular (PCR etc),NA,NA,1,1,1930
+15,50,NA,Sep,2012,13,Nov,2012,NA,NA,0,Uganda,Ibanda and Kabale,9,Molecular (PCR etc),5,NA,7,NA,2032
+16,54,NA,Oct,2004,NA,Jul,2005,NA,NA,0,Angola,Uige Province,252,NA,NA,NA,227,0,1613
+26,31,NA,NA,2004,NA,NA,2005,NA,NA,0,Angola,NA,252,NA,NA,NA,227,NA,1871
+8,31,NA,NA,1998,NA,NA,2000,NA,NA,0,Democratic Republic of the Congo,NA,154,NA,NA,NA,128,NA,1871
+20,62,NA,NA,1967,NA,NA,NA,NA,NA,0,Germany;Yugoslavia,NA,31,NA,NA,NA,7,NA,1871
+21,62,NA,NA,1980,NA,NA,NA,NA,NA,0,Kenya,NA,2,NA,NA,NA,1,NA,1871
+22,62,NA,NA,1987,NA,NA,NA,NA,NA,0,Kenya,NA,1,NA,NA,NA,1,NA,1871
+23,62,NA,NA,1988,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,1,NA,1871
+24,62,NA,NA,1990,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,0,NA,1871
+27,62,NA,NA,2007,NA,NA,NA,NA,NA,0,Uganda,NA,4,NA,NA,NA,2,NA,1871
+28,62,NA,NA,2008,NA,NA,NA,NA,NA,0,United States,Colorado,1,NA,NA,NA,0,NA,1871
+29,62,NA,NA,2008,NA,NA,NA,NA,NA,0,Netherlands,NA,1,NA,NA,NA,1,NA,1871

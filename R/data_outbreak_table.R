@@ -1,6 +1,7 @@
 #' Process data for outbreak table
 #'
 #' @param pathogen name of pathogen e.g. "marburg"
+#' @param prepend string to allow loading data in vignettes
 #' @return processed data to use as input for outbreak_table()
 #' @importFrom readr read_csv
 #' @importFrom dplyr left_join mutate select arrange
@@ -8,20 +9,20 @@
 #' df <- data_outbreak_table(pathogen = "marburg")
 #' @export
 
-data_outbreak_table <- function(pathogen) {
+data_outbreak_table <- function(pathogen, prepend = "") {
 
   # Get file pathway for outbreak data
   file_path_ob <- system.file(
     "extdata", paste0(pathogen, "_outbreak.csv"), package = "epireview")
   if (file_path_ob == "")
-    file_path_ob <- paste0("../extdata/", pathogen, "_outbreak.csv")
+    file_path_ob <- paste0(prepend, "inst/extdata/", pathogen, "_outbreak.csv")
   outbreak <- read_csv(file_path_ob)
 
   # Get file pathway for article data
   file_path_ar <- system.file(
     "extdata", paste0(pathogen, "_article.csv"), package = "epireview")
   if (file_path_ar == "")
-    file_path_ar <- paste0("../extdata/", pathogen, "_article.csv")
+    file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
   articles <- read_csv(file_path_ar)
 
   # Deal with R CMD Check "no visible binding for global variable"

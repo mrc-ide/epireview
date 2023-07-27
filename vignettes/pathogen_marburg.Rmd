@@ -60,7 +60,7 @@ library(meta)
 **Table 1:** Overview of MVD outbreaks i.e. location, timing, and size, as reported in the studies included in this review. We report in bold the country and outbreak year, the location refers to the place of the actual outbreak in the country if known. Blank cells correspond to information which we were unable to find in or extract from the literature.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_outbreak_table(pathogen = "marburg")
+df <- data_outbreak_table(pathogen = "marburg","../")
 outbreak_table(df, "marburg")
 ```
 
@@ -72,7 +72,7 @@ outbreak_table(df, "marburg")
 **Figure 3 (A):** Estimates of the reproduction number. The blue and red points correspond to estimates of the effective reproduction number (Re) and basic reproduction number (R0) respectively, with associated uncertainty shown by the solid lines where available. The dashed vertical line presents the threshold for epidemic growth. 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 forest_plot_r(df)
 ```
 
@@ -81,14 +81,14 @@ forest_plot_r(df)
 
 
 ```{r cfr_panel_A, echo=FALSE, fig.height=4, fig.width=9, message=FALSE, warning=FALSE}
-df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 
 file_path_ob <- system.file("extdata", "marburg_outbreak.csv", package = "epireview")
-if(file_path_ob=="") file_path_ob <- paste0('../extdata/marburg_outbreak.csv')
+if(file_path_ob=="") file_path_ob <- paste0('../inst/extdata/marburg_outbreak.csv')
 outbreak     <- read_csv(file_path_ob)
 
 file_path_ar <- system.file("extdata","marburg_article.csv", package = "epireview")
-if(file_path_ar=="") file_path_ar <- paste0('../extdata/marburg_article.csv')
+if(file_path_ar=="") file_path_ar <- paste0('../inst/extdata/marburg_article.csv')
 articles     <- read_csv(file_path_ar)
 
 df_out <- left_join(outbreak, articles %>% dplyr::select(covidence_id, first_author_surname, year_publication), by = "covidence_id") %>%
@@ -166,7 +166,7 @@ forest.meta(meta_cfr_outbreak,
 **Figure S2 (A):** Overview of the estimates of the case fatality ratio (CFR) obtained from the included studies. CFR estimates reported in the included studies, stratified according to estimation method. Points represent central estimates. Error bars represent an uncertainty interval associated with the point estimate, as reported in the original study. 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 forest_plot_severity(df)
 ```
 **Figure S2 (B):** Overview of the estimates of the case fatality ratio (CFR) obtained from the included studies. CFR estimated from extracted outbreak data, including only one observation per outbreak using the study with the longest duration of the outbreak reported ensuring each case is not double counted. Shaded bars represents the imputed Binomial confidence interval for studies with a sample size, n > 1. Vertical dotted lines represent 0% and 100% CFR.
@@ -181,14 +181,14 @@ forest_plot_severity(df_out,outbreak_naive = TRUE)
 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_param_table(pathogen = "marburg", exclude = c(17, 15))
+df <- data_param_table(pathogen = "marburg", prepend = "../",exclude = c(17, 15))
 delay_table(df, "marburg")
 ```
 
 **Figure 3 (B):**  Delay parameters, stratified into five categories: Generation Time, Incubation Period, Time in Care, Time from Symptom to Careseeking and Time from Symptom to Outcome as indicated by different colours. 
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 forest_plot_delay(df)
 ```
 
@@ -196,7 +196,7 @@ forest_plot_delay(df)
 **Table 4:** Overview of seroprevalence estimates as reported in the included studies. Estimates were primarily reported as percentages, as shown here. Associated uncertainty and sample sizes are provided where these were reported. Where available, additional information regarding the location and timing of the estimates, the antibody being tested for, the target population, the timing in relation to any ongoing outbreak and the availability of disaggregated data is also summarised.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_param_table(pathogen = "marburg", exclude = c(17, 15))
+df <- data_param_table(pathogen = "marburg", prepend = "../", exclude = c(17, 15))
 sero_table(df, "marburg")
 ```
 
@@ -204,7 +204,7 @@ sero_table(df, "marburg")
 **Figure 3 (C):**  Evolutionary rates. Colours indicate different genome types; points represent central estimates. Solid lines represent an uncertainty interval associated with the point estimate while ribbons indicate a parameter value +/- standard error with a minimum value of 0.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
+df <- data_forest_plots(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 forest_plot_mutations(df)
 ```
 
@@ -212,7 +212,7 @@ forest_plot_mutations(df)
 **Table 3:** Aggregated information on risk factors associated with MVD infection and seropositivity. Risk factors were mapped onto our risk factor classification (see Supplement) by interpreting the authors’ descriptions. Adjusted refers to whether estimates are adjusted (i.e. from a multivariate analysis) or not (i.e. from a univariate analysis), with unknown showing that this information is not clearly stated in the original study. Statistical significance was determined according to the original authors’ statistical approaches when specified, or using a p-value of 0.05 otherwise. The numbers in the significant and not significant columns represent the total sample size included in the analyses for this risk factor and outcome category.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
+df <- data_param_table(pathogen = "marburg", prepend = "../", exclude = c(15, 17))
 risk_table(df, "marburg")
 ```
 
@@ -229,6 +229,6 @@ risk_table(df,'marburg',supplement=TRUE)
 **Figure S3:** (A) Count of papers for each quality assessment question scoring Yes, No or not applicable. (B) Quality Assessment Score defined as proportion of Yes votes for each paper relative to sum of Yes and No answers, removing NAs. The time trend is fitted using Local Polynomial Regression Fitting.
 
 ```{r echo=FALSE, fig.height=4, fig.width=8, message=FALSE, warning=FALSE, paged.print=TRUE}
-quality_assessment_plots(pathogen = "marburg", prepend = file_prepend)
+quality_assessment_plots(pathogen = "marburg", prepend = "../")
 ```
 
