@@ -32,17 +32,17 @@ One output of this project will be a database initially populated with all the i
 
 ## Pathogen overview and timeline
 
-| Pathogen  | Titles & Abstracts screened | Expected pre-print | Contact | doi|
-| --------- |         -------------------:|           --------:|      -- | -- |
-| Marburg virus | 4,460 | June 2023 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1101/2023.07.10.23292424||
-| Ebola virus   | 9,563 | September 2023 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
-| Lassa Mammarenavirus  | 1,760 | October 2023   | pd315@ic.ac.uk ||
-| Henipa virus  |           959 | December 2023  | cw1716@ic.ac.uk ||
-| SARS-CoV-1    |        11,918 | January 2024   | acori@ic.ac.uk, cm401@ic.ac.uk || 
-| Nairo virus (CCHF) |     1,967| March 2024     | dn620@ic.ac.uk, svanelsl@ic.ac.uk||
-| Zika virus|              4,518| May 2024       | kem22@ic.ac.uk||
-| Rift Valley Fever Virus| 3,341| June 2024      | gc.4018@ic.ac.uk||
-| MERS-CoV|               10,382| July 2024      | acori@ic.ac.uk||
-| Comprehensive paper comparing pathogens |47,115|September 2024|acori@ic.ac.uk||
+| Pathogen  | Titles & Abstracts screened | Contact | doi|
+| --------- |         -------------------:|      -- | -- |
+| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1101/2023.07.10.23292424||
+| Ebola virus   | 9,563 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
+| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk ||
+| Henipa virus  |           959 | cw1716@ic.ac.uk ||
+| SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk || 
+| Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||
+| Zika virus|              4,518| kem22@ic.ac.uk||
+| Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||
+| MERS-CoV|               10,382| acori@ic.ac.uk||
+| Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](cm401@ic.ac.uk).
