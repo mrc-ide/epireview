@@ -1,7 +1,7 @@
 Population Country,Parameter type,Units,Parameter uncertainty - single type,Parameter uncertainty - paired type,Distribution type,Distribution parameter 1 - type,Distribution parameter 2 - type,Disaggregated by,Sex,Setting,Group,Timing,Reproduction number method,Time from,Time to,IFR_CFR_method,Riskfactor outcome,Riskfactor name,Riskfactor occupation,Riskfactor significant,Riskfactor adjusted
-Afghanistan,Mutations – mutation rate,Percentage (%),Standard Error (SE),CI90%,Bernoulli,Shape,Shape,Age,Female,Community based,Healthcare workers,Start outbreak,Renewal equations / Branching process,Exposure/Infection,Exposure/Infection,Naive,Infection,Age,Abattoir services,Significant,Adjusted
+Afghanistan,Mutations - mutation rate,Percentage (%),Standard Error (SE),CI90%,Bernoulli,Shape,Shape,Age,Female,Community based,Healthcare workers,Start outbreak,Renewal equations / Branching process,Exposure/Infection,Exposure/Infection,Naive,Infection,Age,Abattoir services,Significant,Adjusted
 Albania,Mutations - evolutionary rate,Per hour,Standard deviation (Sd),CI95%,Beta,Scale,Scale,Disease generation,Male,Hospital based,Farmers,Mid outbreak,Growth rate,Infectiousness,Infectiousness,Adjusted,Severe disease,Close contact,Correctional facilities,Not significant ,Not adjusted
-Algeria,Mutations – substitution rate,Per day,Variance,CRI90%,Beta-Binomial,Mean,Mean,Level of exposure,Both,Household based,Outdoor workers,End outbreak,Compartmental model,Symptom Onset/Fever,Symptom Onset/Fever,Unspecified,Death,Contact with animal,Education,Unspecified,Unspecified
+Algeria,Mutations - substitution rate,Per day,Variance,CRI90%,Beta-Binomial,Mean,Mean,Level of exposure,Both,Household based,Outdoor workers,End outbreak,Compartmental model,Symptom Onset/Fever,Symptom Onset/Fever,Unspecified,Death,Contact with animal,Education,Unspecified,Unspecified
 American Samoa,Growth rate (r),Per week,Coefficient of variation,CRI95%,Cauchy,Coefficient of variation,Coefficient of variation,Occupation,Unspecified,Housing estate based,Animal workers,Post outbreak,Next generation matrix,Seeking Care,Seeking Care,,Recovery,Cormobidity,Funeral and burial services,,
 Andorra,Doubling time,Per month,Other,Range,Cauchy-half,Variance,Variance,Region,,Population based,Butchers,Endemic,Empirical (contact tracing),Admission to Care/Hospitalisation,Admission to Care/Hospitalisation,,Serology,Funeral,Healthcare,,
 Angola,Halving time,Per year,,Inter Quartile Range (IQR),Chi-Square-Inverse,Meanlog,Meanlog,Sex,,School based,Abattoir workers,Unspecified,Genomics,Admission to Critical Care/ICU,Admission to Critical Care/ICU,,Other,Hospitalisation,Laboratory,,
@@ -46,10 +46,10 @@ Comoros,,,,,,,,,,,,,,,,,,,,,
 "Congo, Dem. Rep.",,,,,,,,,,,,,,,,,,,,,
 "Congo, Rep.",,,,,,,,,,,,,,,,,,,,,
 Costa Rica,,,,,,,,,,,,,,,,,,,,,
-Côte d'Ivoire,,,,,,,,,,,,,,,,,,,,,
+C\u00F4te d'Ivoire,,,,,,,,,,,,,,,,,,,,,
 Croatia,,,,,,,,,,,,,,,,,,,,,
 Cuba,,,,,,,,,,,,,,,,,,,,,
-Curaçao,,,,,,,,,,,,,,,,,,,,,
+Cura\u00E7ao,,,,,,,,,,,,,,,,,,,,,
 Cyprus,,,,,,,,,,,,,,,,,,,,,
 Czech Republic,,,,,,,,,,,,,,,,,,,,,
 Denmark,,,,,,,,,,,,,,,,,,,,,
@@ -164,7 +164,7 @@ Russian Federation,,,,,,,,,,,,,,,,,,,,,
 Rwanda,,,,,,,,,,,,,,,,,,,,,
 Samoa,,,,,,,,,,,,,,,,,,,,,
 San Marino,,,,,,,,,,,,,,,,,,,,,
-São Tomé and Principe,,,,,,,,,,,,,,,,,,,,,
+S\u00E3o Tom\u00E9 and Pr\u00EDncipe,,,,,,,,,,,,,,,,,,,,,
 Saudi Arabia,,,,,,,,,,,,,,,,,,,,,
 Senegal,,,,,,,,,,,,,,,,,,,,,
 Serbia,,,,,,,,,,,,,,,,,,,,,
