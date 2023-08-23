@@ -18,7 +18,7 @@ vignette: >
 }
 ```
 
-The field options for each table can be retrieved from `get_available_table_field_options(table_type = "model",field = 'Model type')` which would return the available options for the model type field in the Models dataset. Below we display _all_ options for _all_ table types. 
+The field options for each table can be retrieved from `get_table_field_options(table_type = "model", field = 'Model type')` which would return the available options for the model type field in the Models dataset. Below we display _all_ options for _all_ table types. 
 
 ## Model field options
 
@@ -27,7 +27,9 @@ library(tidyverse)
 library(flextable)
 source("../R/get_table_field_options.R")
 
-tbl <- get_available_table_field_options('model',vignette_prepend = "../")
+tbl <- get_table_field_options(table_type = "model", 
+                               pathogen = "marburg",
+                               vignette_prepend = "../")
 tbl %>% flextable()
 ```
 
@@ -35,7 +37,9 @@ tbl %>% flextable()
 ## Parameter field options
 
 ```{r parameter options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
-tbl <- get_available_table_field_options('parameter',vignette_prepend = "../")
+tbl <- get_table_field_options(table_type = "parameter", 
+                               pathogen = "marburg",
+                               vignette_prepend = "../")
 tbl %>% flextable()
 ```
 
@@ -43,7 +47,9 @@ tbl %>% flextable()
 ## Outbreak field options
 
 ```{r outbreak options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
-tbl <- get_available_table_field_options('outbreak',vignette_prepend = "../")
+tbl <- get_table_field_options(table_type = "outbreak", 
+                               pathogen = "marburg",
+                               vignette_prepend = "../")
 tbl %>% flextable()
 ```
 
