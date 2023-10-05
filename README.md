@@ -1,6 +1,6 @@
 # Private fork of epireview
 
-This is a provate fork of epireview. To contribute
+This is a private fork of epireview. To contribute
 
 * create a new branch from the 'develop' branch of this repo (note,
   not from the main branch)
