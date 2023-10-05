@@ -1,3 +1,19 @@
+# Private fork of epireview
+
+This is a provate fork of epireview. To contribute
+
+* create a new branch from the 'develop' branch of this repo (note,
+  not from the main branch)
+* push your changes to your branch
+* When you're happy with your work, and ready to merge, raise a PR to
+  merge into develop branch, and assign Sangeeta, Rebecca or Ettie as
+  reviewers.
+* Before raising a PR, make sure `devtools::document()` and
+  `devtools::check()` run without any warning, errors or notes. If you
+  don't know what this means, message Sangeeta or Rebecca.
+* If you working on an issue, add a comment to note this and assign it
+  to yourself, to avoid duplication of work.
+
 # epireview
 
 <a href="https://github.com/mrc-ide/epireview"><img src="man/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;"></a>
