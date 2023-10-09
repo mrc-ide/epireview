@@ -20,30 +20,17 @@ forest_plot_mutations <- function(df) {
     parameter_data_id <- parameter_uncertainty_lower_value <-
     parameter_uncertainty_upper_value <- NULL
 
-  df_mutations <- df %>%
+  df_plot <- df %>%
     filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
-    group_by(parameter_type)
-
-  df_plot <- df_mutations %>%
-    filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
-    group_by(parameter_type)
-
-  df_plot$article_label_unique <- make.unique(df_plot$article_label)
-  df_plot <- df_plot %>%
     mutate(gene = ifelse(is.na(genome_site) == TRUE,
                          "Whole genome", genome_site)) %>%
-    arrange(gene, desc(parameter_value))
-  df_plot$article_label_unique <- factor(df_plot$article_label_unique,
-                                         levels = df_plot$article_label_unique)
-  df_plot <- df_plot %>%
     mutate(parameter_value = if_else(parameter_value > 1e-02,
                                      parameter_value * 1e-04, parameter_value),
            parameter_uncertainty_single_value =
              if_else(parameter_uncertainty_single_value > 1e-02,
                      parameter_uncertainty_single_value * 1e-04,
-                     parameter_uncertainty_single_value))
+                     parameter_uncertainty_single_value)) %>%
+    arrange(gene, desc(parameter_value))
 
   plot <- ggplot(df_plot,
                  aes(x = (parameter_value * 1e04), y = article_label_unique,

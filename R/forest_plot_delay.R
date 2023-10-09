@@ -25,9 +25,9 @@ forest_plot_delay <- function(df) {
     parameter_data_id <- parameter_uncertainty_lower_value <-
     parameter_uncertainty_upper_value <- NULL
 
-  df_delay <- df %>%
+  df_plot <- df %>%
     filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
+    # mutate(parameter_value = as.numeric(parameter_value)) %>%
     mutate(parameter_type_short =
              gsub("^Human delay - ", "", parameter_type)) %>%
     mutate(
@@ -39,14 +39,9 @@ forest_plot_delay <- function(df) {
             riskfactor_outcome == "Other", "Time symptom to outcome (Other)",
                  parameter_type_short))) %>%
     mutate(parameter_type_short = str_to_sentence(parameter_type_short)) %>%
-    group_by(parameter_type_short) %>%
-    arrange(first_author_surname)
-
-  df_plot <- df_delay %>%
-    filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
-    group_by(parameter_type_short) %>%
     mutate(median = median(parameter_value, na.rm = TRUE)) %>%
+    group_by(parameter_type_short) %>%
+    arrange(first_author_surname) %>%
     arrange(desc(parameter_type_short),
             desc(parameter_value),
             desc(article_label))
