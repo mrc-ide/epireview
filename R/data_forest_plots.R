@@ -13,21 +13,21 @@
 #' data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 #' @export
 
-data_forest_plots <- function(pathogen, prepend = "",exclude = NA) {
+data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(
     "extdata", paste0(pathogen, "_parameter.csv"), package = "epireview")
   if (file_path_pa == "")
     file_path_pa <- paste0(prepend, "inst/extdata/", pathogen, "_parameter.csv")
-  params <- read_csv(file_path_pa)
+  params <- read_csv(file_path_pa, show_col_types = FALSE)
 
   # Get file pathway for article data
   file_path_ar <- system.file(
     "extdata", paste0(pathogen, "_article.csv"), package = "epireview")
   if (file_path_ar == "")
     file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
-  articles <- read_csv(file_path_ar)
+  articles <- read_csv(file_path_ar, show_col_types = FALSE)
 
   # Deal with R CMD Check "no visible binding for global variable"
   parameter_class <- parameter_type <- article_id <- article_label <-
@@ -38,23 +38,29 @@ data_forest_plots <- function(pathogen, prepend = "",exclude = NA) {
     parameter_uncertainty_type <- cfr_ifr_method <- NULL
 
   df <- left_join(params, articles %>%
-                  select(article_id, first_author_surname, year_publication),
-                by = "article_id") %>%
-  mutate(article_label = as.character(
-    paste0(first_author_surname, "", year_publication)),
-    population_country = str_replace_all(population_country, ";", ",")) %>%
-  arrange(article_label, -year_publication) %>%
-  filter(article_id %in% exclude == FALSE) %>%
-  mutate(parameter_uncertainty_lower_value =
-           replace(parameter_uncertainty_lower_value,
-                   (parameter_uncertainty_type == "Range" &
-                      !is.na(parameter_lower_bound) &
-                      parameter_class == "Human delay"), NA),
-         parameter_uncertainty_upper_value =
-           replace(parameter_uncertainty_upper_value,
-                   (parameter_uncertainty_type == "Range" &
-                      !is.na(parameter_upper_bound) &
-                      parameter_class == "Human delay"), NA))
+                    select(article_id, first_author_surname, year_publication),
+                  by = "article_id") %>%
+    mutate(article_label = as.character(
+      paste0(first_author_surname, "", year_publication)),
+      population_country = str_replace_all(population_country, ";", ",")) %>%
+    # arrange(article_label, -year_publication) %>%
+    filter(article_id %in% exclude == FALSE) %>%
+    mutate(parameter_uncertainty_lower_value =
+             replace(parameter_uncertainty_lower_value,
+                     (parameter_uncertainty_type == "Range" &
+                        !is.na(parameter_lower_bound) &
+                        parameter_class == "Human delay"), NA),
+           parameter_uncertainty_upper_value =
+             replace(parameter_uncertainty_upper_value,
+                     (parameter_uncertainty_type == "Range" &
+                        !is.na(parameter_upper_bound) &
+                        parameter_class == "Human delay"), NA)) %>%
+    mutate(parameter_value = as.numeric(parameter_value))
+
+  # Make unique article labels
+  df$article_label_unique <- make.unique(df$article_label)
+  df$article_label_unique <- factor(df$article_label_unique,
+                                         levels = df$article_label_unique)
 
 # pathogen specific edits
 if (pathogen == "marburg") {

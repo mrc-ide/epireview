@@ -33,7 +33,6 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
 
   df_cfr <- df %>%
     filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
     group_by(parameter_type) %>%
     arrange(article_label)
 
@@ -48,7 +47,6 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     filter(is.na(parameter_value) == FALSE) %>%
     arrange((cfr_ifr_method))
 
-  df_plot$article_label_unique <- make.unique(df_plot$article_label)
   df_plot <- df_plot %>% mutate(order_num = seq(1, dim(df_plot)[1], 1))
 
   if (outbreak_naive) {

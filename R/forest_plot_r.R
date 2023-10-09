@@ -23,21 +23,11 @@ forest_plot_r <- function(df) {
     article_label <- parameter_uncertainty_lower_value <-
     parameter_uncertainty_upper_value <- parameter_data_id <- NULL
 
-  df_r <- df %>%
+  df_plot <- df %>%
     filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
+    mutate(median = median(parameter_value, na.rm = TRUE)) %>%
     group_by(parameter_type) %>%
-    arrange(first_author_surname)
-
-  df_plot <- df_r %>%
-    filter(parameter_class == parameter) %>%
-    mutate(parameter_value = as.numeric(parameter_value)) %>%
-    group_by(parameter_type) %>%
-    mutate(median = median(parameter_value, na.rm = TRUE))
-
-  df_plot$article_label_unique <- make.unique(df_plot$article_label)
-
-  df_plot <- df_plot %>%
+    arrange(first_author_surname) %>%
     mutate(parameter_type_short =
              ifelse(parameter_type ==
                       "Reproduction number (Basic R0)",
