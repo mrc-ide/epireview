@@ -37,6 +37,13 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     group_by(parameter_type) %>%
     arrange(article_label)
 
+  df_cfr$pooled <- (sum(df_cfr$cfr_ifr_numerator, na.rm = TRUE) /
+                      sum(df_cfr$cfr_ifr_denominator, na.rm = TRUE)) * 100
+  p <- df_cfr$pooled[1] / 100
+  n <- sum(df_cfr$cfr_ifr_denominator, na.rm = TRUE)
+  df_cfr$pooled_low <- (p - 1.96 * (sqrt((p * (1 - p)) / n))) * 100
+  df_cfr$pooled_upp <- (p + 1.96 * (sqrt((p * (1 - p)) / n))) * 100
+
   df_plot <- df_cfr %>%
     filter(is.na(parameter_value) == FALSE) %>%
     arrange((cfr_ifr_method))
