@@ -21,5 +21,5 @@ seroprevalence_table()
 Process data for delay table
 }
 \examples{
-df <- data_param_table(pathogen = "marburg", exclude = c(15, 17))
+df <- data_param_table(pathogen = "marburg", prepend = "", exclude = c(15, 17))
 }
