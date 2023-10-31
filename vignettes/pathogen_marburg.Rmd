@@ -133,6 +133,10 @@ selection_index <- na.omit(unique(selection_index))
 df_out$keep_record <- 0
 df_out[selection_index,]$keep_record <- 1
 
+df_out$article_label_unique <- make.unique(df_out$article_label)
+df_out$article_label_unique <- factor(df_out$article_label_unique,
+                                      levels = df_out$article_label_unique)
+
 cfr <- df %>% filter(cfr_ifr_denominator>0 & parameter_class=="Severity")
 
 meta_cfr <- metaprop(cfr_ifr_numerator, cfr_ifr_denominator, studlab=article_label, sm="PLOGIT", data=cfr, method="GLMM", method.tau="ML")
