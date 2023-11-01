@@ -31,6 +31,9 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     df <- df %>% filter(keep_record == 1)
   }
 
+  # Make unique article labels
+  df <- add_unique_labels(df)
+
   df_plot <- df %>%
     filter(parameter_class == parameter) %>%
     group_by(parameter_type) %>%
@@ -74,8 +77,8 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
       mutate(order_num = row_number())
 
     plot <- ggplot(df_plot2, aes(x = parameter_value,
-                                y = reorder(article_label_unique, -order_num),
-                                col = cfr_ifr_method)) +
+                                 y = reorder(article_label_unique, -order_num),
+                                 col = cfr_ifr_method)) +
       geom_point(size = 3) +
       scale_y_discrete(labels = setNames(df_plot$article_label,
                                          df_plot$article_label_unique)) +

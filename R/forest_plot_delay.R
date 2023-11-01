@@ -36,7 +36,7 @@ forest_plot_delay <- function(df) {
         ifelse(
           parameter_type_short == "time symptom to outcome" &
             riskfactor_outcome == "Other", "Time symptom to outcome (Other)",
-                 parameter_type_short))) %>%
+          parameter_type_short))) %>%
     mutate(parameter_type_short = str_to_sentence(parameter_type_short)) %>%
     mutate(median = median(parameter_value, na.rm = TRUE)) %>%
     group_by(parameter_type_short) %>%
@@ -45,17 +45,16 @@ forest_plot_delay <- function(df) {
             desc(parameter_value),
             desc(article_label))
 
-  df_plot$article_label_unique <- make.unique(df_plot$article_label)
-  df_plot$article_label_unique <- factor(df_plot$article_label_unique,
-                                         levels = df_plot$article_label_unique)
+  # Make unique article labels
+  df <- add_unique_labels(df)
 
   plot <- ggplot(df_plot, aes(col = parameter_type_short)) +
     geom_point(aes(x = parameter_value,
                    y = article_label_unique,
                    shape = parameter_value_type), size = 3.5) +
     geom_segment(aes(y = article_label_unique, yend = article_label_unique,
-                      x = parameter_lower_bound, xend = parameter_upper_bound,
-                      group = parameter_data_id), lwd = 5, alpha = 0.4) +
+                     x = parameter_lower_bound, xend = parameter_upper_bound,
+                     group = parameter_data_id), lwd = 5, alpha = 0.4) +
     geom_errorbar(aes(y = article_label_unique,
                       xmin = parameter_uncertainty_lower_value,
                       xmax = parameter_uncertainty_upper_value,
