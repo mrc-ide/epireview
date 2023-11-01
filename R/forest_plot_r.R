@@ -52,13 +52,13 @@ forest_plot_r <- function(df) {
                    group = parameter_data_id),
                size = 3) +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey") +
-    labs(x = "Reproduction number") +
+    labs(x = "Reproduction number", y = "", linetype = "", colour = "") +
     scale_linetype_manual(values = c("solid"),
                           labels = function(x) str_wrap(x, width = 5)) +
     scale_colour_manual(values = c("#D95F02", "#7570B3")) +
-    theme(legend.text = element_text(size = 12),
-          strip.text = element_text(size = 20)) +
-    xlim(c(0, 2))
+    xlim(c(0, 2)) +
+    guides(colour = guide_legend(order = 1, ncol = 1),
+           linetype = guide_legend(order = 2, ncol = 1))
 
   return(plot)
 }

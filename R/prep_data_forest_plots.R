@@ -43,7 +43,6 @@ prep_data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
     mutate(article_label = as.character(
       paste0(first_author_surname, "", year_publication)),
       population_country = str_replace_all(population_country, ";", ",")) %>%
-    # arrange(article_label, -year_publication) %>%
     filter(article_id %in% exclude == FALSE) %>%
     mutate(parameter_uncertainty_lower_value =
              replace(parameter_uncertainty_lower_value,
@@ -57,38 +56,33 @@ prep_data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
                         parameter_class == "Human delay"), NA)) %>%
     mutate(parameter_value = as.numeric(parameter_value))
 
-  # Make unique article labels
-  df$article_label_unique <- make.unique(df$article_label)
-  df$article_label_unique <- factor(df$article_label_unique,
-                                         levels = df$article_label_unique)
+  # pathogen specific edits
+  if (pathogen == "marburg") {
+    df <- df %>%
+      rowwise() %>%
+      mutate(parameter_uncertainty_lower_value =
+               replace(parameter_uncertainty_lower_value,
+                       parameter_data_id == 43,
+                       parameter_uncertainty_lower_value * 1e-4),
+             parameter_uncertainty_upper_value =
+               replace(parameter_uncertainty_upper_value,
+                       parameter_data_id == 43,
+                       parameter_uncertainty_upper_value * 1e-4)) %>%
+      mutate(parameter_value =
+               replace(parameter_value, parameter_data_id == 34, 0.93),
+             cfr_ifr_method =
+               replace(cfr_ifr_method, str_starts(parameter_type, "Severity") &
+                         is.na(cfr_ifr_method), "Unknown")) %>%
+      mutate(parameter_value_type =
+               ifelse(parameter_data_id == 16, "Other", parameter_value_type),
+             parameter_value_type =
+               ordered(parameter_value_type, levels = c("Mean",
+                                                        "Median",
+                                                        "Standard Deviation",
+                                                        "Other",
+                                                        "Unspecified")))
+  }
 
-# pathogen specific edits
-if (pathogen == "marburg") {
-  df <- df %>%
-    rowwise() %>%
-    mutate(parameter_uncertainty_lower_value =
-           replace(parameter_uncertainty_lower_value,
-                   parameter_data_id == 43,
-                   parameter_uncertainty_lower_value * 1e-4),
-         parameter_uncertainty_upper_value =
-           replace(parameter_uncertainty_upper_value,
-                   parameter_data_id == 43,
-                   parameter_uncertainty_upper_value * 1e-4)) %>%
-    mutate(parameter_value =
-           replace(parameter_value, parameter_data_id == 34, 0.93),
-         cfr_ifr_method =
-           replace(cfr_ifr_method, str_starts(parameter_type, "Severity") &
-                     is.na(cfr_ifr_method), "Unknown")) %>%
-    mutate(parameter_value_type =
-           ifelse(parameter_data_id == 16, "Other", parameter_value_type),
-         parameter_value_type =
-           ordered(parameter_value_type, levels = c("Mean",
-                                                    "Median",
-                                                    "Standard Deviation",
-                                                    "Other",
-                                                    "Unspecified")))
-}
-
-return(df)
+  return(df)
 
 }

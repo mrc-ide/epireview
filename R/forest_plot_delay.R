@@ -69,8 +69,14 @@ forest_plot_delay <- function(df) {
                        labels = c("Mean", "Median", "Std Dev", "Other"),
                        na.translate = FALSE) +
     labs(x = "Delay (days)",
+         y = "",
+         linetype = "",
+         colour = "",
+         shape = "",
          caption = "*Solid transparent rectangles refer to parameter ranges
-         while the error bars are uncertainty intervals.")
+         while the error bars are uncertainty intervals.") +
+    guides(colour = guide_legend(order = 1, ncol = 1),
+           linetype = guide_legend(order = 2, ncol = 1))
 
 
   return(plot)
