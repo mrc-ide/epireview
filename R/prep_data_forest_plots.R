@@ -13,7 +13,7 @@
 #' data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 #' @export
 
-data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
+prep_data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(

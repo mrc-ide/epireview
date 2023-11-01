@@ -1,7 +1,7 @@
 #' Create forest plot for severity
 #'
 #' @param df processed data with severity information produced using
-#' data_forest_plots()
+#' prep_data_forest_plots()
 #' @param outbreak_naive whether to use unadjusted case and death counts (TRUE)
 #' or the adjusted case and death counts (FALSE). FALSE by default.
 #' @return returns plot with a summary of IFR and CFR estimates
@@ -61,10 +61,10 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
              outbreak_year_cnt = as.character(paste0(
                outbreak_year_cnt, " [n =", cfr_ifr_denominator, "]")))
 
+
     plot <- ggplot(df_plot2, aes(x = parameter_value,
                                  y = reorder(article_label_unique, -order_num),
                                  col = article_label)) +
-      theme_bw() +
       geom_point(size = 3) +
       scale_y_discrete(labels = setNames(df_plot2$outbreak_year_cnt,
                                          df_plot2$article_label_unique)) +
@@ -73,17 +73,9 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
                        group = parameter_data_id),
                    lwd = 3,
                    alpha = 0.4) +
-      labs(x = "Case fatality ratio (%)",
-           y = "",
-           linetype = "",
-           colour = "",
-           fill = "") +
-      theme(legend.position = "right",
-            legend.text = element_text(size = 12),
-            strip.text = element_text(size = 20)) +
+      labs(x = "Case fatality ratio (%)") +
+      theme(legend.position = "right") +
       scale_color_brewer(palette = "Dark2") +
-      guides(colour = guide_legend(order = 1, ncol = 1),
-             linetype = guide_legend(order = 2, ncol = 1)) +
       scale_linetype_manual(values = c("solid"),
                             labels = function(x) str_wrap(x, width = 5)) +
       geom_vline(xintercept = c(0, 100), linetype = "dotted") +
@@ -96,7 +88,6 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     plot <- ggplot(df_plot, aes(x = parameter_value,
                                 y = reorder(article_label_unique, -order_num),
                                 col = cfr_ifr_method)) +
-      theme_bw() +
       geom_point(size = 3) +
       scale_y_discrete(labels = setNames(df_plot$article_label,
                                          df_plot$article_label_unique)) +
@@ -115,17 +106,8 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
                        group = parameter_data_id),
                    lwd = 5,
                    alpha = 0.4) +
-      labs(x = "Case fatality ratio (%)",
-           y = "",
-           linetype = "",
-           colour = "",
-           fill = "") +
-      theme(
-        legend.text = element_text(size = 12),
-        strip.text = element_text(size = 20)) +
+      labs(x = "Case fatality ratio (%)") +
       scale_colour_manual(values = c("#D95F02", "#7570B3")) +
-      guides(colour = guide_legend(order = 1, ncol = 1),
-             linetype = guide_legend(order = 2, ncol = 1)) +
       scale_linetype_manual(values = c("solid"),
                             labels = function(x) str_wrap(x, width = 5)) +
       geom_vline(xintercept = c(0, 100), linetype = "dotted") +
