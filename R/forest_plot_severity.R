@@ -31,12 +31,10 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     df <- df %>% filter(keep_record == 1)
   }
 
-  df_cfr <- df %>%
+  df_plot <- df %>%
     filter(parameter_class == parameter) %>%
     group_by(parameter_type) %>%
-    arrange(article_label)
-
-  df_plot <- df_cfr %>%
+    arrange(article_label) %>%
     filter(is.na(parameter_value) == FALSE) %>%
     arrange((cfr_ifr_method))
 
@@ -61,24 +59,21 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
       geom_point(size = 3) +
       scale_y_discrete(labels = setNames(df_plot2$outbreak_year_cnt,
                                          df_plot2$article_label_unique)) +
-      geom_segment(aes(y = article_label_unique, yend = article_label_unique,
-                       x = lower_ci, xend = upper_ci,
+      geom_segment(aes(y = article_label_unique,
+                       yend = article_label_unique,
+                       x = lower_ci,
+                       xend = upper_ci,
                        group = parameter_data_id),
                    lwd = 3,
                    alpha = 0.4) +
-      labs(x = "Case fatality ratio (%)") +
       theme(legend.position = "right") +
-      scale_color_brewer(palette = "Dark2") +
-      scale_linetype_manual(values = c("solid"),
-                            labels = function(x) str_wrap(x, width = 5)) +
-      geom_vline(xintercept = c(0, 100), linetype = "dotted") +
-      scale_x_continuous(breaks = seq(-20, 120, by = 20))
+      scale_color_brewer(palette = "Dark2")
   } else {
-    df_plot <- df_plot %>%
+    df_plot2 <- df_plot %>%
       arrange(article_label_unique) %>%
       mutate(order_num = row_number())
 
-    plot <- ggplot(df_plot, aes(x = parameter_value,
+    plot <- ggplot(df_plot2, aes(x = parameter_value,
                                 y = reorder(article_label_unique, -order_num),
                                 col = cfr_ifr_method)) +
       geom_point(size = 3) +
@@ -99,14 +94,22 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
                        group = parameter_data_id),
                    lwd = 5,
                    alpha = 0.4) +
-      labs(x = "Case fatality ratio (%)") +
-      scale_colour_manual(values = c("#D95F02", "#7570B3")) +
-      scale_linetype_manual(values = c("solid"),
-                            labels = function(x) str_wrap(x, width = 5)) +
-      geom_vline(xintercept = c(0, 100), linetype = "dotted") +
-      scale_x_continuous(breaks = seq(-20, 120, by = 20)) +
-      xlim(c(-20, 120))
+      scale_colour_manual(values = c("#D95F02", "#7570B3"))
+
   }
+
+  plot <- plot +
+    scale_linetype_manual(values = c("solid"),
+                          labels = function(x) str_wrap(x, width = 5)) +
+    geom_vline(xintercept = c(0, 100), linetype = "dotted") +
+    scale_x_continuous(breaks = seq(-20, 120, by = 20)) +
+    labs(x = "Case fatality ratio (%)",
+         y = "",
+         linetype = "",
+         colour = "",
+         fill = "") +
+    guides(colour = guide_legend(order = 1, ncol = 1),
+           linetype = guide_legend(order = 2, ncol = 1))
 
   return(plot)
 }

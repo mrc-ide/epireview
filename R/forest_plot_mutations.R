@@ -60,10 +60,14 @@ forest_plot_mutations <- function(df) {
                                        df_plot$article_label_unique)) +
     labs(x = expression(Molecular~evolutionary~rate~
                           (substitution/site/year~10^{-4})),
+         y = "",
+         linetype = "",
+         colour = "",
          caption =
            "*Solid transparent lines are calculated as the parameter value
          \u00B1 standard error. Error bars refer to uncertainty intervals.") +
-    xlim(c(0, 10))
+    xlim(c(0, 10)) +
+    guides(colour = guide_legend(order = 1, ncol = 1))
 
 
   return(plot)

@@ -12,14 +12,7 @@ plot_forest <- function(df,
 
   theme_forest_plot <- theme_bw() +
     theme(legend.text = element_text(size = 12),
-          strip.text = element_text(size = 20)) +
-    # guides(colour = guide_legend(order = 1, ncol = 1),
-    #        linetype = guide_legend(order = 2, ncol = 1)) +
-    labs(y = "",
-         linetype = "",
-         colour = "",
-         fill = "",
-         shape = "")
+          strip.text = element_text(size = 20))
 
   if(parameter == 'Human delay'){
     plot <- forest_plot_delay(df = df) +
