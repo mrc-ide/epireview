@@ -15,6 +15,9 @@
 
 data_forest_plots <- function(pathogen, prepend = "",exclude = NA) {
 
+  # assertions
+  assert_pathogen(pathogen)
+
   # Get file pathway for parameter data
   file_path_pa <- system.file(
     "extdata", paste0(pathogen, "_parameter.csv"), package = "epireview")
