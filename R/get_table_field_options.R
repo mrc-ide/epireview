@@ -30,6 +30,9 @@ get_table_field_options <- function(table_type = NA,
                                     field = "all",
                                     vignette_prepend = "") {
 
+  # assertions
+  assert_pathogen(pathogen)
+
   file_path_ob <- system.file(
     "extdata", paste0(pathogen, "_dropdown_", table_type, "s.csv"),
     package = "epireview")

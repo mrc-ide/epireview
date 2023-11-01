@@ -57,7 +57,10 @@ create_new_outbreak_entry <-
                             list("covidence_id"         = as.integer(NA))),
            vignette_prepend = "") {
 
-  #read current article data for pathogen
+  # assertions
+  assert_pathogen(pathogen)
+
+  # read current article data for pathogen
   articles <- as_tibble(load_epidata(table_type = "article",
                                      pathogen = pathogen,
                                      vignette_prepend = vignette_prepend))
@@ -76,7 +79,7 @@ create_new_outbreak_entry <-
        new_row$covidence_id))
     stop("Article_id + Covidence_id pair does not exist in article data")
 
-  #available options for fields
+  # available options for fields
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_outbreaks.csv"),
                                package = "epireview")
@@ -90,7 +93,7 @@ create_new_outbreak_entry <-
   outbreak_country <- cases_mode_detection <- outbreak_date_year <-
     fails <- NULL
 
-  #validate that the entries make sense
+  # validate that the entries make sense
   rules <- validator(
     outbreak_country_is_character = is.character(outbreak_country),
     outbreak_country_valid = strsplit(outbreak_country, ",")[[1]] %vin%
