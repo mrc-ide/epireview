@@ -1,7 +1,7 @@
 #' Create forest plot for reproduction numbers
 #'
 #' @param df processed data with parameter information produced using
-#' data_forest_plots()
+#' prep_data_forest_plots()
 #' @return returns plot with a summary of reproduction number estimates
 #' @importFrom dplyr filter arrange mutate group_by
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
@@ -39,7 +39,6 @@ forest_plot_r <- function(df) {
   plot <- ggplot(df_plot, aes(x = parameter_value,
                               y = article_label_unique,
                               col = parameter_type_short)) +
-    theme_bw() +
     geom_errorbar(aes(y = article_label,
                       xmin = parameter_uncertainty_lower_value,
                       xmax = parameter_uncertainty_upper_value,
@@ -53,15 +52,13 @@ forest_plot_r <- function(df) {
                    group = parameter_data_id),
                size = 3) +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey") +
-    labs(x = "Reproduction number", y = "", linetype = "", colour = "") +
+    labs(x = "Reproduction number") +
     scale_linetype_manual(values = c("solid"),
                           labels = function(x) str_wrap(x, width = 5)) +
     scale_colour_manual(values = c("#D95F02", "#7570B3")) +
     theme(legend.text = element_text(size = 12),
           strip.text = element_text(size = 20)) +
-    xlim(c(0, 2)) +
-    guides(colour = guide_legend(order = 1, ncol = 1),
-           linetype = guide_legend(order = 2, ncol = 1))
+    xlim(c(0, 2))
 
   return(plot)
 }

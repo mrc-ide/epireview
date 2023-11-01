@@ -1,7 +1,7 @@
 #' Create forest plot for genetic mutations
 #'
 #' @param df processed data with parameter information produced using
-#' data_forest_plots()
+#' prep_data_forest_plots()
 #' @return returns plot with a summary of genetic mutations
 #' @importFrom dplyr filter mutate arrange group_by desc if_else
 #' @importFrom ggplot2 geom_vline xlim
@@ -35,11 +35,8 @@ forest_plot_mutations <- function(df) {
   plot <- ggplot(df_plot,
                  aes(x = (parameter_value * 1e04), y = article_label_unique,
                      col = gene)) +
-    theme_bw() +
     geom_point(size = 3) +
     geom_vline(xintercept = 0, color = "black", linetype = "dashed") +
-    scale_y_discrete(labels = setNames(df_plot$article_label,
-                                       df_plot$article_label_unique)) +
     geom_segment(
       aes(y = article_label_unique,
           yend = article_label_unique,
@@ -57,20 +54,17 @@ forest_plot_mutations <- function(df) {
                       group = parameter_data_id),
                   width = 0.3,
                   lwd = 1) +
+    scale_color_brewer(palette = "Dark2",
+                       labels = function(x) str_wrap(x, width = 10)) +
+    scale_y_discrete(labels = setNames(df_plot$article_label,
+                                       df_plot$article_label_unique)) +
     labs(x = expression(Molecular~evolutionary~rate~
                           (substitution/site/year~10^{-4})),
-         y = "",
-         linetype = "",
-         colour = "",
          caption =
            "*Solid transparent lines are calculated as the parameter value
          \u00B1 standard error. Error bars refer to uncertainty intervals.") +
-    theme(legend.text = element_text(size = 12),
-          strip.text = element_text(size = 20)) +
-    xlim(c(0, 10)) +
-    scale_color_brewer(palette = "Dark2",
-                       labels = function(x) str_wrap(x, width = 10)) +
-    guides(colour = guide_legend(order = 1, ncol = 1))
+    xlim(c(0, 10))
+
 
   return(plot)
 }
