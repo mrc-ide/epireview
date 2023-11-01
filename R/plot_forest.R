@@ -30,9 +30,9 @@ plot_forest <- function(df,
   }
 
   if(parameter == 'Severity'){
-   plot <- forest_plot_severity(df = df,
-                         outbreak_naive = outbreak_naive) +
-     theme_forest_plot
+    plot <- forest_plot_severity(df = df,
+                                 outbreak_naive = outbreak_naive) +
+      theme_forest_plot
   }
 
   return(plot)

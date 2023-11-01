@@ -20,6 +20,9 @@ forest_plot_mutations <- function(df) {
     parameter_data_id <- parameter_uncertainty_lower_value <-
     parameter_uncertainty_upper_value <- NULL
 
+  # Make unique article labels
+  df <- add_unique_labels(df)
+
   df_plot <- df %>%
     filter(parameter_class == parameter) %>%
     mutate(gene = ifelse(is.na(genome_site) == TRUE,
@@ -46,8 +49,8 @@ forest_plot_mutations <- function(df) {
             (parameter_value - parameter_uncertainty_single_value) * 1e04),
           xend = (parameter_value + parameter_uncertainty_single_value) * 1e04,
           group = parameter_data_id),
-                 lwd = 5,
-                 alpha = 0.4) +
+      lwd = 5,
+      alpha = 0.4) +
     geom_errorbar(aes(y = article_label_unique,
                       xmin = parameter_uncertainty_lower_value * 1e04,
                       xmax = parameter_uncertainty_upper_value * 1e04,

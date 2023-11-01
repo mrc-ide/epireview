@@ -23,6 +23,9 @@ forest_plot_r <- function(df) {
     article_label <- parameter_uncertainty_lower_value <-
     parameter_uncertainty_upper_value <- parameter_data_id <- NULL
 
+  # Make unique article labels
+  df <- add_unique_labels(df)
+
   df_plot <- df %>%
     filter(parameter_class == parameter) %>%
     mutate(median = median(parameter_value, na.rm = TRUE)) %>%
