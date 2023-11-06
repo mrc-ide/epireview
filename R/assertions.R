@@ -3,29 +3,35 @@
 #------------------------------------------------
 # x is one of the existing priority pathogens
 #' @noRd
-assert_pathogen <- function(x, message = paste("%s must be one of the priority pathogens:",
-                                           paste(unique(gsub(pattern = "_.*", replacement = "", x = list.files("../../inst/extdata/"))), sep = ", ")),
-                            name = deparse(substitute(x))){
+assert_pathogen <- function(x, message = paste(
+                              "%s must be one of the priority pathogens:",
+                              paste(priority_pathogens()$pathogen, collapse = ", ")
+                            ),
+                            name = deparse(substitute(x))) {
   assert_string(x)
 
-  pps <- unique(gsub(pattern = "_.*", replacement = "", x = list.files("../../inst/extdata/")))
-  if(!x %in% pps){
-    stop(sprintf(message, name), call. = FALSE)}
-  return(TRUE)
+  pps <- priority_pathogens()
+  if (!x %in% pps$pathogen) {
+    stop(sprintf(message, name), call. = FALSE)
+  }
+
+  invisible(TRUE)
 }
 
 #------------------------------------------------
 # x is a table
 #' @noRd
-assert_table <- function(x, message = paste("%s must be one of the priority pathogens table options:",
-                                            paste("article", "parameter", "outbreak", "model", sep = ", ")),
-                         name = deparse(substitute(x))){
+assert_table <- function(x, message = paste(
+                           "%s must be one of the priority pathogens table options:",
+                           paste("article", "parameter", "outbreak", "model", sep = ", ")
+                         ),
+                         name = deparse(substitute(x))) {
   assert_string(x)
   table_names <- c("article", "parameter", "outbreak", "model")
-  if(!x %in% table_names){
+  if (!x %in% table_names) {
     stop(sprintf(message, name), call. = FALSE)
   }
-    return(TRUE)
+  invisible(TRUE)
 }
 
 #------------------------------------------------
@@ -35,5 +41,5 @@ assert_string <- function(x, message = "%s must be character string", name = dep
   if (!is.character(x)) {
     stop(sprintf(message, name), call. = FALSE)
   }
-  return(TRUE)
+  invisible(TRUE)
 }
