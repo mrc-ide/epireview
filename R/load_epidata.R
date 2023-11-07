@@ -13,10 +13,9 @@ load_epidata <- function(table_type = NA,
                          pathogen = NA,
                          vignette_prepend = "") {
 
-  if (is.na(table_type) || is.na(pathogen)) {
-    stop("table_type and pathogen name must be supplied. table_type can be
-         one of either 'article', 'parameter', 'outbreak' or 'model'")
-  }
+  # assertions
+  assert_pathogen(pathogen)
+  assert_table(table_type)
 
   file_path <- system.file(
     "extdata", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")

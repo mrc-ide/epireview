@@ -20,6 +20,9 @@
 quality_assessment_plots <- function(pathogen = NA,
                                      prepend = "") {
 
+  # assertions
+  assert_pathogen(pathogen)
+
   if (is.na(pathogen)) {
     stop("pathogen name must be supplied")
   }

@@ -40,7 +40,10 @@ create_new_model_entry <-
                          list("covidence_id"        = as.integer(NA))),
            vignette_prepend = "") {
 
-  #read current article data for pathogen
+  # assertions
+  assert_pathogen(pathogen)
+
+  # read current article data for pathogen
   articles <- as_tibble(load_epidata(table_type = "article",
                                      pathogen = pathogen,
                                      vignette_prepend = vignette_prepend))
