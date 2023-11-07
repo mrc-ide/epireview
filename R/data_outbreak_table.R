@@ -11,6 +11,9 @@
 
 data_outbreak_table <- function(pathogen, prepend = "") {
 
+  # assertions
+  assert_pathogen(pathogen)
+
   # Get file pathway for outbreak data
   file_path_ob <- system.file(
     "extdata", paste0(pathogen, "_outbreak.csv"), package = "epireview")

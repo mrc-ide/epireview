@@ -1,3 +1,30 @@
+#' Data on the priority pathogens included in the systematic review
+#' @description
+#' This data set gives the list of WHO priority pathogens for which
+#' the Pathogen Epidemiology Review Group (PERG) has carried out a
+#' systematic review. The data set gives the name of the pathogen
+#' as used in the package and associated information with the review.
+#'
+#' @title priority_pathogens
+#'
+#' @return data.frame with the following fields
+#' - pathogen: name of the pathogen as used in the package
+#' - articles_screened: number of titles and abstracts screened for inclusion
+#' - articles_extracted: number of articles from which data were extracted
+#' - doi: doi of the accompanying systematic review
+#' @export
+priority_pathogens <- function() {
+
+  data.frame(
+    pathogen = c("marburg", "ebola"),
+    articles_screened = c(4460, 9563),
+    articles_extracted = c(42, 520),
+    doi = c("10.1101/2023.07.10.23292424v1", NA)
+  )
+}
+
+
+
 #' Data on the articles identified and included in the systematic review of
 #' articles related to Marburg virus disease.
 #'

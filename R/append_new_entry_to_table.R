@@ -27,6 +27,10 @@ append_new_entry_to_table <- function(pathogen = NA,
                                       write_table = FALSE,
                                       vignette_prepend = "") {
 
+  # assertions
+  assert_pathogen(pathogen)
+  assert_table(table_type)
+
   old_table <- load_epidata(table_type = table_type,
                             pathogen = pathogen,
                             vignette_prepend = vignette_prepend)

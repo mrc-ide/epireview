@@ -57,7 +57,10 @@ create_new_article_entry <-
                            list("qa_d7"                   = as.integer(NA))),
            vignette_prepend = "") {
 
-  #read current article data for pathogen
+  # assertions
+  assert_pathogen(pathogen)
+
+  # read current article data for pathogen
   old_articles <- as_tibble(load_epidata(table_type = "article",
                                          pathogen = pathogen,
                                          vignette_prepend = vignette_prepend))
@@ -97,7 +100,7 @@ create_new_article_entry <-
   if (is.character(new_row$doi) && new_row$doi %in% na.omit(old_articles$doi))
     stop("doi exists in data already!")
 
-  #validate that the entries make sense
+  # validate that the entries make sense
   rules <- validator(
     author_first_name_is_character = is.character(first_author_first_name),
     author_surname_is_character    = is.character(first_author_surname),
