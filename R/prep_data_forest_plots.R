@@ -1,88 +1,72 @@
-#' Process data for use in forest_plot_delay(), forest_plot_mutations(),
-#' forest_plot_r() and forest_plot_severity()
-#'
-#' @param pathogen name of pathogen e.g. "marburg"
-#' @param prepend string to allow loading data in vignettes
-#' @param exclude article IDs to exclude
-#' @return processed data to use as input for forest_plot_delay(),
-#' forest_plot_mutations(), forest_plot_r() and forest_plot_severity()
-#' @importFrom readr read_csv
-#' @importFrom stringr str_starts
-#' @importFrom dplyr select arrange filter mutate rowwise
-#' @examples
-#' data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
-#' @export
+##' Combine parameters and articles for use in forest plots
+##'
+##' @details
+##'
+##' This function will read in the pathogen-specific articles file and
+##' parameters files and join them into a data.frame. The resulting
+##' data set can be used to create a forest plot/
+##'
+##' @param pathogen name of pathogen. Must be one of the priority pathogens
+##' exactly as specified in the package. You can get a list of the
+##' priority pathogens currently included in the package by calling
+##' \code{priority_pathogens()}.
+##' @param prepend
+##' @param exclude
+##' @return data.frame with articles information (authors, publication year)
+##' combined with the parameters
+##' @importFrom readr read_csv
+##' @importFrom dplyr left_join
+##' @export
 
-prep_data_forest_plots <- function(pathogen, prepend = "", exclude = NA) {
+prep_data_forest_plot <- function(pathogen, prepend = "") {
+  assert_pathogen(pathogen)
+  pps <- priority_pathogens()
+
+  afname <- pps[pps$pathogen == pathogen, "articles_file"]
+  pfname <- pps[pps$pathogen == pathogen, "params_file"]
+  mfname <- pps[pps$pathogen == pathogen, "models_file"]
 
   # Get file pathway for parameter data
   file_path_pa <- system.file(
-    "extdata", paste0(pathogen, "_parameter.csv"), package = "epireview")
-  if (file_path_pa == "")
+    "extdata", pfname,
+    package = "epireview"
+  )
+  if (file_path_pa == "") {
     file_path_pa <- paste0(prepend, "inst/extdata/", pathogen, "_parameter.csv")
+  }
+
   params <- read_csv(file_path_pa, show_col_types = FALSE)
 
   # Get file pathway for article data
   file_path_ar <- system.file(
-    "extdata", paste0(pathogen, "_article.csv"), package = "epireview")
-  if (file_path_ar == "")
+    "extdata", afname,
+    package = "epireview"
+  )
+
+  if (file_path_ar == "") {
     file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
-  articles <- read_csv(file_path_ar, show_col_types = FALSE)
-
-  # Deal with R CMD Check "no visible binding for global variable"
-  parameter_class <- parameter_type <- article_id <- article_label <-
-    first_author_surname <- year_publication <- parameter_value <-
-    parameter_value_type <- parameter_lower_bound <- parameter_upper_bound <-
-    parameter_data_id <- parameter_uncertainty_lower_value <-
-    parameter_uncertainty_upper_value <- population_country <-
-    parameter_uncertainty_type <- cfr_ifr_method <- NULL
-
-  df <- left_join(params, articles %>%
-                    select(article_id, first_author_surname, year_publication),
-                  by = "article_id") %>%
-    mutate(article_label = as.character(
-      paste0(first_author_surname, "", year_publication)),
-      population_country = str_replace_all(population_country, ";", ",")) %>%
-    filter(article_id %in% exclude == FALSE) %>%
-    mutate(parameter_uncertainty_lower_value =
-             replace(parameter_uncertainty_lower_value,
-                     (parameter_uncertainty_type == "Range" &
-                        !is.na(parameter_lower_bound) &
-                        parameter_class == "Human delay"), NA),
-           parameter_uncertainty_upper_value =
-             replace(parameter_uncertainty_upper_value,
-                     (parameter_uncertainty_type == "Range" &
-                        !is.na(parameter_upper_bound) &
-                        parameter_class == "Human delay"), NA)) %>%
-    mutate(parameter_value = as.numeric(parameter_value))
-
-  # pathogen specific edits
-  if (pathogen == "marburg") {
-    df <- df %>%
-      rowwise() %>%
-      mutate(parameter_uncertainty_lower_value =
-               replace(parameter_uncertainty_lower_value,
-                       parameter_data_id == 43,
-                       parameter_uncertainty_lower_value * 1e-4),
-             parameter_uncertainty_upper_value =
-               replace(parameter_uncertainty_upper_value,
-                       parameter_data_id == 43,
-                       parameter_uncertainty_upper_value * 1e-4)) %>%
-      mutate(parameter_value =
-               replace(parameter_value, parameter_data_id == 34, 0.93),
-             cfr_ifr_method =
-               replace(cfr_ifr_method, str_starts(parameter_type, "Severity") &
-                         is.na(cfr_ifr_method), "Unknown")) %>%
-      mutate(parameter_value_type =
-               ifelse(parameter_data_id == 16, "Other", parameter_value_type),
-             parameter_value_type =
-               ordered(parameter_value_type, levels = c("Mean",
-                                                        "Median",
-                                                        "Standard Deviation",
-                                                        "Other",
-                                                        "Unspecified")))
   }
 
-  return(df)
+  articles <- read_csv(file_path_ar, show_col_types = FALSE)
+
+  ## Make pretty labels for articles
+  articles$article_label <- paste0(
+    articles$first_author_surname, " ", articles$year_publication
+  )
+
+  cols <- c(
+    "article_id", "first_author_surname", "year_publication", "article_label"
+  )
+
+  articles <- articles[, cols]
+
+  df <- left_join(params, articles, by = "article_id")
+
+  ## Marburg parameters have entries like "Germany;Yugoslavia"
+  ## For future pathogens, this should be cleaned up before data are
+  ## checked into epireview
+  df$parameter_value <- as.numeric(df$parameter_value)
+
+  df
 
 }
