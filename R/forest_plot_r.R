@@ -31,13 +31,6 @@ forest_plot_r <- function(df) {
     mutate(median = median(parameter_value, na.rm = TRUE)) %>%
     group_by(parameter_type) %>%
     arrange(first_author_surname) %>%
-    mutate(parameter_type_short =
-             ifelse(parameter_type ==
-                      "Reproduction number (Basic R0)",
-                    "Basic (R0)",
-                    ifelse(parameter_type ==
-                             "Reproduction number (Effective, Re)",
-                           "Effective (Re)", NA)))
 
   plot <- ggplot(df_plot, aes(x = parameter_value,
                               y = article_label_unique,

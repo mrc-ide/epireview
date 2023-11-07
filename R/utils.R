@@ -25,3 +25,26 @@ theme_epireview <- function(
 
   th
 }
+
+##' Define a consistent color palette for use in
+##' figures
+##'
+##'
+##' @param x a list of parameters
+##' @return a named list of colors that can be used
+##' in forest plots for manually setting colors
+##' with for example
+##' \code{\link{ggplot2:scale_color_manual}{scale_color_manual}}
+##' @author Sangeeta Bhatia
+parameter_palette <- function(x) {
+  out <- list(
+    ## Variations of R0
+    "Basic (R0)" = "#D95F02",
+    "Reproduction number (Basic R0)"= "#D95F02",
+    ## Variations of Re
+    "Effective (Re)" = "#7570B3",
+    "Reproduction number (Effective, Re)" = "#7570B3"
+  )
+
+  out[x]
+}
