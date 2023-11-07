@@ -27,17 +27,12 @@ forest_plot_delay <- function(df) {
 
   df_plot <- df %>%
     filter(parameter_class == parameter) %>%
-    mutate(parameter_type_short =
-             gsub("^Human delay - ", "", parameter_type)) %>%
-    mutate(
-      parameter_type_short = ifelse(
-        parameter_type_short == "time symptom to outcome" &
-          riskfactor_outcome == "Death", "Time symptom to outcome (Death)",
-        ifelse(
-          parameter_type_short == "time symptom to outcome" &
-            riskfactor_outcome == "Other", "Time symptom to outcome (Other)",
-          parameter_type_short))) %>%
-    mutate(parameter_type_short = str_to_sentence(parameter_type_short)) %>%
+
+
+
+
+
+
     mutate(median = median(parameter_value, na.rm = TRUE)) %>%
     group_by(parameter_type_short) %>%
     arrange(first_author_surname) %>%

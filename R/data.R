@@ -19,7 +19,19 @@ priority_pathogens <- function() {
     pathogen = c("marburg", "ebola"),
     articles_screened = c(4460, 9563),
     articles_extracted = c(42, 520),
-    doi = c("10.1101/2023.07.10.23292424v1", NA)
+    doi = c("10.1101/2023.07.10.23292424v1", NA),
+    articles_file = c(
+      "marburg_article.csv",
+      "ebola_article.csv"
+    ),
+    params_file = c(
+      "marburg_parameter.csv",
+      "ebola_parameter.csv"
+    ),
+    models_file = c(
+      "marburg_model.csv",
+      "ebola_model.csv"
+    )
   )
 }
 
