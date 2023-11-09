@@ -5,7 +5,11 @@
 <!-- badges: start -->
 [![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
 [![DOI](https://zenodo.org/badge/655602716.svg)](https://zenodo.org/badge/latestdoi/655602716)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
+
+** Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
+The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with us (email s.bhatia@imperial.ac.uk). **
 
 epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
