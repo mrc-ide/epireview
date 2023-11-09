@@ -21,6 +21,7 @@ This is a private fork of epireview. To contribute
 <!-- badges: start -->
 [![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
 [![DOI](https://zenodo.org/badge/655602716.svg)](https://zenodo.org/badge/latestdoi/655602716)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 **
