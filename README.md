@@ -23,7 +23,8 @@ This is a private fork of epireview. To contribute
 [![DOI](https://zenodo.org/badge/655602716.svg)](https://zenodo.org/badge/latestdoi/655602716)
 <!-- badges: end -->
 
-**Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
+**
+Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
 The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with us (email s.bhatia@imperial.ac.uk).
 **
 
