@@ -59,6 +59,7 @@ parameter_palette <- function(x) {
 ##'
 ##' @author Sangeeta Bhatia
 value_type_palette <- function(x) {
+
   out <- list(
     Mean = 16,
     mean = 16,
