@@ -20,6 +20,27 @@ short_parameter_type <- function(x) {
   x
 }
 
+#' Filter columns of a data frame based on specified conditions.
+#'
+#' This function filters the rows of a data frame based on specified conditions for
+#' selected columns.
+#'
+#' @param x A data frame.
+#' @param cols A character vector specifying the columns to be filtered.
+#' @param funs A character vector specifying the filter functions for each column.
+#'   Each function must be in "%in", "==", ">", "<".
+#' @param vals A list of values to be used for filtering columns in \code{cols}.
+#'
+#' @return A data frame with rows filtered based on the specified conditions.
+#'
+#' @examples
+#'
+#'
+#'
+#'
+#'
+#'
+#' @export
 filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
   if (legnth(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
@@ -37,7 +58,8 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
   ## Make sure character and factor columns take in %in% or ==
   ## and numeric columns take in ==, > or <
   char_cols <- sapply(
-    cols, function(col) is.character(x[[col]]) | is.factor(x[[col]])
+    cols,
+    function(col) is.character(x[[col]]) | is.factor(x[[col]])
   )
 
   char_funs <- sapply(
