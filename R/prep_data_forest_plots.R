@@ -34,14 +34,14 @@ short_parameter_type <- function(x) {
 #' @return A data frame with rows filtered based on the specified conditions.
 #'
 #' @examples
-#'
-#'
-#'
-#'
+#' x <- fetch_data('marburg')
+#' p <- x$params
+#' filter_cols(p, "parameter_type", "==", "Attack rate")
+#' filter_cols(p, "parameter_type", "%in%", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
 #'
 #'
 #' @export
-filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
+filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
   if (length(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
           Please specify one function for each column in cols")
@@ -68,7 +68,7 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
 
   not_match <- any(char_cols) & !any(char_funs)
 
-  if (no_match) {
+  if (not_match) {
     msg <- "Non-character filter functions supplied to character columns. Offending columns are"
     stop(paste(msg, toString(cols[!match])))
   }
@@ -96,9 +96,9 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
     this_col <- cols[[idx]]
     this_val <- vals[[idx]]
     this_fun <- funs[[idx]]
-    switch(
+    filter <- switch(
       this_fun,
-      "%in" = filter & (x[[this_col]] %in% this_val),
+      "%in%" = filter & (x[[this_col]] %in% this_val),
       ">" = filter & (x[[this_col]] > this_val),
       "<" = filter & (x[[this_col]] < this_val),
       "==" = filter & (x[[this_col]] == this_val),
