@@ -8,24 +8,19 @@
 ##' @return
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x) {
-
   x$parameter_type_short <- case_when(
     x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
     x$parameter_type == "Reproduction number (Effective, Re)" ~ "Effective (Re)",
-
     x$parameter_type == "Human delay - time symptom to outcome" &
       x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
-
     x$parameter_type == "Human delay - time symptom to outcome" &
       x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
   )
 
   x
-
 }
 
 filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
-
   if (legnth(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
           Please specify one function for each column in cols")
@@ -39,6 +34,8 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
 
   match.arg(funs, nomatch = "funs must be one of %in%, ==, > or <")
 
+  ## Make sure character and factor columns take in %in% or ==
+  ## and numeric columns take in ==, > or <
   char_cols <- sapply(
     cols, function(col) is.character(x[[col]]) | is.factor(x[[col]])
   )
@@ -49,15 +46,26 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
 
   match <- char_cols & char_funs
 
-  if (! all(match)) {
-    stop(
-      "Non-character filter functions supplied to character columns.
-     Offending columns are ")
+  if (!all(match)) {
+    msg <- "Non-character filter functions supplied to character columns. Offending columns are"
+    stop(paste(msg, toString(cols[!match])))
   }
 
-  ## Make sure character and factor columns take in %in% or ==
-  ## and numeric columns take in ==, > or <
 
+  num_cols <- sapply(
+    cols, function(col) is.numeric(x[[col]])
+  )
+
+  num_funs <- sapply(
+    funs, function(fun) fun %in% c("==", ">", "<")
+  )
+
+  match <- num_cols & num_funs
+
+  if (!all(match)) {
+    msg <- "Non-numeric filter functions supplied to numeric columns. Offending columns are"
+    stop(paste(msg, toString(cols[!match])))
+  }
 
 
   filter <- rep(TRUE, nrow(x))
@@ -65,20 +73,22 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
   for (idx in seq_along(cols)) {
     this_col <- cols[[idx]]
     this_val <- vals[[idx]]
-    if (funs[[idx]] == "%in%") {
-      filter <- filter & (x[[this_col]] %in% this_val)
-    } else if (funs[[idx]] == "==") {
-      filter <- filter & (x[[this_col]] == this_val)
-    } else if (funs[[idx]] == ">") {
-      filter <- filter & (x[[this_col]] > this_val)
-    }
+    this_fun <- funs[[idx]]
+    switch(
+      this_fun,
+      "%in" = filter & (x[[this_col]] %in% this_val),
+      ">" = filter & (x[[this_col]] > this_val),
+      "<" = filter & (x[[this_col]] < this_val),
+      "==" = filter & (x[[this_col]] == this_val),
+      )
   }
+
   x[filter, ]
 }
 
 
 prepare_params_forest_plot <- function(df, options) {
- df
+  df
 }
 
 ##' Retrieve pathogen-specific data
@@ -158,6 +168,4 @@ fetch_data <- function(pathogen, prepend = "") {
 
 
   list(params = df1, models = df2)
-
 }
-
