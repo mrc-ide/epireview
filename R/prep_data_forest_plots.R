@@ -7,7 +7,7 @@
 ##' @param x data.frame containing a column called "parameter_type"
 ##' @return
 ##' @author Sangeeta Bhatia
-short_parameter_type <- functon(x) {
+short_parameter_type <- function(x) {
 
   x$parameter_type_short <- case_when(
     x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
@@ -17,14 +17,16 @@ short_parameter_type <- functon(x) {
       x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
 
     x$parameter_type == "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)",
-
+      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
   )
 
   x
 
 }
 
+prepare_params_forest_plot <- function(df, options) {
+ df
+}
 
 ##' Retrieve pathogen-specific data
 ##'
@@ -92,7 +94,8 @@ fetch_data <- function(pathogen, prepend = "") {
 
   ## Get file path for models
   mfname <- pps[pps$pathogen == pathogen, "models_file"]
-  models <- read_csv(mfname, show_col_types = FALSE)
+  file_path_m <- system.file("extdata", mfname, package = "epireview")
+  models <- read_csv(file_path_m, show_col_types = FALSE)
 
 
   df1 <- left_join(params, articles, by = "article_id")
@@ -104,3 +107,4 @@ fetch_data <- function(pathogen, prepend = "") {
   list(params = df1, models = df2)
 
 }
+

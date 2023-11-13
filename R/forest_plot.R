@@ -21,7 +21,7 @@ forest_plot <- function(df) {
     ) + scale_y_discrete(
       breaks = df$y,
       labels = df$label
-    )
+    ) + theme_epireview()
 
   p
 

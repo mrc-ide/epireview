@@ -8,7 +8,7 @@ forest_plot_delay(df)
 }
 \arguments{
 \item{df}{processed data with human delay information produced using
-data_forest_plots()}
+prep_data_forest_plots()}
 }
 \value{
 returns plot with a summary of the human delays
