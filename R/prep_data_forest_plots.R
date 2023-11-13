@@ -42,18 +42,18 @@ short_parameter_type <- function(x) {
 #'
 #' @export
 filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
-  if (legnth(cols) != length(funs)) {
+  if (length(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
           Please specify one function for each column in cols")
   }
 
-  if (legnth(funs) != length(vals)) {
+  if (length(funs) != length(vals)) {
     stop("Length of arguments funs is different from that of vals.
           Please specify values to be used for filtering columns in
          cols")
   }
 
-  match.arg(funs, nomatch = "funs must be one of %in%, ==, > or <")
+  match.arg(funs)
 
   ## Make sure character and factor columns take in %in% or ==
   ## and numeric columns take in ==, > or <
@@ -66,9 +66,9 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
     funs, function(fun) fun %in% c("==", "%in%")
   )
 
-  match <- char_cols & char_funs
+  not_match <- any(char_cols) & !any(char_funs)
 
-  if (!all(match)) {
+  if (no_match) {
     msg <- "Non-character filter functions supplied to character columns. Offending columns are"
     stop(paste(msg, toString(cols[!match])))
   }
@@ -82,9 +82,9 @@ filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
     funs, function(fun) fun %in% c("==", ">", "<")
   )
 
-  match <- num_cols & num_funs
+  not_match <- any(num_cols) & !any(num_funs)
 
-  if (!all(match)) {
+  if (not_match) {
     msg <- "Non-numeric filter functions supplied to numeric columns. Offending columns are"
     stop(paste(msg, toString(cols[!match])))
   }
