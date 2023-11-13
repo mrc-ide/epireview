@@ -28,7 +28,7 @@ short_parameter_type <- function(x) {
 #' @param x A data frame.
 #' @param cols A character vector specifying the columns to be filtered.
 #' @param funs A character vector specifying the filter functions for each column.
-#'   Each function must be in "%in", "==", ">", "<".
+#'   Each function must be one of "%in", "==", ">", "<" in quotes.
 #' @param vals A list of values to be used for filtering columns in \code{cols}.
 #'
 #' @return A data frame with rows filtered based on the specified conditions.
@@ -42,6 +42,7 @@ short_parameter_type <- function(x) {
 #'
 #' @export
 filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
+
   if (length(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
           Please specify one function for each column in cols")
@@ -55,39 +56,28 @@ filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
 
   match.arg(funs)
 
+  if (any(! cols %in% colnames(x))) {
+    msg <- "cols must be present in x as a column. Offending cols are "
+    stop(paste(msg, toString(cols[! cols %in% colnames(x)])))
+  }
+
   ## Make sure character and factor columns take in %in% or ==
-  ## and numeric columns take in ==, > or <
   char_cols <- sapply(
     cols,
     function(col) is.character(x[[col]]) | is.factor(x[[col]])
   )
 
-  char_funs <- sapply(
-    funs, function(fun) fun %in% c("==", "%in%")
+  nonchar_funs <- sapply(
+    funs, function(fun) fun %in% c(">", "<")
   )
 
-  not_match <- any(char_cols) & !any(char_funs)
+  any_match <- any(char_cols & nonchar_funs)
 
-  if (not_match) {
+  if (any_match) {
     msg <- "Non-character filter functions supplied to character columns. Offending columns are"
-    stop(paste(msg, toString(cols[!match])))
+    stop(paste(msg, toString(cols[any_match])))
   }
 
-
-  num_cols <- sapply(
-    cols, function(col) is.numeric(x[[col]])
-  )
-
-  num_funs <- sapply(
-    funs, function(fun) fun %in% c("==", ">", "<")
-  )
-
-  not_match <- any(num_cols) & !any(num_funs)
-
-  if (not_match) {
-    msg <- "Non-numeric filter functions supplied to numeric columns. Offending columns are"
-    stop(paste(msg, toString(cols[!match])))
-  }
 
 
   filter <- rep(TRUE, nrow(x))
