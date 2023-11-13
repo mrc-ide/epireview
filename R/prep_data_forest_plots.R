@@ -24,6 +24,59 @@ short_parameter_type <- function(x) {
 
 }
 
+filter_cols <- function(x, cols, funs = c("%in", "==", ">", "<"), vals) {
+
+  if (legnth(cols) != length(funs)) {
+    stop("Length of arguments cols is different from that of funs.
+          Please specify one function for each column in cols")
+  }
+
+  if (legnth(funs) != length(vals)) {
+    stop("Length of arguments funs is different from that of vals.
+          Please specify values to be used for filtering columns in
+         cols")
+  }
+
+  match.arg(funs, nomatch = "funs must be one of %in%, ==, > or <")
+
+  char_cols <- sapply(
+    cols, function(col) is.character(x[[col]]) | is.factor(x[[col]])
+  )
+
+  char_funs <- sapply(
+    funs, function(fun) fun %in% c("==", "%in%")
+  )
+
+  match <- char_cols & char_funs
+
+  if (! all(match)) {
+    stop(
+      "Non-character filter functions supplied to character columns.
+     Offending columns are ")
+  }
+
+  ## Make sure character and factor columns take in %in% or ==
+  ## and numeric columns take in ==, > or <
+
+
+
+  filter <- rep(TRUE, nrow(x))
+
+  for (idx in seq_along(cols)) {
+    this_col <- cols[[idx]]
+    this_val <- vals[[idx]]
+    if (funs[[idx]] == "%in%") {
+      filter <- filter & (x[[this_col]] %in% this_val)
+    } else if (funs[[idx]] == "==") {
+      filter <- filter & (x[[this_col]] == this_val)
+    } else if (funs[[idx]] == ">") {
+      filter <- filter & (x[[this_col]] > this_val)
+    }
+  }
+  x[filter, ]
+}
+
+
 prepare_params_forest_plot <- function(df, options) {
  df
 }
