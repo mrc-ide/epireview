@@ -1,13 +1,15 @@
 ##' Short labels parameters for use in figures
 ##'
 ##' This function assigns short labels to otherwise very long parameter
-##' names. It is not intended to be called directly but is used by
+##' names. It is generally not intended to be called directly but is used by
 ##' \code{\link{prep_data_forest_plot}}
 ##'
 ##' @param x data.frame containing a column called "parameter_type"
+##' @param parameter_type_full optional. User can specify the full value of a parameter type not already included in the function.
+##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return
 ##' @author Sangeeta Bhatia
-short_parameter_type <- function(x) {
+short_parameter_type <- function(x, parameter_type_full = NULL, parameter_type_short = NULL) {
   x$parameter_type_short <- case_when(
     x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
     x$parameter_type == "Reproduction number (Effective, Re)" ~ "Effective (Re)",
@@ -16,6 +18,15 @@ short_parameter_type <- function(x) {
     x$parameter_type == "Human delay - time symptom to outcome" &
       x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
   )
+
+  if (! is.null(parameter_type_full)) {
+    if (! is.null(parameter_type_full)) {
+      x$parameter_type_short <- case_when(
+        x$parameter_type == parameter_type_full ~ parameter_type_short
+    } else {
+      stop("You have specified the full value of a parameter_type but not parameter_type_short.")
+    }
+  }
 
   x
 }
@@ -28,7 +39,7 @@ short_parameter_type <- function(x) {
 #' @param x A data frame.
 #' @param cols A character vector specifying the columns to be filtered.
 #' @param funs A character vector specifying the filter functions for each column.
-#'   Each function must be one of "%in", "==", ">", "<" in quotes.
+#'   Each function must be one of "in", "==", ">", "<" in quotes.
 #' @param vals A list of values to be used for filtering columns in \code{cols}.
 #'
 #' @return A data frame with rows filtered based on the specified conditions.
@@ -37,11 +48,11 @@ short_parameter_type <- function(x) {
 #' x <- fetch_data('marburg')
 #' p <- x$params
 #' filter_cols(p, "parameter_type", "==", "Attack rate")
-#' filter_cols(p, "parameter_type", "%in%", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
+#' filter_cols(p, "parameter_type", "in", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
 #'
 #'
 #' @export
-filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
+filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 
   if (length(cols) != length(funs)) {
     stop("Length of arguments cols is different from that of funs.
@@ -78,8 +89,6 @@ filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
     stop(paste(msg, toString(cols[any_match])))
   }
 
-
-
   filter <- rep(TRUE, nrow(x))
 
   for (idx in seq_along(cols)) {
@@ -88,7 +97,7 @@ filter_cols <- function(x, cols, funs = c("%in%", "==", ">", "<"), vals) {
     this_fun <- funs[[idx]]
     filter <- switch(
       this_fun,
-      "%in%" = filter & (x[[this_col]] %in% this_val),
+      "in" = filter & (x[[this_col]] %in% this_val),
       ">" = filter & (x[[this_col]] > this_val),
       "<" = filter & (x[[this_col]] < this_val),
       "==" = filter & (x[[this_col]] == this_val),
