@@ -18,7 +18,7 @@ test_that("filter_cols works as expected", {
   x <- fetch_data('marburg')
   p <- x$params
   ## Test column of each type: numeric, factor, and character
-  out <- filter_cols(p, "parameter_value", "%in%", list(pval = c(20, 21)))
+  out <- filter_cols(p, "parameter_value", "in", list(pval = c(20, 21)))
   expect_in(unique(out$parameter_value), c(20, 21))
 
   out <- filter_cols(p, "parameter_value", ">", 20)
@@ -26,7 +26,7 @@ test_that("filter_cols works as expected", {
   expect_true(vals)
 
   out <- filter_cols(
-    p, "population_country", "%in%", list(pc = c("South Africa", "Germany"))
+    p, "population_country", "in", list(pc = c("South Africa", "Germany"))
   )
   vals <- unique(out$population_country)
   expect_in(vals, c("South Africa", "Germany"))
