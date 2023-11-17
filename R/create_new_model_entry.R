@@ -13,7 +13,7 @@
 #' @examples
 #' create_new_model_entry(
 #'   pathogen = 'marburg',
-#'   new_model = c(list("article_id"           = as.integer(1)),
+#'   new_model = c(list("article_id"           = as.numeric(1)),
 #'                 list("model_type"           = as.character("Compartmental")),
 #'                 list("compartmental_type"   = as.character("SEIR, SIR")),
 #'                 list("stoch_deter"          = as.character("Deterministic")),
@@ -22,13 +22,13 @@
 #'                 list("code_available"       = as.logical(TRUE)),
 #'                 list("transmission_route"   = as.character("Sexual")),
 #'                 list("assumptions"          = as.character("Unspecified")),
-#'                 list("covidence_id"         = as.integer(2059))),
+#'                 list("covidence_id"         = as.numeric(2059))),
 #'   vignette_prepend = "")
 #'
 #' @export
 create_new_model_entry <-
   function(pathogen = NA,
-           new_model = c(list("article_id"          = as.integer(NA)),
+           new_model = c(list("article_id"          = as.numeric(NA)),
                          list("model_type"          = as.character(NA)),
                          list("compartmental_type"  = as.character(NA)),
                          list("stoch_deter"         = as.character(NA)),
@@ -37,13 +37,10 @@ create_new_model_entry <-
                          list("code_available"      = as.logical(NA)),
                          list("transmission_route"  = as.character(NA)),
                          list("assumptions"         = as.character(NA)),
-                         list("covidence_id"        = as.integer(NA))),
+                         list("covidence_id"        = as.numeric(NA))),
            vignette_prepend = "") {
 
-  # assertions
-  assert_pathogen(pathogen)
-
-  # read current article data for pathogen
+  #read current article data for pathogen
   articles <- as_tibble(load_epidata(table_type = "article",
                                      pathogen = pathogen,
                                      vignette_prepend = vignette_prepend))
