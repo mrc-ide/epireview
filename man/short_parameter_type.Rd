@@ -4,14 +4,22 @@
 \alias{short_parameter_type}
 \title{Short labels parameters for use in figures}
 \usage{
-short_parameter_type(x)
+short_parameter_type(
+  x,
+  parameter_type_full = NULL,
+  parameter_type_short = NULL
+)
 }
 \arguments{
 \item{x}{data.frame containing a column called "parameter_type"}
+
+\item{parameter_type_full}{optional. User can specify the full value of a parameter type not already included in the function.}
+
+\item{parameter_type_short}{optional. Shorter value of parameter_type_full}
 }
 \description{
 This function assigns short labels to otherwise very long parameter
-names. It is not intended to be called directly but is used by
+names. It is generally not intended to be called directly but is used by
 \code{\link{prep_data_forest_plot}}
 }
 \author{

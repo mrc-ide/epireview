@@ -20,12 +20,11 @@ short_parameter_type <- function(x, parameter_type_full = NULL, parameter_type_s
   )
 
   if (! is.null(parameter_type_full)) {
-    if (! is.null(parameter_type_full)) {
-      x$parameter_type_short <- case_when(
-        x$parameter_type == parameter_type_full ~ parameter_type_short
-    } else {
-      stop("You have specified the full value of a parameter_type but not parameter_type_short.")
-    }
+    x$parameter_type_short <- case_when(
+      x$parameter_type == parameter_type_full ~ parameter_type_short
+    )
+  } else {
+    stop("You have specified the full value of a parameter_type but not parameter_type_short.")
   }
 
   x
@@ -184,7 +183,6 @@ load_epidata <- function(pathogen, prepend = "") {
   ## checked into epireview
   params <- short_parameter_type(params)
   params$parameter_value <- as.numeric(df1$parameter_value)
-
 
 
   params <- left_join(params, articles, by = "article_id")

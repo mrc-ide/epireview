@@ -4,7 +4,7 @@
 \alias{filter_cols}
 \title{Filter columns of a data frame based on specified conditions.}
 \usage{
-filter_cols(x, cols, funs = c("\%in\%", "==", ">", "<"), vals)
+filter_cols(x, cols, funs = c("in", "==", ">", "<"), vals)
 }
 \arguments{
 \item{x}{A data frame.}
@@ -12,7 +12,7 @@ filter_cols(x, cols, funs = c("\%in\%", "==", ">", "<"), vals)
 \item{cols}{A character vector specifying the columns to be filtered.}
 
 \item{funs}{A character vector specifying the filter functions for each column.
-Each function must be in "\%in", "==", ">", "<".}
+Each function must be one of "in", "==", ">", "<" in quotes.}
 
 \item{vals}{A list of values to be used for filtering columns in \code{cols}.}
 }
@@ -27,7 +27,7 @@ selected columns.
 x <- fetch_data('marburg')
 p <- x$params
 filter_cols(p, "parameter_type", "==", "Attack rate")
-filter_cols(p, "parameter_type", "\%in\%", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
+filter_cols(p, "parameter_type", "in", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
 
 
 }
