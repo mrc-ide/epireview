@@ -1,30 +1,56 @@
-#' Load data for a particular pathogen
+#' Loads raw data for a particular pathogen
 #'
-#' @param table_type which type of table (either "article", "parameter",
-#' "outbreak", or "model") should be loaded
-#' @param pathogen name of pathogen
+#' @details
+#' This function will return the raw data as a data.frame. The
+#' csv files of the models, outbreaks, and parameters for a pathogen
+#' do not contain information on the source but only an "article_id"
+#' that can be used to merge them with the articles. If you wish to
+#' retrieve linked information or multiple tables at the same time,
+#' use \code{load_epidata} instead.
+#'
+#'
+#' @inheritParams load_epidata
+#'
+#' @param table the table to be loaded. Must be one of
+#' "article", "parameter", "outbreak", or "model"
+#'
+#'
 #' @param vignette_prepend string to allow loading data in vignettes
-#' @return return data for specified table_type and pathogen
+#' @return data.frame reading in the csv the specified pathogen table
 #' @importFrom readr read_csv
+#' @seealso
+#' [load_epidata()] for a more user-friendly interface
 #' @examples
-#' load_epidata(table_type = "outbreak", pathogen = "marburg")
+#' load_epidata(pathogen = "marburg", table = "outbreak", )
 #' @export
-load_epidata <- function(table_type = NA,
-                         pathogen = NA,
-                         vignette_prepend = "") {
+load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
 
-  if (is.na(table_type) || is.na(pathogen)) {
-    stop("table_type and pathogen name must be supplied. table_type can be
+  if ( missing(pathogen) | missing(table)) {
+    stop("Table_type and pathogen name must be supplied. Table_type can be
          one of either 'article', 'parameter', 'outbreak' or 'model'")
   }
 
-  file_path <- system.file(
-    "extdata", paste0(pathogen, "_", table_type, ".csv"), package = "epireview")
+  assert_pathogen(pathogen)
 
-  if (file_path == "")
-    file_path <- paste0(
-      vignette_prepend, "inst/extdata/", pathogen, "_", table_type, ".csv")
+  pps <- priority_pathogens()
 
-  data_tbl <- read_csv(file_path)
-  return(data_tbl)
+  file_path <- switch(
+    table,
+    article =  pps[pps$pathogen == pathogen, "articles_file"],
+    parameter = pps[pps$pathogen == pathogen, "params_file"],
+    outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
+    model = pps[pps$pathogen == pathogen, "models_file"],
+  )
+  # Get file path for article data
+
+  file_path_ar <- system.file("extdata", afname, package = "epireview")
+
+  if (file_path_ar == "") {
+    file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
+  }
+
+  out <- read_csv(file_path)
+
+  out
+
 }
