@@ -31,6 +31,10 @@ priority_pathogens <- function() {
     models_file = c(
       "marburg_model.csv",
       "ebola_model.csv"
+    ),
+    outbreaks_file = c(
+      "marburg_outbreak.csv",
+      NA
     )
   )
 }

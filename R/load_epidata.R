@@ -45,7 +45,7 @@ load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
 
   file_path <- system.file("extdata", fname, package = "epireview")
 
-  out <- read_csv(file_path)
+  out <- ifelse(is.na(fname), NA, read_csv(file_path))
 
   out
 

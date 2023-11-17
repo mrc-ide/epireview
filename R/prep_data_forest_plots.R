@@ -142,6 +142,30 @@ load_epidata <- function(pathogen, prepend = "") {
   assert_pathogen(pathogen)
 
   articles <- load_epidata_raw(pathogen, "article")
+  models <- load_epidata_raw(pathogen, "model")
+  outbreaks <- load_epidata_raw(pathogen, "outbreak")
+  params <- load_epidata_raw(pathogen, "parameter")
+
+  if (is.na(articles)) {
+    stop(paste("No article information found for ", pathogen))
+  }
+
+  if (is.na(models)) {
+    warning(paste("No models information found for ", pathogen))
+    models <- data.frame(article_id = NA)
+  }
+
+  if (is.na(outbreaks)) {
+    warning(paste("No outbreaks information found for ", pathogen))
+    outbreaks <- data.frame(article_id = NA)
+  }
+
+  if (is.na(params)) {
+    warning(paste("No params information found for ", pathogen))
+    params <- data.frame(article_id = NA)
+  }
+
+
 
   ## Make pretty labels for articles
   articles$article_label <- paste0(
@@ -154,19 +178,19 @@ load_epidata <- function(pathogen, prepend = "") {
 
   articles <- articles[, cols]
 
-  params <- load_epidata_raw(pathogen, "parameter")
+
   ## Marburg parameters have entries like "Germany;Yugoslavia"
   ## For future pathogens, this should be cleaned up before data are
   ## checked into epireview
   params <- short_parameter_type(params)
+  params$parameter_value <- as.numeric(df1$parameter_value)
 
-  ## Get file path for models
-  models <- load_epidata_raw(pathogen, "model")
 
-  df1 <- left_join(params, articles, by = "article_id")
-  df1$parameter_value <- as.numeric(df1$parameter_value)
 
-  df2 <- left_join(models, articles, by = "article_id")
+  params <- left_join(params, articles, by = "article_id")
+  models <- left_join(models, articles, by = "article_id")
+  outbreaks <- left_join(outbreaks, articles, by = "article_id")
 
-  list(params = df1, models = df2)
+
+  list(params = params, models = models, outbreaks = outbreaks)
 }
