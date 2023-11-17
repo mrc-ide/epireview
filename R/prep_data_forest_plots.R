@@ -141,7 +141,7 @@ load_epidata <- function(pathogen, prepend = "") {
 
   assert_pathogen(pathogen)
 
-  articles <- read_csv(file_path_ar, show_col_types = FALSE)
+  articles <- load_epidata_raw(pathogen, "article")
 
   ## Make pretty labels for articles
   articles$article_label <- paste0(
@@ -154,30 +154,19 @@ load_epidata <- function(pathogen, prepend = "") {
 
   articles <- articles[, cols]
 
-
-
-  file_path_pa <- system.file("extdata", pfname, package = "epireview")
-  if (file_path_pa == "") {
-    file_path_pa <- paste0(prepend, "inst/extdata/", pathogen, "_parameter.csv")
-  }
-
-  params <- read_csv(file_path_pa, show_col_types = FALSE)
+  params <- load_epidata_raw(pathogen, "parameter")
   ## Marburg parameters have entries like "Germany;Yugoslavia"
   ## For future pathogens, this should be cleaned up before data are
   ## checked into epireview
   params <- short_parameter_type(params)
 
   ## Get file path for models
-  mfname <- pps[pps$pathogen == pathogen, "models_file"]
-  file_path_m <- system.file("extdata", mfname, package = "epireview")
-  models <- read_csv(file_path_m, show_col_types = FALSE)
-
+  models <- load_epidata_raw(pathogen, "model")
 
   df1 <- left_join(params, articles, by = "article_id")
   df1$parameter_value <- as.numeric(df1$parameter_value)
 
   df2 <- left_join(models, articles, by = "article_id")
-
 
   list(params = df1, models = df2)
 }

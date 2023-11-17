@@ -34,7 +34,7 @@ load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
 
   pps <- priority_pathogens()
 
-  file_path <- switch(
+  fname <- switch(
     table,
     article =  pps[pps$pathogen == pathogen, "articles_file"],
     parameter = pps[pps$pathogen == pathogen, "params_file"],
@@ -43,11 +43,7 @@ load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
   )
   # Get file path for article data
 
-  file_path_ar <- system.file("extdata", afname, package = "epireview")
-
-  if (file_path_ar == "") {
-    file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
-  }
+  file_path <- system.file("extdata", fname, package = "epireview")
 
   out <- read_csv(file_path)
 
