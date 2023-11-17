@@ -137,18 +137,9 @@ prepare_params_forest_plot <- function(df, options) {
 ##' @importFrom dplyr left_join
 ##' @export
 
-fetch_data <- function(pathogen, prepend = "") {
+load_epidata <- function(pathogen, prepend = "") {
+
   assert_pathogen(pathogen)
-  pps <- priority_pathogens()
-
-
-  # Get file path for article data
-  afname <- pps[pps$pathogen == pathogen, "articles_file"]
-  file_path_ar <- system.file("extdata", afname, package = "epireview")
-
-  if (file_path_ar == "") {
-    file_path_ar <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
-  }
 
   articles <- read_csv(file_path_ar, show_col_types = FALSE)
 
@@ -163,8 +154,8 @@ fetch_data <- function(pathogen, prepend = "") {
 
   articles <- articles[, cols]
 
-  # Get file path for parameter data
-  pfname <- pps[pps$pathogen == pathogen, "params_file"]
+
+
   file_path_pa <- system.file("extdata", pfname, package = "epireview")
   if (file_path_pa == "") {
     file_path_pa <- paste0(prepend, "inst/extdata/", pathogen, "_parameter.csv")
