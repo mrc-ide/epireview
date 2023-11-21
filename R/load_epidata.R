@@ -27,12 +27,12 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   "outbreak", "model"), vignette_prepend = "") {
 
   if ( missing(pathogen) | missing(table)) {
-    stop("Table_type and pathogen name must be supplied. Table_type can be
-         one of either 'article', 'parameter', 'outbreak' or 'model'")
+    stop("pathogen and table name must be supplied. table can be
+         one of 'article', 'parameter', 'outbreak' or 'model'")
   }
 
   assert_pathogen(pathogen)
-  match.arg(table)
+  assert_table(table)
 
   pps <- priority_pathogens()
 
