@@ -28,6 +28,9 @@ get_table_field_options <- function(pathogen, table = c("model", "parameter", "o
                                        
   match.arg(table)
   
+  # assertions
+  assert_pathogen(pathogen)
+
   file_path_ob <- system.file(
     "extdata", paste0(pathogen, "_dropdown_", table, "s.csv"),
     package = "epireview")

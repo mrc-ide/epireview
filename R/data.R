@@ -36,6 +36,7 @@ priority_pathogens <- function() {
       "marburg_outbreak.csv",
       NA
     )
+    doi = c("10.1101/2023.07.10.23292424v1", NA)
   )
 }
 
