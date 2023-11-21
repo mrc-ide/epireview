@@ -15,16 +15,13 @@ create_new_article_entry(
     as.integer(NA)), list(qa_m2 = as.integer(NA)), 
      list(qa_a3 = as.integer(NA)),
     list(qa_a4 = as.integer(NA)), list(qa_d5 = as.integer(NA)), list(qa_d6 =
-    as.integer(NA)), list(qa_d7 = as.integer(NA))),
-  vignette_prepend = ""
+    as.integer(NA)), list(qa_d7 = as.integer(NA)))
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_article}{all the required details for the new article}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 return new row of data to be added to the article data set using the
@@ -36,24 +33,27 @@ Create new article entry
 \examples{
 create_new_article_entry(
   pathogen = "marburg",
-  new_article = c(list("first_author_first_name" = as.character("Joe")),
-                  list("first_author_surname"    = as.character("Blocks")),
-                  list("article_title"           = as.character("hello")),
-                  list("doi"                     = as.character("NA")),
-                  list("journal"                 = as.character("ABC")),
-                  list("year_publication"        = as.integer(2000)),
-                  list("volume"                  = as.integer(NA)),
-                  list("issue"                   = as.integer(NA)),
-                  list("page_first"              = as.integer(NA)),
-                  list("page_last"               = as.integer(NA)),
-                  list("paper_copy_only"         = as.logical(NA)),
-                  list("notes"                   = as.character(NA)),
-                  list("qa_m1"                   = as.integer(1)),
-                  list("qa_m2"                   = as.integer(0)),
-                  list("qa_a3"                   = as.integer(NA)),
-                  list("qa_a4"                   = as.integer(1)),
-                  list("qa_d5"                   = as.integer(0)),
-                  list("qa_d6"                   = as.integer(NA)),
-                  list("qa_d7"                   = as.integer(1))),
-  vignette_prepend = "" )
+  new_article = c(
+    list("first_author_first_name" = as.character("Joe")),
+    list("first_author_surname" = as.character("Blocks")),
+    list("article_title" = as.character("hello")),
+    list("doi" = as.character("NA")),
+    list("journal" = as.character("ABC")),
+    list("year_publication" = as.integer(2000)),
+    list("volume" = as.integer(NA)),
+    list("issue" = as.integer(NA)),
+    list("page_first" = as.integer(NA)),
+    list("page_last" = as.integer(NA)),
+    list("paper_copy_only" = as.logical(NA)),
+    list("notes" = as.character(NA)),
+    list("qa_m1" = as.integer(1)),
+    list("qa_m2" = as.integer(0)),
+    list("qa_a3" = as.integer(NA)),
+    list("qa_a4" = as.integer(1)),
+    list("qa_d5" = as.integer(0)),
+    list("qa_d6" = as.integer(NA)),
+    list("qa_d7" = as.integer(1))
+  )
+
+)
 }

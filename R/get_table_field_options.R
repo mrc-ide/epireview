@@ -41,6 +41,6 @@ get_table_field_options <- function(pathogen, table = c("model", "parameter", "o
   if (field == "all") {
     return(model_options %>% mutate(across(everything(), ~replace_na(.x, ""))))
   } else {
-    return(as.vector(na.omit(model_options[[field]])))
+    return(na.omit(model_options[, field]))
   }
 }
