@@ -57,6 +57,6 @@ create_new_outbreak_entry(
                    list("cases_asymptomatic"   = as.integer(NA)),
                    list("deaths"               = as.integer(2)),
                    list("cases_severe_hospitalised" = as.integer(NA)),
-                   list("covidence_id"         = as.integer(2059))),
-  vignette_prepend = "")
+                   list("covidence_id"         = as.integer(2059)))
+  )
 }

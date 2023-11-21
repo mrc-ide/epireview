@@ -29,8 +29,8 @@
 #'                list("genome_site"                  = as.character(NA)),
 #'                list("genomic_sequence_available"   = as.logical(NA)),
 #'                list("parameter_class"          = as.character(NA)),
-#'                list("covidence_id"             = as.integer(2059))),
-#'            vignette_prepend = "")
+#'                list("covidence_id"             = as.integer(2059)))
+#'            )
 #' @export
 create_new_parameter_entry <-
   function(pathogen = NA,
@@ -89,12 +89,12 @@ create_new_parameter_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-    articles <- as_tibble(load_epidata(pathogen = pathogen,
-      "article",
-      vignette_prepend = vignette_prepend))
-    old_parameters <- as_tibble(load_epidata(
-      pathogen = pathogen, "parameter",
-      vignette_prepend = vignette_prepend))
+    articles <- as_tibble(load_epidata_raw(pathogen = pathogen,
+      "article"
+      ))
+    old_parameters <- as_tibble(load_epidata_raw(
+      pathogen = pathogen, "parameter"
+      ))
   new_row <- as_tibble_row(new_param)
 
   # generate the below quanties.

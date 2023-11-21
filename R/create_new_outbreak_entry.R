@@ -31,8 +31,8 @@
 #'                    list("cases_asymptomatic"   = as.integer(NA)),
 #'                    list("deaths"               = as.integer(2)),
 #'                    list("cases_severe_hospitalised" = as.integer(NA)),
-#'                    list("covidence_id"         = as.integer(2059))),
-#'   vignette_prepend = "")
+#'                    list("covidence_id"         = as.integer(2059)))
+#'   )
 #' @export
 create_new_outbreak_entry <-
   function(pathogen = NA,
@@ -58,11 +58,11 @@ create_new_outbreak_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-    articles <- as_tibble(load_epidata(
-      pathogen = pathogen, "article", vignette_prepend = vignette_prepend)
+    articles <- as_tibble(load_epidata_raw(
+      pathogen = pathogen, "article")
     )
-  old_outbreaks <- as_tibble(load_epidata(pathogen = pathogen, "outbreak",
-                                          vignette_prepend = vignette_prepend))
+  old_outbreaks <- as_tibble(load_epidata_raw(pathogen = pathogen, "outbreak"
+                                          ))
   new_row <- as_tibble_row(new_outbreak)
 
   # generate the below quantities

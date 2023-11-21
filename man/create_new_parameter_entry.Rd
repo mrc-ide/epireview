@@ -79,6 +79,6 @@ create_new_parameter_entry <-
                list("genome_site"                  = as.character(NA)),
                list("genomic_sequence_available"   = as.logical(NA)),
                list("parameter_class"          = as.character(NA)),
-               list("covidence_id"             = as.integer(2059))),
-           vignette_prepend = "")
+               list("covidence_id"             = as.integer(2059)))
+           )
 }
