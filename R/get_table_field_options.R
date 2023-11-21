@@ -26,14 +26,17 @@ get_table_field_options <- function(pathogen, table = c("model", "parameter", "o
                                     field = "all",
                                     vignette_prepend = "") {
                                        
-                                       match.arg(table)
+  match.arg(table)
+  
   file_path_ob <- system.file(
     "extdata", paste0(pathogen, "_dropdown_", table, "s.csv"),
     package = "epireview")
-
-  if (file_path_ob == "") file_path_ob <- paste0(
-    vignette_prepend, "extdata/", pathogen, "_dropdown_", table, "s.csv")
-  model_options <- read_csv(file_path_ob)
+  
+  if (any(file_path_ob == "")) {
+    stop(paste0("No data found for ", pathogen))
+  }
+  model_options <- read_csv(file_path_ob, show_col_types = FALSE)
+  
 
   if (field == "all") {
     return(model_options %>% mutate(across(everything(), ~replace_na(.x, ""))))
