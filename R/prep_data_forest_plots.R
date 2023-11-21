@@ -9,7 +9,8 @@
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return
 ##' @author Sangeeta Bhatia
-short_parameter_type <- function(x, parameter_type_full = NULL, parameter_type_short = NULL) {
+short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
+
   x$parameter_type_short <- case_when(
     x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
     x$parameter_type == "Reproduction number (Effective, Re)" ~ "Effective (Re)",
@@ -19,12 +20,14 @@ short_parameter_type <- function(x, parameter_type_full = NULL, parameter_type_s
       x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
   )
 
-  if (! is.null(parameter_type_full)) {
+  if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     x$parameter_type_short <- case_when(
       x$parameter_type == parameter_type_full ~ parameter_type_short
     )
-  } else {
-    stop("You have specified the full value of a parameter_type but not parameter_type_short.")
+  } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
+    stop("Please specify both parameter_type_full and parameter_type_short")
+  } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
+    stop("Please specify both parameter_type_full and parameter_type_short")
   }
 
   x
@@ -145,21 +148,21 @@ load_epidata <- function(pathogen, prepend = "") {
   outbreaks <- load_epidata_raw(pathogen, "outbreak")
   params <- load_epidata_raw(pathogen, "parameter")
 
-  if (is.na(articles)) {
+  if (! inherits(articles, "data.frame")) {
     stop(paste("No article information found for ", pathogen))
   }
 
-  if (is.na(models)) {
+  if (! inherits(models, "data.frame")) {
     warning(paste("No models information found for ", pathogen))
     models <- data.frame(article_id = NA)
   }
 
-  if (is.na(outbreaks)) {
+  if (! inherits(outbreaks, "data.frame")) {
     warning(paste("No outbreaks information found for ", pathogen))
     outbreaks <- data.frame(article_id = NA)
   }
 
-  if (is.na(params)) {
+  if (! inherits(params, "data.frame")) {
     warning(paste("No params information found for ", pathogen))
     params <- data.frame(article_id = NA)
   }
@@ -182,7 +185,7 @@ load_epidata <- function(pathogen, prepend = "") {
   ## For future pathogens, this should be cleaned up before data are
   ## checked into epireview
   params <- short_parameter_type(params)
-  params$parameter_value <- as.numeric(df1$parameter_value)
+  params$parameter_value <- as.numeric(params$parameter_value)
 
 
   params <- left_join(params, articles, by = "article_id")
