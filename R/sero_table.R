@@ -11,6 +11,9 @@
 #' @export
 sero_table <- function(df, pathogen) {
 
+  # assertions
+  assert_pathogen(pathogen)
+
   border_style <- fp_border(color = "black", width = 1)
   set_flextable_defaults(background.color = "white")
 

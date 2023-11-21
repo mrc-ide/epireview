@@ -25,7 +25,7 @@ forest_plot_severity <- function(df, outbreak_naive = FALSE) {
     cfr_ifr_denominator <- outbreak_year_cnt <- article_label_unique <-
     order_num <- lower_ci <- upper_ci <- parameter_data_id <-
     parameter_uncertainty_lower_value <- parameter_lower_bound <-
-    parameter_uncertainty_upper_value <- parameter_upper_bound <- NULL
+    parameter_uncertainty_upper_value <- parameter_upper_bound <- p <- NULL
 
   if (outbreak_naive) {
     df <- df %>% filter(keep_record == 1)
