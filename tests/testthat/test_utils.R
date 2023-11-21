@@ -2,7 +2,7 @@ test_that("filter_cols fails when wrong arguments are supplied", {
 
   ## Fails if columns are character and function
   ## is numeric
-  x <- fetch_data('marburg')
+  x <- load_epidata('marburg')
   p <- x$params
   expect_error(filter_cols(p, "parameter_type", ">", 21))
   expect_error(filter_cols(p, "parameter_type", "<", 21))
@@ -15,7 +15,7 @@ test_that("filter_cols works as expected", {
 
   ## Fails if columns are character and function
   ## is numeric
-  x <- fetch_data('marburg')
+  x <- load_epidata('marburg')
   p <- x$params
   ## Test column of each type: numeric, factor, and character
   out <- filter_cols(p, "parameter_value", "in", list(pval = c(20, 21)))

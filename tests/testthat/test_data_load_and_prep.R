@@ -1,4 +1,4 @@
-testthat("load_epidata loads data as expected", {
+test_that("load_epidata loads data as expected", {
 
   out <- load_epidata("marburg")
   expect_equal(length(out), 3)

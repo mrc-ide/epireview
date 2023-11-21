@@ -4,7 +4,11 @@
 \alias{load_epidata_raw}
 \title{Loads raw data for a particular pathogen}
 \usage{
-load_epidata_raw(pathogen, table, vignette_prepend = "")
+load_epidata_raw(
+  pathogen,
+  table = c("article", "parameter", "outbreak", "model"),
+  vignette_prepend = ""
+)
 }
 \arguments{
 \item{pathogen}{name of pathogen. Must be one of the priority pathogens

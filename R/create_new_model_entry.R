@@ -41,11 +41,9 @@ create_new_model_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-  articles <- as_tibble(load_epidata(table_type = "article",
-                                     pathogen = pathogen,
+  articles <- as_tibble(load_epidata(pathogen = pathogen, "article",
                                      vignette_prepend = vignette_prepend))
-  old_models <- as_tibble(load_epidata(table_type = "model",
-                                       pathogen = pathogen,
+  old_models <- as_tibble(load_epidata(pathogen = pathogen, "model",
                                        vignette_prepend = vignette_prepend))
   new_row <- as_tibble_row(new_model)
 
