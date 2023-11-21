@@ -24,11 +24,12 @@ forest_plot_delay <- function(df) {
 
   p <- forest_plot(df)
   p <- p +
-    aes(col = parameter_type_short)
+    aes(col = parameter_type_short, shape = parameter_value_type)
+
   plot <- ggplot(df_plot, aes()) +
     geom_point(aes(x = parameter_value,
                    y = article_label_unique,
-                   shape = parameter_value_type)) +
+                   )) +
     geom_segment(
       aes(y = article_label_unique, yend = article_label_unique,
         x = parameter_lower_bound, xend = parameter_upper_bound,
@@ -45,7 +46,7 @@ forest_plot_delay <- function(df) {
     scale_color_brewer(palette = "Dark2",
                        labels = function(x) str_wrap(x, width = 18)) +
     scale_shape_manual(
-      values = value_type_palette[c("Mean", "Median", "Std Dev", "Other")]
+      values = value_type_palette[c("Mean", "Median", "Std Dev", "Other")],
       labels = c("Mean", "Median", "Std Dev", "Other"),
       na.translate = FALSE
     ) +
