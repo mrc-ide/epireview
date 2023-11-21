@@ -2,7 +2,6 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_model all the required details for the new model
-#' @param vignette_prepend string to allow loading data in vignettes
 #' @return return new row of data to be added to the model data set using the
 #' append_new_entry_to_table() function
 #' @importFrom tibble as_tibble as_tibble_row
@@ -22,8 +21,8 @@
 #'                 list("code_available"       = as.logical(TRUE)),
 #'                 list("transmission_route"   = as.character("Sexual")),
 #'                 list("assumptions"          = as.character("Unspecified")),
-#'                 list("covidence_id"         = as.integer(2059))),
-#'   vignette_prepend = "")
+#'                 list("covidence_id"         = as.integer(2059)))
+#'   )
 #'
 #' @export
 create_new_model_entry <-
@@ -41,10 +40,10 @@ create_new_model_entry <-
            vignette_prepend = "") {
 
   #read current article data for pathogen
-  articles <- as_tibble(load_epidata(pathogen = pathogen, "article",
-                                     vignette_prepend = vignette_prepend))
-  old_models <- as_tibble(load_epidata(pathogen = pathogen, "model",
-                                       vignette_prepend = vignette_prepend))
+  articles <- as_tibble(load_epidata_raw(pathogen = pathogen, "article"
+                                     ))
+  old_models <- as_tibble(load_epidata_raw(pathogen = pathogen, "model"
+                                       ))
   new_row <- as_tibble_row(new_model)
 
   # generate the below quantities

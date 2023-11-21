@@ -19,8 +19,6 @@ create_new_model_entry(
 \item{pathogen}{name of pathogen}
 
 \item{new_model}{all the required details for the new model}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 return new row of data to be added to the model data set using the
@@ -41,7 +39,7 @@ create_new_model_entry(
                 list("code_available"       = as.logical(TRUE)),
                 list("transmission_route"   = as.character("Sexual")),
                 list("assumptions"          = as.character("Unspecified")),
-                list("covidence_id"         = as.integer(2059))),
-  vignette_prepend = "")
+                list("covidence_id"         = as.integer(2059)))
+  )
 
 }
