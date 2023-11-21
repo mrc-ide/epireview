@@ -2,7 +2,7 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_article all the required details for the new article
-#' @param vignette_prepend string to allow loading data in vignettes
+#'
 #' @return return new row of data to be added to the article data set using the
 #' append_new_entry_to_table() function
 #' @importFrom tibble as_tibble as_tibble_row
@@ -33,8 +33,8 @@
 #'     list("qa_d5" = as.integer(0)),
 #'     list("qa_d6" = as.integer(NA)),
 #'     list("qa_d7" = as.integer(1))
-#'   ),
-#'   vignette_prepend = ""
+#'   )
+#' 
 #' )
 #' @export
 create_new_article_entry <-
@@ -59,13 +59,11 @@ create_new_article_entry <-
              list("qa_d5" = as.integer(NA)),
              list("qa_d6" = as.integer(NA)),
              list("qa_d7" = as.integer(NA))
-           ),
-           vignette_prepend = "") {
+           )) {
     # read current article data for pathogen
     old_articles <- as_tibble(load_epidata(
       pathogen = pathogen,
-      "article",
-      vignette_prepend = vignette_prepend
+      "article"
     ))
 
     new_row <- as_tibble_row(new_article)

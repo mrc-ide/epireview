@@ -6,8 +6,7 @@
 \usage{
 load_epidata_raw(
   pathogen,
-  table = c("article", "parameter", "outbreak", "model"),
-  vignette_prepend = ""
+  table = c("article", "parameter", "outbreak", "model")
 )
 }
 \arguments{
@@ -18,8 +17,6 @@ priority pathogens currently included in the package by calling
 
 \item{table}{the table to be loaded. Must be one of
 "article", "parameter", "outbreak", or "model"}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 data.frame reading in the csv the specified pathogen table
@@ -36,7 +33,7 @@ retrieve linked information or multiple tables at the same time,
 use \code{load_epidata} instead.
 }
 \examples{
-load_epidata(pathogen = "marburg", table = "outbreak", )
+load_epidata_raw(pathogen = "marburg", table = "outbreak")
 }
 \seealso{
 \code{\link[=load_epidata]{load_epidata()}} for a more user-friendly interface
