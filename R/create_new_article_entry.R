@@ -2,7 +2,7 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_article all the required details for the new article
-#'
+#'  
 #' @return return new row of data to be added to the article data set using the
 #' append_new_entry_to_table() function
 #' @importFrom tibble as_tibble as_tibble_row
@@ -61,10 +61,10 @@ create_new_article_entry <-
              list("qa_d7" = as.integer(NA))
            )) {
     # read current article data for pathogen
-    old_articles <- as_tibble(load_epidata(
+    old_articles <- load_epidata_raw(
       pathogen = pathogen,
       "article"
-    ))
+    )
 
     new_row <- as_tibble_row(new_article)
 
