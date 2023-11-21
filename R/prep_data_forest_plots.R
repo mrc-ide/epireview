@@ -47,7 +47,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' @return A data frame with rows filtered based on the specified conditions.
 #'
 #' @examples
-#' x <- fetch_data('marburg')
+#' x <- load_epidata('marburg')
 #' p <- x$params
 #' filter_cols(p, "parameter_type", "==", "Attack rate")
 #' filter_cols(p, "parameter_type", "in", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
@@ -99,10 +99,11 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
     this_fun <- funs[[idx]]
     filter <- switch(
       this_fun,
-      "in" = filter & (x[[this_col]] %in% this_val),
-      ">" = filter & (x[[this_col]] > this_val),
-      "<" = filter & (x[[this_col]] < this_val),
-      "==" = filter & (x[[this_col]] == this_val),
+      ## Make sure NA is not matched
+      "in" = filter & (!is.na(x[[this_col]]) & x[[this_col]] %in% this_val),
+      ">" = filter & (!is.na(x[[this_col]]) & x[[this_col]] > this_val),
+      "<" = filter & (!is.na(x[[this_col]]) & x[[this_col]] < this_val),
+      "==" = filter & (!is.na(x[[this_col]]) & x[[this_col]] == this_val),
       )
   }
 
@@ -110,9 +111,6 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 }
 
 
-prepare_params_forest_plot <- function(df, options) {
-  df
-}
 
 ##' Retrieve pathogen-specific data
 ##'

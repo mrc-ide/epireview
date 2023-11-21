@@ -4,11 +4,7 @@
 \alias{short_parameter_type}
 \title{Short labels parameters for use in figures}
 \usage{
-short_parameter_type(
-  x,
-  parameter_type_full = NULL,
-  parameter_type_short = NULL
-)
+short_parameter_type(x, parameter_type_full, parameter_type_short)
 }
 \arguments{
 \item{x}{data.frame containing a column called "parameter_type"}

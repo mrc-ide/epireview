@@ -23,7 +23,8 @@
 #' @examples
 #' load_epidata(pathogen = "marburg", table = "outbreak", )
 #' @export
-load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
+load_epidata_raw <- function(pathogen, table = c("article", "parameter",
+  "outbreak", "model"), vignette_prepend = "") {
 
   if ( missing(pathogen) | missing(table)) {
     stop("Table_type and pathogen name must be supplied. Table_type can be
@@ -31,6 +32,7 @@ load_epidata_raw <- function(pathogen, table, vignette_prepend = "") {
   }
 
   assert_pathogen(pathogen)
+  match.arg(table)
 
   pps <- priority_pathogens()
 
