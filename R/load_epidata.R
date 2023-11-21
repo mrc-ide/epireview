@@ -15,16 +15,16 @@
 #' "article", "parameter", "outbreak", or "model"
 #'
 #'
-#' @param vignette_prepend string to allow loading data in vignettes
+#' 
 #' @return data.frame reading in the csv the specified pathogen table
 #' @importFrom readr read_csv
 #' @seealso
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
-#' load_epidata(pathogen = "marburg", table = "outbreak", )
+#' load_epidata_raw(pathogen = "marburg", table = "outbreak")
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-  "outbreak", "model"), vignette_prepend = "") {
+  "outbreak", "model")) {
 
   if ( missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
