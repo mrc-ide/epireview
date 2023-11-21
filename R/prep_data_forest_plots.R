@@ -193,3 +193,31 @@ load_epidata <- function(pathogen, prepend = "") {
 
   list(params = params, models = models, outbreaks = outbreaks)
 }
+
+##' Prepapre pathogen-specific data for input use in forest plots
+##' @details
+##' This function prepares the pathogen-specific data for use in forest plots.
+##' It applies the desired filters using \code{\link{filter_cols}} and then
+##' renames the columns to be used in the forest plot. Central value is renamed
+##' to "mid", lower and upper uncertainty bounds are renamed to "low" and "high"
+##' respectively. The resulting data.frame can be used to create a basic forest plot using
+##' \code{\link{forest_plot}}. The basic workflow is (a) load data, (b) filter and prepare data, and 
+##' (c) create forest plot.
+##' @inheritParams filter_cols
+##' @return a filtered data.frame with the following columns: article_label, parameter_type,
+##' mid, low, high
+prepare_data_forest_plot <- function(df, cols, funs, vals) {
+
+  df <- filter_cols(df, cols, funs, vals)
+
+  df <- df %>%
+    mutate(
+      mid = parameter_value,
+      low = parameter_uncertainty_lower_value,
+      high = parameter_uncertainty_upper_value
+    ) %>%
+    select(article_label, parameter_type, mid, low, high)
+
+  df
+
+}
