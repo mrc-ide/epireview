@@ -54,25 +54,20 @@ create_new_outbreak_entry <-
                             list("cases_asymptomatic"   = as.integer(NA)),
                             list("deaths"               = as.integer(NA)),
                             list("cases_severe_hospitalised" = as.integer(NA)),
-                            list("covidence_id"         = as.integer(NA))),
-           vignette_prepend = "") {
+                            list("covidence_id"         = as.integer(NA)))
+           ) {
 
   # assertions
   assert_pathogen(pathogen)
 
   # read current article data for pathogen
-  articles <- as_tibble(load_epidata(table_type = "article",
-                                     pathogen = pathogen,
-                                     vignette_prepend = vignette_prepend))
-  old_outbreaks <- as_tibble(load_epidata(table_type = "outbreak",
-                                          pathogen = pathogen,
-                                          vignette_prepend = vignette_prepend))
-  #read current article data for pathogen
-    articles <- as_tibble(load_epidata_raw(
-      pathogen = pathogen, "article")
-    )
-  old_outbreaks <- as_tibble(load_epidata_raw(pathogen = pathogen, "outbreak"
-                                          ))
+  articles <- as_tibble(load_epidata_raw(pathogen = pathogen, "article"))
+                                     
+                                    
+  old_outbreaks <- as_tibble(load_epidata_raw(pathogen = pathogen, "outbreak"))
+                                          
+                                          
+  
   new_row <- as_tibble_row(new_outbreak)
 
   # generate the below quantities
@@ -89,10 +84,7 @@ create_new_outbreak_entry <-
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_outbreaks.csv"),
                                package = "epireview")
-  if (file_path_ob == "") {
-    file_path_ob <- paste0(vignette_prepend,
-                          "extdata/", pathogen, "_dropdown_outbreaks.csv")
-  }
+  
   outbreak_options <- read_csv(file_path_ob)
 
   # Deal with R CMD Check "no visible binding for global variable"

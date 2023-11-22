@@ -36,14 +36,14 @@ create_new_model_entry <-
                          list("code_available"      = as.logical(NA)),
                          list("transmission_route"  = as.character(NA)),
                          list("assumptions"         = as.character(NA)),
-                         list("covidence_id"        = as.integer(NA))),
-           vignette_prepend = "") {
+                         list("covidence_id"        = as.integer(NA)))
+         ) {
 
   #read current article data for pathogen
-  articles <- as_tibble(load_epidata_raw(pathogen = pathogen, "article"
-                                     ))
-  old_models <- as_tibble(load_epidata_raw(pathogen = pathogen, "model"
-                                       ))
+  articles <- as_tibble(load_epidata_raw(pathogen = pathogen, "article"))
+                                     
+  old_models <- as_tibble(load_epidata_raw(pathogen = pathogen, "model"))
+                                       
   new_row <- as_tibble_row(new_model)
 
   # generate the below quantities
@@ -59,10 +59,7 @@ create_new_model_entry <-
   #available options for fields
   file_path_ob <- system.file("extdata", paste0(pathogen, "_dropdown_models.csv"),
                               package = "epireview")
-  if (file_path_ob == "") {
-    file_path_ob <- paste0(vignette_prepend,
-                           "extdata/", pathogen, "_dropdown_models.csv")
-  }
+  
   model_options <- read_csv(file_path_ob)
 
   # Deal with R CMD Check "no visible binding for global variable"
