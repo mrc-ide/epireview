@@ -6,13 +6,12 @@
 \usage{
 create_new_model_entry(
   pathogen = NA,
-  new_model = c(list(article_id = as.integer(NA)), list(model_type = as.character(NA)),
+  new_model = c(list(article_id = as.numeric(NA)), list(model_type = as.character(NA)),
     list(compartmental_type = as.character(NA)), list(stoch_deter = as.character(NA)),
     list(theoretical_model = as.logical(NA)), list(interventions_type =
     as.character(NA)), list(code_available = as.logical(NA)), list(transmission_route =
     as.character(NA)), list(assumptions = as.character(NA)), list(covidence_id =
-    as.integer(NA))),
-  vignette_prepend = ""
+    as.integer(NA)))
 )
 }
 \arguments{
@@ -30,7 +29,7 @@ Create new model entry
 \examples{
 create_new_model_entry(
   pathogen = 'marburg',
-  new_model = c(list("article_id"           = as.integer(1)),
+  new_model = c(list("article_id"           = as.numeric(1)),
                 list("model_type"           = as.character("Compartmental")),
                 list("compartmental_type"   = as.character("SEIR, SIR")),
                 list("stoch_deter"          = as.character("Deterministic")),

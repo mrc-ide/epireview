@@ -28,6 +28,7 @@ Imports:
     validate
 Suggests:
     knitr,
+    lifecycle,
     meta,
     tidyverse,
     testthat (>= 3.0.0)

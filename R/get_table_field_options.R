@@ -5,7 +5,6 @@
 #' @inheritParams load_epidata_raw 
 #' @param field can either be "all" to return all fields in the specified
 #' table_type, or a specific variable name that the user wants to return
-#' @param vignette_prepend string to allow loading data in vignettes
 #' @return data for specified table_type and field
 #' @importFrom dplyr mutate everything across
 #' @importFrom tidyr replace_na
@@ -23,10 +22,9 @@
 #'                         field = "Reproduction number method")
 #' @export
 get_table_field_options <- function(pathogen, table = c("model", "parameter", "outbreak", "article"),
-                                    field = "all",
-                                    vignette_prepend = "") {
+                                    field = "all") {
                                        
-  match.arg(table)
+  assert_table(table)
   
   # assertions
   assert_pathogen(pathogen)

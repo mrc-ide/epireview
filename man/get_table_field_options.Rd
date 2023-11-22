@@ -7,8 +7,7 @@
 get_table_field_options(
   pathogen,
   table = c("model", "parameter", "outbreak", "article"),
-  field = "all",
-  vignette_prepend = ""
+  field = "all"
 )
 }
 \arguments{
@@ -22,8 +21,6 @@ priority pathogens currently included in the package by calling
 
 \item{field}{can either be "all" to return all fields in the specified
 table_type, or a specific variable name that the user wants to return}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 data for specified table_type and field
