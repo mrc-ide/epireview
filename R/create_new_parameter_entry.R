@@ -85,16 +85,12 @@ create_new_parameter_entry <-
                list("genome_site"                  = as.character(NA)),
                list("genomic_sequence_available"   = as.logical(NA)),
                list("parameter_class"          = as.character(NA)),
-               list("covidence_id"             = as.integer(NA))),
-           vignette_prepend = "") {
+               list("covidence_id"             = as.integer(NA)))
+           ) {
 
   #read current article data for pathogen
-    articles <- as_tibble(load_epidata_raw(pathogen = pathogen,
-      "article"
-      ))
-    old_parameters <- as_tibble(load_epidata_raw(
-      pathogen = pathogen, "parameter"
-      ))
+    articles <- as_tibble(load_epidata_raw(pathogen = pathogen, "article"))
+    old_parameters <- as_tibble(load_epidata_raw(pathogen = pathogen, "parameter"))
   new_row <- as_tibble_row(new_param)
 
   # generate the below quanties.
@@ -111,10 +107,7 @@ create_new_parameter_entry <-
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_parameters.csv"),
                                package = "epireview")
-  if (file_path_ob == "") {
-    file_path_ob <- paste0(vignette_prepend,
-                           "extdata/", pathogen, "_dropdown_parameters.csv")
-  }
+  
   parameter_options <- read_csv(file_path_ob)
 
   # Deal with R CMD Check "no visible binding for global variable"
