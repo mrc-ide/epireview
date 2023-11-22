@@ -103,7 +103,7 @@ create_new_parameter_entry <-
        new_row$covidence_id))
     stop("Article_id + Covidence_id pair does not exist in article data")
 
-  # available options for fields
+  #available options for fields
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_parameters.csv"),
                                package = "epireview")
@@ -113,7 +113,7 @@ create_new_parameter_entry <-
   # Deal with R CMD Check "no visible binding for global variable"
   population_country <- fails <- NULL
 
-  # validate that the entries make sense
+  #validate that the entries make sense
   rules <- validator(
     model_type_is_character = is.character(population_country),
     model_types_valid = strsplit(population_country, ",")[[1]] %vin%
