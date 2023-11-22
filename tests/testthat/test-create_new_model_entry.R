@@ -1,6 +1,6 @@
-old_models <- as_tibble(load_epidata(table_type = "model",
-                                     pathogen = 'marburg',
-                                     vignette_prepend = ''))
+old_models <- as_tibble(load_epidata_raw(pathogen = 'marburg', table = "model"))
+                                     
+                                     
 model_columns <- colnames(old_models)
 
 dummy_model = c(list("article_id"           = as.numeric(1)),

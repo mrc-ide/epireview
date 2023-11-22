@@ -1,6 +1,6 @@
-old_outbreaks <- as_tibble(load_epidata(table_type = "outbreak",
-                                       pathogen = 'marburg',
-                                       vignette_prepend = ""))
+old_outbreaks <- as_tibble(load_epidata_raw(pathogen = 'marburg', table = "outbreak"))
+                                       
+                                       
 outbreak_columns <- colnames(old_outbreaks)
 dummy_outbreak = c(list("article_id"           = as.numeric(1)),
                  list("outbreak_start_day"   = as.numeric(NA)),

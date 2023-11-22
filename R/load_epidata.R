@@ -27,8 +27,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   "outbreak", "model")) {
 
   # assertions
-  assert_pathogen(pathogen)
-  assert_table(table_type)
+
   if ( missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
          one of 'article', 'parameter', 'outbreak' or 'model'")

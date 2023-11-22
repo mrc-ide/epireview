@@ -5,29 +5,26 @@
 \title{Create new outbreak entry}
 \usage{
 create_new_outbreak_entry(
-  pathogen = NA,
-  new_outbreak = c(list(article_id = as.integer(NA)), list(outbreak_start_day =
-    as.integer(NA)), list(outbreak_start_month = as.character(NA)),
-    list(outbreak_start_year = as.integer(NA)), list(outbreak_end_day = as.integer(NA)),
+  pathogen,
+  new_outbreak = c(list(article_id = as.numeric(NA)), list(outbreak_start_day =
+    as.numeric(NA)), list(outbreak_start_month = as.character(NA)),
+    list(outbreak_start_year = as.numeric(NA)), list(outbreak_end_day = as.numeric(NA)),
     list(outbreak_end_month = as.character(NA)), list(outbreak_date_year =
-    as.integer(NA)), list(outbreak_duration_months = as.integer(NA)), list(outbreak_size
-    = as.integer(NA)), list(asymptomatic_transmission = as.integer(NA)),
+    as.numeric(NA)), list(outbreak_duration_months = as.numeric(NA)), list(outbreak_size
+    = as.numeric(NA)), list(asymptomatic_transmission = as.numeric(NA)),
     list(outbreak_country = as.character(NA)), list(outbreak_location =
     as.character(NA)), 
-     list(cases_confirmed = as.integer(NA)),
+     list(cases_confirmed = as.numeric(NA)),
     list(cases_mode_detection = as.character(NA)), list(cases_suspected =
     as.integer(NA)), list(cases_asymptomatic = as.integer(NA)), list(deaths =
     as.integer(NA)), list(cases_severe_hospitalised = as.integer(NA)), list(covidence_id
-    = as.integer(NA))),
-  vignette_prepend = ""
+    = as.integer(NA)))
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_outbreak}{all the required details for the new outbreak}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 return new row of data to be added to the outbreak data set using
@@ -39,19 +36,19 @@ Create new outbreak entry
 \examples{
 create_new_outbreak_entry(
   pathogen = "marburg",
-  new_outbreak = c(list("article_id"           = as.integer(1)),
-                   list("outbreak_start_day"   = as.integer(NA)),
+  new_outbreak = c(list("article_id"           = as.numeric(1)),
+                   list("outbreak_start_day"   = as.numeric(NA)),
                    list("outbreak_start_month" = as.character(NA)),
-                   list("outbreak_start_year"  = as.integer(1999)),
-                   list("outbreak_end_day"     = as.integer(NA)),
+                   list("outbreak_start_year"  = as.numeric(1999)),
+                   list("outbreak_end_day"     = as.numeric(NA)),
                    list("outbreak_end_month"   = as.character(NA)),
-                   list("outbreak_date_year"   = as.integer(2001)),
-                   list("outbreak_duration_months" = as.integer(NA)),
-                   list("outbreak_size"        = as.integer(2)),
-                   list("asymptomatic_transmission" = as.integer(0)),
+                   list("outbreak_date_year"   = as.numeric(2001)),
+                   list("outbreak_duration_months" = as.numeric(NA)),
+                   list("outbreak_size"        = as.numeric(2)),
+                   list("asymptomatic_transmission" = as.numeric(0)),
                    list("outbreak_country"     = as.character("Tanzania")),
                    list("outbreak_location"    = as.character(NA)),
-                   list("cases_confirmed"      = as.integer(NA)),
+                   list("cases_confirmed"      = as.numeric(NA)),
                    list("cases_mode_detection" = as.character(NA)),
                    list("cases_suspected"      = as.integer(NA)),
                    list("cases_asymptomatic"   = as.integer(NA)),
