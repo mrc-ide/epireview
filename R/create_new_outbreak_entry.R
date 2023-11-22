@@ -13,19 +13,19 @@
 #' @examples
 #' create_new_outbreak_entry(
 #'   pathogen = "marburg",
-#'   new_outbreak = c(list("article_id"           = as.integer(1)),
-#'                    list("outbreak_start_day"   = as.integer(NA)),
+#'   new_outbreak = c(list("article_id"           = as.numeric(1)),
+#'                    list("outbreak_start_day"   = as.numeric(NA)),
 #'                    list("outbreak_start_month" = as.character(NA)),
-#'                    list("outbreak_start_year"  = as.integer(1999)),
-#'                    list("outbreak_end_day"     = as.integer(NA)),
+#'                    list("outbreak_start_year"  = as.numeric(1999)),
+#'                    list("outbreak_end_day"     = as.numeric(NA)),
 #'                    list("outbreak_end_month"   = as.character(NA)),
-#'                    list("outbreak_date_year"   = as.integer(2001)),
-#'                    list("outbreak_duration_months" = as.integer(NA)),
-#'                    list("outbreak_size"        = as.integer(2)),
-#'                    list("asymptomatic_transmission" = as.integer(0)),
+#'                    list("outbreak_date_year"   = as.numeric(2001)),
+#'                    list("outbreak_duration_months" = as.numeric(NA)),
+#'                    list("outbreak_size"        = as.numeric(2)),
+#'                    list("asymptomatic_transmission" = as.numeric(0)),
 #'                    list("outbreak_country"     = as.character("Tanzania")),
 #'                    list("outbreak_location"    = as.character(NA)),
-#'                    list("cases_confirmed"      = as.integer(NA)),
+#'                    list("cases_confirmed"      = as.numeric(NA)),
 #'                    list("cases_mode_detection" = as.character(NA)),
 #'                    list("cases_suspected"      = as.integer(NA)),
 #'                    list("cases_asymptomatic"   = as.integer(NA)),
@@ -36,19 +36,19 @@
 #' @export
 create_new_outbreak_entry <-
   function(pathogen = NA,
-           new_outbreak = c(list("article_id"           = as.integer(NA)),
-                            list("outbreak_start_day"   = as.integer(NA)),
+           new_outbreak = c(list("article_id"           = as.numeric(NA)),
+                            list("outbreak_start_day"   = as.numeric(NA)),
                             list("outbreak_start_month" = as.character(NA)),
-                            list("outbreak_start_year"  = as.integer(NA)),
-                            list("outbreak_end_day"     = as.integer(NA)),
+                            list("outbreak_start_year"  = as.numeric(NA)),
+                            list("outbreak_end_day"     = as.numeric(NA)),
                             list("outbreak_end_month"   = as.character(NA)),
-                            list("outbreak_date_year"   = as.integer(NA)),
-                            list("outbreak_duration_months" = as.integer(NA)),
-                            list("outbreak_size"        = as.integer(NA)),
-                            list("asymptomatic_transmission" = as.integer(NA)),
+                            list("outbreak_date_year"   = as.numeric(NA)),
+                            list("outbreak_duration_months" = as.numeric(NA)),
+                            list("outbreak_size"        = as.numeric(NA)),
+                            list("asymptomatic_transmission" = as.numeric(NA)),
                             list("outbreak_country"     = as.character(NA)),
                             list("outbreak_location"    = as.character(NA)),
-                            list("cases_confirmed"      = as.integer(NA)),
+                            list("cases_confirmed"      = as.numeric(NA)),
                             list("cases_mode_detection" = as.character(NA)),
                             list("cases_suspected"      = as.integer(NA)),
                             list("cases_asymptomatic"   = as.integer(NA)),
@@ -80,7 +80,7 @@ create_new_outbreak_entry <-
        new_row$covidence_id))
     stop("Article_id + Covidence_id pair does not exist in article data")
 
-  # available options for fields
+  #available options for fields
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_outbreaks.csv"),
                                package = "epireview")
@@ -91,7 +91,7 @@ create_new_outbreak_entry <-
   outbreak_country <- cases_mode_detection <- outbreak_date_year <-
     fails <- NULL
 
-  # validate that the entries make sense
+  #validate that the entries make sense
   rules <- validator(
     outbreak_country_is_character = is.character(outbreak_country),
     outbreak_country_valid = strsplit(outbreak_country, ",")[[1]] %vin%
@@ -99,7 +99,7 @@ create_new_outbreak_entry <-
     cases_mode_detection_is_character = is.character(cases_mode_detection),
     cases_mode_detection_valid = strsplit(cases_mode_detection, ",")[[1]] %vin%
       na.omit(outbreak_options$`Detection mode`),
-    outbreak_date_year_is_integer = is.integer(outbreak_date_year),
+    outbreak_date_year_is_integer = outbreak_date_year%%1==0,
     outbreak_date_year_after_1800 = outbreak_date_year > 1800,
     outbreak_date_year_not_future = outbreak_date_year <
       (as.integer(substring(Sys.Date(), 1, 4)) + 2)

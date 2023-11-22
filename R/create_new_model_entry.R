@@ -12,7 +12,7 @@
 #' @examples
 #' create_new_model_entry(
 #'   pathogen = 'marburg',
-#'   new_model = c(list("article_id"           = as.integer(1)),
+#'   new_model = c(list("article_id"           = as.numeric(1)),
 #'                 list("model_type"           = as.character("Compartmental")),
 #'                 list("compartmental_type"   = as.character("SEIR, SIR")),
 #'                 list("stoch_deter"          = as.character("Deterministic")),
@@ -27,7 +27,7 @@
 #' @export
 create_new_model_entry <-
   function(pathogen = NA,
-           new_model = c(list("article_id"          = as.integer(NA)),
+           new_model = c(list("article_id"          = as.numeric(NA)),
                          list("model_type"          = as.character(NA)),
                          list("compartmental_type"  = as.character(NA)),
                          list("stoch_deter"         = as.character(NA)),
