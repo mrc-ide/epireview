@@ -1,6 +1,4 @@
-old_parameters <- as_tibble(load_epidata(table_type = "parameter",
-                                       pathogen = 'marburg',
-                                       vignette_prepend = ""))
+old_parameters <- as_tibble(load_epidata_raw(pathogen = 'marburg', table = 'parameter'))
 parameter_columns <- colnames(old_parameters)
 dummy_param <- c(list("article_id"            = as.numeric(1)),
                  list("parameter_type"        = as.character(NA)),

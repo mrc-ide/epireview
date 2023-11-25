@@ -1,6 +1,6 @@
-old_articles <- as_tibble(load_epidata(table_type = "article",
-                                       pathogen = 'marburg',
-                                       vignette_prepend = ""))
+old_articles <- as_tibble(load_epidata_raw(pathogen = 'marburg', 'article'))
+                                       
+                                       
 article_columns <- colnames(old_articles)
 dummy_article = c(list("first_author_first_name" = 'Jane'),
                   list("first_author_surname"    = 'Doe'),
@@ -24,7 +24,7 @@ dummy_article = c(list("first_author_first_name" = 'Jane'),
 
 test_that("new article entry matches old article structure", {
   blank <- create_new_article_entry(pathogen='marburg')
-  expect_named(blank,article_columns)
+  expect_named(blank, article_columns)
 
   dummy <- create_new_article_entry(pathogen = 'marburg', new_article = dummy_article)
   expect_named(dummy,article_columns)
