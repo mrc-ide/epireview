@@ -46,6 +46,15 @@ create_new_model_entry <-
                                        
   new_row <- as_tibble_row(new_model)
 
+  ## Look for any columns in old data that are not in new data
+  ## and add them to new data with NA values with the same class
+  ## as the corresponding column in the old data.
+  for (col in colnames(old_models)) {
+    if (!(col %in% colnames(new_row))) {
+      new_row[[col]] <- as(NA, class(old_models[[col]]))
+    }
+  }
+
   # generate the below quantities
   new_row$model_data_id <- max(old_models$model_data_id) + 1
   new_row <- new_row %>% select(colnames(old_models))
