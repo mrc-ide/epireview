@@ -58,7 +58,7 @@ test_that("new parameter entry matches old parameter structure", {
 
   dummy <- create_new_parameter_entry(pathogen = 'marburg', new_param = dummy_param)
   expect_named(dummy,parameter_columns)
-  expect_s3_class(dummy,'data.frame',exact = FALSE)
+  expect_s3_class(dummy, 'data.frame', exact = FALSE)
   expect_identical(sapply(dummy, class),sapply(old_parameters, class))
 
 })

@@ -53,7 +53,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     warning(paste("No data found for ", pathogen))
   } else {
     message(paste("Loading data for ", pathogen))
-    out <- read_csv(file_path)
+    out <- read_csv(file_path, show_col_types = FALSE)
   }
 
   out

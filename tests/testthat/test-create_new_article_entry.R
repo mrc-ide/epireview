@@ -27,9 +27,9 @@ test_that("new article entry matches old article structure", {
   expect_named(blank, article_columns)
 
   dummy <- create_new_article_entry(pathogen = 'marburg', new_article = dummy_article)
-  expect_named(dummy,article_columns)
-  expect_s3_class(dummy,'data.frame',exact = FALSE)
-  expect_identical(sapply(dummy, class),sapply(old_articles, class))
+  expect_named(dummy, article_columns)
+  expect_s3_class(dummy, 'data.frame', exact = FALSE)
+  expect_identical(sapply(dummy, class), sapply(old_articles, class))
 
   check_score <- mean(c(dummy$qa_m1, dummy$qa_m2, dummy$qa_a3, dummy$qa_a4, dummy$qa_d5, dummy$qa_d6, dummy$qa_d7),
                       na.rm = TRUE)

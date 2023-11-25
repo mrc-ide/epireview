@@ -103,12 +103,13 @@ create_new_parameter_entry <-
        new_row$covidence_id))
     stop("Article_id + Covidence_id pair does not exist in article data")
 
+
   #available options for fields
   file_path_ob  <- system.file("extdata",
                                paste0(pathogen, "_dropdown_parameters.csv"),
                                package = "epireview")
   
-  parameter_options <- read_csv(file_path_ob)
+  parameter_options <- read_csv(file_path_ob, show_col_types = FALSE)
 
   # Deal with R CMD Check "no visible binding for global variable"
   population_country <- fails <- NULL
@@ -128,5 +129,14 @@ create_new_parameter_entry <-
   if (sum(rules_summary$fails) > 0)
     stop(as_tibble(rules_summary) %>% filter(fails > 0))
 
-  return(new_row)
+  ## Check for columns in old data that are not in new data
+  ## and add them to new data with NA values with the same class
+  ## as the corresponding column in the old data.
+  for (col in colnames(old_parameters)) {
+    if (!(col %in% colnames(new_row))) {
+      new_row[[col]] <- as(NA, class(old_parameters[[col]]))
+    }
+  }
+  ## Make sure the columns are in the same order as the old data
+  new_row[ , colnames(old_parameters)]
 }

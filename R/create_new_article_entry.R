@@ -91,7 +91,16 @@ create_new_article_entry <-
       "ebola" = "Ebola virus",
       NA
     )
-    new_row$double_extracted <- FALSE
+    
+    ## Look for any additional columns that in the old data set
+    ## and set them to NA with the same class as the corresponding
+    ## column in the old data set.
+    for (col in colnames(old_articles)) {
+      if (!(col %in% colnames(new_row))) {
+        old_class <- class(old_articles[[col]])
+        new_row[[col]] <- as(NA, old_class)
+      }
+    }
 
     new_row <- new_row %>%
       rowwise() %>%

@@ -80,7 +80,7 @@ create_new_outbreak_entry <- function(pathogen,
                               paste0(pathogen, "_dropdown_outbreaks.csv"),
                               package = "epireview")
   
-  outbreak_options <- read_csv(file_path_ob)
+  outbreak_options <- read_csv(file_path_ob, show_col_types = FALSE)
   
   # Deal with R CMD Check "no visible binding for global variable"
   outbreak_country <- cases_mode_detection <- outbreak_date_year <-
@@ -109,5 +109,14 @@ create_new_outbreak_entry <- function(pathogen,
     stop(as_tibble(rules_summary) %>% filter(fails > 0))
   }
   
-  return(new_row)
+  ## Check for columns in old data that are not in new data
+  ## and add them to new data with NA values with the same class
+  ## as the corresponding column in the old data.
+  for (col in colnames(old_outbreaks)) {
+    if (!(col %in% colnames(new_row))) {
+      new_row[[col]] <- as(NA, class(old_outbreaks[[col]]))
+    }
+  }
+
+  new_row
 }
