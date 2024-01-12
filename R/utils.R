@@ -26,6 +26,49 @@ theme_epireview <- function(
   th
 }
 
+#' country_palette Function
+#'
+#' This function creates a color palette for countries.
+#'
+#' 
+#' @param countries A vector of country names. If not provided, a palette of length 36 with a default set of
+#' countries is returned.
+#'
+#' @return A named color palette.
+#'
+#' @examples
+#' country_palette()
+#' country_palette(countries = c("USA", "Canada", "Mexico"))
+#'
+#' @importFrom paletteer paletteer_d
+#' @importFrom pals polychrome
+#'
+#' @export
+country_palette <- function(countries) {
+  pal <- paletteer::paletteer_d("pals::polychrome")
+  ## this gives a palette of length 36. I don't think
+  ## we need more than 36 countries in a single plot.
+  if (missing(countries)) {
+    countries <- c(
+      'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
+      'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
+      'Cameroon', 'Central African Republic', 'Republic of the Congo',
+      'Sudan', 'Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
+      'Equatorial Guinea', 'Angola', 'South Africa', 'Zambia', 'Tanzania',
+      'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
+      'United Kingdom', 'Unspecified'
+    )
+  } else {
+    ## If more than 36 countries are provided, throw and error
+    if (length(countries) > 36) {
+      stop("More than 36 countries provided. Please provide a vector of length 36 or less")
+    }
+    pal <- pal[1:length(countries)]
+  }
+  names(pal) <- countries
+  pal
+}
+
 ##' Define a consistent color palette for use in
 ##' figures
 ##'
@@ -45,7 +88,9 @@ parameter_palette <- function(x) {
     "Effective (Re)" = "#7570B3",
     "Reproduction number (Effective, Re)" = "#7570B3"
   )
-
+  if (missing(x)) {
+    return(out)
+  }
   out[x]
 }
 ##' Define a consistent shape palette for use in
@@ -72,6 +117,24 @@ value_type_palette <- function(x) {
     other = 18,
     Other = 18
   )
-
+  ## if x is missing, return the whole palette
+  if (missing(x)) {
+    return(out)
+  }
   out[x]
+}
+
+##' Define a consistent color palette for use in
+##' figures. Palettes are currently defined for
+##' parameters and countries. Any other variable will
+##' return NULL
+get_col_palette <- function(col_by = c("parameter", "country")) {
+  match.arg(col_by)
+  if (col_by == "parameter") {
+    col_palette <- parameter_palette()
+  } 
+  if (col_by == "country") {
+    col_palette <- country_palette()
+  }
+  col_palette
 }
