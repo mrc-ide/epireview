@@ -73,7 +73,8 @@ country_palette <- function(countries) {
 ##' figures
 ##'
 ##'
-##' @param x a list of parameters
+##' @param x a list of parameters. Optional. If missing, the entire
+##' palette is returned.
 ##' @return a named list of colors that can be used
 ##' in forest plots for manually setting colors
 ##' with for example

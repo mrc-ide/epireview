@@ -3,16 +3,50 @@
 ##' Basic forest plot displays central estimate and uncertainty for a parameter from different studies.
 ##' y-axis lists the study labels and the x-axis displays parameter.
 ##'
-##' @param df data.frame with the following fields: article, label, mid, low, high
+#' Generates a forest plot.
+#'
+#' This function generates a forest plot using the provided data frame.
+#'
+#' @param df The data frame containing the data for the forest plot. data.frame with the following fields: article, label, mid, low, high
 ##' The field 'y' is mapped to the y-axis with 'label' used as a display label.
 ##' mid refers to the central estimate. low and high represent the lower and higher ends of the
 ##' uncertainty interval
-##' @return ggplot2 object
-##' @author Sangeeta Bhatia
+#' @param facet_by (Optional) Variable to facet the plot by.
+#' @param shape_by (Optional) Variable to shape the points by.
+#' @param col_by (Optional) Variable to color the points by.
+#' @param shape_palette (Optional) Palette for shaping the points. Optional unless shape_by is
+#' not one of 'value_type'.
+#' @param col_palette Palette for coloring the points. Optional unless col_by is
+#' not one of 'parameter' or 'country'.
+#'
+#' @details epireview provides a default palette for parameters and countries.
+#' If you wish to color by a different variable, you must provide a palette.
+#' @return A ggplot object representing the forest plot.
+#'
+#' @examples
+#' df <- data.frame(
+#'   mid = c(1, 2, 3),
+#'   y = c("A", "B", "C"),
+#'   low = c(0.5, 1.5, 2.5),
+#'   high = c(1.5, 2.5, 3.5)
+#' )
+#' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     shape_palette, 
     col_palette) {
 
+  ## If col_by is not one of parameter or country, a palette must be provided
+  if (!is.na(col_by) & !col_by %in% c("parameter", "country")) {
+    if (is.na(col_palette)) {
+      stop("A palette must be provided if col_by is not one of 'parameter' or 'country'")
+    }
+  }
+  ## If shape_by is not one of value_type, a palette must be provided
+  if (!is.na(shape_by) & !shape_by %in% c("value_type")) {
+    if (is.na(shape_palette)) {
+      stop("A palette must be provided if shape_by is not one of 'value_type'")
+    }
+  }
   p <- ggplot(df) +
     geom_point(aes(x = mid, y = y)) +
     geom_errorbar(
