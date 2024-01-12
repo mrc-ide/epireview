@@ -128,13 +128,14 @@ value_type_palette <- function(x) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
-get_col_palette <- function(col_by = c("parameter", "country")) {
+get_col_palette <- function(col_by = c("parameter", "country"), ...) {
   match.arg(col_by)
+  other_args <- list(...)
   if (col_by == "parameter") {
-    col_palette <- parameter_palette()
+    col_palette <- parameter_palette(other_args)
   } 
   if (col_by == "country") {
-    col_palette <- country_palette()
+    col_palette <- country_palette(other_args)
   }
   col_palette
 }
