@@ -4,21 +4,54 @@
 \alias{forest_plot}
 \title{Basic forest plot}
 \usage{
-forest_plot(df)
+forest_plot(
+  df,
+  facet_by = NA,
+  shape_by = NA,
+  col_by = NA,
+  shp_palette,
+  col_palette
+)
 }
 \arguments{
-\item{df}{data.frame with the following fields: article, label, mid, low, high
+\item{df}{The data frame containing the data for the forest plot. data.frame with the following fields: article, label, mid, low, high
 The field 'y' is mapped to the y-axis with 'label' used as a display label.
 mid refers to the central estimate. low and high represent the lower and higher ends of the
 uncertainty interval}
+
+\item{facet_by}{(Optional) Variable to facet the plot by.}
+
+\item{shape_by}{(Optional) Variable to shape the points by.}
+
+\item{col_by}{(Optional) Variable to color the points by.}
+
+\item{col_palette}{Palette for coloring the points. Optional unless col_by is
+not one of 'parameter' or 'country'.}
+
+\item{shape_palette}{(Optional) Palette for shaping the points. Optional unless shape_by is
+not one of 'value_type'.}
 }
 \value{
-ggplot2 object
+A ggplot object representing the forest plot.
 }
 \description{
 Basic forest plot displays central estimate and uncertainty for a parameter from different studies.
 y-axis lists the study labels and the x-axis displays parameter.
 }
-\author{
-Sangeeta Bhatia
+\details{
+Generates a forest plot.
+
+This function generates a forest plot using the provided data frame.
+
+epireview provides a default palette for parameters and countries.
+If you wish to color by a different variable, you must provide a palette.
+}
+\examples{
+df <- data.frame(
+  mid = c(1, 2, 3),
+  y = c("A", "B", "C"),
+  low = c(0.5, 1.5, 2.5),
+  high = c(1.5, 2.5, 3.5)
+)
+forest_plot(df)
 }
