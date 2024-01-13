@@ -32,7 +32,7 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shape_palette, 
+    shp_palette, 
     col_palette) {
 
   ## If col_by is not one of parameter or country, a palette must be provided
@@ -43,7 +43,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   }
   ## If shape_by is not one of value_type, a palette must be provided
   if (!is.na(shape_by) & !shape_by %in% c("value_type")) {
-    if (is.na(shape_palette)) {
+    if (is.na(shp_palette)) {
       stop("A palette must be provided if shape_by is not one of 'value_type'")
     }
   }
@@ -78,11 +78,11 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.na(shape_palette)) {
-      p <- p + scale_shape_manual(values = shape_palette)
-    } else if (!is.na(shape_palette)) {
-      shape_palette <- get_shape_palette(shape_by)
+      p <- p + scale_shape_manual(values = shp_palette)
+    } else if (!is.na(shp_palette)) {
+      shp_palette <- shape_palette(shape_by)
       if (! is.na(shape_palette)) {
-        p <- p + scale_shape_manual(values = shape_palette)
+        p <- p + scale_shape_manual(values = shp_palette)
       } else {
         warning(paste("No palette was provided or found for ", shape_by, ". Using default palette"))
       }
@@ -101,7 +101,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     if (!is.na(col_palette)) {
       p <- p + scale_color_manual(values = col_palette)
     } else if (!is.na(col_palette)) {
-      col_palette <- get_col_palette(col_by)
+      col_palette <- color_palette(col_by)
       if (! is.na(col_palette)) {
         p <- p + scale_color_manual(values = col_palette)
       } else {

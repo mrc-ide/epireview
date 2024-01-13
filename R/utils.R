@@ -129,7 +129,7 @@ value_type_palette <- function(x) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
-get_col_palette <- function(col_by = c("parameter", "country"), ...) {
+color_palette <- function(col_by = c("parameter", "country"), ...) {
   match.arg(col_by)
   other_args <- list(...)
   if (col_by == "parameter") {
@@ -139,4 +139,32 @@ get_col_palette <- function(col_by = c("parameter", "country"), ...) {
     col_palette <- country_palette(other_args)
   }
   col_palette
+}
+
+## Synonym for color_palette
+colour_palette <- function(col_by = c("parameter", "country"), ...) {
+  color_palette(col_by, ...)
+}
+
+#' shape_palette function
+#'
+#' This function generates a shape palette based on the specified shape_by parameter.
+#'
+#' @param shape_by A character vector specifying the parameter to shape the palette by.
+#'   Currently, only "value_type" is supported.
+#' @param ... Additional arguments to be passed to the underlying palette function.
+#'
+#' @return A shape palette based on the specified shape_by parameter.
+#'
+#' @examples
+#' shape_palette("value_type")
+#'
+#' @export
+shape_palette <- function(shape_by = c("value_type"), ...) {
+  match.arg(shape_by)
+  other_args <- list(...)
+  if (shape_by == "value_type") {
+    shape_palette <- value_type_palette(other_args)
+  }
+  shape_palette
 }
