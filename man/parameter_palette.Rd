@@ -8,7 +8,8 @@ figures}
 parameter_palette(x)
 }
 \arguments{
-\item{x}{a list of parameters}
+\item{x}{a list of parameters. Optional. If missing, the entire
+palette is returned.}
 }
 \value{
 a named list of colors that can be used
