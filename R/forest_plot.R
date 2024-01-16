@@ -61,13 +61,9 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
 
 
   if (!is.na(facet_by)) {
-
-
     p <- p + facet_col(
       ~.data[[facet_by]], scales = "free_y", space = "free"
     ) 
-
-
   }
 
   if (!is.na(shape_by)) {
@@ -77,9 +73,9 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
-    if (!is.na(shape_palette)) {
+    if (!is.na(shp_palette)) {
       p <- p + scale_shape_manual(values = shp_palette)
-    } else if (!is.na(shp_palette)) {
+    } else {
       shp_palette <- shape_palette(shape_by)
       if (! is.na(shape_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
@@ -100,14 +96,14 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## if neither is provided, use the default palette
     if (!is.na(col_palette)) {
       p <- p + scale_color_manual(values = col_palette)
-    } else if (!is.na(col_palette)) {
+    } else {
       col_palette <- color_palette(col_by)
       if (! is.na(col_palette)) {
         p <- p + scale_color_manual(values = col_palette)
       } else {
+        ## if the palette is not found, use the default and issue a warning
         warning(paste("No palette was provided or found for ", col_by, ". Using default palette"))
       }
-      ## if the palette is not found, use the default and issue a warning
       
     }
   }

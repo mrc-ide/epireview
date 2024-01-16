@@ -90,8 +90,16 @@ parameter_palette <- function(x) {
     "Reproduction number (Effective, Re)" = "#7570B3"
   )
   if (missing(x)) {
-    return(out)
+    x <- names(out)
+  } else {
+    ## Set names of out to x checking first that the lengths match
+    if (length(x) > length(out)) {
+      stop(paste0("Pre-defined palette has only ", length(out), " colors. Please provide a vector of length ", length(out), " or less"))
+    } else {
+      names(out[1:length(x)]) <- x
+    }
   }
+
   out[x]
 }
 ##' Define a consistent shape palette for use in
@@ -105,7 +113,6 @@ parameter_palette <- function(x) {
 ##'
 ##' @author Sangeeta Bhatia
 value_type_palette <- function(x) {
-
   out <- list(
     Mean = 16,
     mean = 16,
@@ -120,7 +127,14 @@ value_type_palette <- function(x) {
   )
   ## if x is missing, return the whole palette
   if (missing(x)) {
-    return(out)
+    x <- names(out)
+  } else {
+    ## Set names of out to x checking first that the lengths match
+    if (length(x) > length(out)) {
+      stop(paste0("Pre-defined palette has only ", length(out), " shapes. Please provide a vector of length ", length(out), " or less"))
+    } else {
+      names(out[1:length(x)]) <- x
+    }
   }
   out[x]
 }
@@ -153,6 +167,7 @@ colour_palette <- function(col_by = c("parameter", "country"), ...) {
 #' @param shape_by A character vector specifying the parameter to shape the palette by.
 #'   Currently, only "value_type" is supported.
 #' @param ... Additional arguments to be passed to the underlying palette function.
+#' These are treated as names of the palette elements.
 #'
 #' @return A shape palette based on the specified shape_by parameter.
 #'
