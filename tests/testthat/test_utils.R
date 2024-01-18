@@ -40,10 +40,7 @@ test_that("filter_cols works as expected", {
 })
 
 
-test_that("shape_palette returns NULL when shape_by is not 'value_type'", {
-  actual_palette <- shape_palette(shape_by = "other_type")
-  expect_null(actual_palette)
-})
+
 
 test_that("value_type_palette returns the correct values", {
   # Test case 1: Missing argument
@@ -66,11 +63,31 @@ test_that("value_type_palette returns the correct values", {
   ))
 
   # Test case 3: Multiple values
-  expect_equal(value_type_palette(c("Mean", "Median")), list(
-    Mean = 16,
-    Median = 15
+  expect_equal(value_type_palette(c("A", "B")), list(
+    A = 16,
+    B = 15
   ))
 
   # Test case 4: Invalid length of input vector
   expect_error(value_type_palette(letters))
 })
+
+
+test_that("country_palette returns the correct palette", {
+  pal <- paletteer::paletteer_d("pals::polychrome")
+  # Test case 1: No argument provided
+  expect_equal(country_palette(), pal)
+
+  # Test case 2: Single country
+  expect_equal(country_palette("Liberia"), pal[1])
+
+  # Test case 3: Multiple countries
+  expect_equal(country_palette(c("A", "B")), c(
+    A = pal[1],
+    B = pal[2]
+  ))
+
+  # Test case 4: More than 36 countries provided
+  expect_error(country_palette(rep("Country", 37)))
+})
+

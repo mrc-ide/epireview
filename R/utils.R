@@ -26,30 +26,32 @@ theme_epireview <- function(
   th
 }
 
+
 #' country_palette Function
 #'
-#' This function creates a color palette for countries.
+#' This function returns a color palette for countries.
 #'
-#' 
-#' @param countries A vector of country names. If not provided, a palette of length 36 with a default set of
-#' countries is returned.
-#'
-#' @return A named color palette.
-#'
+#' @param x A vector of country names. If provided, the function will return a color palette for the specified countries.
+#' @return A color palette for the specified countries.
 #' @examples
+#' # Get color palette for all countries
 #' country_palette()
-#' country_palette(countries = c("USA", "Canada", "Mexico"))
+#'
+#' # Get color palette for specific countries
+#' country_palette(c('Liberia', 'Guinea', 'Sierra Leone'))
 #'
 #' @importFrom paletteer paletteer_d
 #' @importFrom pals polychrome
 #'
 #' @export
-country_palette <- function(countries) {
-  pal <- paletteer::paletteer_d("pals::polychrome")
+country_palette <- function(x) {
   ## this gives a palette of length 36. I don't think
   ## we need more than 36 countries in a single plot.
-  if (missing(countries)) {
-    countries <- c(
+  pal <- paletteer::paletteer_d("pals::polychrome")
+  ## turn it into a list as otherwise is has class "colors"
+  ## and i can't see what good that is doing.
+  class(pal) <- NULL
+  countries <- c(
       'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
       'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
       'Cameroon', 'Central African Republic', 'Republic of the Congo',
@@ -58,15 +60,19 @@ country_palette <- function(countries) {
       'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
       'United Kingdom', 'Unspecified'
     )
+  
+  if (missing(x)) {
+   names(pal) <- countries
   } else {
     ## If more than 36 countries are provided, throw and error
-    if (length(countries) > 36) {
-      stop("More than 36 countries provided. Please provide a vector of length 36 or less")
+    if (length(x) > length(pal)) {
+      stop(paste0("More than", length(pal)," countries provided. Please provide a vector of length", length(pal)," or less"))
+    } else {
+      pal <- pal[1:length(x)]
+      names(pal) <- x
     }
-    pal <- pal[1:length(countries)]
   }
-  names(pal) <- countries
-  pal
+  pal[x]
 }
 
 ##' Define a consistent color palette for use in
@@ -89,19 +95,24 @@ parameter_palette <- function(x) {
     "Effective (Re)" = "#7570B3",
     "Reproduction number (Effective, Re)" = "#7570B3"
   )
+  ## number of unique colors
+  n_colrs <- length(unique(out))
+  colrs <- unique(out)
+  ## if x is missing, return the whole palette
   if (missing(x)) {
     x <- names(out)
   } else {
     ## Set names of out to x checking first that the lengths match
-    if (length(x) > length(out)) {
-      stop(paste0("Pre-defined palette has only ", length(out), " colors. Please provide a vector of length ", length(out), " or less"))
+    if (length(x) < n_colrs) {
+      out <- colrs[seq_along(x)]
+      names(out) <- x
     } else {
-      names(out[1:length(x)]) <- x
+      stop(paste0("Pre-defined palette has only ", n_colrs, " colors. Please provide a vector of length ", n_colrs, " or less"))
     }
   }
-
   out[x]
 }
+
 ##' Define a consistent shape palette for use in
 ##'
 ##' We map shape aesthetic to value type i.e., mean, median etc.
@@ -125,15 +136,20 @@ value_type_palette <- function(x) {
     other = 18,
     Other = 18
   )
+  ## number of unique shapes
+  n_shapes <- length(unique(out))
+  ## unique shapes
+  shapes <- unique(out)
   ## if x is missing, return the whole palette
   if (missing(x)) {
     x <- names(out)
   } else {
     ## Set names of out to x checking first that the lengths match
-    if (length(x) > length(out)) {
-      stop(paste0("Pre-defined palette has only ", length(out), " shapes. Please provide a vector of length ", length(out), " or less"))
+    if (length(x) < n_shapes) {
+      out <- shapes[seq_along(x)]
+      names(out) <- x
     } else {
-      names(out[1:length(x)]) <- x
+      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please provide a vector of length ", n_shapes, " or less"))
     }
   }
   out[x]
