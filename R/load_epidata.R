@@ -24,20 +24,20 @@
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-  "outbreak", "model")) {
-
+                                                "outbreak", "model")) {
+  
   # assertions
-
-  if ( missing(pathogen) | missing(table)) {
+  
+  if (missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
          one of 'article', 'parameter', 'outbreak' or 'model'")
   }
-
+  
   assert_pathogen(pathogen)
   assert_table(table)
-
+  
   pps <- priority_pathogens()
-
+  
   fname <- switch(
     table,
     article =  pps[pps$pathogen == pathogen, "articles_file"],
@@ -53,18 +53,18 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     outbreak = outbreak_column_type(),
     model = model_column_type()
   )
-
+  
   file_path <- system.file("extdata", fname, package = "epireview")
-
+  
   if (is.na(file_path)) {
     warning(paste("No data found for ", pathogen))
   } else {
     message(paste("Loading data for ", pathogen))
     out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE)
   }
-
+  
   out
-
+  
 }
 
 
@@ -74,7 +74,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' Define the column types for the article data frame
 #'
 #' This function defines the column types for the article data frame used in the epireview package.
-#' It specifies the data types for each column in the data frame. readr is generally good at guessing the
+#' readr is generally good at guessing the
 #' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which 
 #' is particularly undesirable for us. 
 #' The function is intended to be used
@@ -82,6 +82,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' @return A list of column types for the article data frame
 #' @importFrom readr col_character col_integer col_logical
+#' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
 article_column_type <- function() {
   list(
@@ -107,19 +108,134 @@ article_column_type <- function() {
   )
 }
 
+#' parameter_column_type
+#'
+#' This function defines the column types for the parameters in the dataset.
+#' It returns a list of column types with their corresponding names.
+#' 
+#' @inherit article_column_type details return seealso 
+#' @export
+#'
+#' @examples
+#' parameter_column_type()
+#'
+#' @importFrom readr col_integer col_character col_double col_logical
+#'
+#' @keywords dataset, column types
 parameter_column_type <- function() {
   list(
     article_id = col_integer(),
-    parameter_name = col_character(),
-    parameter_value = col_character(),
-    parameter_units = col_character(),
-    parameter_notes = col_character(),
-    qa_m1 = col_integer(),
-    qa_m2 = col_integer(),
-    qa_a3 = col_integer(),
-    qa_a4 = col_integer(),
-    qa_d5 = col_integer(),
-    qa_d6 = col_integer(),
-    qa_d7 = col_integer()
+    parameter_type = col_character(),
+    parameter_value = col_double(),
+    parameter_unit = col_character(),
+    parameter_lower_bound = col_double(),
+    parameter_upper_bound = col_double(),
+    parameter_value_type = col_character(),
+    parameter_uncertainty_single_value = col_double(),
+    parameter_uncertainty_singe_type = col_character(),
+    parameter_uncertainty_lower_value = col_double(),
+    parameter_uncertainty_upper_value = col_double(),
+    parameter_uncertainty_type = col_character(),
+    cfr_ifr_numerator = col_integer(),
+    cfr_ifr_denominator = col_integer(),
+    distribution_type = col_character(),
+    distribution_par1_value = col_double(),
+    distribution_par1_type = col_character(),
+    distribution_par1_uncertainty = col_logical(),
+    distribution_par2_value = col_double(),
+    distribution_par2_type = col_character(),
+    distribution_par2_uncertainty = col_logical(),
+    method_from_supplement = col_logical(),
+    method_moment_value = col_character(),
+    cfr_ifr_method = col_character(),
+    method_r = col_character(),
+    method_disaggregated_by = col_character(),
+    method_disaggregated = col_logical(),
+    method_disaggregated_only = col_logical(),
+    riskfactor_outcome = col_character(),
+    riskfactor_name = col_character(),
+    riskfactor_occupation = col_character(),
+    riskfactor_significant = col_character(),
+    riskfactor_adjusted = col_character(),
+    population_sex = col_character(),
+    population_sample_type = col_character(),
+    population_group = col_character(),
+    population_age_min = col_integer(),
+    population_age_max = col_integer(),
+    population_sample_size = col_integer(),
+    population_country = col_character(),
+    population_location = col_character(),
+    population_study_start_day = col_integer(),
+    population_study_start_month = col_character(),
+    population_study_start_year = col_integer(),
+    population_study_end_day = col_integer(),
+    population_study_end_month = col_character(),
+    population_study_end_year = col_integer(),
+    genome_site = col_character(),
+    genomic_sequence_available = col_logical(),
+    parameter_class = col_character(),
+    covidence_id = col_integer()
   )
+}
+
+
+#' outbreak_column_type
+#' 
+#' This function defines the column types for the outbreaks in the dataset.
+#' It returns a list of column types with their corresponding names.
+#' @inherit article_column_type details return seealso
+#' @export
+#' @importFrom readr col_integer col_character col_double col_logical
+#' @keywords dataset, column types
+#' @examples
+#' outbreak_column_type()
+outbreak_column_type <- function() {
+  list(
+    article_id           = col_double(),
+    outbreak_start_day   = col_double(),
+    outbreak_start_month = col_character(),
+    outbreak_start_year  = col_double(),
+    outbreak_end_day     = col_double(),
+    outbreak_end_month   = col_character(),
+    outbreak_date_year   = col_double(),
+    outbreak_duration_months = col_double(),
+    outbreak_size        = col_double(),
+    asymptomatic_transmission = col_double(),
+    outbreak_country     = col_character(),
+    outbreak_location    = col_character(),
+    cases_confirmed      = col_double(),
+    cases_mode_detection = col_character(),
+    cases_suspected      = col_integer(),
+    cases_asymptomatic   = col_integer(),
+    deaths               = col_integer(),
+    cases_severe_hospitalised = col_integer(),
+    covidence_id         = col_integer()
+  )
+}
+
+#' model_column_type
+#' 
+#' This function defines the column types for the models in the dataset.
+#' It returns a list of column types with their corresponding names.
+#' @inherit article_column_type details return seealso
+#' @export
+#' @importFrom readr col_integer col_character col_double col_logical
+#' @keywords dataset, column types
+#' @examples
+#' model_column_type()
+model_column_type <- function() {
+  
+  new_model = list(
+    article_id          = col_double(),
+    model_type          = col_character(),
+    compartmental_type  = col_character(),
+    stoch_deter         = col_character(),
+    theoretical_model   = col_logical(),
+    interventions_type  = col_character(),
+    code_available      = col_logical(),
+    transmission_route  = col_character(),
+    assumptions         = col_character(),
+    covidence_id        = col_integer()
+  )
+  
 }

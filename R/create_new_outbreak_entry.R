@@ -1,7 +1,7 @@
 #' Create new outbreak entry
 #'
 #' @param pathogen name of pathogen
-#' @param new_outbreak all the required details for the new outbreak
+#' @param new_outbreak all the required details for the new outbreak as a list
 #' @importFrom tibble as_tibble as_tibble_row
 #' @importFrom validate validator confront summary %vin%
 #' @importFrom dplyr select
@@ -12,48 +12,30 @@
 #' @examples
 #' create_new_outbreak_entry(
 #'   pathogen = "marburg",
-#'   new_outbreak = c(list("article_id"           = as.numeric(1)),
-#'                    list("outbreak_start_day"   = as.numeric(NA)),
-#'                    list("outbreak_start_month" = as.character(NA)),
-#'                    list("outbreak_start_year"  = as.numeric(1999)),
-#'                    list("outbreak_end_day"     = as.numeric(NA)),
-#'                    list("outbreak_end_month"   = as.character(NA)),
-#'                    list("outbreak_date_year"   = as.numeric(2001)),
-#'                    list("outbreak_duration_months" = as.numeric(NA)),
-#'                    list("outbreak_size"        = as.numeric(2)),
-#'                    list("asymptomatic_transmission" = as.numeric(0)),
-#'                    list("outbreak_country"     = as.character("Tanzania")),
-#'                    list("outbreak_location"    = as.character(NA)),
-#'                    list("cases_confirmed"      = as.numeric(NA)),
-#'                    list("cases_mode_detection" = as.character(NA)),
-#'                    list("cases_suspected"      = as.integer(NA)),
-#'                    list("cases_asymptomatic"   = as.integer(NA)),
-#'                    list("deaths"               = as.integer(2)),
-#'                    list("cases_severe_hospitalised" = as.integer(NA)),
-#'                    list("covidence_id"         = as.integer(2059)))
+#'   new_outbreak = list(
+#'     article_id           = as.numeric(1),
+#'     outbreak_start_day   = as.numeric(NA),
+#'     outbreak_start_month = as.character(NA),
+#'     outbreak_start_year  = as.numeric(1999),
+#'     outbreak_end_day     = as.numeric(NA),
+#'     outbreak_end_month   = as.character(NA),
+#'     outbreak_date_year   = as.numeric(2001),
+#'     outbreak_duration_months = as.numeric(NA),
+#'     outbreak_size        = as.numeric(2),
+#'     asymptomatic_transmission = as.numeric(0),
+#'     outbreak_country     = as.character("Tanzania"),
+#'     outbreak_location    = as.character(NA),
+#'     cases_confirmed      = as.numeric(NA),
+#'     cases_mode_detection = as.character(NA),
+#'     cases_suspected      = as.integer(NA),
+#'     cases_asymptomatic   = as.integer(NA),
+#'     deaths               = as.integer(2),
+#'     cases_severe_hospitalised = as.integer(NA),
+#'     covidence_id         = as.integer(2059)
 #'   )
+#' )
 #' @export
-create_new_outbreak_entry <- function(pathogen,
-                                      new_outbreak = c(list("article_id"           = as.numeric(NA)),
-                                                       list("outbreak_start_day"   = as.numeric(NA)),
-                                                       list("outbreak_start_month" = as.character(NA)),
-                                                       list("outbreak_start_year"  = as.numeric(NA)),
-                                                       list("outbreak_end_day"     = as.numeric(NA)),
-                                                       list("outbreak_end_month"   = as.character(NA)),
-                                                       list("outbreak_date_year"   = as.numeric(NA)),
-                                                       list("outbreak_duration_months" = as.numeric(NA)),
-                                                       list("outbreak_size"        = as.numeric(NA)),
-                                                       list("asymptomatic_transmission" = as.numeric(NA)),
-                                                       list("outbreak_country"     = as.character(NA)),
-                                                       list("outbreak_location"    = as.character(NA)),
-                                                       list("cases_confirmed"      = as.numeric(NA)),
-                                                       list("cases_mode_detection" = as.character(NA)),
-                                                       list("cases_suspected"      = as.integer(NA)),
-                                                       list("cases_asymptomatic"   = as.integer(NA)),
-                                                       list("deaths"               = as.integer(NA)),
-                                                       list("cases_severe_hospitalised" = as.integer(NA)),
-                                                       list("covidence_id"         = as.integer(NA)))
-) {
+create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   
   # assertions
   assert_pathogen(pathogen)
