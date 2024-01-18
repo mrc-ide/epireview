@@ -48,10 +48,10 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   ## Get column types based on table type
   col_types <- switch(
     table,
-    article = article_column_type(),
-    parameter = parameter_column_type(),
-    outbreak = outbreak_column_type(),
-    model = model_column_type()
+    article = article_column_type(pathogen = pathogen),
+    parameter = parameter_column_type(pathogen = pathogen),
+    outbreak = outbreak_column_type(pathogen = pathogen),
+    model = model_column_type(pathogen = pathogen)
   )
   
   file_path <- system.file("extdata", fname, package = "epireview")
@@ -82,13 +82,13 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' is particularly undesirable for us. 
 #' The function is intended to be used
 #' internally by \code{load_epidata_raw} where the files are being read. 
-#'
+#' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
 #' @importFrom readr col_character col_integer col_logical
 #' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
-article_column_type <- function() {
-  list(
+article_column_type <- function(pathogen) {
+  out <- list(
     first_author_first_name = col_character(),
     first_author_surname = col_character(),
     article_title = col_character(),
@@ -109,13 +109,19 @@ article_column_type <- function() {
     qa_d6 = col_integer(),
     qa_d7 = col_integer()
   )
+
+  if (pathogen == "marburg") {
+    names(out)[names(out) == "id"] <- "article_id"
+  }
+
+  out
 }
 
 #' parameter_column_type
 #'
 #' This function defines the column types for the parameters in the dataset.
 #' It returns a list of column types with their corresponding names.
-#' 
+#' @inheritParams load_epidata_raw
 #' @inherit article_column_type details return seealso 
 #' @export
 #'
@@ -125,10 +131,10 @@ article_column_type <- function() {
 #' @importFrom readr col_integer col_character col_double col_logical
 #'
 #' @keywords dataset, column types
-parameter_column_type <- function() {
-  list(
+parameter_column_type <- function(pathogen) {
+  out <- list(
     parameter_data_id = col_integer(),
-    article_id = col_integer(),
+    id = col_integer(),
     parameter_type = col_character(),
     parameter_value = col_double(),
     parameter_unit = col_character(),
@@ -180,6 +186,13 @@ parameter_column_type <- function() {
     parameter_class = col_character(),
     covidence_id = col_integer()
   )
+  
+  ## Marburg files have a slightly different structure
+  if (pathogen == "marburg") {
+    names(out)[names(out) == "id"] <- "article_id"
+  }
+
+  out
 }
 
 
@@ -187,14 +200,15 @@ parameter_column_type <- function() {
 #' 
 #' This function defines the column types for the outbreaks in the dataset.
 #' It returns a list of column types with their corresponding names.
+#' @inheritParams load_epidata_raw
 #' @inherit article_column_type details return seealso
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' outbreak_column_type()
-outbreak_column_type <- function() {
-  list(
+outbreak_column_type <- function(pathogen) {
+  out <- list(
     outbreak_id     = col_integer(),
     article_id           = col_double(),
     outbreak_start_day   = col_double(),
@@ -216,6 +230,13 @@ outbreak_column_type <- function() {
     cases_severe_hospitalised = col_integer(),
     covidence_id         = col_integer()
   )
+
+  ## Marburg files have a slightly different structure
+  if (pathogen == "marburg") {
+    names(out)[names(out) == "id"] <- "article_id"
+  }
+
+  out
 }
 
 #' model_column_type
@@ -223,15 +244,16 @@ outbreak_column_type <- function() {
 #' This function defines the column types for the models in the dataset.
 #' It returns a list of column types with their corresponding names.
 #' @inherit article_column_type details return seealso
+#' @inheritParams load_epidata_raw
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' model_column_type()
-model_column_type <- function() {
+model_column_type <- function(pathogen) {
   
-  new_model = list(
-    model_data_id            = col_integer(),
+  out <- list(
+    model_data_id       = col_integer(),
     article_id          = col_double(),
     model_type          = col_character(),
     compartmental_type  = col_character(),
@@ -243,5 +265,11 @@ model_column_type <- function() {
     assumptions         = col_character(),
     covidence_id        = col_integer()
   )
-  
+
+  ## Marburg files have a slightly different structure
+  if (pathogen == "marburg") {
+    names(out)[names(out) == "id"] <- "article_id"
+  }
+
+  out
 }
