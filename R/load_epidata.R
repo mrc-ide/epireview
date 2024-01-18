@@ -60,7 +60,10 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     warning(paste("No data found for ", pathogen))
   } else {
     message(paste("Loading data for ", pathogen))
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE)
+    ## Temporarily read in without column types as column names for the 
+    ## same table can change between pathogens
+    tmp <- read_csv(file_path, show_col_types = FALSE)
+    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
   }
   
   out
@@ -124,6 +127,7 @@ article_column_type <- function() {
 #' @keywords dataset, column types
 parameter_column_type <- function() {
   list(
+    parameter_data_id = col_integer(),
     article_id = col_integer(),
     parameter_type = col_character(),
     parameter_value = col_double(),
@@ -191,6 +195,7 @@ parameter_column_type <- function() {
 #' outbreak_column_type()
 outbreak_column_type <- function() {
   list(
+    outbreak_id     = col_integer(),
     article_id           = col_double(),
     outbreak_start_day   = col_double(),
     outbreak_start_month = col_character(),
@@ -226,6 +231,7 @@ outbreak_column_type <- function() {
 model_column_type <- function() {
   
   new_model = list(
+    model_data_id            = col_integer(),
     article_id          = col_double(),
     model_type          = col_character(),
     compartmental_type  = col_character(),
