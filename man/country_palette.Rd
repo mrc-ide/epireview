@@ -4,20 +4,22 @@
 \alias{country_palette}
 \title{country_palette Function}
 \usage{
-country_palette(countries)
+country_palette(x)
 }
 \arguments{
-\item{countries}{A vector of country names. If not provided, a palette of length 36 with a default set of
-countries is returned.}
+\item{x}{A vector of country names. If provided, the function will return a color palette for the specified countries.}
 }
 \value{
-A named color palette.
+A color palette for the specified countries.
 }
 \description{
-This function creates a color palette for countries.
+This function returns a color palette for countries.
 }
 \examples{
+# Get color palette for all countries
 country_palette()
-country_palette(countries = c("USA", "Canada", "Mexico"))
+
+# Get color palette for specific countries
+country_palette(c('Liberia', 'Guinea', 'Sierra Leone'))
 
 }

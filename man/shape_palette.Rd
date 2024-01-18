@@ -10,7 +10,8 @@ shape_palette(shape_by = c("value_type"), ...)
 \item{shape_by}{A character vector specifying the parameter to shape the palette by.
 Currently, only "value_type" is supported.}
 
-\item{...}{Additional arguments to be passed to the underlying palette function.}
+\item{...}{Additional arguments to be passed to the underlying palette function.
+These are treated as names of the palette elements.}
 }
 \value{
 A shape palette based on the specified shape_by parameter.
