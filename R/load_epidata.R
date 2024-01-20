@@ -54,11 +54,11 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     model = model_column_type()
   )
   
-  file_path <- system.file("extdata", fname, package = "epireview")
-  
-  if (is.na(file_path)) {
+  if (is.na(fname)) {
     warning(paste("No data found for ", pathogen))
+    return(NULL)
   } else {
+    file_path <- system.file("extdata", fname, package = "epireview")
     message(paste("Loading data for ", pathogen))
     ## Temporarily read in without column types as column names for the 
     ## same table can change between pathogens
