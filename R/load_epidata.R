@@ -48,10 +48,10 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   ## Get column types based on table type
   col_types <- switch(
     table,
-    article = article_column_type(pathogen = pathogen),
-    parameter = parameter_column_type(pathogen = pathogen),
-    outbreak = outbreak_column_type(pathogen = pathogen),
-    model = model_column_type(pathogen = pathogen)
+    article = article_column_type(),
+    parameter = parameter_column_type(),
+    outbreak = outbreak_column_type(),
+    model = model_column_type()
   )
   
   file_path <- system.file("extdata", fname, package = "epireview")
@@ -63,9 +63,14 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## Temporarily read in without column types as column names for the 
     ## same table can change between pathogens
     tmp <- read_csv(file_path, show_col_types = FALSE)
+    ## col_types will have more columns than tmp, so we need to select
+    ## only the columns that are in tmp
+    ## This is because the column names can change between pathogens
+    ## for instance, pathogens extracted after SARS will have additional
+    ## parameters.
+    col_types <- intersect(colnames(tmp), names(col_types))
     out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
   }
-  
   out
   
 }
@@ -89,6 +94,9 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' @export
 article_column_type <- function(pathogen) {
   out <- list(
+    id = col_character(),
+    covidence_id = col_integer(),
+    pathogen = col_character(),
     first_author_first_name = col_character(),
     first_author_surname = col_character(),
     article_title = col_character(),
@@ -110,10 +118,6 @@ article_column_type <- function(pathogen) {
     qa_d7 = col_integer()
   )
 
-  if (pathogen == "marburg") {
-    names(out)[names(out) == "id"] <- "article_id"
-  }
-
   out
 }
 
@@ -121,7 +125,7 @@ article_column_type <- function(pathogen) {
 #'
 #' This function defines the column types for the parameters in the dataset.
 #' It returns a list of column types with their corresponding names.
-#' @inheritParams load_epidata_raw
+#' 
 #' @inherit article_column_type details return seealso 
 #' @export
 #'
@@ -131,10 +135,11 @@ article_column_type <- function(pathogen) {
 #' @importFrom readr col_integer col_character col_double col_logical
 #'
 #' @keywords dataset, column types
-parameter_column_type <- function(pathogen) {
+parameter_column_type <- function() {
   out <- list(
-    parameter_data_id = col_integer(),
-    id = col_integer(),
+    parameter_data_id = col_character(),
+    id = col_character(),
+    article_id = col_integer(),
     parameter_type = col_character(),
     parameter_value = col_double(),
     parameter_unit = col_character(),
@@ -187,11 +192,6 @@ parameter_column_type <- function(pathogen) {
     covidence_id = col_integer()
   )
   
-  ## Marburg files have a slightly different structure
-  if (pathogen == "marburg") {
-    names(out)[names(out) == "id"] <- "article_id"
-  }
-
   out
 }
 
@@ -200,17 +200,18 @@ parameter_column_type <- function(pathogen) {
 #' 
 #' This function defines the column types for the outbreaks in the dataset.
 #' It returns a list of column types with their corresponding names.
-#' @inheritParams load_epidata_raw
+#' 
 #' @inherit article_column_type details return seealso
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' outbreak_column_type()
-outbreak_column_type <- function(pathogen) {
+outbreak_column_type <- function() {
   out <- list(
-    outbreak_id     = col_integer(),
-    article_id           = col_double(),
+    outbreak_id     = col_character(),
+    id = col_character(),
+    article_id           = col_integer(),
     outbreak_start_day   = col_double(),
     outbreak_start_month = col_character(),
     outbreak_start_year  = col_double(),
@@ -230,12 +231,6 @@ outbreak_column_type <- function(pathogen) {
     cases_severe_hospitalised = col_integer(),
     covidence_id         = col_integer()
   )
-
-  ## Marburg files have a slightly different structure
-  if (pathogen == "marburg") {
-    names(out)[names(out) == "id"] <- "article_id"
-  }
-
   out
 }
 
@@ -244,17 +239,20 @@ outbreak_column_type <- function(pathogen) {
 #' This function defines the column types for the models in the dataset.
 #' It returns a list of column types with their corresponding names.
 #' @inherit article_column_type details return seealso
-#' @inheritParams load_epidata_raw
+#' 
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' model_column_type()
-model_column_type <- function(pathogen) {
+model_column_type <- function() {
   
   out <- list(
-    model_data_id       = col_integer(),
-    article_id          = col_double(),
+    id = col_character(),
+    model_data_id       = col_character(),
+    article_id          = col_integer(),
+    pathogen            = col_character(),
+    ebola_variant       = col_character(),
     model_type          = col_character(),
     compartmental_type  = col_character(),
     stoch_deter         = col_character(),
@@ -265,11 +263,6 @@ model_column_type <- function(pathogen) {
     assumptions         = col_character(),
     covidence_id        = col_integer()
   )
-
-  ## Marburg files have a slightly different structure
-  if (pathogen == "marburg") {
-    names(out)[names(out) == "id"] <- "article_id"
-  }
 
   out
 }
