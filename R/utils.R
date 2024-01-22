@@ -3,7 +3,7 @@
 #' @inheritParams ggplot2::theme_bw
 #' @importFrom ggplot2 update_geom_defaults
 #' @importFrom ggplot2 theme_bw
-#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 theme unit element_text margin
 #' @export
 theme_epireview <- function(
     base_size = 11,
@@ -11,15 +11,15 @@ theme_epireview <- function(
     base_line_size = base_size / 22,
     base_rect_size = base_size / 22) {
 
-  update_geom_defaults("point", list(size = 3))
-  update_geom_defaults("segment", list(lwd = 5, alpha = 0.4))
-  update_geom_defaults("errorbar", list(lwd = 1, width = 0.4))
-  th <- theme_bw(base_size, base_family, base_line_size, base_rect_size)
-  th <- th + theme(
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    plot.margin = margin(10, 20, 10, 20),
-    panel.spacing = unit(1.5, "lines"),
+  ggplot2::update_geom_defaults("point", list(size = 3))
+  ggplot2::update_geom_defaults("segment", list(lwd = 5, alpha = 0.4))
+  ggplot2::update_geom_defaults("errorbar", list(lwd = 1, width = 0.4))
+  th <- ggplot2::theme_bw(base_size, base_family, base_line_size, base_rect_size)
+  th <- th + ggplot2::theme(
+    plot.title = ggplot2::element_text(hjust = 0.5),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5),
+    plot.margin = ggplot2::margin(10, 20, 10, 20),
+    panel.spacing = ggplot2::unit(1.5, "lines"),
     legend.position = "bottom"
   )
 
@@ -60,18 +60,19 @@ country_palette <- function(x) {
       'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
       'United Kingdom', 'Unspecified'
     )
-  
-  if (missing(x)) {
-   names(pal) <- countries
+  ## Missing or of length 0, return the whole palette
+  if (missing(x) | length(x) == 0) {
+   x <- countries
   } else {
     ## If more than 36 countries are provided, throw and error
     if (length(x) > length(pal)) {
       stop(paste0("More than", length(pal)," countries provided. Please provide a vector of length", length(pal)," or less"))
     } else {
       pal <- pal[1:length(x)]
-      names(pal) <- x
+      
     }
   }
+  names(pal) <- x
   pal[x]
 }
 
@@ -99,7 +100,7 @@ parameter_palette <- function(x) {
   n_colrs <- length(unique(out))
   colrs <- unique(out)
   ## if x is missing, return the whole palette
-  if (missing(x)) {
+  if (missing(x) | length(x) == 0) {
     x <- names(out)
   } else {
     ## Set names of out to x checking first that the lengths match
@@ -141,7 +142,7 @@ value_type_palette <- function(x) {
   ## unique shapes
   shapes <- unique(out)
   ## if x is missing, return the whole palette
-  if (missing(x)) {
+  if (missing(x) | length(x) == 0) {
     x <- names(out)
   } else {
     ## Set names of out to x checking first that the lengths match
@@ -159,20 +160,21 @@ value_type_palette <- function(x) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
-color_palette <- function(col_by = c("parameter", "country"), ...) {
+color_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   match.arg(col_by)
   other_args <- list(...)
-  if (col_by == "parameter") {
+  col_palette <- NULL
+  if (col_by == "parameter_type") {
     col_palette <- parameter_palette(other_args)
   } 
-  if (col_by == "country") {
+  if (col_by == "population_country") {
     col_palette <- country_palette(other_args)
   }
   col_palette
 }
 
 ## Synonym for color_palette
-colour_palette <- function(col_by = c("parameter", "country"), ...) {
+colour_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   color_palette(col_by, ...)
 }
 
@@ -194,6 +196,7 @@ colour_palette <- function(col_by = c("parameter", "country"), ...) {
 shape_palette <- function(shape_by = c("value_type"), ...) {
   match.arg(shape_by)
   other_args <- list(...)
+  shape_palette <- NULL
   if (shape_by == "value_type") {
     shape_palette <- value_type_palette(other_args)
   }

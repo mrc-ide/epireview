@@ -8,7 +8,7 @@
 #' This function generates a forest plot using the provided data frame.
 #'
 #' @param df The data frame containing the data for the forest plot. data.frame with the following fields: article, label, mid, low, high
-##' The field 'y' is mapped to the y-axis with 'label' used as a display label.
+##' The field 'y' is mapped to the y-axis with 'article_label' used as a display label.
 ##' mid refers to the central estimate. low and high represent the lower and higher ends of the
 ##' uncertainty interval
 #' @param facet_by (Optional) Variable to facet the plot by.
@@ -17,12 +17,12 @@
 #' @param shape_palette (Optional) Palette for shaping the points. Optional unless shape_by is
 #' not one of 'value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
-#' not one of 'parameter' or 'country'.
+#' not one of 'parameter_type' or 'population_country'.
 #'
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
 #' @return A ggplot object representing the forest plot.
-#'
+#' @import ggplot2
 #' @examples
 #' df <- data.frame(
 #'   mid = c(1, 2, 3),
@@ -32,11 +32,11 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shp_palette, 
-    col_palette) {
+    shp_palette = NA, 
+    col_palette = NA) {
 
   ## If col_by is not one of parameter or country, a palette must be provided
-  if (!is.na(col_by) & !col_by %in% c("parameter", "country")) {
+  if (!is.na(col_by) & !col_by %in% c("parameter_type", "population_country")) {
     if (is.na(col_palette)) {
       stop("A palette must be provided if col_by is not one of 'parameter' or 'country'")
     }
@@ -56,7 +56,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       aes(x = low, xend = high, y = y, yend = y)
     ) + scale_y_discrete(
       breaks = df$y,
-      labels = df$label
+      labels = df$article_label
     ) + theme_epireview()
 
 
@@ -77,7 +77,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       p <- p + scale_shape_manual(values = shp_palette)
     } else {
       shp_palette <- shape_palette(shape_by)
-      if (! is.na(shape_palette)) {
+      if (! is.null(shape_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         warning(paste("No palette was provided or found for ", shape_by, ". Using default palette"))
@@ -98,7 +98,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       p <- p + scale_color_manual(values = col_palette)
     } else {
       col_palette <- color_palette(col_by)
-      if (! is.na(col_palette)) {
+      if (! is.null(col_palette)) {
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning

@@ -4,7 +4,13 @@
 \alias{article_column_type}
 \title{Define the column types for the article data frame}
 \usage{
-article_column_type()
+article_column_type(pathogen)
+}
+\arguments{
+\item{pathogen}{name of pathogen. Must be one of the priority pathogens
+exactly as specified in the package. You can get a list of the
+priority pathogens currently included in the package by calling
+\code{priority_pathogens()}.}
 }
 \value{
 A list of column types for the article data frame

@@ -1,0 +1,30 @@
+---
+title: "load-filter-view-epidata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{load-filter-view-epidata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(epireview)
+```
+
+```{r}
+ebola <- load_epidata('ebola')
+params <- ebola[["params"]]
+rt <- filter_cols(params, "parameter_type", "in", "Reproduction number (Effective, Re)")
+rt$y <- rt$article_label
+rt$mid <- rt$parameter_value 
+rt$low <- rt$parameter_uncertainty_lower_value
+rt$high <- rt$parameter_uncertainty_upper_value
+forest_plot(rt, col_by = "country")
+```
