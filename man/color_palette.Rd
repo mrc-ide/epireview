@@ -7,7 +7,7 @@ figures. Palettes are currently defined for
 parameters and countries. Any other variable will
 return NULL}
 \usage{
-color_palette(col_by = c("parameter", "country"), ...)
+color_palette(col_by = c("parameter_type", "population_country"), ...)
 }
 \description{
 Define a consistent color palette for use in

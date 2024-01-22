@@ -12,6 +12,7 @@ Contains the latest open access pathogen data from the Pathogen Epidemiology Rev
 Useful links:
 \itemize{
   \item \url{https://mrc-ide.github.io/epireview/}
+  \item Report bugs at \url{https://mrc-ide.github.io/epireview/issues}
 }
 
 }

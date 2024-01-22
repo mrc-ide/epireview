@@ -15,10 +15,10 @@
 #' @param shape_by (Optional) Variable to shape the points by.
 #' @param col_by (Optional) Variable to color the points by.
 #' @param shape_palette (Optional) Palette for shaping the points. Optional unless shape_by is
-#' not one of 'value_type'.
+#' not one of 'parameter_value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
 #' not one of 'parameter_type' or 'population_country'.
-#'
+#' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
 #' @return A ggplot object representing the forest plot.
@@ -68,17 +68,16 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       if (! is.null(shape_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
+        ## if no palette is found, use the default and issue a warning
         warning(paste("No palette was provided or found for ", shape_by, ". Using default palette"))
       }
-      ## if the palette is not found, use the default and issue a warning
+     
       
     }   
   }
 
   if (!is.na(col_by)) {
-    p <- p + aes(
-      col = .data[[col_by]]
-    )
+    p <- p + aes(col = .data[[col_by]])
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette

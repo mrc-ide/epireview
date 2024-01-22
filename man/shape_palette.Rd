@@ -4,7 +4,7 @@
 \alias{shape_palette}
 \title{shape_palette function}
 \usage{
-shape_palette(shape_by = c("value_type"), ...)
+shape_palette(shape_by = c("parameter_value_type"), ...)
 }
 \arguments{
 \item{shape_by}{A character vector specifying the parameter to shape the palette by.
