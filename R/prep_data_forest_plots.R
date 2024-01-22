@@ -152,17 +152,17 @@ load_epidata <- function(pathogen, prepend = "") {
 
   if (! inherits(models, "data.frame")) {
     warning(paste("No models information found for ", pathogen))
-    models <- data.frame(article_id = NA)
+    models <- data.frame(id = NA)
   }
 
   if (! inherits(outbreaks, "data.frame")) {
     warning(paste("No outbreaks information found for ", pathogen))
-    outbreaks <- data.frame(article_id = NA)
+    outbreaks <- data.frame(id = NA)
   }
 
   if (! inherits(params, "data.frame")) {
     warning(paste("No params information found for ", pathogen))
-    params <- data.frame(article_id = NA)
+    params <- data.frame(id = NA)
   }
 
 
@@ -171,9 +171,10 @@ load_epidata <- function(pathogen, prepend = "") {
   articles$article_label <- paste0(
     articles$first_author_surname, " ", articles$year_publication
   )
-
+  ## TODO: this won't work for Marburg
+  ## TODO: fix Marburg data
   cols <- c(
-    "article_id", "first_author_surname", "year_publication", "article_label"
+    "id", "first_author_surname", "year_publication", "article_label"
   )
 
   articles <- articles[, cols]
@@ -186,9 +187,9 @@ load_epidata <- function(pathogen, prepend = "") {
   params$parameter_value <- as.numeric(params$parameter_value)
 
 
-  params <- left_join(params, articles, by = "article_id")
-  models <- left_join(models, articles, by = "article_id")
-  outbreaks <- left_join(outbreaks, articles, by = "article_id")
+  params <- left_join(params, articles, by = "id")
+  models <- left_join(models, articles, by = "id")
+  outbreaks <- left_join(outbreaks, articles, by = "id")
 
 
   list(params = params, models = models, outbreaks = outbreaks)
