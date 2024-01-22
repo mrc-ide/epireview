@@ -9,13 +9,13 @@ forest_plot(
   facet_by = NA,
   shape_by = NA,
   col_by = NA,
-  shp_palette,
-  col_palette
+  shp_palette = NA,
+  col_palette = NA
 )
 }
 \arguments{
 \item{df}{The data frame containing the data for the forest plot. data.frame with the following fields: article, label, mid, low, high
-The field 'y' is mapped to the y-axis with 'label' used as a display label.
+The field 'y' is mapped to the y-axis with 'article_label' used as a display label.
 mid refers to the central estimate. low and high represent the lower and higher ends of the
 uncertainty interval}
 
