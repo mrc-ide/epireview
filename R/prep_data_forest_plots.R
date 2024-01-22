@@ -186,7 +186,7 @@ load_epidata <- function(pathogen, prepend = "") {
   params <- short_parameter_type(params)
   params$parameter_value <- as.numeric(params$parameter_value)
 
-
+  
   params <- left_join(params, articles, by = "id")
   models <- left_join(models, articles, by = "id")
   outbreaks <- left_join(outbreaks, articles, by = "id")

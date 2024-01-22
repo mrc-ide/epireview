@@ -68,7 +68,8 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## This is because the column names can change between pathogens
     ## for instance, pathogens extracted after SARS will have additional
     ## parameters.
-    col_types <- intersect(colnames(tmp), names(col_types))
+    cols <- intersect(colnames(tmp), names(col_types))
+    col_types <- col_types[cols]
     out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
   }
   out
