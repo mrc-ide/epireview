@@ -38,11 +38,11 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## If col_by is not one of parameter or country, a palette must be provided
   if (!is.na(col_by) & !col_by %in% c("parameter_type", "population_country")) {
     if (is.na(col_palette)) {
-      stop("A palette must be provided if col_by is not one of 'parameter' or 'country'")
+      stop("A palette must be provided if col_by is not one of 'parameter_type' or 'population_country'")
     }
   }
   ## If shape_by is not one of value_type, a palette must be provided
-  if (!is.na(shape_by) & !shape_by %in% c("value_type")) {
+  if (!is.na(shape_by) & !shape_by %in% c("parameter_value_type")) {
     if (is.na(shp_palette)) {
       stop("A palette must be provided if shape_by is not one of 'value_type'")
     }

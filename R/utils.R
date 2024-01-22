@@ -193,11 +193,11 @@ colour_palette <- function(col_by = c("parameter_type", "population_country"), .
 #' shape_palette("value_type")
 #'
 #' @export
-shape_palette <- function(shape_by = c("value_type"), ...) {
+shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
   match.arg(shape_by)
   other_args <- list(...)
   shape_palette <- NULL
-  if (shape_by == "value_type") {
+  if (shape_by == "parameter_value_type") {
     shape_palette <- value_type_palette(other_args)
   }
   shape_palette
