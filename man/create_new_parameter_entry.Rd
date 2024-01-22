@@ -108,6 +108,6 @@ create_new_parameter_entry <-
                "genome_site"                  = as.character(NA),
                "genomic_sequence_available"   = as.logical(NA),
                "parameter_class"          = as.character(NA),
-               "covidence_id"             = as.integer(NA)))
+               "covidence_id"             = as.integer(NA))
            )
 }

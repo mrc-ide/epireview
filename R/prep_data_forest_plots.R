@@ -7,7 +7,7 @@
 ##' @param x data.frame containing a column called "parameter_type"
 ##' @param parameter_type_full optional. User can specify the full value of a parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
-##' @return
+##' @return data.frame with a new column called "parameter_type_short"
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
@@ -126,7 +126,7 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 ##' exactly as specified in the package. You can get a list of the
 ##' priority pathogens currently included in the package by calling
 ##' \code{priority_pathogens()}.
-##' @param prepend
+##' 
 ##'
 ##' @return a list of length 2. The first element is a data.frame
 ##' called "params" with articles information (authors, publication year)
@@ -137,7 +137,7 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 ##' @importFrom dplyr left_join
 ##' @export
 
-load_epidata <- function(pathogen, prepend = "") {
+load_epidata <- function(pathogen) {
 
   assert_pathogen(pathogen)
 
@@ -205,7 +205,7 @@ load_epidata <- function(pathogen, prepend = "") {
 ##' \code{\link{forest_plot}}. The basic workflow is (a) load data, (b) filter and prepare data, and 
 ##' (c) create forest plot.
 ##' @inheritParams filter_cols
-##' @return a filtered data.frame with the following columns: article_label, parameter_type,
+##' @return data.frame a filtered data.frame with the following columns: article_label, parameter_type,
 ##' mid, low, high
 prepare_data_forest_plot <- function(df, cols, funs, vals) {
 

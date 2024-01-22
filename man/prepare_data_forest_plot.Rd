@@ -15,7 +15,7 @@ Each function must be one of "in", "==", ">", "<" in quotes.}
 \item{vals}{A list of values to be used for filtering columns in \code{cols}.}
 }
 \value{
-a filtered data.frame with the following columns: article_label, parameter_type,
+data.frame a filtered data.frame with the following columns: article_label, parameter_type,
 mid, low, high
 }
 \description{

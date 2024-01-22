@@ -50,7 +50,8 @@ dummy_param <- list("article_id"            = as.numeric(1),
                     "genome_site"                  = as.character(NA),
                     "genomic_sequence_available"   = as.logical(NA),
                     "parameter_class"          = as.character(NA),
-                    "covidence_id"             = as.numeric(2059))
+                    "covidence_id"             = as.numeric(2059)
+                    )
 
 
 test_that("new parameter entry matches old parameter structure", {

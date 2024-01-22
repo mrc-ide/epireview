@@ -13,6 +13,9 @@ short_parameter_type(x, parameter_type_full, parameter_type_short)
 
 \item{parameter_type_short}{optional. Shorter value of parameter_type_full}
 }
+\value{
+data.frame with a new column called "parameter_type_short"
+}
 \description{
 This function assigns short labels to otherwise very long parameter
 names. It is generally not intended to be called directly but is used by
