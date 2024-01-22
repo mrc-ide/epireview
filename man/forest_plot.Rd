@@ -26,10 +26,10 @@ uncertainty interval}
 \item{col_by}{(Optional) Variable to color the points by.}
 
 \item{col_palette}{Palette for coloring the points. Optional unless col_by is
-not one of 'parameter' or 'country'.}
+not one of 'parameter_type' or 'population_country'.}
 
 \item{shape_palette}{(Optional) Palette for shaping the points. Optional unless shape_by is
-not one of 'value_type'.}
+not one of 'parameter_value_type'.}
 }
 \value{
 A ggplot object representing the forest plot.
