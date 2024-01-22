@@ -22,15 +22,15 @@ priority_pathogens <- function() {
     doi = c("10.1101/2023.07.10.23292424v1", NA),
     articles_file = c(
       "marburg_article.csv",
-      "ebola_article.csv"
+      "ebola_articles.csv"
     ),
     params_file = c(
       "marburg_parameter.csv",
-      "ebola_parameter.csv"
+      "ebola_parameters.csv"
     ),
     models_file = c(
       "marburg_model.csv",
-      "ebola_model.csv"
+      "ebola_models.csv"
     ),
     outbreaks_file = c(
       "marburg_outbreak.csv",
