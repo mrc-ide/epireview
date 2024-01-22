@@ -17,6 +17,7 @@ Description: Contains the latest open access pathogen data from the Pathogen Epi
 License: GPL (>= 3)
 Depends:
     ggplot2,
+    ggforce,
     R (>= 3.3.0)
 Imports:
     tibble,
