@@ -157,6 +157,11 @@ value_type_palette <- function(x) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
+##' @param col_by a character vector specifying the parameter to color the palette by.
+##' @param ... additional arguments to be passed to the underlying palette function.
+##' These are treated as names of the palette elements.
+##' @return a named list of colors that can be used in forest plots for manually setting colors
+##' @export
 color_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   match.arg(col_by)
   other_args <- list(...)

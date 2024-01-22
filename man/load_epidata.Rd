@@ -4,15 +4,13 @@
 \alias{load_epidata}
 \title{Retrieve pathogen-specific data}
 \usage{
-load_epidata(pathogen, prepend = "")
+load_epidata(pathogen)
 }
 \arguments{
 \item{pathogen}{name of pathogen. Must be one of the priority pathogens
 exactly as specified in the package. You can get a list of the
 priority pathogens currently included in the package by calling
 \code{priority_pathogens()}.}
-
-\item{prepend}{}
 }
 \value{
 a list of length 2. The first element is a data.frame
