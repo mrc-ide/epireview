@@ -23,6 +23,7 @@
 #' If you wish to color by a different variable, you must provide a palette.
 #' @return A ggplot object representing the forest plot.
 #' @import ggplot2
+#' @export 
 #' @examples
 #' df <- data.frame(
 #'   mid = c(1, 2, 3),
