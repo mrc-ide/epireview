@@ -36,12 +36,12 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     col_palette = NA) {
 
   p <- ggplot(df) +
-    geom_point(aes(x = .data[["mid"]], y = .data[[y]])) +
+    geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
     geom_errorbar(
-      aes(xmin = .data[[low]], xmax = .data[[high]], y = .data[[y]])
+      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']])
     ) +
     geom_segment(
-      aes(x = .data[[low]], xend = .data[[high]], y = .data[[y]], yend = .data[[y]])
+      aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], yend = .data[['y']])
     ) + scale_y_discrete(
       breaks = df$y,
       labels = df$article_label
