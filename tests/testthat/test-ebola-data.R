@@ -1,22 +1,9 @@
 test_that('Ebola articles, models, and parameters are ok', {
 
-  apath <- system.file(
-    "extdata", "ebola_article.csv",
-    package = "epireview"
-  )
-  articles <- read_csv(apath)
 
-  mpath <- system.file(
-    "extdata", "ebola_model.csv",
-    package = "epireview"
-  )
-  models <- read_csv(mpath)
-
-  ppath <- system.file(
-    "extdata", "ebola_parameter.csv",
-    package = "epireview"
-  )
-  params <- read_csv(ppath)
+  articles <- load_epidata_raw("ebola", "article")
+  models <- load_epidata_raw("ebola", "model")
+  params <- load_epidata_raw("ebola", "parameter")
 
   ## 520 articles for Ebola
   expect_equal(nrow(articles), 520)

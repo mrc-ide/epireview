@@ -6,25 +6,20 @@
 \usage{
 create_new_article_entry(
   pathogen = NA,
-  new_article = c(list(first_author_first_name = as.character(NA)),
-    list(first_author_surname = as.character(NA)), list(article_title =
-    as.character(NA)), list(doi = as.character(NA)), list(journal = as.character(NA)),
-    list(year_publication = as.integer(NA)), list(volume = as.integer(NA)), list(issue =
-    as.integer(NA)), list(page_first = as.integer(NA)), list(page_last = as.integer(NA)),
-    list(paper_copy_only = as.logical(NA)), list(notes = as.character(NA)), list(qa_m1 =
-    as.integer(NA)), list(qa_m2 = as.integer(NA)), 
-     list(qa_a3 = as.integer(NA)),
-    list(qa_a4 = as.integer(NA)), list(qa_d5 = as.integer(NA)), list(qa_d6 =
-    as.integer(NA)), list(qa_d7 = as.integer(NA))),
-  vignette_prepend = ""
+  new_article = list(first_author_first_name = as.character(NA), first_author_surname =
+    as.character(NA), article_title = as.character(NA), doi = as.character(NA), journal =
+    as.character(NA), year_publication = as.integer(NA), volume = as.integer(NA), issue =
+    as.integer(NA), page_first = as.integer(NA), page_last = as.integer(NA),
+    paper_copy_only = as.logical(NA), notes = as.character(NA), qa_m1 = as.integer(NA),
+    qa_m2 = as.integer(NA), qa_a3 = as.integer(NA), qa_a4 = as.integer(NA), qa_d5 =
+    as.integer(NA), qa_d6 = as.integer(NA), 
+     qa_d7 = as.integer(NA))
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_article}{all the required details for the new article}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 return new row of data to be added to the article data set using the
@@ -36,24 +31,27 @@ Create new article entry
 \examples{
 create_new_article_entry(
   pathogen = "marburg",
-  new_article = c(list("first_author_first_name" = as.character("Joe")),
-                  list("first_author_surname"    = as.character("Blocks")),
-                  list("article_title"           = as.character("hello")),
-                  list("doi"                     = as.character("NA")),
-                  list("journal"                 = as.character("ABC")),
-                  list("year_publication"        = as.integer(2000)),
-                  list("volume"                  = as.integer(NA)),
-                  list("issue"                   = as.integer(NA)),
-                  list("page_first"              = as.integer(NA)),
-                  list("page_last"               = as.integer(NA)),
-                  list("paper_copy_only"         = as.logical(NA)),
-                  list("notes"                   = as.character(NA)),
-                  list("qa_m1"                   = as.integer(1)),
-                  list("qa_m2"                   = as.integer(0)),
-                  list("qa_a3"                   = as.integer(NA)),
-                  list("qa_a4"                   = as.integer(1)),
-                  list("qa_d5"                   = as.integer(0)),
-                  list("qa_d6"                   = as.integer(NA)),
-                  list("qa_d7"                   = as.integer(1))),
-  vignette_prepend = "" )
+  new_article = list(
+    first_author_first_name = as.character("Joe"),
+    first_author_surname = as.character("Blocks"),
+    article_title = as.character("hello"),
+    doi = as.character("NA"),
+    journal = as.character("ABC"),
+    year_publication = as.integer(2000),
+    volume = as.integer(NA),
+    issue = as.integer(NA),
+    page_first = as.integer(NA),
+    page_last = as.integer(NA),
+    paper_copy_only = as.logical(NA),
+    notes = as.character(NA),
+    qa_m1 = as.integer(1),
+    qa_m2 = as.integer(0),
+    qa_a3 = as.integer(NA),
+    qa_a4 = as.integer(1),
+    qa_d5 = as.integer(0),
+    qa_d6 = as.integer(NA),
+    qa_d7 = as.integer(1)
+  )
+
+)
 }

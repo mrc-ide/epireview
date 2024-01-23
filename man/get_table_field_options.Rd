@@ -5,22 +5,22 @@
 \title{Utility to obtain available fields in a specified table}
 \usage{
 get_table_field_options(
-  table_type = NA,
-  pathogen = NA,
-  field = "all",
-  vignette_prepend = ""
+  pathogen,
+  table = c("model", "parameter", "outbreak", "article"),
+  field = "all"
 )
 }
 \arguments{
-\item{table_type}{which type of table (either "parameter", "outbreak", or
-"model") should be loaded}
+\item{pathogen}{name of pathogen. Must be one of the priority pathogens
+exactly as specified in the package. You can get a list of the
+priority pathogens currently included in the package by calling
+\code{priority_pathogens()}.}
 
-\item{pathogen}{pathogen name e.g. "marburg"}
+\item{table}{the table to be loaded. Must be one of
+"article", "parameter", "outbreak", or "model"}
 
 \item{field}{can either be "all" to return all fields in the specified
 table_type, or a specific variable name that the user wants to return}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 data for specified table_type and field
@@ -29,14 +29,13 @@ data for specified table_type and field
 Note: This will need to be extended when other pathogens are added
 }
 \examples{
-get_table_field_options(table_type = "model",
-                       pathogen = "marburg",
+get_table_field_options(
+                       pathogen = "marburg", "model",
                        field = "all")
 
-get_table_field_options(table_type = "model",
-                       pathogen = "marburg",
-                       field = "Model type")
+get_table_field_options(pathogen = "marburg", "model",
+                        field = "Model type")
 
-get_table_field_options(table_type = "parameter", pathogen = "marburg",
+get_table_field_options(pathogen = "marburg", "parameter",
                         field = "Reproduction number method")
 }
