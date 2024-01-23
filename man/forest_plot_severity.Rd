@@ -8,7 +8,7 @@ forest_plot_severity(df, outbreak_naive = FALSE)
 }
 \arguments{
 \item{df}{processed data with severity information produced using
-data_forest_plots()}
+prep_data_forest_plots()}
 
 \item{outbreak_naive}{whether to use unadjusted case and death counts (TRUE)
 or the adjusted case and death counts (FALSE). FALSE by default.}

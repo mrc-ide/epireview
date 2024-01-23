@@ -9,13 +9,17 @@ Authors@R: c(
     person("Sangeeta", "Bhatia", email = "s.bhatia@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0001-6525-101X")),
     person("Richard", "Sheppard", email = "richard.sheppard11@imperial.ac.uk", role = "aut"),
+    person("Joseph", "Hicks", email = "j.hicks@imperial.ac.uk", role = "aut"),
     person("Gina", "Cuomo-Dannenburg", role = "aut", comment = c(ORCID = "0000-0001-6821-0352")),
     person("Ruth", "McCabe", role = "aut", comment = c(ORCID = "0000-0002-6368-9103")),
     person("Kelly", "McCain", role = "aut", comment = c(ORCID = "0000-0003-2393-2217")))
 Description: Contains the latest open access pathogen data from the Pathogen Epidemiology Review Group (PERG). Tools are available to update pathogen databases with new peer-reviewed data as it becomes available, and to summarise the latest data using tables and figures.
 License: GPL (>= 3)
-Imports:
+Depends:
     ggplot2,
+    ggforce,
+    R (>= 3.3.0)
+Imports:
     tibble,
     dplyr,
     tidyr,
@@ -25,18 +29,21 @@ Imports:
     tm,
     officer,
     stringr,
-    validate
+    validate,
+    pals,
+    paletteer
 Suggests:
     knitr,
+    lifecycle,
     meta,
     tidyverse,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rmarkdown
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://mrc-ide.github.io/epireview/
-Depends: 
-    R (>= 2.10)
 LazyData: true
+BugReports: https://mrc-ide.github.io/epireview/issues
