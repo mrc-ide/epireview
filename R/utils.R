@@ -3,11 +3,11 @@
 #' @inheritParams ggplot2::theme_bw
 #' @export
 theme_epireview <- function(
-    base_size = 11,
-    base_family = "",
-    base_line_size = base_size / 22,
-    base_rect_size = base_size / 22) {
-
+  base_size = 11,
+  base_family = "",
+  base_line_size = base_size / 22,
+  base_rect_size = base_size / 22
+) {
   update_geom_defaults("point", list(size = 3))
   update_geom_defaults("segment", list(lwd = 5, alpha = 0.4))
   update_geom_defaults("errorbar", list(lwd = 1, width = 0.4))
@@ -19,10 +19,8 @@ theme_epireview <- function(
     panel.spacing = unit(1.5, "lines"),
     legend.position = "bottom"
   )
-
   th
 }
-
 
 #' country_palette Function
 #'
@@ -42,31 +40,24 @@ theme_epireview <- function(
 #'
 #' @export
 country_palette <- function(x) {
-  ## this gives a palette of length 36. I don't think
-  ## we need more than 36 countries in a single plot.
   pal <- paletteer::paletteer_d("pals::polychrome")
-  ## turn it into a list as otherwise is has class "colors"
-  ## and i can't see what good that is doing.
   class(pal) <- NULL
   countries <- c(
-      'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
-      'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
-      'Cameroon', 'Central African Republic', 'Republic of the Congo',
-      'Sudan', 'Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
-      'Equatorial Guinea', 'Angola', 'South Africa', 'Zambia', 'Tanzania',
-      'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
-      'United Kingdom', 'Unspecified'
-    )
-  ## Missing or of length 0, return the whole palette
+    'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
+    'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
+    'Cameroon', 'Central African Republic', 'Republic of the Congo',
+    'Sudan', 'Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
+    'Equatorial Guinea', 'Angola', 'South Africa', 'Zambia', 'Tanzania',
+    'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
+    'United Kingdom', 'Unspecified'
+  )
   if (missing(x) | length(x) == 0) {
-   x <- countries
+    x <- countries
   } else {
-    ## If more than 36 countries are provided, throw and error
     if (length(x) > length(pal)) {
       stop(paste0("More than", length(pal)," countries provided. Please provide a vector of length", length(pal)," or less"))
     } else {
       pal <- pal[1:length(x)]
-      
     }
   }
   names(pal) <- x
@@ -86,21 +77,16 @@ country_palette <- function(x) {
 ##' @author Sangeeta Bhatia
 parameter_palette <- function(x) {
   out <- list(
-    ## Variations of R0
     "Basic (R0)" = "#D95F02",
     "Reproduction number (Basic R0)" = "#D95F02",
-    ## Variations of Re
     "Effective (Re)" = "#7570B3",
     "Reproduction number (Effective, Re)" = "#7570B3"
   )
-  ## number of unique colors
   n_colrs <- length(unique(out))
   colrs <- unique(out)
-  ## if x is missing, return the whole palette
   if (missing(x) | length(x) == 0) {
     x <- names(out)
   } else {
-    ## Set names of out to x checking first that the lengths match
     if (length(x) < n_colrs) {
       out <- colrs[seq_along(x)]
       names(out) <- x
@@ -134,15 +120,11 @@ value_type_palette <- function(x) {
     other = 18,
     Other = 18
   )
-  ## number of unique shapes
   n_shapes <- length(unique(out))
-  ## unique shapes
   shapes <- unique(out)
-  ## if x is missing, return the whole palette
   if (missing(x) | length(x) == 0) {
     x <- names(out)
   } else {
-    ## Set names of out to x checking first that the lengths match
     if (length(x) < n_shapes) {
       out <- shapes[seq_along(x)]
       names(out) <- x
@@ -203,4 +185,55 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
     shape_palette <- value_type_palette(other_args)
   }
   shape_palette
+}
+
+#' Update parameter uncertainty columns in a data frame
+#'
+#' This function updates the parameter uncertainty columns in a data frame
+#' when the uncertainty is given by a single value (standard deviation or
+#' standard error). It creates new columns called `low' (parameter central
+#' value - uncertainty) and `high' (parameter central value + uncertainty).
+#' These columns are used by \code{\link{forest_plot}} to plot the
+#' uncertainty intervals.
+#' 
+#' @param df A data frame containing the parameter uncertainty columns.
+#' This will typically be the output of \code{\link{load_epidata}}.
+#' @return The updated data frame with parameter uncertainty columns
+#'
+#' @examples
+#' df <- data.frame(
+#'   parameter_value = c(10, 20, 30),
+#'   parameter_uncertainty_single_value = c(1, 2, 3),
+#'   parameter_uncertainty_lower_value = c(5, 15, 25),
+#'   parameter_uncertainty_upper_value = c(15, 25, 35),
+#'   parameter_uncertainty_type = c(NA, NA, NA),
+#'   parameter_uncertainty_singe_type = c("Standard Deviation", "Standard Error", NA)
+#' )
+#' updated_df <- param_pm_uncertainty(df)
+#' updated_df
+#'
+#' @export
+param_pm_uncertainty <- function(df) {
+  df$parameter_uncertainty_type <- ifelse(
+    is.na(df$parameter_uncertainty_type) &
+      df$parameter_uncertainty_singe_type == "Standard Deviation",
+    "Standard Deviation",
+    ifelse(
+      is.na(df$parameter_uncertainty_type) &
+        df$parameter_uncertainty_singe_type == "Standard Error",
+      "Standard Error",
+      df$parameter_uncertainty_type
+    )
+  )
+  df$low <- ifelse(
+    df$parameter_uncertainty_type %in% c("Standard Deviation", "Standard Error"),
+    df$parameter_value - df$parameter_uncertainty_single_value,
+    df$parameter_uncertainty_lower_value
+  )
+  df$high <- ifelse(
+    df$parameter_uncertainty_type %in% c("Standard Deviation", "Standard Error"),
+    df$parameter_value + df$parameter_uncertainty_single_value,
+    df$parameter_uncertainty_upper_value
+  )
+  df
 }
