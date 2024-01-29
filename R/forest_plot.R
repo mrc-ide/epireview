@@ -21,7 +21,7 @@
 #' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
-#' @return A ggplot object representing the forest plot.
+#' @return A ggplot2 object representing the forest plot.
 #' @import ggplot2
 #' @export 
 #' @examples
