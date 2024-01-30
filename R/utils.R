@@ -98,7 +98,7 @@ parameter_palette <- function(x) {
   out[x]
 }
 
-##' Define a consistent shape palette for use in
+##' Define a consistent shape palette for use in forest plots
 ##'
 ##' We map shape aesthetic to value type i.e., mean, median etc.
 ##' This function defines a shape palette that can be used in forest
@@ -238,4 +238,65 @@ param_pm_uncertainty <- function(df) {
     df$parameter_uncertainty_upper_value
   )
   df
+}
+
+## Where uncertainty is expressed using the shape and scale parameters of a
+## gamma distribution, we convert these to mean and standard deviation
+## for plotting. 
+#' Reparameterize Gamma Distribution
+#'
+#' This function reparameterizes the gamma distribution in a given data frame.
+#' It identifies rows where the parameter_value is NA, the distribution_type is gamma,
+#' the distribution_par1_type is Shape, the distribution_par2_type is Scale,
+#' and the distribution_par1_value and distribution_par2_value are not NA.
+#' For these rows, it sets the parameter_value_type to "Mean",
+#' the parameter_uncertainty_single_type to "Standard Deviation",
+#' and calculates the mean and standard deviation using the gamma_shapescale2mucv function.
+#' If the distribution_par2_type is "Mean sd", it sets the parameter_uncertainty_single_value
+#' to the distribution_par2_value and the parameter_uncertainty_single_type to "Standard Deviation".
+#'
+#' @param df A data frame containing the parameters and distributions.
+#' @return The modified data frame with reparameterized gamma distributions.
+#' @export
+reparam_gamma <- function(df) {
+  # function code here
+}
+reparam_gamma <- function(df) {
+
+  ## get rows whre parameter_value is na, and distribution_type is gamma
+  ## and distribution_par1_type is Shape and distribution_par2_type is Scale
+  ## and distribution_par1_value is not na and distribution_par2_value is not na
+  idx <- which(
+    is.na(df$parameter_value) &
+      df$distribution_type == "Gamma" &
+      df$distribution_par1_type == "Shape" &
+      df$distribution_par2_type == "Scale" &
+      !is.na(df$distribution_par1_value) &
+      !is.na(df$distribution_par2_value)
+  )
+  ## for these rows, set parameter_value_type to "Mean"
+  df$parameter_value_type[idx] <- "Mean"
+  ## for these rows, set parameter_uncertainty_singe_type to "Standard Deviation"
+  df$parameter_uncertainty_singe_type[idx] <- "Standard Deviation"
+  ## for these rows, get mean and cv using gamma_shapescale2mucv
+  new_params <- gamma_shapescale2mucv(
+    df$distribution_par1_value[idx],
+    df$distribution_par2_value[idx]
+  )
+  mus <- new_params$mu
+  sds <- new_params$cv * mus
+  df$parameter_uncertainty_single_value[idx] <- sds
+  df$parameter_value[idx] <- mus
+
+  ## If we have a gamma distribution with Mead sd,
+  ## we set the parameter_uncertainty_single_value to distribution_par2_value
+  idx <- which(
+      df$distribution_type == "Gamma" &
+      is.na(df$parameter_uncertainty_singe_type) &
+      df$distribution_par2_type == "Mean sd" 
+  )
+  df$parameter_uncertainty_single_value[idx] <- df$distribution_par2_value[idx]
+  df$parameter_uncertainty_singe_type[idx] <- "Standard Deviation"
+ 
+ df
 }

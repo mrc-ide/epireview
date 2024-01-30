@@ -40,7 +40,7 @@ forest_plot_r0 <- function(df, ulim = 10, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
   p <- forest_plot_rt_int(rt, ulim, ...) + 
-  labs(x = "Effective reproduction number (R)")
+  labs(x = "Basic reproduction number (R0)")
   p
 }
 
