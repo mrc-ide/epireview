@@ -1,5 +1,5 @@
 reorder_studies <- function(df) {
-  
+
   df$range_midpoint <- ifelse(is.na(df$parameter_value) & !is.na(df$parameter_upper_bound),
     df$parameter_upper_bound - df$parameter_lower_bound, NA
   )
@@ -10,9 +10,9 @@ reorder_studies <- function(df) {
 
   df <- df[order(df$temp_order_by), ]
 
-  df$article_label_unique <- factor(df$article_label_unique,
-    levels = unique(df$article_label_unique)
+  df$y <- factor(df$article_label,
+    levels = unique(df$article_label, ordered = TRUE)
   )
-
+  
   df
 }
