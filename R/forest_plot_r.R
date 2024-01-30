@@ -30,7 +30,6 @@
 #' @export
 forest_plot_rt <- function(df, ulim = 10, ...) {
   
-  other_args <- list(...)
   rt <- df[df$parameter_type == "Reproduction number (Effective, Re)", ]
   rt <- param_pm_uncertainty(rt)
   
