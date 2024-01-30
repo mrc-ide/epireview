@@ -31,21 +31,27 @@
 forest_plot_rt <- function(df, ulim = 10, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Effective, Re)", ]
-  rt <- param_pm_uncertainty(rt)
+  p <- forest_plot_rt_int(rt, ulim, ...) + 
+  labs(x = "Effective reproduction number (R)")
+  p
+}
+
+forest_plot_r0 <- function(df, ulim = 10, ...) {
   
-  
-  rt <- reorder_studies(rt)
-  
-  p <- forest_plot(rt, ...)
-  
+  rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
+  p <- forest_plot_rt_int(rt, ulim, ...) + 
+  labs(x = "Effective reproduction number (R)")
+  p
+}
+
+## Internal function; not exported
+forest_plot_rt_int <- function(rt_r0, ulim, ...) {
+  rt_r0 <- param_pm_uncertainty(rt_r0)
+  rt_r0 <- reorder_studies(rt_r0)
+  p <- forest_plot(rt_r0, ...)
   p <- p +       
     scale_x_continuous(limits = c(0, ulim), expand = c(0, 0), oob = scales::squish) +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey")
-  
-  p <- p + labs(x = "Effective reproduction number (R)")
-  
   p <- p + theme(axis.title.y = element_blank())
-  
   p
-  
 }
