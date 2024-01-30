@@ -17,7 +17,8 @@ theme_epireview <- function(
     plot.subtitle = element_text(hjust = 0.5),
     plot.margin = margin(10, 20, 10, 20),
     panel.spacing = unit(1.5, "lines"),
-    legend.position = "bottom"
+    legend.position = "bottom",
+    legend.title = element_blank()
   )
   th
 }
