@@ -240,27 +240,22 @@ param_pm_uncertainty <- function(df) {
   df
 }
 
+##
 ## Where uncertainty is expressed using the shape and scale parameters of a
 ## gamma distribution, we convert these to mean and standard deviation
 ## for plotting. 
 #' Reparameterize Gamma Distribution
 #'
 #' This function reparameterizes the gamma distribution in a given data frame.
-#' It identifies rows where the parameter_value is NA, the distribution_type is gamma,
-#' the distribution_par1_type is Shape, the distribution_par2_type is Scale,
-#' and the distribution_par1_value and distribution_par2_value are not NA.
-#' For these rows, it sets the parameter_value_type to "Mean",
-#' the parameter_uncertainty_single_type to "Standard Deviation",
-#' and calculates the mean and standard deviation using the gamma_shapescale2mucv function.
-#' If the distribution_par2_type is "Mean sd", it sets the parameter_uncertainty_single_value
-#' to the distribution_par2_value and the parameter_uncertainty_single_type to "Standard Deviation".
-#'
-#' @param df A data frame containing the parameters and distributions.
-#' @return The modified data frame with reparameterized gamma distributions.
+#' If a parameter has been expressed as a gamma distribution with shape and scale, 
+#' we convert these to mean and standard deviation for plotting.
+#' 
+#' 
+#' 
+#' @param df A data frame with updated columns for parameter value and uncertainty.
+#' @return data.frame modified data frame with reparameterized gamma distributions.
+#' @importFrom epitrix gamma_shapescale2mucv
 #' @export
-reparam_gamma <- function(df) {
-  # function code here
-}
 reparam_gamma <- function(df) {
 
   ## get rows whre parameter_value is na, and distribution_type is gamma
