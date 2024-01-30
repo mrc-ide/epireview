@@ -225,6 +225,7 @@ param_pm_uncertainty <- function(df) {
       df$parameter_uncertainty_type
     )
   )
+  df$mid <- df$parameter_value
   df$low <- ifelse(
     df$parameter_uncertainty_type %in% c("Standard Deviation", "Standard Error"),
     df$parameter_value - df$parameter_uncertainty_single_value,

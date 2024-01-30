@@ -32,7 +32,7 @@ not one of 'parameter_type' or 'population_country'.}
 not one of 'parameter_value_type'.}
 }
 \value{
-A ggplot object representing the forest plot.
+A ggplot2 object representing the forest plot.
 }
 \description{
 Basic forest plot displays central estimate and uncertainty for a parameter from different studies.

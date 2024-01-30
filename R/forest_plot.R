@@ -45,7 +45,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], yend = .data[['y']])
     ) + scale_y_discrete(
       breaks = df$y,
-      labels = df$article_label
+      labels = df$y
     ) + theme_epireview()
 
 
