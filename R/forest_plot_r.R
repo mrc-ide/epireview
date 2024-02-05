@@ -47,10 +47,12 @@ forest_plot_r0 <- function(df, ulim = 10, ...) {
 ## Internal function; not exported
 forest_plot_rt_int <- function(rt_r0, ulim, ...) {
   rt_r0 <- param_pm_uncertainty(rt_r0)
+  rt_r0 <- reparam_gamma(rt_r0)
   rt_r0 <- reorder_studies(rt_r0)
   p <- forest_plot(rt_r0, ...)
   p <- p +       
-    scale_x_continuous(limits = c(0, ulim), expand = c(0, 0), oob = scales::squish) +
+    scale_x_continuous(
+      limits = c(0, ulim), expand = c(0, 0), oob = scales::squish) +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey")
   p <- p + theme(axis.title.y = element_blank())
   p
