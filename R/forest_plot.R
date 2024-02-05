@@ -90,7 +90,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", col_by, ". Using default palette"))
+        warning(paste("No palette was provided or found for ", col_by, ". 
+        Using default palette"))
       }
       
     }
