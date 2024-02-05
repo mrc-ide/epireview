@@ -92,3 +92,48 @@ test_that("country_palette returns the correct palette", {
   expect_error(country_palette(rep("Country", 37)))
 })
 
+test_that("reparam_gamma correctly reparameterizes the data frame", {
+  # Create a sample data frame
+  df <- data.frame(
+    parameter_value = NA,
+    distribution_type = "Gamma",
+    distribution_par1_type = "Shape",
+    distribution_par2_type = "Scale",
+    distribution_par1_value = 1,
+    distribution_par2_value = 10,
+    parameter_value_type = NA,
+    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_value = NA
+  )
+
+  # Call the reparam_gamma function
+  df <- reparam_gamma(df)
+
+  # Check if the reparameterization is correct
+  expect_equal(df$parameter_value_type, "Mean")
+  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_value, 10)
+  expect_equal(df$parameter_value, 10)
+})
+
+test_that("reparam_gamma handles gamma distribution with Mean sd", {
+  # Create a sample data frame
+  df <- data.frame(
+    parameter_value = c(NA, NA),
+    distribution_type = c("Gamma", "Gamma"),
+    distribution_par1_type = c("Shape", "Shape"),
+    distribution_par2_type = c("Scale", "Mean sd"),
+    distribution_par1_value = c(2, NA),
+    distribution_par2_value = c(1, 3),
+    parameter_value_type = c(NA, NA),
+    parameter_uncertainty_singe_type = c(NA, NA),
+    parameter_uncertainty_single_value = c(NA, NA)
+  )
+
+  # Call the reparam_gamma function
+  df <- reparam_gamma(df)
+
+  # Check if the reparameterization is correct
+  expect_equal(df$parameter_uncertainty_singe_type, c("Standard Deviation", "Standard Deviation"))
+  expect_equal(df$parameter_uncertainty_single_value, c(1, 3))
+})
