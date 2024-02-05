@@ -114,26 +114,45 @@ test_that("reparam_gamma correctly reparameterizes the data frame", {
   expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
   expect_equal(df$parameter_uncertainty_single_value, 10)
   expect_equal(df$parameter_value, 10)
+
+  ## Run ebola parameters through this; we should expect
+  ## to see Mean and Standard Deviation whereever distribution_type
+  ## is Gamma and Shape and Scale are provided.
+  x <- load_epidata('ebola')
+  p <- x$params
+  p <- reparam_gamma(p)
+  idx <- which(
+    p$distribution_type == "Gamma" &
+    p$distribution_par1_type == "Shape" &
+    p$distribution_par2_type == "Scale" &
+    !is.na(p$distribution_par1_value) &
+    !is.na(p$distribution_par2_value))
+
+  g <- p[idx, ]
+
+  expect_equal(unique(g$parameter_value_type), "Mean")
+  expect_equal(unique(g$parameter_uncertainty_singe_type), "Standard Deviation")
+
 })
 
 test_that("reparam_gamma handles gamma distribution with Mean sd", {
   # Create a sample data frame
   df <- data.frame(
-    parameter_value = c(NA, NA),
-    distribution_type = c("Gamma", "Gamma"),
-    distribution_par1_type = c("Shape", "Shape"),
-    distribution_par2_type = c("Scale", "Mean sd"),
-    distribution_par1_value = c(2, NA),
-    distribution_par2_value = c(1, 3),
-    parameter_value_type = c(NA, NA),
-    parameter_uncertainty_singe_type = c(NA, NA),
-    parameter_uncertainty_single_value = c(NA, NA)
+    parameter_value = NA,
+    distribution_type = "Gamma",
+    distribution_par1_type = "Shape",
+    distribution_par2_type = "Mean sd",
+    distribution_par1_value = 2,
+    distribution_par2_value = 3,
+    parameter_value_type = NA,
+    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_value = NA
   )
 
   # Call the reparam_gamma function
   df <- reparam_gamma(df)
 
   # Check if the reparameterization is correct
-  expect_equal(df$parameter_uncertainty_singe_type, c("Standard Deviation", "Standard Deviation"))
-  expect_equal(df$parameter_uncertainty_single_value, c(1, 3))
+  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_value, 3)
 })
