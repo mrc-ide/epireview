@@ -1,3 +1,4 @@
+library(testthat)
 test_that("filter_cols fails when wrong arguments are supplied", {
 
   ## Fails if columns are character and function

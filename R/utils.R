@@ -255,6 +255,7 @@ param_pm_uncertainty <- function(df) {
 #' @param df A data frame with updated columns for parameter value and uncertainty.
 #' @return data.frame modified data frame with reparameterized gamma distributions.
 #' @importFrom epitrix gamma_shapescale2mucv
+#' 
 #' @export
 reparam_gamma <- function(df) {
 
