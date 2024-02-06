@@ -76,18 +76,18 @@ test_that("value_type_palette returns the correct values", {
 test_that("country_palette returns the correct palette", {
 
   # Test case 1: No argument provided.
-  # Check for a named vector of length 36
+  # Check for a named vector of length 35
   out <- country_palette()
-  expect_equal(length(out), 36)
+  expect_equal(length(out), 35)
   expect_named(out)
 
   # Test case 2: Single country
-  expect_equal(country_palette("Liberia"), c(Liberia = pal[1]))
+  expect_equal(country_palette("Liberia"), c(Liberia = "#5A5156FF"))
 
   # Test case 3: Multiple countries
   expect_equal(country_palette(c("A", "B")), c(
-    A = pal[1],
-    B = pal[2]
+    A = "#5A5156FF",
+    B = "#E4E1E3FF"
   ))
 
   # Test case 4: More than 36 countries provided
