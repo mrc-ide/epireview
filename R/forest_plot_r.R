@@ -42,7 +42,26 @@ forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
   p
 }
 
-forest_plot_r0 <- function(df, ulim, reorder_studies, ...) {
+#' forest_plot_r0 function
+#'
+#' This function generates a forest plot for the reproduction number (Basic R0) 
+#' using the provided data frame.
+#' @inheritParams forest_plot_rt
+#' @inheritDotParams forest_plot_rt
+#'
+#' @return ggplot2 object.
+#'
+#' @examples
+#' df <- data.frame(parameter_type = c("Reproduction number (Basic R0)", 
+#'                                     "Reproduction number (Basic R0)"),
+#'                  study = c("Study A", "Study B"),
+#'                  estimate = c(1.5, 2.0),
+#'                  lower_ci = c(1.2, 1.8),
+#'                  upper_ci = c(1.8, 2.2))
+#' forest_plot_r0(df, ulim = 2.5, reorder_studies = TRUE)
+#'
+#' @export
+forest_plot_r0 <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
   p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
