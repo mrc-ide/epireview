@@ -40,7 +40,7 @@ theme_epireview <- function(
 #' @importFrom pals polychrome
 #'
 #' @export
-country_palette <- function(x) {
+country_palette <- function(x = NULL) {
   pal <- paletteer::paletteer_d("pals::polychrome")
   class(pal) <- NULL
   countries <- c(
@@ -108,7 +108,7 @@ parameter_palette <- function(x) {
 ##' median, std dev etc.)
 ##'
 ##' @author Sangeeta Bhatia
-value_type_palette <- function(x) {
+value_type_palette <- function(x = NULL) {
   out <- list(
     Mean = 16,
     mean = 16,
@@ -296,3 +296,42 @@ reparam_gamma <- function(df) {
  
  df
 }
+
+## Throwaway function to add id column to marburg files;
+## need not be exported. I am only putting it here for
+## the sake of record keeping.
+# process_marburg_files <- function() {
+#   a <- load_epidata_raw("marburg", "article")
+#   p <- load_epidata_raw("marburg", "parameter")
+#   o <- load_epidata_raw("marburg", "outbreak")
+#   m <- load_epidata_raw("marburg", "model")
+# 
+#   a$id <- ids::random_id(nrow(a), use_openssl = FALSE)
+#   m$model_data_id <- ids::random_id(nrow(m), use_openssl = FALSE)
+#   p$parameter_data_id <- ids::random_id(nrow(p), use_openssl = FALSE)
+#   o$outbreak_data_id <- ids::random_id(nrow(o), use_openssl = FALSE)
+# 
+# m <- left_join(
+#       m,
+#       a[, c("article_id", "id", "pathogen", "covidence_id")],
+#       by = "article_id"
+#     )
+# 
+# o <- left_join(
+#       o,
+#       a[, c("article_id", "id", "pathogen", "covidence_id")],
+#       by = "article_id"
+#     )
+# 
+# p <- left_join(
+#       p,
+#       a[, c("article_id", "id", "pathogen", "covidence_id")],
+#       by = "article_id"
+#     )
+# 
+# readr::write_csv(m, "inst/extdata/marburg_model.csv")
+# readr::write_csv(o, "inst/extdata/marburg_outbreak.csv")
+# readr::write_csv(p, "inst/extdata/marburg_parameter.csv")
+# readr::write_csv(a, "inst/extdata/marburg_article.csv")
+#   
+# }

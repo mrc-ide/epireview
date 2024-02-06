@@ -7,13 +7,19 @@
 ## to axis.
 #' Generate a forest plot for effective reproduction number (Rt)
 #'
-#' This function generates a forest plot for the effective reproduction number (Rt) using the provided data frame.
+#' This function generates a forest plot for the effective reproduction number 
+#' (Rt) using the provided data frame.
 #'
-#' @param df The data frame containing the necessary data for generating the forest plot.
+#' @param df The data frame containing the necessary data for generating the 
+#' forest plot.
 #' @param ulim The upper limit for the x-axis of the plot. Default is 10.
-#' @param ... Additional arguments to be passed to the \code{\link[forestplot]{forest_plot}} function.
+#' @param reorder_studies Logical. If TRUE, the studies will be reordered using
+#' the \code{\link{reorder_studies}} function. Default is TRUE.
+#' @param ... Additional arguments to be passed to the 
+#' \code{\link[forestplot]{forest_plot}} function.
 #'
-#' @return A ggplot2 object representing the forest plot for effective reproduction number (Rt).
+#' @return A ggplot2 object representing the forest plot for effective 
+#' reproduction number (Rt).
 #'
 #' @importFrom ggplot2 scale_x_continuous geom_vline labs theme element_blank
 #'
@@ -28,27 +34,27 @@
 #' forest_plot_rt(df)
 #'
 #' @export
-forest_plot_rt <- function(df, ulim = 10, ...) {
+forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Effective, Re)", ]
-  p <- forest_plot_rt_int(rt, ulim, ...) + 
+  p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
   labs(x = "Effective reproduction number (R)")
   p
 }
 
-forest_plot_r0 <- function(df, ulim = 10, ...) {
+forest_plot_r0 <- function(df, ulim, reorder_studies, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
-  p <- forest_plot_rt_int(rt, ulim, ...) + 
+  p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
   labs(x = "Basic reproduction number (R0)")
   p
 }
 
 ## Internal function; not exported
-forest_plot_rt_int <- function(rt_r0, ulim, ...) {
+forest_plot_rt_int <- function(rt_r0, ulim, reorder_studies, ...) {
   rt_r0 <- param_pm_uncertainty(rt_r0)
   rt_r0 <- reparam_gamma(rt_r0)
-  rt_r0 <- reorder_studies(rt_r0)
+  if (reorder_studies) rt_r0 <- reorder_studies(rt_r0)
   p <- forest_plot(rt_r0, ...)
   p <- p +       
     scale_x_continuous(

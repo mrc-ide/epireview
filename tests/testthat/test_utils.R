@@ -1,4 +1,3 @@
-library(testthat)
 test_that("filter_cols fails when wrong arguments are supplied", {
 
   ## Fails if columns are character and function
@@ -75,12 +74,15 @@ test_that("value_type_palette returns the correct values", {
 
 
 test_that("country_palette returns the correct palette", {
-  pal <- paletteer::paletteer_d("pals::polychrome")
-  # Test case 1: No argument provided
-  expect_equal(country_palette(), pal)
+
+  # Test case 1: No argument provided.
+  # Check for a named vector of length 36
+  out <- country_palette()
+  expect_equal(length(out), 36)
+  expect_named(out)
 
   # Test case 2: Single country
-  expect_equal(country_palette("Liberia"), pal[1])
+  expect_equal(country_palette("Liberia"), c(Liberia = pal[1]))
 
   # Test case 3: Multiple countries
   expect_equal(country_palette(c("A", "B")), c(
