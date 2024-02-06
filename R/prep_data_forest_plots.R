@@ -91,7 +91,7 @@ load_epidata <- function(pathogen) {
   }
 
 
-
+  
   ## Make pretty labels for articles
   ## prefix: surname; if na then first name; if that is na
   ## then just use covidence id and issue a warning
@@ -117,7 +117,6 @@ load_epidata <- function(pathogen) {
   )
 
   articles <- articles[, cols]
-
 
   ## Marburg parameters have entries like "Germany;Yugoslavia"
   ## For future pathogens, this should be cleaned up before data are
