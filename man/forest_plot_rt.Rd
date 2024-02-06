@@ -4,20 +4,27 @@
 \alias{forest_plot_rt}
 \title{Generate a forest plot for effective reproduction number (Rt)}
 \usage{
-forest_plot_rt(df, ulim = 10, ...)
+forest_plot_rt(df, ulim = 10, reorder_studies = TRUE, ...)
 }
 \arguments{
-\item{df}{The data frame containing the necessary data for generating the forest plot.}
+\item{df}{The data frame containing the necessary data for generating the
+forest plot.}
 
 \item{ulim}{The upper limit for the x-axis of the plot. Default is 10.}
 
-\item{...}{Additional arguments to be passed to the \code{\link[forestplot]{forest_plot}} function.}
+\item{reorder_studies}{Logical. If TRUE, the studies will be reordered using
+the \code{\link{reorder_studies}} function. Default is TRUE.}
+
+\item{...}{Additional arguments to be passed to the
+\code{\link[forestplot]{forest_plot}} function.}
 }
 \value{
-A ggplot2 object representing the forest plot for effective reproduction number (Rt).
+A ggplot2 object representing the forest plot for effective
+reproduction number (Rt).
 }
 \description{
-This function generates a forest plot for the effective reproduction number (Rt) using the provided data frame.
+This function generates a forest plot for the effective reproduction number
+(Rt) using the provided data frame.
 }
 \examples{
 df <- data.frame(

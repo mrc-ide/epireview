@@ -4,7 +4,7 @@
 \alias{country_palette}
 \title{country_palette Function}
 \usage{
-country_palette(x)
+country_palette(x = NULL)
 }
 \arguments{
 \item{x}{A vector of country names. If provided, the function will return a color palette for the specified countries.}
