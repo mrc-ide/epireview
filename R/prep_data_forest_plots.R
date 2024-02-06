@@ -93,11 +93,25 @@ load_epidata <- function(pathogen) {
 
 
   ## Make pretty labels for articles
-  articles$article_label <- paste0(
-    articles$first_author_surname, " ", articles$year_publication
+  ## prefix: surname; if na then first name; if that is na
+  ## then just use covidence id and issue a warning
+  ## suffix: year of publication; if na, then just use covidence id
+  ## and issue a warning
+  prefix <- ifelse(
+    ! is.na(articles$first_author_surname),
+    articles$first_author_surname,
+    ifelse(
+      ! is.na(articles$first_author_first_name),
+      articles$first_author_first_name,
+      articles$covidence_id  
+  ))
+  suffix <- ifelse(
+    ! is.na(articles$year_publication),
+    articles$year_publication,
+    articles$covidence_id
   )
-  ## TODO: this won't work for Marburg
-  ## TODO: fix Marburg data
+  articles$article_label <- paste(prefix, suffix)
+
   cols <- c(
     "id", "first_author_surname", "year_publication", "article_label"
   )
