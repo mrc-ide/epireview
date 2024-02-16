@@ -35,7 +35,13 @@
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     shp_palette = NA, 
     col_palette = NA) {
-
+ 
+  ## ggplot2 will put all article labels on the y-axis
+  ## even if mid, low, and high are NA. We will filter them out
+  ## here to avoid that.
+  ## We want at least one of mid, low, or high to be non-NA
+  ## for each row
+  df <- df[complete.cases(df[, c("mid", "low", "high")]), ]
   p <- ggplot(df) +
     geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
     geom_errorbar(

@@ -21,6 +21,9 @@ library(epireview)
 ```{r}
 ebola <- load_epidata('ebola')
 params <- ebola[["params"]]
+params <- filter_cols(
+  params, "article_qa_score", funs = ">", vals = "50"
+)
 forest_plot_rt(params, col_by = "population_country", shape_by = "parameter_value_type")
 forest_plot_r0(params, col_by = "population_country", shape_by = "parameter_value_type")
 
