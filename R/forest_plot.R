@@ -41,18 +41,21 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## here to avoid that.
   ## We want at least one of mid, low, or high to be non-NA
   ## for each row
-  df <- df[complete.cases(df[, c("mid", "low", "high")]), ]
+  rows <- apply(df, 1, function(x) {
+    any(!is.na(x[c("mid", "low", "high")]))
+  }, simplify = TRUE)
+  df <- df[rows, ]
   p <- ggplot(df) +
     geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
     geom_errorbar(
       aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']])
     ) +
     geom_segment(
-      aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], yend = .data[['y']])
-    ) + scale_y_discrete(
-      breaks = df$y,
-      labels = df$y
-    ) + theme_epireview()
+      aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], 
+      yend = .data[['y']])
+    ) + 
+    scale_y_discrete(breaks = df$y, labels = df$y) + 
+    theme_epireview()
 
 
   if (!is.na(facet_by)) {
@@ -62,9 +65,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   }
 
   if (!is.na(shape_by)) {
-    p <- p + aes(
-      shape = .data[[shape_by]]
-    )
+    p <- p + aes(shape = .data[[shape_by]])
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
@@ -76,7 +77,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", shape_by, ". Using default palette"))
+        warning(paste("No palette was provided or found for ", shape_by, ". 
+          Using default palette"))
       }
      
       

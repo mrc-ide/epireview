@@ -119,7 +119,9 @@ value_type_palette <- function(x = NULL) {
     `std dev` = 17,
     sd = 17,
     other = 18,
-    Other = 18
+    Other = 18,
+    Unspecified = 5,
+    unspecified = 5
   )
   n_shapes <- length(unique(out))
   shapes <- unique(out)
@@ -195,8 +197,9 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
 #' standard error). It creates new columns called `low' (parameter central
 #' value - uncertainty) and `high' (parameter central value + uncertainty).
 #' These columns are used by \code{\link{forest_plot}} to plot the
-#' uncertainty intervals.
-#' 
+#' uncertainty intervals. If the uncertainty is given by a range, the
+#' midpoint of the range is used as the central value (mid) and the lower and
+#' upper bounds are used as the low and high values respectively.
 #' @param df A data frame containing the parameter uncertainty columns.
 #' This will typically be the output of \code{\link{load_epidata}}.
 #' @return The updated data frame with parameter uncertainty columns
@@ -215,35 +218,82 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
 #'
 #' @export
 param_pm_uncertainty <- function(df) {
-  df$parameter_uncertainty_type <- ifelse(
-    is.na(df$parameter_uncertainty_type) &
-      df$parameter_uncertainty_singe_type == "Standard Deviation",
-    "Standard Deviation",
-    ifelse(
-      is.na(df$parameter_uncertainty_type) &
-        df$parameter_uncertainty_singe_type == "Standard Error",
-      "Standard Error",
-      df$parameter_uncertainty_type
-    )
-  )
-  df$mid <- df$parameter_value
-  df$low <- ifelse(
-    df$parameter_uncertainty_type %in% c("Standard Deviation", "Standard Error"),
-    df$parameter_value - df$parameter_uncertainty_single_value,
-    df$parameter_uncertainty_lower_value
-  )
-  df$high <- ifelse(
-    df$parameter_uncertainty_type %in% c("Standard Deviation", "Standard Error"),
-    df$parameter_value + df$parameter_uncertainty_single_value,
-    df$parameter_uncertainty_upper_value
-  )
+  ## We want to assign 'low', 'mid' and 'high' values to each parameter in a
+  ## a `sensible' way. In the forest plot, parameters will be ordered by the
+  ## `mid' value, even if choose to not plot some of them; see notes below.
+  ## We deal with the easy case first. If parameter value is extraccted, that's
+  ## the central value. 
+  mid_not_na <- ! is.na(df$parameter_value)
+
+  ## If parameter value is not extracted, then there are a few cases to consider.
+  ## 1. paired uncertainty is extracted. In this case, we plot the uncertainty
+  ## and use its width to order the parameters in the forest plot. single 
+  ## uncertainty is not going to make sense I think without a central value. so
+  ## we don't consider that combination here.
+  paired_not_na <- !is.na(df$parameter_uncertainty_lower_value) &
+    ! is.na(df$parameter_uncertainty_upper_value)
+  ## 2. both single and paired uncertainty are NA but parameter_lower_bound and 
+  ## parameter_upper_bound are extracted. In this case, we set the midpoint
+  ## of the range as a mid value and the range as the low and high values. mid
+  ## value is used to order the parameters in the forest plot, but not plotted
+  ## because it is not an estimate in any sense.
+  range_not_na <- !is.na(df$parameter_lower_bound) &
+    !is.na(df$parameter_upper_bound)
+
+  ## Start with NAs and then update
+  df$low <- NA
+  df$mid <- NA
+  df$high <- NA
+
+  df$mid[mid_not_na] <- df$parameter_value[mid_not_na]
+  x <- df$parameter_uncertainty_lower_value +
+  (df$parameter_uncertainty_upper_value - df$parameter_uncertainty_lower_value) / 2
+  df$mid[(! mid_not_na) & paired_not_na] <- x[(! mid_not_na) & paired_not_na]
+
+  x <- df$parameter_lower_bound + 
+    (df$parameter_upper_bound - df$parameter_lower_bound) / 2
+  df$mid[! mid_not_na & ! paired_not_na & range_not_na] <- 
+    x[! mid_not_na & ! paired_not_na & range_not_na]
+
+  ## Create a variable that captures the type of "mid" value so that we can 
+  ## choose not to plot those that don't make sense.
+  df$mid_type <- NA
+  df$mid_type[mid_not_na] <- "Extracted"
+  df$mid_type[! mid_not_na & paired_not_na] <- "Uncertainty width"
+  df$mid_type[! mid_not_na & ! paired_not_na & range_not_na] <- "Range midpoint"
+
+  ## Now we can calculate low and high values
+  ## If parameter_uncertainty_single_value is not NA, we use it to calculate
+  ## low and high values
+  single_uc_not_na <- !is.na(df$parameter_uncertainty_single_value)
+  df$low[single_uc_not_na] <- df$mid[single_uc_not_na] - 
+    df$parameter_uncertainty_single_value[single_uc_not_na]
+  
+  df$high[single_uc_not_na] <- df$mid[single_uc_not_na] + 
+    df$parameter_uncertainty_single_value[single_uc_not_na]
+
+  ## If paired uncertainty is not NA, we use it to calculate low and high values
+  df$low[paired_not_na] <- df$parameter_uncertainty_lower_value[paired_not_na] 
+  df$high[paired_not_na] <- df$parameter_uncertainty_upper_value[paired_not_na]
+
+  ## Finally, if neither single nor paired uncertainty is non-NA but range is
+  ## available, we use it to set low and high values
+  df$low[! paired_not_na & range_not_na] <- 
+    df$parameter_lower_bound[! paired_not_na & range_not_na]
+  df$high[! paired_not_na & range_not_na] <- 
+    df$parameter_upper_bound[! paired_not_na & range_not_na]
+  
+  df$uncertainty_type <- NA
+  df$uncertainty_type[paired_not_na] <- 
+    df$parameter_uncertainty_type[paired_not_na]
+  df$uncertainty_type[single_uc_not_na] <- 
+    df$parameter_uncertainty_singe_type[single_uc_not_na]
+  df$uncertainty_type[! paired_not_na & range_not_na] <- "Range**"
+
   df
 }
 
-##
-## Where uncertainty is expressed using the shape and scale parameters of a
-## gamma distribution, we convert these to mean and standard deviation
-## for plotting. 
+ 
 #' Reparameterize Gamma Distribution
 #'
 #' This function reparameterizes the gamma distribution in a given data frame.

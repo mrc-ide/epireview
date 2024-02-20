@@ -59,7 +59,6 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     return(NULL)
   } else {
     file_path <- system.file("extdata", fname, package = "epireview")
-    message(paste("Loading data for ", pathogen))
     ## Temporarily read in without column types as column names for the 
     ## same table can change between pathogens
     tmp <- read_csv(file_path, show_col_types = FALSE)
