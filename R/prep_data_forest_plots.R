@@ -142,7 +142,11 @@ load_epidata <- function(pathogen) {
       mark_multiple_estimates("outbreak_country")
   } else outbreaks <- NULL
   
-  list(params = params, models = models, outbreaks = outbreaks)
+  message("Data loaded for ", pathogen)
+  
+  list(
+    articles = articles, params = params, models = models, outbreaks = outbreaks
+    )
 }
 
 
