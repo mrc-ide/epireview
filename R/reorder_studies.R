@@ -31,7 +31,7 @@ reorder_studies <- function(df) {
   ## More sensible options are possible - e.g. geographical or alphabetical
   df <- do.call(rbind, res)
   
-  df$y <- factor(df$article_label,
+  df$article_label <- factor(df$article_label,
     levels = unique(df$article_label, ordered = TRUE)
   )
   

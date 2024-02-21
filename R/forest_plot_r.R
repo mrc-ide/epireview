@@ -81,6 +81,6 @@ forest_plot_rt_int <- function(rt_r0, ulim, reorder_studies, ...) {
       breaks = seq(0, ulim, by = 1)
      ) +
     geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey")
-  p <- p + theme(axis.title.y = element_blank())
+  
   p
 }
