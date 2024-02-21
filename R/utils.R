@@ -9,8 +9,8 @@ theme_epireview <- function(
   base_rect_size = base_size / 22
 ) {
   update_geom_defaults("point", list(size = 3))
-  update_geom_defaults("segment", list(lwd = 5, alpha = 0.4))
-  update_geom_defaults("errorbar", list(lwd = 1, width = 0.4))
+  update_geom_defaults("segment", list(lwd = 3, alpha = 0.4))
+  update_geom_defaults("errorbar", list(lwd = 0.5, width = 0.4))
   th <- theme_bw(base_size, base_family, base_line_size, base_rect_size)
   th <- th + theme(
     plot.title = element_text(hjust = 0.5),
@@ -132,7 +132,8 @@ value_type_palette <- function(x = NULL) {
       out <- shapes[seq_along(x)]
       names(out) <- x
     } else {
-      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please provide a vector of length ", n_shapes, " or less"))
+      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please 
+        provide a vector of length ", n_shapes, " or less"))
     }
   }
   out[x]
