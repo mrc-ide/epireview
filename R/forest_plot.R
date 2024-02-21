@@ -45,15 +45,28 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     any(!is.na(x[c("mid", "low", "high")]))
   }, simplify = TRUE)
   df <- df[rows, ]
+  ## We don't want to plot rows where mid_type is "Range midpoint" or 
+  ## "Uncertainty width".
+  df$mid[df$mid_type %in% c("Range midpoint", "Uncertainty width")] <- NA
+    
+  ## uncertainty_type was created by us in param_pm_uncertainty
+  ## so the user has no visibility of this variable. The main thing
+  ## is that we want to distinguish Range** which is slightly different
+  ## from the other types of uncertainty
+  uc_types <- unique(df$uncertainty_type)
+  lty_map <- rep("solid", length(uc_types))
+  names(lty_map) <- uc_types
+  lty_map[["Range**"]] <- "dotted"
+  ## note that if you use dashed linetype here, then the legend only shows
+  ## a single dash, which is of course indisguishable from a solid line.
+
   p <- ggplot(df) +
     geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
     geom_errorbar(
-      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']])
+      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']],
+          lty = uncertainty_type)
     ) +
-    geom_segment(
-      aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], 
-      yend = .data[['y']])
-    ) + 
+    scale_linetype_manual(values = lty_map, breaks = "Range**") +
     scale_y_discrete(breaks = df$y, labels = df$y) + 
     theme_epireview()
 
