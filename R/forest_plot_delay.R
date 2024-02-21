@@ -1,6 +1,23 @@
 #' Create forest plot for human delays
-#'
-#' @param df processed data with human delay information produced using
+#' @details There are a number of 'delays' that are relevant to the pathogens
+#' we study. Some of the more commonly, and hence likely to be extracted for 
+#' most pathogens, are the infectious period, the incubation period, and the
+#' serial interval. However, there are many others reported by relatively few
+#' studies or relevant to only a few pathogens. Hence this function is intended
+#' to serve as a template for creating forest plots for these delays. It will 
+#' carry out pre-processing tasks we expect to be common to all such forest
+#' plots. These are described in details below.
+#' 1. Check that all parameters have the same units (days) and warn the user if
+#' this is not the case.
+#' 2. Deal with most common unit conversions (e.g. weeks to days, months to days)
+#' and with inverse parameters (e.g. rate to period).
+#' 3. Reparameterise delays reported using gamma distributions.
+#' We also provide some utility functions for the commonly used delays that are
+#' simply syntactic sugar for this function. If however you are interested in 
+#' some other delay, you will need to use this function directly, ensuring that
+#' the data frame you provide has only the relevant delays.
+#' @inheritParams forest_plot_rt
+#' @seealso \code{\link{forest_plot_rt}}
 #' prep_data_forest_plots()
 #' @return returns plot with a summary of the human delays
 #' @importFrom dplyr filter mutate group_by arrange desc
@@ -13,54 +30,5 @@
 #' df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
 #' forest_plot_delay(df = df)
 #' @export
-forest_plot_delay <- function(df) {
-
-  parameter <- "Human delay"
-
-
-
-  # Make unique article labels
-  df$y <- make.unique(df$article_label)
-
-  p <- forest_plot(df)
-  p <- p +
-    aes(col = parameter_type_short, shape = parameter_value_type)
-
-  plot <- ggplot(df_plot, aes()) +
-    geom_point(aes(x = parameter_value,
-                   y = article_label_unique,
-                   )) +
-    geom_segment(
-      aes(y = article_label_unique, yend = article_label_unique,
-        x = parameter_lower_bound, xend = parameter_upper_bound,
-        group = parameter_data_id
-      )
-    ) +
-    geom_errorbar(aes(y = article_label_unique,
-                      xmin = parameter_uncertainty_lower_value,
-                      xmax = parameter_uncertainty_upper_value,
-                      group = parameter_data_id)) +
-    scale_y_discrete(labels = setNames(df_plot$article_label,
-                                       df_plot$article_label_unique)) +
-    scale_x_continuous(breaks = c(seq(0, 60, by = 10))) +
-    scale_color_brewer(palette = "Dark2",
-                       labels = function(x) str_wrap(x, width = 18)) +
-    scale_shape_manual(
-      values = value_type_palette[c("Mean", "Median", "Std Dev", "Other")],
-      labels = c("Mean", "Median", "Std Dev", "Other"),
-      na.translate = FALSE
-    ) +
-    labs(x = "Delay (days)",
-         y = "",
-         linetype = "",
-         colour = "",
-         shape = "",
-         caption = "*Solid transparent rectangles refer to parameter ranges
-         while the error bars are uncertainty intervals.") +
-    guides(colour = guide_legend(order = 1, ncol = 1),
-      linetype = guide_legend(order = 2, ncol = 1)) +
-    theme_epireview()
-
-
-  plot
+forest_plot_delay <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
 }

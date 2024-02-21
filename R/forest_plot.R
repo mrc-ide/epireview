@@ -47,7 +47,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   df <- df[rows, ]
   ## We don't want to plot rows where mid_type is "Range midpoint" or 
   ## "Uncertainty width".
-  df$mid[df$mid_type %in% c("Range midpoint", "Uncertainty width")] <- NA
+  df$mid[df$mid_type %in% c("Range midpoint")] <- NA
     
   ## uncertainty_type was created by us in param_pm_uncertainty
   ## so the user has no visibility of this variable. The main thing
@@ -61,15 +61,16 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## a single dash, which is of course indisguishable from a solid line.
 
   p <- ggplot(df) +
-    geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
+    geom_point(aes(x = .data[['mid']], y = .data[['article_label']])) +
     geom_errorbar(
-      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']],
+      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['article_label']],
           lty = uncertainty_type)
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
-    scale_y_discrete(breaks = df$y, labels = df$y) + 
+    ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) + 
     theme_epireview()
-
+  
+  p <- p + theme(axis.title.y = element_blank())
 
   if (!is.na(facet_by)) {
     p <- p + facet_col(
