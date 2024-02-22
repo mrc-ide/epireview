@@ -71,8 +71,9 @@ forest_plot_r0 <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
 
 ## Internal function; not exported
 forest_plot_rt_int <- function(rt_r0, ulim, reorder_studies, ...) {
-  rt_r0 <- param_pm_uncertainty(rt_r0)
   rt_r0 <- reparam_gamma(rt_r0)
+  rt_r0 <- param_pm_uncertainty(rt_r0)
+
   if (reorder_studies) rt_r0 <- reorder_studies(rt_r0)
   p <- forest_plot(rt_r0, ...)
   p <- p +       
