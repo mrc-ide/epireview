@@ -3,27 +3,27 @@
 #' we study. Some of the more commonly, and hence likely to be extracted for 
 #' most pathogens, are infectious period, incubation period, and
 #' serial interval. However, there are many others reported by relatively few
-#' studies or relevant to only a few pathogens. Hence this function is intended
-#' to serve as a template for creating forest plots for these delays. 
+#' studies or relevant to only a few pathogens. This function is intended
+#' to serve as a template for creating forest plots for these delays. It will
+#' first reparameterise any delays reported in terms of the gamma distribution
+#' to the mean and standard deviation (see \code{\link{reparam_gamma}}). Then, 
+#' any parameters reported as inverse (e.g., per day instead of days) will be
+#' inverted (see \code{\link{invert_inverse_params}}). Finally, all delays will
+#' be converted to days (see \code{\link{delays_to_days}}) before 
+#' reordering the studies (if requested) and plotting the forest plot.
 #' We also provide some utility functions for the commonly used delays that are
-#' simply syntactic sugar for this function. If however you are interested in 
+#' simply wrapper for this function. If however you are interested in 
 #' some other delay, you will need to use this function directly, ensuring that
 #' the data frame you provide has only the relevant delays.
 #' @inheritParams forest_plot_rt
-#' @seealso \code{\link{forest_plot_rt}}
-#' prep_data_forest_plots()
+#' @seealso \code{\link{forest_plot_serial_interval}}
+#' 
 #' @return returns plot with a summary of the human delays
-#' @importFrom dplyr filter mutate group_by arrange desc
-#' @importFrom stringr str_to_sentence str_wrap
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
-#' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
-#' scale_shape_manual theme guides element_text guide_legend
-#' @importFrom stats setNames median
-#' @examples
-#' df <- data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
-#' forest_plot_delay(df = df)
-#' @export
-forest_plot_delay <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
+#' 
+#' 
+#' @export 
+forest_plot_delay_int <- function(df, ulim, reorder_studies, ...) {
 
   df <- reparam_gamma(df) |> 
     invert_inverse_params() |> 
@@ -31,19 +31,78 @@ forest_plot_delay <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
     param_pm_uncertainty() 
     
   if (reorder_studies) df <- reorder_studies(df)
-  p <- forest_plot(df)
+  p <- forest_plot(df, ...)
+  p <- p +       
+    scale_x_continuous(
+      limits = c(0, ulim), expand = c(0, 0), oob = scales::squish,
+      breaks = seq(0, ulim, by = 7) ## every week
+     ) 
   p
 }
- 
+
+#' Create forest plot for serial interval
+#' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
+#' that is specifically for the serial interval.
+#' @inheritParams forest_plot_delay_int
+#' @export 
+forest_plot_serial_interval <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
+  
+  check_ulim(df, ulim, "serial interval")
+  x <- df[df$parameter_type == "Human delay - serial interval", ]
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+    labs(x = "Serial interval (days)")
+  p
+}
+
+check_ulim <- function(df, ulim, param) {
+  ulim_data <- max(df$parameter_value, na.rm = TRUE)
+  if (ulim_data > ulim) {
+    msg <- paste("The maximum", param, "is ", ulim_data,
+                 "; the ulim is set to ", ulim, 
+                 ". Some points may not be plotted. Consider increasing the 
+                 upper limit.")
+    warning(msg)
+  } ## else do nothing
+}
+#' Create forest plot for incubation period
+#' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
+#' that is specifically for the incubation period.
+#' @inheritParams forest_plot_delay_int
+#' @export
+forest_plot_incubation_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
+  
+  ## Warn user is max incubation period is greater than ulim
+  check_ulim(df, ulim, "incubation period")
+  x <- df[df$parameter_type %in% c("Human delay - incubation period", 
+  "Human delay - incubation period  (inverse parameter)"), ]
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+    labs(x = "Incubation period (days)")
+  p
+}
+
+#' Create forest plot for infectious period
+#' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
+#' that is specifically for the infectious period.
+#' @inheritParams forest_plot_delay_int
+#' @export
+forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
+  
+  check_ulim(df, ulim, "infectious period")
+  x <- df[df$parameter_type %in% c("Human delay - infectious period", 
+  "Human delay - infectious period  (inverse parameter)"), ]
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+    labs(x = "Infectious period (days)")
+  p
+}
+
+#' Inverts the values of selected parameters in a data frame.
 #' Sometimes parameters are reported in inverse form (e.g., a delay might be 
 #' reported as per day instead of days). Here we carry out a very simple
 #' transformation to convert these to the correct form by inverting the parameter
 #' value and the uncertainty bounds. This may not be appropriate in all cases,
 #' and must be checked on a case-by-case basis.
-#' Inverts the values of selected parameters in a data frame.
-#'
 #' This function takes a data frame as input and inverts the values of selected parameters.
-#' The selected parameters are identified by a logical vector in the data frame.
+#' The selected parameters are identified by the column 'inverse_param'.
 #' The function performs the following operations:
 #'   - Inverts the parameter values of the selected parameters.
 #'   - Swaps the upper and lower bounds of the selected parameters.
@@ -62,10 +121,6 @@ forest_plot_delay <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
 #'                  inverse_param = c(FALSE, TRUE, FALSE))
 #' invert_inverse_params(df)
 #' # Output:
-#' #   parameter_value parameter_upper_bound parameter_lower_bound parameter_uncertainty_upper_value parameter_uncertainty_lower_value inverse_param
-#' # 1               2                     5                     1                              0.1                              0.4         FALSE
-#' # 2               0                     6                     0                              5.0                              0.2         FALSE
-#' # 3               4                     7                     3                              0.3                              0.6         FALSE
 #' @export
 invert_inverse_params <- function(df) {
 
@@ -74,10 +129,11 @@ invert_inverse_params <- function(df) {
     warning("No parameters to invert.")
     return(df)
   }
+
   df$parameter_value[idx] <- 1 / df$parameter_value[idx]
   tmp <- df$parameter_upper_bound[idx]
   df$parameter_upper_bound[idx] <- 1 / df$parameter_lower_bound[idx]
-  df$parameter_lower_bound <- 1 / tmp
+  df$parameter_lower_bound[idx] <- 1 / tmp
 
   tmp <- df$parameter_uncertainty_upper_value[idx]
   df$parameter_uncertainty_upper_value[idx] <- 
@@ -116,7 +172,7 @@ delays_to_days <- function(df) {
   ## and warn the user if this is not the case
   units <- tolower(df$parameter_unit)
   not_days <- unique(units[!units %in% "days"])
-  if (!all(df$unit %in% "days")) {
+  if (!all(units %in% "days")) {
     warning("Not all delays are in days. Other units are:", 
                   paste(not_days, collapse = ", "))
     warning("We will attempt to convert hours and weeks to days.")
