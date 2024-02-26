@@ -54,41 +54,7 @@ forest_plot_serial_interval <- function(df, ulim = 30, reorder_studies = TRUE, .
   p
 }
 
-#' Check upper limit of parameter values
-#'
-#' @details
-#' Each forest plot has a default upper limit for the parameter values, based on
-#' the expected range of the parameter. This function checks the upper limit of
-#' parameter values in a data frame and compares it with the default limit.
-#' If the maximum parameter value
-#' exceeds the specified upper limit, a warning message is displayed. The 
-#' function also returns the suggested upper limit. It is used internally by
-#' the forest plot functions (only for warning the user). You can also use it 
-#' directly to update the default upper limit in the forest plot functions.
-#'
-#' @param df A data frame containing the parameter values.
-#' @param ulim The specified upper limit for the parameter values.
-#' @param param The name of the parameter.
-#'
-#' @return The suggested upper limit for the parameter values.
-#'
-#' @examples
-#' df <- data.frame(parameter_value = c(10, 20, 30))
-#' check_ulim(df, 25, "parameter")
-#'
-#' @export
-check_ulim <- function(df, ulim, param) {
-  ulim_data <- max(df$parameter_value, na.rm = TRUE)
-  if (ulim_data > ulim) {
-    msg <- paste("The maximum", param, "is ", ulim_data,
-                 "; the ulim is set to ", ulim, 
-                 ". Some points may not be plotted. Consider increasing the 
-                 upper limit.")
-    warning(msg)
-  } 
-  ## Return suggested ulim
-  round(ulim_data, 0)
-}
+
 #' Create forest plot for incubation period
 #' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
 #' that is specifically for the incubation period.
@@ -97,9 +63,10 @@ check_ulim <- function(df, ulim, param) {
 forest_plot_incubation_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
   
   ## Warn user is max incubation period is greater than ulim
-  check_ulim(df, ulim, "incubation period")
+  
   x <- df[df$parameter_type %in% c("Human delay - incubation period", 
   "Human delay - incubation period  (inverse parameter)"), ]
+  check_ulim(x, ulim, "incubation period")
   p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
     labs(x = "Incubation period (days)")
   p
@@ -111,10 +78,10 @@ forest_plot_incubation_period <- function(df, ulim = 30, reorder_studies = TRUE,
 #' @inheritParams forest_plot_delay_int
 #' @export
 forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
-  
-  check_ulim(df, ulim, "infectious period")
+
   x <- df[df$parameter_type %in% c("Human delay - infectious period", 
   "Human delay - infectious period  (inverse parameter)"), ]
+  check_ulim(x, ulim, "infectious period")
   p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
     labs(x = "Infectious period (days)")
   p
