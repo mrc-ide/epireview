@@ -37,6 +37,7 @@
 forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Effective, Re)", ]
+  check_ulim(rt, ulim, "effective reproduction number")
   p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
   labs(x = "Effective reproduction number (R)")
   p
@@ -64,6 +65,7 @@ forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
 forest_plot_r0 <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
   
   rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
+  check_ulim(rt, ulim, "basic reproduction number")
   p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
   labs(x = "Basic reproduction number (R0)")
   p
