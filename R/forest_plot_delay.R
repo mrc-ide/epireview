@@ -54,6 +54,29 @@ forest_plot_serial_interval <- function(df, ulim = 30, reorder_studies = TRUE, .
   p
 }
 
+#' Check upper limit of parameter values
+#'
+#' @details
+#' Each forest plot has a default upper limit for the parameter values, based on
+#' the expected range of the parameter. This function checks the upper limit of
+#' parameter values in a data frame and compares it with the default limit.
+#' If the maximum parameter value
+#' exceeds the specified upper limit, a warning message is displayed. The 
+#' function also returns the suggested upper limit. It is used internally by
+#' the forest plot functions (only for warning the user). You can also use it 
+#' directly to update the default upper limit in the forest plot functions.
+#'
+#' @param df A data frame containing the parameter values.
+#' @param ulim The specified upper limit for the parameter values.
+#' @param param The name of the parameter.
+#'
+#' @return The suggested upper limit for the parameter values.
+#'
+#' @examples
+#' df <- data.frame(parameter_value = c(10, 20, 30))
+#' check_ulim(df, 25, "parameter")
+#'
+#' @export
 check_ulim <- function(df, ulim, param) {
   ulim_data <- max(df$parameter_value, na.rm = TRUE)
   if (ulim_data > ulim) {
@@ -62,7 +85,9 @@ check_ulim <- function(df, ulim, param) {
                  ". Some points may not be plotted. Consider increasing the 
                  upper limit.")
     warning(msg)
-  } ## else do nothing
+  } 
+  ## Return suggested ulim
+  round(ulim_data, 0)
 }
 #' Create forest plot for incubation period
 #' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
