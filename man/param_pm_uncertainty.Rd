@@ -18,7 +18,9 @@ This function updates the parameter uncertainty columns in a data frame
 when the uncertainty is given by a single value (standard deviation or
 standard error). It creates new columns called \verb{low' (parameter central value - uncertainty) and }high' (parameter central value + uncertainty).
 These columns are used by \code{\link{forest_plot}} to plot the
-uncertainty intervals.
+uncertainty intervals. If the uncertainty is given by a range, the
+midpoint of the range is used as the central value (mid) and the lower and
+upper bounds are used as the low and high values respectively.
 }
 \examples{
 df <- data.frame(
