@@ -74,20 +74,87 @@ test_that("value_type_palette returns the correct values", {
 
 
 test_that("country_palette returns the correct palette", {
-  pal <- paletteer::paletteer_d("pals::polychrome")
-  # Test case 1: No argument provided
-  expect_equal(country_palette(), pal)
+
+  # Test case 1: No argument provided.
+  # Check for a named vector of length 35
+  out <- country_palette()
+  expect_equal(length(out), 35)
+  expect_named(out)
 
   # Test case 2: Single country
-  expect_equal(country_palette("Liberia"), pal[1])
+  expect_equal(country_palette("Liberia"), c(Liberia = "#5A5156FF"))
 
   # Test case 3: Multiple countries
   expect_equal(country_palette(c("A", "B")), c(
-    A = pal[1],
-    B = pal[2]
+    A = "#5A5156FF",
+    B = "#E4E1E3FF"
   ))
 
   # Test case 4: More than 36 countries provided
   expect_error(country_palette(rep("Country", 37)))
 })
 
+test_that("reparam_gamma correctly reparameterizes the data frame", {
+  # Create a sample data frame
+  df <- data.frame(
+    parameter_value = NA,
+    distribution_type = "Gamma",
+    distribution_par1_type = "Shape",
+    distribution_par2_type = "Scale",
+    distribution_par1_value = 1,
+    distribution_par2_value = 10,
+    parameter_value_type = NA,
+    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_value = NA
+  )
+
+  # Call the reparam_gamma function
+  df <- reparam_gamma(df)
+
+  # Check if the reparameterization is correct
+  expect_equal(df$parameter_value_type, "Mean")
+  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_value, 10)
+  expect_equal(df$parameter_value, 10)
+
+  ## Run ebola parameters through this; we should expect
+  ## to see Mean and Standard Deviation whereever distribution_type
+  ## is Gamma and Shape and Scale are provided.
+  x <- load_epidata('ebola')
+  p <- x$params
+  p <- reparam_gamma(p)
+  idx <- which(
+    p$distribution_type == "Gamma" &
+    p$distribution_par1_type == "Shape" &
+    p$distribution_par2_type == "Scale" &
+    !is.na(p$distribution_par1_value) &
+    !is.na(p$distribution_par2_value))
+
+  g <- p[idx, ]
+
+  expect_equal(unique(g$parameter_value_type), "Mean")
+  expect_equal(unique(g$parameter_uncertainty_singe_type), "Standard Deviation")
+
+})
+
+test_that("reparam_gamma handles gamma distribution with Mean sd", {
+  # Create a sample data frame
+  df <- data.frame(
+    parameter_value = NA,
+    distribution_type = "Gamma",
+    distribution_par1_type = "Shape",
+    distribution_par2_type = "Mean sd",
+    distribution_par1_value = 2,
+    distribution_par2_value = 3,
+    parameter_value_type = NA,
+    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_value = NA
+  )
+
+  # Call the reparam_gamma function
+  df <- reparam_gamma(df)
+
+  # Check if the reparameterization is correct
+  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_value, 3)
+})

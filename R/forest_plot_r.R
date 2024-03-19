@@ -1,60 +1,89 @@
-#' Create forest plot for reproduction numbers
+## This function is a wrapper around the forest_plot function in forest_plot.R
+## It will 
+## 1. filter the data frame to only include estimates of effective reproduction number; 
+## 2. order the studies (see details); 
+## 3. rename or create columns required by forest_plot; 
+## 5. set sensible axis limits, and  give nice labels
+## to axis.
+#' Generate a forest plot for effective reproduction number (Rt)
 #'
-#' @param df processed data with parameter information produced using
-#' prep_data_forest_plots()
-#' @return returns plot with a summary of reproduction number estimates
-#' @importFrom dplyr filter arrange mutate group_by
-#' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
-#' scale_x_continuous geom_segment geom_errorbar labs scale_color_brewer
-#' scale_shape_manual theme guides element_text guide_legend position_dodge
-#' scale_linetype_manual scale_colour_manual xlim
-#' @importFrom stats median
+#' This function generates a forest plot for the effective reproduction number 
+#' (Rt) using the provided data frame.
+#'
+#' @param df The data frame containing the necessary data for generating the 
+#' forest plot.
+#' @param ulim The upper limit for the x-axis of the plot. Default is 10.
+#' @param reorder_studies Logical. If TRUE, the studies will be reordered using
+#' the \code{\link{reorder_studies}} function. Default is TRUE.
+#' @param ... Additional arguments to be passed to the 
+#' \code{\link[forestplot]{forest_plot}} function.
+#'
+#' @return A ggplot2 object representing the forest plot for effective 
+#' reproduction number (Rt).
+#'
+#' @importFrom ggplot2 scale_x_continuous geom_vline labs theme element_blank
+#'
 #' @examples
-#' df = data_forest_plots(pathogen = "marburg", exclude = c(15, 17))
-#' forest_plot_r(df = df)
+#' df <- data.frame(
+#'   article_label = c("Study A", "Study B", "Study C"),
+#'   parameter_type = c("Effective (Re)", "Effective (Re)", "Effective (Re)"),
+#'   estimate = c(1.5, 2.0, 1.8),
+#'   lower_limit = c(1.2, 1.7, 1.5),
+#'   upper_limit = c(1.8, 2.3, 2.1)
+#' )
+#' forest_plot_rt(df)
+#'
 #' @export
-forest_plot_r <- function(df) {
+forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
+  
+  rt <- df[df$parameter_type == "Reproduction number (Effective, Re)", ]
+  check_ulim(rt, ulim, "effective reproduction number")
+  p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
+  labs(x = "Effective reproduction number (R)")
+  p
+}
 
-  parameter <- "Reproduction number"
+#' forest_plot_r0 function
+#'
+#' This function generates a forest plot for the reproduction number (Basic R0) 
+#' using the provided data frame.
+#' @inheritParams forest_plot_rt
+#' @inheritDotParams forest_plot_rt
+#'
+#' @return ggplot2 object.
+#'
+#' @examples
+#' df <- data.frame(parameter_type = c("Reproduction number (Basic R0)", 
+#'                                     "Reproduction number (Basic R0)"),
+#'                  study = c("Study A", "Study B"),
+#'                  estimate = c(1.5, 2.0),
+#'                  lower_ci = c(1.2, 1.8),
+#'                  upper_ci = c(1.8, 2.2))
+#' forest_plot_r0(df, ulim = 2.5, reorder_studies = TRUE)
+#'
+#' @export
+forest_plot_r0 <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
+  
+  rt <- df[df$parameter_type == "Reproduction number (Basic R0)", ]
+  check_ulim(rt, ulim, "basic reproduction number")
+  p <- forest_plot_rt_int(rt, ulim, reorder_studies, ...) + 
+  labs(x = "Basic reproduction number (R0)")
+  p
+}
 
-  # Deal with R CMD Check "no visible binding for global variable"
-  parameter_value <- parameter_type <- first_author_surname <-
-    parameter_class <- article_label_unique <- parameter_type_short <-
-    article_label <- parameter_uncertainty_lower_value <-
-    parameter_uncertainty_upper_value <- parameter_data_id <- NULL
+## Internal function; not exported
+forest_plot_rt_int <- function(rt_r0, ulim, reorder_studies, ...) {
+  rt_r0 <- reparam_gamma(rt_r0)
+  rt_r0 <- param_pm_uncertainty(rt_r0)
 
-  # Make unique article labels
-  df <- add_unique_labels(df)
-
-  df_plot <- df %>%
-    filter(parameter_class == parameter) %>%
-    mutate(median = median(parameter_value, na.rm = TRUE)) %>%
-    group_by(parameter_type) %>%
-    arrange(first_author_surname) %>%
-
-  plot <- ggplot(df_plot, aes(x = parameter_value,
-                              y = article_label_unique,
-                              col = parameter_type_short)) +
-    geom_errorbar(aes(y = article_label,
-                      xmin = parameter_uncertainty_lower_value,
-                      xmax = parameter_uncertainty_upper_value,
-                      group = parameter_data_id,
-                      linetype = "Uncertainty interval"),
-                  position = position_dodge(width = 0.5),
-                  width = 0.2,
-                  lwd = 1) +
-    geom_point(aes(x = parameter_value,
-                   y = article_label,
-                   group = parameter_data_id),
-               size = 3) +
-    geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey") +
-    labs(x = "Reproduction number", y = "", linetype = "", colour = "") +
-    scale_linetype_manual(values = c("solid"),
-                          labels = function(x) str_wrap(x, width = 5)) +
-    scale_colour_manual(values = c("#D95F02", "#7570B3")) +
-    xlim(c(0, 2)) +
-    guides(colour = guide_legend(order = 1, ncol = 1),
-           linetype = guide_legend(order = 2, ncol = 1))
-
-  return(plot)
+  if (reorder_studies) rt_r0 <- reorder_studies(rt_r0)
+  p <- forest_plot(rt_r0, ...)
+  p <- p +       
+    scale_x_continuous(
+      limits = c(0, ulim), expand = c(0, 0), oob = scales::squish,
+      breaks = seq(0, ulim, by = 1)
+     ) +
+    geom_vline(xintercept = 1, linetype = "dashed", colour = "dark grey")
+  
+  p
 }

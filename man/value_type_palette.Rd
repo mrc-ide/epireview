@@ -2,9 +2,9 @@
 % Please edit documentation in R/utils.R
 \name{value_type_palette}
 \alias{value_type_palette}
-\title{Define a consistent shape palette for use in}
+\title{Define a consistent shape palette for use in forest plots}
 \usage{
-value_type_palette(x)
+value_type_palette(x = NULL)
 }
 \arguments{
 \item{x}{a list of parameters}
