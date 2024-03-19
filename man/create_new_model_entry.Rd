@@ -6,21 +6,17 @@
 \usage{
 create_new_model_entry(
   pathogen = NA,
-  new_model = c(list(article_id = as.integer(NA)), list(model_type = as.character(NA)),
-    list(compartmental_type = as.character(NA)), list(stoch_deter = as.character(NA)),
-    list(theoretical_model = as.logical(NA)), list(interventions_type =
-    as.character(NA)), list(code_available = as.logical(NA)), list(transmission_route =
-    as.character(NA)), list(assumptions = as.character(NA)), list(covidence_id =
-    as.integer(NA))),
-  vignette_prepend = ""
+  new_model = list(article_id = as.numeric(NA), model_type = as.character(NA),
+    compartmental_type = as.character(NA), stoch_deter = as.character(NA),
+    theoretical_model = as.logical(NA), interventions_type = as.character(NA),
+    code_available = as.logical(NA), transmission_route = as.character(NA), assumptions =
+    as.character(NA), covidence_id = as.integer(NA))
 )
 }
 \arguments{
 \item{pathogen}{name of pathogen}
 
 \item{new_model}{all the required details for the new model}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 return new row of data to be added to the model data set using the
@@ -32,16 +28,18 @@ Create new model entry
 \examples{
 create_new_model_entry(
   pathogen = 'marburg',
-  new_model = c(list("article_id"           = as.integer(1)),
-                list("model_type"           = as.character("Compartmental")),
-                list("compartmental_type"   = as.character("SEIR, SIR")),
-                list("stoch_deter"          = as.character("Deterministic")),
-                list("theoretical_model"    = as.logical(FALSE)),
-                list("interventions_type"   = as.character("Vaccination")),
-                list("code_available"       = as.logical(TRUE)),
-                list("transmission_route"   = as.character("Sexual")),
-                list("assumptions"          = as.character("Unspecified")),
-                list("covidence_id"         = as.integer(2059))),
-  vignette_prepend = "")
+  new_model = list(
+    article_id           = as.numeric(1),
+    model_type           = as.character("Compartmental"),
+    compartmental_type   = as.character("SEIR, SIR"),
+    stoch_deter          = as.character("Deterministic"),
+    theoretical_model    = as.logical(FALSE),
+    interventions_type   = as.character("Vaccination"),
+    code_available       = as.logical(TRUE),
+    transmission_route   = as.character("Sexual"),
+    assumptions          = as.character("Unspecified"),
+    covidence_id         = as.integer(2059)
+  )
+)
 
 }

@@ -8,8 +8,10 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-** Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
-The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with us (email s.bhatia@imperial.ac.uk). **
+**
+Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
+The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with us (email s.bhatia@imperial.ac.uk).
+**
 
 epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
@@ -38,10 +40,10 @@ One output of this project will be a database initially populated with all the i
 
 | Pathogen  | Titles & Abstracts screened | Contact | doi|
 | --------- |         -------------------:|      -- | -- |
-| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1101/2023.07.10.23292424||
-| Ebola virus   | 9,563 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
+| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1016/S1473-3099(23)00515-7
+| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk||
 | Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk ||
-| Henipa virus  |           959 | cw1716@ic.ac.uk ||
+| Henipa virus  |           959 | s.bhatia@imperial.ac.uk||
 | SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk || 
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||
 | Zika virus|              4,518| kem22@ic.ac.uk||
@@ -49,4 +51,4 @@ One output of this project will be a database initially populated with all the i
 | MERS-CoV|               10,382| acori@ic.ac.uk||
 | Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||
 
-If you are interested in adding any other pathogen to the database please feel free to [contact us](cm401@ic.ac.uk).
+If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).
