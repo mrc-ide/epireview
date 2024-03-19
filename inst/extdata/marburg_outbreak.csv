@@ -1,24 +1,24 @@
-outbreak_id,article_id,outbreak_start_day,outbreak_start_month,outbreak_start_year,outbreak_end_day,outbreak_end_month,outbreak_date_year,outbreak_duration_months,outbreak_size,asymptomatic_transmission,outbreak_country,outbreak_location,cases_confirmed,cases_mode_detection,cases_suspected,cases_asymptomatic,deaths,cases_severe_hospitalised,covidence_id
-4,20,NA,Aug,1968,NA,Nov,1968,3,NA,1,Germany;Yugoslavia,"Marburg (23), Frankfurt am Main (6), Belgrade (2)",31,Symptoms,NA,1,7,NA,2060
-5,23,18,Aug,1968,13,Nov,1968,3,NA,1,Germany,"Marburg, Frankfurt am Main",23,Symptoms,NA,1,5,NA,2883
-6,23,18,Oct,2012,7,Nov,2012,NA,NA,0,Uganda,Kabale; Ibanda; Mbarara; Kampala,15,Molecular (PCR etc),NA,NA,4,NA,2883
-7,21,NA,Oct,1998,NA,Aug,2000,NA,NA,1,Democratic Republic of the Congo,Durba and Watsa villages,76,Molecular (PCR etc),33,0,NA,NA,2762
-10,33,NA,NA,2005,NA,NA,2005,NA,NA,0,Angola,NA,252,Not specified,NA,NA,227,0,2696
-12,42,NA,Jul,2012,10,Nov,2012,NA,NA,0,Uganda,"Ibanda, Kabale and Kamwenge Districts",15,Molecular (PCR etc),11,NA,15,NA,2241
-13,45,NA,Oct,1998,NA,May,1999,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,73,Symptoms,NA,NA,61,0,2759
-14,49,10,Jun,2007,14,Sep,2007,NA,NA,0,Uganda,Kamwenge and Ibanda,4,Molecular (PCR etc),NA,NA,1,0,4693
-17,57,NA,Oct,1998,NA,Sep,2000,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,48,Molecular (PCR etc),106,NA,125,0,2819
-19,60,12,Feb,1975,NA,NA,NA,NA,NA,0,South Africa;Zimbabwe,Johannesburg,3,Molecular (PCR etc),NA,NA,1,1,2573
-1,14,17,Sep,2014,28,Sep,2014,NA,NA,0,Uganda,Kampala,1,Molecular (PCR etc),NA,NA,1,1,1930
-15,50,NA,Sep,2012,13,Nov,2012,NA,NA,0,Uganda,Ibanda and Kabale,9,Molecular (PCR etc),5,NA,7,NA,2032
-16,54,NA,Oct,2004,NA,Jul,2005,NA,NA,0,Angola,Uige Province,252,NA,NA,NA,227,0,1613
-26,31,NA,NA,2004,NA,NA,2005,NA,NA,0,Angola,NA,252,NA,NA,NA,227,NA,1871
-8,31,NA,NA,1998,NA,NA,2000,NA,NA,0,Democratic Republic of the Congo,NA,154,NA,NA,NA,128,NA,1871
-20,62,NA,NA,1967,NA,NA,NA,NA,NA,0,Germany;Yugoslavia,NA,31,NA,NA,NA,7,NA,1871
-21,62,NA,NA,1980,NA,NA,NA,NA,NA,0,Kenya,NA,2,NA,NA,NA,1,NA,1871
-22,62,NA,NA,1987,NA,NA,NA,NA,NA,0,Kenya,NA,1,NA,NA,NA,1,NA,1871
-23,62,NA,NA,1988,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,1,NA,1871
-24,62,NA,NA,1990,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,0,NA,1871
-27,62,NA,NA,2007,NA,NA,NA,NA,NA,0,Uganda,NA,4,NA,NA,NA,2,NA,1871
-28,62,NA,NA,2008,NA,NA,NA,NA,NA,0,United States,Colorado,1,NA,NA,NA,0,NA,1871
-29,62,NA,NA,2008,NA,NA,NA,NA,NA,0,Netherlands,NA,1,NA,NA,NA,1,NA,1871
+outbreak_id,article_id,outbreak_start_day,outbreak_start_month,outbreak_start_year,outbreak_end_day,outbreak_end_month,outbreak_date_year,outbreak_duration_months,outbreak_size,asymptomatic_transmission,outbreak_country,outbreak_location,cases_confirmed,cases_mode_detection,cases_suspected,cases_asymptomatic,deaths,cases_severe_hospitalised,covidence_id.x,outbreak_data_id,id,pathogen,covidence_id.y
+4,20,NA,Aug,1968,NA,Nov,1968,3,NA,1,Germany;Yugoslavia,"Marburg (23), Frankfurt am Main (6), Belgrade (2)",31,Symptoms,NA,1,7,NA,2060,4ec7e750d40a73072ec8d63f29b41672,3904265fa9450197d424763ee3f60d17,Marburg virus,2060
+5,23,18,Aug,1968,13,Nov,1968,3,NA,1,Germany,"Marburg, Frankfurt am Main",23,Symptoms,NA,1,5,NA,2883,40523cf5164a6cf7bfb363d3a452493f,1575cebe2ee533da37534c61995d7524,Marburg virus,2883
+6,23,18,Oct,2012,7,Nov,2012,NA,NA,0,Uganda,Kabale; Ibanda; Mbarara; Kampala,15,Molecular (PCR etc),NA,NA,4,NA,2883,e0cc1ba2ac7315f593455c9f81d2ffa2,1575cebe2ee533da37534c61995d7524,Marburg virus,2883
+7,21,NA,Oct,1998,NA,Aug,2000,NA,NA,1,Democratic Republic of the Congo,Durba and Watsa villages,76,Molecular (PCR etc),33,0,NA,NA,2762,583905030816cd445275f9a3cf237834,23a79a42fe972af68b39510c1dc01bf1,Marburg virus,2762
+10,33,NA,NA,2005,NA,NA,2005,NA,NA,0,Angola,NA,252,Not specified,NA,NA,227,0,2696,9d574628a29ca660f3610ad6685e2f94,9689ae2e21b97d044a70ead357abcf55,Marburg virus,2696
+12,42,NA,Jul,2012,10,Nov,2012,NA,NA,0,Uganda,"Ibanda, Kabale and Kamwenge Districts",15,Molecular (PCR etc),11,NA,15,NA,2241,12f7c9b2507edc408dd9cde74536487d,c1c206bec3ad4f7e93c417dd10b1457c,Marburg virus,2241
+13,45,NA,Oct,1998,NA,May,1999,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,73,Symptoms,NA,NA,61,0,2759,be84a93cccc66ea99499386848550ee3,3e6977d15335be4c5b92044d1bbf48c2,Marburg virus,2759
+14,49,10,Jun,2007,14,Sep,2007,NA,NA,0,Uganda,Kamwenge and Ibanda,4,Molecular (PCR etc),NA,NA,1,0,4693,e37387d2c71b627b678047f9c8b51d29,5987f7edbc50272840d26b593b73e8d5,Marburg virus,4693
+17,57,NA,Oct,1998,NA,Sep,2000,NA,NA,0,Democratic Republic of the Congo,Durba and Watsa,48,Molecular (PCR etc),106,NA,125,0,2819,9a38b18b8f516f01a4ef683b5d163270,59d8786f870eed009049aa014d91ba11,Marburg virus,2819
+19,60,12,Feb,1975,NA,NA,NA,NA,NA,0,South Africa;Zimbabwe,Johannesburg,3,Molecular (PCR etc),NA,NA,1,1,2573,11cb6489a8c5bb8039cee00983465ab0,9f809c984a2ce64c50da6d66fa08a6d5,Marburg virus,2573
+1,14,17,Sep,2014,28,Sep,2014,NA,NA,0,Uganda,Kampala,1,Molecular (PCR etc),NA,NA,1,1,1930,ef2abb2a41a8e4c071792d453a9e7850,76e04e3ba17d1c717694fd40a3bd045f,Marburg virus,1930
+15,50,NA,Sep,2012,13,Nov,2012,NA,NA,0,Uganda,Ibanda and Kabale,9,Molecular (PCR etc),5,NA,7,NA,2032,1fa7b989ccb753bb243de6cb7f978176,299c0f1ecb056f7c014821edebd39929,Marburg virus,2032
+16,54,NA,Oct,2004,NA,Jul,2005,NA,NA,0,Angola,Uige Province,252,NA,NA,NA,227,0,1613,cdc68e5d678007f21e90983e5c04904d,6746ef8eaee8eb2f99df80fbb46af12c,Marburg virus,1613
+26,31,NA,NA,2004,NA,NA,2005,NA,NA,0,Angola,NA,252,NA,NA,NA,227,NA,1871,3a63a09c76bc3aa62422d947289b16c3,0a410742da523c956970ac2b7934b60d,Marburg virus,1871
+8,31,NA,NA,1998,NA,NA,2000,NA,NA,0,Democratic Republic of the Congo,NA,154,NA,NA,NA,128,NA,1871,42e58a7e8202a60983b9e67b582ec2e7,0a410742da523c956970ac2b7934b60d,Marburg virus,1871
+20,62,NA,NA,1967,NA,NA,NA,NA,NA,0,Germany;Yugoslavia,NA,31,NA,NA,NA,7,NA,1871,89388c82aa313ee931a06ededb98bd1d,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+21,62,NA,NA,1980,NA,NA,NA,NA,NA,0,Kenya,NA,2,NA,NA,NA,1,NA,1871,320cfc8b1d3cc96d6b977b068df48583,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+22,62,NA,NA,1987,NA,NA,NA,NA,NA,0,Kenya,NA,1,NA,NA,NA,1,NA,1871,f1f1382d7c2075068eca9b2ac29dcd55,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+23,62,NA,NA,1988,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,1,NA,1871,135c34d4b06f0923ac6e80398936a405,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+24,62,NA,NA,1990,NA,NA,NA,NA,NA,0,Russian Federation,NA,1,NA,NA,NA,0,NA,1871,ce992051c9b163a2000dd0c334909242,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+27,62,NA,NA,2007,NA,NA,NA,NA,NA,0,Uganda,NA,4,NA,NA,NA,2,NA,1871,4b527e42979042854f2d56db2676f998,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+28,62,NA,NA,2008,NA,NA,NA,NA,NA,0,United States,Colorado,1,NA,NA,NA,0,NA,1871,87313a007c462f96874f336d0fed971a,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871
+29,62,NA,NA,2008,NA,NA,NA,NA,NA,0,Netherlands,NA,1,NA,NA,NA,1,NA,1871,27382993fd46aa12f62725d031442445,2fbc69b6a85f403c2a43b3aeae7b894d,Marburg virus,1871

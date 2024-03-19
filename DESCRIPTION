@@ -16,6 +16,7 @@ Authors@R: c(
 Description: Contains the latest open access pathogen data from the Pathogen Epidemiology Review Group (PERG). Tools are available to update pathogen databases with new peer-reviewed data as it becomes available, and to summarise the latest data using tables and figures.
 License: GPL (>= 3)
 Depends:
+    epitrix,
     ggplot2,
     ggforce,
     R (>= 3.3.0)

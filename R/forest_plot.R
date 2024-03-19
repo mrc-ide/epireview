@@ -21,7 +21,7 @@
 #' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
-#' @return A ggplot object representing the forest plot.
+#' @return A ggplot2 object representing the forest plot.
 #' @import ggplot2
 #' @export 
 #' @examples
@@ -35,19 +35,42 @@
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     shp_palette = NA, 
     col_palette = NA) {
+ 
+  ## ggplot2 will put all article labels on the y-axis
+  ## even if mid, low, and high are NA. We will filter them out
+  ## here to avoid that.
+  ## We want at least one of mid, low, or high to be non-NA
+  ## for each row
+  rows <- apply(df, 1, function(x) {
+    any(!is.na(x[c("mid", "low", "high")]))
+  }, simplify = TRUE)
+  df <- df[rows, ]
+  ## We don't want to plot rows where mid_type is "Range midpoint" or 
+  ## "Uncertainty width".
+  df$mid[df$mid_type %in% c("Range midpoint")] <- NA
+    
+  ## uncertainty_type was created by us in param_pm_uncertainty
+  ## so the user has no visibility of this variable. The main thing
+  ## is that we want to distinguish Range** which is slightly different
+  ## from the other types of uncertainty
+  uc_types <- unique(df$uncertainty_type)
+  lty_map <- rep("solid", length(uc_types))
+  names(lty_map) <- uc_types
+  lty_map[["Range**"]] <- "dotted"
+  ## note that if you use dashed linetype here, then the legend only shows
+  ## a single dash, which is of course indisguishable from a solid line.
 
   p <- ggplot(df) +
-    geom_point(aes(x = .data[['mid']], y = .data[['y']])) +
+    geom_point(aes(x = .data[['mid']], y = .data[['article_label']])) +
     geom_errorbar(
-      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['y']])
+      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['article_label']],
+          lty = uncertainty_type)
     ) +
-    geom_segment(
-      aes(x = .data[['low']], xend = .data[['high']], y = .data[['y']], yend = .data[['y']])
-    ) + scale_y_discrete(
-      breaks = df$y,
-      labels = df$article_label
-    ) + theme_epireview()
-
+    scale_linetype_manual(values = lty_map, breaks = "Range**") +
+    ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) + 
+    theme_epireview()
+  
+  p <- p + theme(axis.title.y = element_blank())
 
   if (!is.na(facet_by)) {
     p <- p + facet_col(
@@ -56,9 +79,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   }
 
   if (!is.na(shape_by)) {
-    p <- p + aes(
-      shape = .data[[shape_by]]
-    )
+    p <- p + aes(shape = .data[[shape_by]])
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
@@ -70,7 +91,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", shape_by, ". Using default palette"))
+        warning(paste("No palette was provided or found for ", shape_by, ". 
+          Using default palette"))
       }
      
       
@@ -90,7 +112,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", col_by, ". Using default palette"))
+        warning(paste("No palette was provided or found for ", col_by, ". 
+        Using default palette"))
       }
       
     }
