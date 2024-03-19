@@ -1,12 +1,12 @@
 Package: epireview
 Title: Tools to update and summarise the latest pathogen data from the Pathogen Epidemiology Review Group (PERG)
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
-    person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = c("aut", "cre"),
+    person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5213-4364")),
     person("Christian", "Morgenstern", email = "c.morgenstern@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0003-3735-1130")),
-    person("Sangeeta", "Bhatia", email = "s.bhatia@imperial.ac.uk", role = "aut",
+    person("Sangeeta", "Bhatia", email = "s.bhatia@imperial.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6525-101X")),
     person("Richard", "Sheppard", email = "richard.sheppard11@imperial.ac.uk", role = "aut"),
     person("Joseph", "Hicks", email = "j.hicks@imperial.ac.uk", role = "aut"),
