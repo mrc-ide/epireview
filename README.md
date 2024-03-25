@@ -42,7 +42,7 @@ One output of this project will be a database initially populated with all the i
 | --------- |         -------------------:|      -- | -- |
 | Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1016/S1473-3099(23)00515-7
 | Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|https://doi.org/10.1101/2024.03.20.24304571|
-| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk |https://doi.org/10.1101/2024.03.23.24304596|
+| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |https://doi.org/10.1101/2024.03.23.24304596|
 | Henipa virus  |           959 | s.bhatia@imperial.ac.uk||
 | SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk || 
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||
