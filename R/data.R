@@ -16,25 +16,29 @@
 priority_pathogens <- function() {
 
   data.frame(
-    pathogen = c("marburg", "ebola"),
-    articles_screened = c(4460, 9563),
-    articles_extracted = c(42, 520),
-    doi = c("10.1101/2023.07.10.23292424v1", NA),
+    pathogen = c("marburg", "ebola","lassa"),
+    articles_screened = c(4460, 9563,5414),
+    articles_extracted = c(42, 520,157),
+    doi = c("10.1016/S1473-3099(23)00515-7", "10.1101/2024.03.20.24304571", "10.1101/2024.03.23.24304596"),
     articles_file = c(
       "marburg_article.csv",
-      "ebola_articles.csv"
+      "ebola_articles.csv",
+      "lassa_articles.csv"
     ),
     params_file = c(
       "marburg_parameter.csv",
-      "ebola_parameters.csv"
+      "ebola_parameters.csv",
+      "lassa_parameters.csv"
     ),
     models_file = c(
       "marburg_model.csv",
-      "ebola_models.csv"
+      "ebola_models.csv",
+      "lassa_models.csv"
     ),
     outbreaks_file = c(
       "marburg_outbreak.csv",
-      NA
+      NA,
+      "lassa_outbreaks.csv"
     )
   )
 }
