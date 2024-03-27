@@ -24,9 +24,7 @@ Please provide all available data for the article. For the quality assessment, w
 # load packages and source code
 library(tidyverse)
 library(validate)
-source('R/create_new_article_entry.R')
-source('R/append_new_entry_to_table.R')
-source('R/load_epidata.R')
+library(epireview)
 
 new_article <- 
   create_new_article_entry(

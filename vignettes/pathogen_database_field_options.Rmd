@@ -25,7 +25,7 @@ The field options for each table can be retrieved from `get_table_field_options(
 ```{r model options, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
 library(tidyverse)
 library(flextable)
-source("../R/get_table_field_options.R")
+library(epireview)
 
 tbl <- get_table_field_options(table_type = "model", 
                                pathogen = "marburg",
