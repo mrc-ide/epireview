@@ -18,8 +18,7 @@ epireview is a tool to obtain the latest data, figures and tables from the Patho
 To install the latest version of epireview, use:
 
 ```r
-install.packages('epireview', repos = c('https://mrc-ide.r-universe.dev',
-                                        'https://cloud.r-project.org'))
+remotes::install_github('mrc-ide/epireview')
 ```
 
 ## Project overview
