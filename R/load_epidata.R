@@ -109,13 +109,13 @@ article_column_type <- function(pathogen) {
     page_last = col_integer(),
     paper_copy_only = col_logical(),
     notes = col_character(),
-    qa_m1 = col_integer(),
-    qa_m2 = col_integer(),
-    qa_a3 = col_integer(),
-    qa_a4 = col_integer(),
-    qa_d5 = col_integer(),
-    qa_d6 = col_integer(),
-    qa_d7 = col_integer()
+    qa_m1 = col_character(),
+    qa_m2 = col_character(),
+    qa_a3 = col_character(),
+    qa_a4 = col_character(),
+    qa_d5 = col_character(),
+    qa_d6 = col_character(),
+    qa_d7 = col_character()
   )
 
   out
