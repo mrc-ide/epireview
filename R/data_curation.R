@@ -44,8 +44,8 @@ data_curation <- function(articles, outbreaks, models, parameters, plotting) {
               list(~ .x * 10^exponent)) %>%
     dplyr::mutate_at(vars(parameter_value,parameter_lower_bound,parameter_upper_bound,
                    parameter_uncertainty_lower_value,parameter_uncertainty_upper_value), #account for different units
-              list(~ ifelse(parameter_unit == "Weeks", . * 7, .))) %>%
-    mutate(parameter_unit = ifelse(parameter_unit == "Weeks", "Days", parameter_unit)) %>%
+              list(~ ifelse(parameter_unit %in% "Weeks", . * 7, .))) %>%
+    mutate(parameter_unit = ifelse(parameter_unit %in% "Weeks", "Days", parameter_unit)) %>%
     mutate(no_unc = is.na(parameter_uncertainty_lower_value) & is.na(parameter_uncertainty_upper_value), #store uncertainty in pu_lower and pu_upper
            parameter_uncertainty_lower_value = case_when(
              parameter_uncertainty_singe_type == "Maximum" & no_unc ~ parameter_value,
