@@ -1,0 +1,113 @@
+id,model_data_id,covidence_id,pathogen,model_type,compartmental_type,stoch_deter,theoretical_model,interventions_type,code_available,transmission_route,assumptions
+38c022b6ec39e0c6b2fa657618bbcafc,5ff9f9880ec5fe4716bb91cfdea75eec,19,SARS-CoV,Other,Other compartmental,Deterministic,FALSE,NA,FALSE,Unspecified,Unspecified
+3b333d7804d1c112369347cca8a9b0a5,2160e017132979f6f5423f2389a9bbab,435,SARS-CoV,Agent / Individual based,Not compartmental,Stochastic,FALSE,NA,FALSE,Airborne or close contact,Heterogenity in transmission rates - over time
+6bb32c3d8b41778fda365b33c60b53fb,9caa2bed487baf0295994ad6c73cb0a4,646,SARS-CoV,Other,SEIR,Deterministic,TRUE,NA,FALSE,Unspecified,Heterogenity in transmission rates - over time
+db3abf8bf7428f6af49b4d46c25db8d3,304f15e55bfc600416c04d48591ddecc,655,SARS-CoV,Compartmental,SEIR,Deterministic,FALSE,Other,FALSE,Unspecified,Heterogenity in transmission rates - over time;Latent period is same as incubation period
+6e800c3368c53de6b41350cdbd4d7a04,06bca59e9d2da03e5990bb562c2cb485,696,SARS-CoV,Other,SIS,Stochastic,TRUE,Other,FALSE,Unspecified,Heterogenity in transmission rates - between groups
+5a6305f648a80cbbf1650582e85a584b,24e83fbdef063ec84db13c4e07c3a41a,706,SARS-CoV,Branching process,Not compartmental,Stochastic,TRUE,Unspecified,FALSE,Unspecified,Unspecified
+5c662f6294f79b14b771abfd715abb07,29f474765dca7f804877c6d6c27dc468,965,SARS-CoV,Compartmental,Other compartmental,NA,TRUE,Hospitals;Quarantine,FALSE,Airborne or close contact;Human to human (direct contact),Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time
+b37b9da05cf7ee225e16a88d03ccd30d,a9787723dd40aa438167bb2f9bfe11de,1023,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,NA,FALSE,Unspecified,Unspecified
+b37b9da05cf7ee225e16a88d03ccd30d,a9787723dd40aa438167bb2f9bfe11de,1023,SARS-CoV,Compartmental,SIR,Deterministic,FALSE,NA,FALSE,Unspecified,Unspecified
+eed8f8c7a44aa4f01572ca0916c2a340,a0eb6771e8705314e87505bcb57221e7,1036,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Behaviour changes;Quarantine,FALSE,Unspecified,Heterogenity in transmission rates - over time
+4e06ece399a76eac074cd761c8f91a3b,aa1a99ea0d3dda29322a4515b9a9299a,1672,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,NA,FALSE,Human to human (direct contact),Homogeneous mixing
+8aedf68898884d7a84b397a0a8fc6612,e946163aa6325ea0430160eafb5c6e79,1906,SARS-CoV,Other,Other compartmental,Deterministic,TRUE,Quarantine;Other,FALSE,Unspecified,Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time
+7475ef5ccb22c1013efc6afbf0a850a4,02b2149f3ad1478f0b767eb8959c2cbc,1929,SARS-CoV,Compartmental,Other compartmental,Stochastic,FALSE,Behaviour changes;Hospitals;Other,FALSE,Airborne or close contact,Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time
+ce1050dd4580a02c55e252f6ec3311c0,b410bc1df5536c259c0b57032320956b,2223,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,NA,FALSE,Airborne or close contact;Human to human (direct contact),NA
+b3d2c9a152fb4292b3c7228bead82311,f3333cbd1f3f875a701aa677783f99ca,2326,SARS-CoV,Agent / Individual based;Branching process,NA,NA,TRUE,Other;Quarantine,FALSE,NA,Heterogenity in transmission rates - over time
+d92d2b8438976bf03f8f092f17c710c5,5aaeef1bbe50fda43859b61a89800608,2498,SARS-CoV,Agent / Individual based,NA,NA,FALSE,Behaviour changes;Vaccination,FALSE,Human to human (direct contact),Age dependent susceptibility;Heterogenity in transmission rates - between groups
+27fb0862e5894022f23f89ad267db541,becbb6e6073893e55d143aadc7510765,2611,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,Contact tracing;Quarantine,FALSE,Human to human (direct contact),Homogeneous mixing
+ff3fe9b38920991e857720a78ea10624,15b817f2ba284c093a4fcb62e5d8d2a7,2613,SARS-CoV,Compartmental,SEIR,Stochastic,FALSE,Behaviour changes;Other,FALSE,Human to human (direct contact),Homogeneous mixing
+59aecf7651e9dfe6e45c89944543c491,4a6995413f4f1afc9475ad5f0e173f43,2614,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Quarantine,FALSE,Human to human (direct contact),Homogeneous mixing
+59aecf7651e9dfe6e45c89944543c491,f9e9a0205bbad7aae973c0b4bc8e94cb,2614,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Unspecified,FALSE,Human to human (direct contact),Homogeneous mixing
+d25d30f96b211bd653c6cb38e9c8c304,94c1c651dcef074e3ca7843595bedab3,2650,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,NA,FALSE,Human to human (direct contact),Homogeneous mixing
+eb519f4eab7b1c7ed1949dd978ce68e3,20940fab56d6e8410cd9451c9bb8f4e8,2766,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Quarantine,FALSE,NA,Heterogenity in transmission rates - over time;Homogeneous mixing
+af08c91c3ee53abc9f3809c3a5d30a8f,69369cad7ed17b8bc6114e91112d3236,2792,SARS-CoV,Compartmental,Other compartmental,Stochastic,FALSE,NA,FALSE,NA,Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time;Homogeneous mixing
+89abe8e1d8fba3b20f2641198e068491,78876b37a5c1b91e3f91d7da44c3b537,2838,SARS-CoV,Other,NA,Deterministic,TRUE,NA,FALSE,NA,NA
+2bb7061c6fee57f598a624ce52ff4036,c4447d77ec032481c60a9d8c3cacd9ef,3042,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Contact tracing;Quarantine,FALSE,Human to human (direct contact),Homogeneous mixing
+11c2de05b1ff3a03bc0409585a820a3e,f026925c02006590d69d3a588719e467,3282,SARS-CoV,Branching process,NA,Stochastic,FALSE,Contact tracing;Other;Quarantine,FALSE,Unspecified,Heterogenity in transmission rates - between groups
+55f11edb51dcaf50f607cfc2110cc0dd,11b62f7a28daa0872408c1dbe2cbd4e0,3284,SARS-CoV,Compartmental,SEIR,Stochastic,TRUE,Behaviour changes;Contact tracing;Other;Quarantine,FALSE,Human to human (direct contact),Heterogenity in transmission rates - between groups
+3d28aef2f8dcd3e0f2827f898eaaf131,c5dde9f8bf5158edd4485aa3b277c8e3,3375,SARS-CoV,Compartmental,Other compartmental,Stochastic,FALSE,Quarantine,FALSE,Unspecified,NA
+3e76e9f69fe5144d1f8efea47150d784,68824fa8618243fd8efdb355ddd20c01,3394,SARS-CoV,Compartmental,SEIR,Stochastic,TRUE,NA,FALSE,Unspecified,Heterogenity in transmission rates - between groups;Homogeneous mixing
+3e76e9f69fe5144d1f8efea47150d784,4ac3400d80b26e57e3386c1eae481aa6,3394,SARS-CoV,Branching process,NA,Stochastic,TRUE,NA,FALSE,Unspecified,Heterogenity in transmission rates - between groups;Homogeneous mixing
+290361c7d76f2ce2154e954c64bbea8d,759c26f582b379a221c57ba59cb5a6cc,3468,SARS-CoV,Other,NA,Stochastic,FALSE,Contact tracing;Quarantine,FALSE,Airborne or close contact,Unspecified
+b2e1efd44fdbc398c159167be9797da1,daab481054910920fdc1fc45b201dd3c,3469,SARS-CoV,Other,SIR,Stochastic,TRUE,Unspecified,FALSE,Airborne or close contact,Homogeneous mixing
+08c9163197ce9a7b565a42829e10b939,9d9dbf6da365dcdcc8c0e60c8764f5c4,3497,SARS-CoV,Branching process,Not compartmental,Stochastic,FALSE,Unspecified,FALSE,Unspecified,Latent period is same as incubation period
+5d63572fd1d4ab221a36ae3734d848ad,375b066f178db99762a0bd38455a52c6,3645,SARS-CoV,Unspecified,Not compartmental,Stochastic,TRUE,Behaviour changes;Contact tracing;Quarantine;Vaccination,FALSE,Unspecified,Unspecified
+6369165274fe6a2eb5c6697efd14ace1,1c2eb37339bb993ade2f2466bc778e61,3685,SARS-CoV,Compartmental,SEIR,Deterministic,FALSE,NA,FALSE,Unspecified,NA
+14cac23c051e7fe7a2e78ee33b2149e6,36d17b5ae36982ea584a63d56bb120fa,3726,SARS-CoV,Branching process,NA,Stochastic,TRUE,Quarantine,FALSE,Unspecified,NA
+b6242a208e41e9553b5a525673b586ce,7787625cd3c4e29a1079120ce1f82560,3991,SARS-CoV,Compartmental,SEIR,Stochastic,FALSE,Unspecified,FALSE,Unspecified,Latent period is same as incubation period
+2d9163fa5758898c624d4c7fb7243b01,65cc3df7a9c726aa61cf82db6d54b91d,4011,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Behaviour changes,FALSE,Unspecified,Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time;Latent period is same as incubation period
+19782ca1f7c08cfbe9941905bb52f0ec,294a6365f72a2097cb04bb90652010d8,4293,SARS-CoV,Compartmental,SEIR,Stochastic,FALSE,Unspecified,FALSE,Human to human (direct contact),Heterogenity in transmission rates - over time
+732b00667ad5f36035a95b639603ff65,f052a759907e2f916c19ac970fec80ac,4466,SARS-CoV,Compartmental;Other,Other compartmental,Deterministic,FALSE,Hospitals;Quarantine,FALSE,Unspecified,NA
+5c04046f2a4131d8424e3eeeb77b8098,bb0377b6ad94b5d8b9348b75aac42e2d,4467,SARS-CoV,Other,NA,Deterministic,FALSE,NA,FALSE,NA,NA
+0f13bcef79d9d2be5ab53687f1ec2eef,a414ca8c3c8f9eb7d78bf088169e0d4c,4469,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,NA,FALSE,NA,NA
+d8734354a280a936f16ebf19f803597e,f2451e0690c6949a89d76be23833d26b,4675,SARS-CoV,Other,NA,Stochastic,TRUE,Other,FALSE,Unspecified,Latent period is same as incubation period
+d3be53e9b926a8687df4a8767c452962,b413d7e33222d67d8bc0c713642f744c,4676,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,Unspecified,FALSE,Unspecified,Heterogenity in transmission rates - over time
+99c2b3af944318c635f4b925e28635e7,8e464951c81acd0f95b14c46bc56fb61,4677,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes;Contact tracing;Vaccination,FALSE,Unspecified,Unspecified
+a5a3f09e3b5104733dd3ec8b95104bf0,97dea684f0f0b7a01fb8d5da1616880f,4796,SARS-CoV,Compartmental,SEIR,Deterministic;Stochastic,TRUE,Hospitals,FALSE,Unspecified,Heterogenity in transmission rates - over time;Latent period is same as incubation period
+59dacfbabff368fd54b84d3517e60e6c,16e58c9d16eec071d858ceb3ff2e743b,4837,SARS-CoV,Agent / Individual based,Not compartmental,Deterministic,FALSE,Contact tracing;Quarantine,FALSE,Unspecified,Homogeneous mixing
+4efd0f902be2838b303fff125960c225,001b44cfde64ddcc0490d4377e790c71,5011,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,Contact tracing;Quarantine,FALSE,Unspecified,Unspecified
+33fafb0fcaf759dbe5711f2a4a97a570,c02b9a7686bbcca5bb7fd3cebf837a34,5069,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Quarantine,FALSE,Unspecified,Homogeneous mixing
+c0e68e1e9e564c133fb4da45a2003670,0be0118bce676b57ba3bf0f161ce4b7f,5154,SARS-CoV,Branching process,Not compartmental,Stochastic,TRUE,Unspecified,FALSE,Unspecified,Unspecified
+41b5c13635b3dc1d1bdd9f8b274ac965,9a0d10f69cf2bc4ab24e9d5cac999bc3,5225,SARS-CoV,Agent / Individual based,NA,NA,FALSE,Behaviour changes,FALSE,NA,NA
+85dd7488bbe691b68479a84b559fe227,f5b093a68ea5339cf09556b45921c9fa,5269,SARS-CoV,Compartmental,SEIR,Stochastic,FALSE,NA,FALSE,Human to human (direct contact),NA
+9748370ea80bae44119a27866bb702e3,e503a56e6657f87a453d21c1cc14c956,5361,SARS-CoV,Compartmental,Other compartmental;SEIR,Deterministic,FALSE,Other,FALSE,Human to human (direct contact),Homogeneous mixing
+d6bfc6ebf8a8d55270bb8c6189fbd8c2,1c8f3320b39203c9e56b21b191228223,5385,SARS-CoV,Compartmental,Other compartmental;SEIR,Deterministic,FALSE,Behaviour changes,FALSE,NA,Age dependent susceptibility;Heterogenity in transmission rates - between groups;Homogeneous mixing
+c23e74eee390b618a31892c970806efc,fe013ae9c2998655722455447665da85,5484,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Hospitals;Quarantine,FALSE,NA,NA
+046d0c0044271ce273d25cff95b1f01b,8588a3e4beab67ebc2eb2e53cbbaea8e,5589,SARS-CoV,Compartmental,SIR,Deterministic,FALSE,NA,FALSE,Human to human (direct contact),Homogeneous mixing;Latent period is same as incubation period
+508beb19f337dd86f0b7e5e251c8cc09,65335d53012a2703ab9f217cd230aa1c,5722,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,Other,FALSE,Airborne or close contact,NA
+2ab5d56d066dfa257c83c9602da851b3,8d4baaeb606b5d7469d7f17b57f62745,5896,SARS-CoV,Compartmental,SEIR,Stochastic,FALSE,NA,FALSE,Airborne or close contact,Heterogenity in transmission rates - over time;Homogeneous mixing
+f499386c67edf823f85e7a5718892538,1753dddc41a44dfa5c53ef57d54d109c,5917,SARS-CoV,Compartmental,Other compartmental,Stochastic,FALSE,Quarantine,FALSE,NA,Homogeneous mixing
+ecabef022a22d64834df53d8ebea788f,dda387aec7e20f8b37809dc97eac3cfa,6023,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,Behaviour changes;Other;Quarantine,FALSE,Unspecified,Unspecified
+f5322d14f02b6a1ca0bae0757fccb2e0,675949d2003c4f209b1a8ecda7a79957,6068,SARS-CoV,Other,NA,Stochastic,TRUE,NA,FALSE,Unspecified,NA
+3c3d6feb3ef952428010791f0796ed4e,1ee005da06676b4dda358d0134af5e9d,6069,SARS-CoV,Unspecified,NA,Stochastic,FALSE,NA,FALSE,Unspecified,NA
+aaadc879e8338d58bd633273324b8c32,a38d5f640d3fcdf48d7cd812c8ad7685,6109,SARS-CoV,Other,NA,Stochastic,FALSE,NA,FALSE,Airborne or close contact,NA
+f944b640b9d9d0e9fdc76929f447e539,34726b31689377fdbee2f19cc9515b72,6339,SARS-CoV,Compartmental,SEIR,Deterministic,FALSE,Quarantine,FALSE,Unspecified,Homogeneous mixing
+4ceb51183d946202fddb737fd270bf7a,6a288864addf4312824837cfba0741cc,6348,SARS-CoV,Compartmental,Other compartmental,Stochastic,TRUE,Contact tracing;Quarantine;Treatment,FALSE,Human to human (direct contact),Homogeneous mixing
+ff5d235ad937aeee74c83b69568a8b15,21482896948f4d7e30fbe7b83c1a03b1,6465,SARS-CoV,Branching process,Not compartmental,NA,TRUE,Behaviour changes;Contact tracing;Other;Quarantine,FALSE,Human to human (direct contact),NA
+b240fb24d7fe0b5d94129c3cefdff107,c39502861047db071e33063790df497e,6554,SARS-CoV,Compartmental,Other compartmental,Stochastic,FALSE,NA,FALSE,Unspecified,Unspecified
+2a57227dcbd2360d82c192db92416bc7,c8e26737d54195a8ab780c6b3f3bceb1,6578,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Hospitals;Quarantine,FALSE,Unspecified,Heterogenity in transmission rates - between groups
+4e21ecae1b6f666ca183e0a6ad8b4158,7c52a933a5d5ade2689f1dbc424fd2e8,6700,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,NA,FALSE,Unspecified,Unspecified
+d3df4209c7e5e30e1ddaf2ce8d08ec03,caa06ed46e27820dfc9326387a948481,7020,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Quarantine,FALSE,Unspecified,Unspecified
+7e993c93dc2029a74d03411c05804c94,db3ad11e095d02a5507b6011e9842f7c,7029,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Quarantine,FALSE,Human to human (direct contact),Heterogenity in transmission rates - over time;Unspecified
+6d76985bbeb83a754b1de706d2a88142,7eb991822a919c6003194fd45ef3b97c,7106,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,Unspecified,FALSE,Human to human (direct contact),Unspecified
+6d76985bbeb83a754b1de706d2a88142,b6369226d55ba2c6335ca47ffaabe289,7106,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Hospitals,FALSE,Human to human (direct contact),Unspecified
+6bdd62d9e30ddd913a31ae2aa962918c,59d631b25cff8d6b7425e2999f4ac2a4,7107,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes;Other,TRUE,Human to human (direct contact),Homogeneous mixing
+b9ec8436c5662750358f24c2dba7575c,3cd6ef42c000152b44922d030f4e0984,7135,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Quarantine,FALSE,Human to human (direct contact),Unspecified
+147beefff04398ca7977965dc10d0246,54fcad61d4e59893c6ca3d962f6157c5,7256,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,Unspecified,TRUE,Human to human (direct contact),Homogeneous mixing
+6e74b713b00a126d88b325a644548cc4,75bfbe0ba54b01a05def5e5bbc0a04f2,7260,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,NA,FALSE,Human to human (direct contact),NA
+37fe29875214ad966a013e54bf85ef2b,06dfe20cca6c1e9fa8d55be27ff17111,7372,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,Other;Quarantine,FALSE,Unspecified,Homogeneous mixing
+900cd18570ffab7dab0888aad8c0b1c2,b4bf1f77c5587e4d2d8ea1a2e19b6d5d,7393,SARS-CoV,Agent / Individual based,NA,Stochastic,TRUE,Contact tracing;Vaccination,FALSE,Unspecified,NA
+a76c6f2f5550d77e9b6103a06b1fd8f9,83d3db51e2dbab4ab92a24c713bc7e69,7957,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes,FALSE,Unspecified,Unspecified
+81fddbd21e98848e58b618aefb0c1fe8,719dbd0834b57e9346333f2493ac1339,8001,SARS-CoV,Other,Not compartmental,Deterministic,FALSE,Behaviour changes,FALSE,Unspecified,Unspecified
+59c4ec8576a5bafaf97481f6787d1a40,10370477e537d609b501727d376104d2,8513,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes;Quarantine,FALSE,Unspecified,Unspecified
+36502515b00fd97e96b5288f8bb67a55,99d65c4cac81650394ce6cccf08d9b23,8514,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,Other;Quarantine,FALSE,Unspecified,Homogeneous mixing
+ba564ed2823030118410bd7569052ab8,ca702331aebcdf5524f5e560f786e9be,8759,SARS-CoV,Other,SEIR,Stochastic,FALSE,NA,FALSE,Unspecified,NA
+b2a8641e4e0738c8e62622dcedfd96f8,49914d0cb34e5f2334236bc56d83758b,8787,SARS-CoV,Compartmental,Other compartmental;SEIR,Deterministic,TRUE,Quarantine;Vaccination,FALSE,Unspecified,Homogeneous mixing
+9951b4fdffdcf8e9c6e92aeb172aea7f,46a66a7134a7947221b2493fcebddd4c,8847,SARS-CoV,Unspecified,NA,Stochastic,TRUE,Unspecified,FALSE,Unspecified,Unspecified
+3fc986b55e978f95f2db41b0b2b103f1,d5282aaf02ece8b6baca764324668f65,9416,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,NA,FALSE,Unspecified,Unspecified
+5e5ce3ffa186b086f4259e08d3846dde,6ea2dd0bfc7cfe7666093d10928ab15a,9786,SARS-CoV,Compartmental,SIR;SIS,Stochastic,TRUE,NA,FALSE,Unspecified,NA
+5649bb22cd090f27f180cda2569e5934,55d8b50b65f49eeb460387cc0d7f4e59,10395,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,NA,FALSE,Human to human (direct contact),Unspecified
+47c33c90fffd09149b7de668b0864697,e91795bb403988e3fc593b1e567f52d2,10779,SARS-CoV,Other,NA,Stochastic,TRUE,NA,FALSE,Human to human (direct contact),NA
+b2e942dc0c51aa02187700be0d7f938a,1f0b9c73b3259eabeb28711a2e0acae1,10860,SARS-CoV,Agent / Individual based,Not compartmental,NA,TRUE,Hospitals;Other;Quarantine,FALSE,Unspecified,Unspecified
+4f7119ca0443029fa96c110c6bd69928,210ea9409b0be9639c5276b8ec5d2ff5,10922,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes;Quarantine,FALSE,Airborne or close contact,Heterogenity in transmission rates - between groups;Homogeneous mixing;Latent period is same as incubation period
+25c1320c64a656335d416cff58fd6eb2,1d208a1b5e9761996b79d9d5857d837d,10924,SARS-CoV,Compartmental,Other compartmental,Deterministic,TRUE,Behaviour changes;Quarantine,FALSE,Unspecified,Heterogenity in transmission rates - between groups;Homogeneous mixing;Latent period is same as incubation period
+98b436234a1f013cb621cb5ae0bca70a,a823b4829a1172d8449ff6090070e032,10951,SARS-CoV,Agent / Individual based,Other compartmental,Stochastic,TRUE,Behaviour changes;Contact tracing;Hospitals;Other;Quarantine,FALSE,Airborne or close contact;Human to human (direct contact),Heterogenity in transmission rates - between groups;Latent period is same as incubation period
+700072a9252401745b0c5b9b9f06643e,28466d066882be14fceeb9d98e3670fe,11000,SARS-CoV,Compartmental,SEIR,Stochastic,TRUE,NA,FALSE,Airborne or close contact,Heterogenity in transmission rates - between groups;Latent period is same as incubation period
+8c6cea477c7485e9d06e1bf302299f8b,03131716a27ccf276bdeb853d79db164,11040,SARS-CoV,Compartmental,SIR,Deterministic,FALSE,Unspecified,FALSE,Unspecified,Unspecified
+9194e238c9943e2b8a106599e56c3a9f,d75d15cf8d087e3d9d4e8d44af7a088c,11232,SARS-CoV,Compartmental,SIR,Deterministic,FALSE,Contact tracing;Other;Quarantine,FALSE,Human to human (direct contact),Age dependent susceptibility
+d543abefdaad57a99a695769b651886a,857553e7054e0a0f1024dd5f7e9498ed,11544,SARS-CoV,Compartmental,SIR,Deterministic;Stochastic,FALSE,Other,FALSE,Human to human (direct contact),Heterogenity in transmission rates - between groups;Heterogenity in transmission rates - over time
+9bd5e11d85f4d6d2af763178ab642e1c,cd93a4823c17c09fb4bb5877915a4894,11599,SARS-CoV,Other,Not compartmental,Stochastic,TRUE,Unspecified,FALSE,Human to human (direct contact),Heterogenity in transmission rates - between groups
+d4d1b1cdc235760a274f829d3902b5ca,4bc9fcd2b1c62f883296f098fd3f9a52,11859,SARS-CoV,Other,Not compartmental,Stochastic,FALSE,Unspecified,FALSE,Unspecified,Heterogenity in transmission rates - over time
+12a46e1b672d63f5eae740bce2e2cdcc,10ace8564e4bab9a4bf53e760e7defda,11950,SARS-CoV,Unspecified,Not compartmental,Stochastic,TRUE,Unspecified,TRUE,Unspecified,Unspecified
+ebb51849eaed948c1e592dc7e5b8e3e2,c75d412e39c6081e09e2fc4d5064cc96,12002,SARS-CoV,Agent / Individual based,SEIR,Stochastic,TRUE,Contact tracing,FALSE,Human to human (direct contact),Heterogenity in transmission rates - between groups;Latent period is same as incubation period
+5c6cbb3d1957c4fdf446aa4bafa17dae,2795d4fe8999f79559d9cff02b826bcc,12073,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Other;Quarantine,FALSE,Human to human (direct contact),Heterogenity in transmission rates - over time
+af6052cf8bcb8456613ea50e6407196f,c4975d307d3f0ffb7d8413972947d99a,12456,SARS-CoV,Other,Not compartmental,Stochastic,TRUE,Quarantine,FALSE,Human to human (direct contact),Heterogenity in transmission rates - between groups
+caa3cebdd946efcafd9dddebb0c71542,307002d2f00ec8fc214cc64328ac5244,22482,SARS-CoV,Compartmental,Other compartmental,Stochastic,TRUE,Hospitals,FALSE,Unspecified,Unspecified
+a1ef01bda0b3a8c3b85fc2e86b9760d1,85a87c3a00d7511269d22b34c0c51d39,24517,SARS-CoV,Compartmental,Other compartmental,Deterministic,FALSE,Hospitals,FALSE,Unspecified,Heterogenity in transmission rates - between groups
+2462160a4899cf4d92e8119987f3466c,a97ed5b9aae9182d532e58272c6d559f,24598,SARS-CoV,Compartmental,SIR,Deterministic,TRUE,NA,FALSE,Human to human (direct contact),NA
+1f04b6ffaa04b948fe7f93279e28ee52,3462dfd658b735bed5cfcddcd214688a,24602,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,Unspecified,FALSE,Human to human (direct contact),NA
+79b0777d515fa1cfcc892b1c4f63f8af,85664514a1729073ba6f61f9fb05e6a4,24884,SARS-CoV,Compartmental,SIS,Stochastic,FALSE,Behaviour changes;Treatment,FALSE,Human to human (direct contact),Homogeneous mixing
+32a7aa58ce892e5fe8d6d63e24f31b41,4c00210639d9da400f0331768d39e43e,24951,SARS-CoV,Agent / Individual based,SEIR,Stochastic,TRUE,Contact tracing;Other,FALSE,Unspecified,NA
+f62dad4e8640027ce2c4e5a3c5bd68df,2651378128264166e55a41b460c54ba2,25516,SARS-CoV,Compartmental,SIR,Deterministic,FALSE,NA,FALSE,Unspecified,Homogeneous mixing
+88554dc7e1b6ba3d4f966fb881741d12,9e507216b8deafef71452ccf4b963772,25901,SARS-CoV,Compartmental,SEIR,Deterministic,TRUE,Other;Quarantine,FALSE,Unspecified,Unspecified
