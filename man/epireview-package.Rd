@@ -17,12 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Rebecca Nash \email{r.nash@imperial.ac.uk} (\href{https://orcid.org/0000-0002-5213-4364}{ORCID})
+\strong{Maintainer}: Sangeeta Bhatia \email{s.bhatia@imperial.ac.uk} (\href{https://orcid.org/0000-0001-6525-101X}{ORCID})
 
 Authors:
 \itemize{
+  \item Rebecca Nash \email{r.nash@imperial.ac.uk} (\href{https://orcid.org/0000-0002-5213-4364}{ORCID})
   \item Christian Morgenstern \email{c.morgenstern@imperial.ac.uk} (\href{https://orcid.org/0000-0003-3735-1130}{ORCID})
-  \item Sangeeta Bhatia \email{s.bhatia@imperial.ac.uk} (\href{https://orcid.org/0000-0001-6525-101X}{ORCID})
   \item Richard Sheppard \email{richard.sheppard11@imperial.ac.uk}
   \item Joseph Hicks \email{j.hicks@imperial.ac.uk}
   \item Gina Cuomo-Dannenburg (\href{https://orcid.org/0000-0001-6821-0352}{ORCID})
