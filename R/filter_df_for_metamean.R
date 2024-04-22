@@ -67,5 +67,5 @@ filter_df_for_metamean <- function(df) {
                                     min    = ifelse(parameter_uncertainty_type == "Range", parameter_uncertainty_lower_value, NA),
                                     max    = ifelse(parameter_uncertainty_type == "Range", parameter_uncertainty_upper_value, NA))
 
-  return(df)
+  df
 }
