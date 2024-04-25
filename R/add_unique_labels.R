@@ -9,6 +9,7 @@
 #'
 #' @param articles A data frame containing information about the articles. This 
 #' will typically be the output of \code{load_epidata_raw}.
+#' @inheritParams load_epidata
 #' @return A modified data frame with an additional column "article_label" 
 #' containing the generated labels.
 #' @examples
