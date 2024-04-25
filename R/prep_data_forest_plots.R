@@ -52,7 +52,8 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 ##' priority pathogens currently included in the package by calling
 ##' \code{priority_pathogens()}.
 ##' 
-##'
+##' @param mark_multiple logical. If TRUE, multiple studies from the same
+##' author in the same year will be marked with a suffix to distinguish them.
 ##' @return a list of length 2. The first element is a data.frame
 ##' called "params" with articles information (authors, publication year)
 ##' combined with the parameters. The second element is a data.frame
@@ -62,7 +63,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 ##' @importFrom dplyr left_join
 ##' @export
 
-load_epidata <- function(pathogen) {
+load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   assert_pathogen(pathogen)
 
@@ -95,26 +96,8 @@ load_epidata <- function(pathogen) {
     params_extracted <- FALSE
   }
   
-  ## Make pretty labels for articles
-  ## prefix: surname; if na then first name; if that is na
-  ## then just use covidence id and issue a warning
-  ## suffix: year of publication; if na, then just use covidence id
-  ## and issue a warning
-  prefix <- ifelse(
-    ! is.na(articles$first_author_surname),
-    articles$first_author_surname,
-    ifelse(
-      ! is.na(articles$first_author_first_name),
-      articles$first_author_first_name,
-      articles$covidence_id  
-  ))
-  suffix <- ifelse(
-    ! is.na(articles$year_publication),
-    articles$year_publication,
-    articles$covidence_id
-  )
-  articles$article_label <- paste(prefix, suffix)
 
+  articles <- pretty_article_label(articles, mark_multiple)
   cols <- c(
     "id", "first_author_surname", "year_publication", "article_label"
   )
@@ -146,7 +129,7 @@ load_epidata <- function(pathogen) {
   
   list(
     articles = articles, params = params, models = models, outbreaks = outbreaks
-    )
+  )
 }
 
 
