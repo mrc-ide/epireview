@@ -1,4 +1,6 @@
-df <- readRDS("tests/testthat/data/example_param_df.RDS")
+df <- load_epidata("lassa")[["params"]]
+o2h_df <- df[df$parameter_type %in% "Human delay - symptom onset>admission to care", ]
+df <- filter_df_for_metamean(o2h_df)
 
 test_that("filtering parameter dataframe for meta mean works",{
 
@@ -13,7 +15,7 @@ test_that("filtering parameter dataframe for meta mean works",{
                      "parameter_uncertainty_upper_value")
 
   msg1 <- paste(
-    "df must have columns named:", 
+    "df must have columns named:",
     paste(required_cols, collapse = ", ")
   )
   for(i in required_cols){
@@ -27,9 +29,12 @@ test_that("filtering parameter dataframe for meta mean works",{
   df1$parameter_unit[1] <- "Weeks"
   expect_error(filter_df_for_metamean(df1))
 
-  ## The test data.frame has rows with NA values for parameter_value
+  ## Pretend the dataframe has rows with NA values for parameter_value
   ## and non-na parameter_unit. Expect warning.
-  expect_warning(filter_df_for_metamean(df))
+  df_na <- df
+  df_na$parameter_value[1] <- NA
+  expect_message(filter_df_for_metamean(df_na))
+
   ## Check that the resulting df has as many or fewer rows
   df2 <- filter_df_for_metamean(df)
   expect_true(dim(df2)[1] <= dim(df)[1])
@@ -38,9 +43,10 @@ test_that("filtering parameter dataframe for meta mean works",{
   ## + additional ones as expected
   expect_true(all(names(df) %in% names(df2)))
   extra_cols <- names(df2)[which(!(names(df2) %in% names(df)))]
-  expect_true(all(extra_cols == c("xbar", "median", "q1", "q3", "min", "max")))
+  new_cols <- c("xbar", "median", "q1", "q3", "min", "max")
+  expect_true(all(extra_cols == new_cols))
 
-  ## Mess up the data.frame and check that 
+  ## Mess up the data.frame and check that
   ## there are no rows that should have been filtered out
   df$population_sample_size[1] <- NA
   ## Already 1 row with NA population_value that should be filtered out

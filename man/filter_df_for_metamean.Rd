@@ -34,10 +34,12 @@ parameter values are all in the same units; and that the sample size is
 reported for each parameter value.
 }
 \examples{
-## TODO: rewrite example once the curation functions exist with examples
-## of how to then use metamean function
-df <- readRDS("tests/testthat/data/example_param_df.RDS")
-dataframe <- filter_df_for_metamean(df)
-## mtan <- metamean(data = dataframe, ...)
+## preparing data for meta analyses of delay from symptom onset to
+## hospitalisation for Lassa
 
+df <- load_epidata("lassa")[["params"]]
+o2h_df <- df[df$parameter_type \%in\% "Human delay - symptom onset>admission to care", ]
+o2h_df_filtered <- filter_df_for_metamean(o2h_df)
+## o2h_df_filtered could then be used directly in meta analyses as:
+## mtan <- metamean(data = o2h_df_filtered, ...)
 }
