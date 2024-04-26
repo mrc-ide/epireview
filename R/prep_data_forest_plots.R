@@ -112,17 +112,17 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   
   if (params_extracted) {
     params <- left_join(params, articles, by = "id") |>
-      mark_multiple_estimates("parameter_type")
+      mark_multiple_estimates("parameter_type", label_type = "numbers")
   } else params <- NULL
   
   if (models_extracted) {
     models <- left_join(models, articles, by = "id") |>
-      mark_multiple_estimates("model_type")
+      mark_multiple_estimates("model_type", label_type = "numbers")
   } else models <- NULL
 
   if (outbreaks_extracted) {
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
-      mark_multiple_estimates("outbreak_country")
+      mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL
   
   message("Data loaded for ", pathogen)
@@ -148,16 +148,20 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' @param col The column name for the table type. For parameters this is
 #' "parameter_type"; for models this is "model_type"; for outbreaks this is 
 #' "outbreak_country".
-#'
+#' @param labels Type of labels to add to distinguish multiple estimates. Must 
+#' be one of "letters" or "numbers".
 #' @return The modified data frame with updated article_label
 #'
 #' @examples
 #' df <- data.frame(article_label = c("A", "A", "B", "B", "C"),
 #'                  parameter_type = c("X", "X", "Y", "Y", "Z"))
-#' mark_multiple_estimates(df)
+#' mark_multiple_estimates(df, label_type = "numbers")
 #'
 #' @export
-mark_multiple_estimates <- function(df, col = "parameter_type") {
+mark_multiple_estimates <- function(df, col = "parameter_type", label_type = c("letters", "numbers")) {
+
+  match.arg(label_type)
+
   dups <- as.data.frame(
     table(article_label = df[["article_label"]], params = df[[col]])
   )
@@ -171,7 +175,12 @@ mark_multiple_estimates <- function(df, col = "parameter_type") {
     rows <- df$article_label %in% article & df[[col]] %in% param
     ## add a suffix to the article_label
     nrows <- sum(rows)
-    df$article_label[rows] <- paste0(article, " (", seq_len(nrows), ")")
+    if (label_type == "letters") {
+      labels <- letters[seq_len(nrows)]
+    } else if (label_type == "numbers") {
+      labels <- seq_len(nrows)
+    }
+    df$article_label[rows] <- paste0(article, " (", labels, ")")
   }
   df
 }

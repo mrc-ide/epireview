@@ -1,4 +1,5 @@
-test_pretty_article_label <- function() {
+test_that("pretty article labels work", {
+  mark_multiple <- TRUE
   # Test case 1: articles with all information available
   articles1 <- data.frame(
     first_author_first_name = "John",
@@ -7,7 +8,7 @@ test_pretty_article_label <- function() {
     covidence_id = 123,
     stringsAsFactors = FALSE
   )
-  result1 <- pretty_article_label(articles1)
+  result1 <- pretty_article_label(articles1, mark_multiple = mark_multiple)
   expect_equal(result1$article_label, "Smith 2022")
 
   # Test case 2: articles with missing author information
@@ -20,10 +21,10 @@ test_pretty_article_label <- function() {
   )
   
   expect_warning(
-    pretty_article_label(articles2), 
+    pretty_article_label(articles2, mark_multiple = mark_multiple), 
     "There are 1 articles with missing first author surname."
   )
-  result <- pretty_article_label(articles2)
+  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
   expect_equal(result$article_label, "John 2022")
 
  articles2 <- data.frame(
@@ -33,9 +34,9 @@ test_pretty_article_label <- function() {
     covidence_id = 123,
     stringsAsFactors = FALSE
   )
-  expect_warning(pretty_article_label(articles2))
+  expect_warning(pretty_article_label(articles2, mark_multiple = mark_multiple))
   
-  result <- pretty_article_label(articles2)
+  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
   expect_equal(result$article_label, "123 2022")
 
  articles2 <- data.frame(
@@ -45,8 +46,8 @@ test_pretty_article_label <- function() {
     covidence_id = 123,
     stringsAsFactors = FALSE
   )
-  expect_warning(pretty_article_label(articles2))
-  result <- pretty_article_label(articles2)
+  expect_warning(pretty_article_label(articles2, mark_multiple = mark_multiple))
+  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
   expect_equal(result$article_label, "123 123")
 
   # Test case 3: articles with multiple studies from the same author in the same year
@@ -58,9 +59,14 @@ test_pretty_article_label <- function() {
     stringsAsFactors = FALSE
   )
 
-  result <- pretty_article_label(articles3)
+  result <- pretty_article_label(articles3, mark_multiple = mark_multiple)
   expect_equal(
-    result$article_label, c("Smith 2022 (1)", "Smith 2022 (2)", "Johnson 2022")
+    result$article_label, c("Smith 2022 (a)", "Smith 2022 (b)", "Johnson 2022")
   )
-}
+  
+  result <- pretty_article_label(articles3, mark_multiple = FALSE)
+  expect_equal(
+    result$article_label, c("Smith 2022", "Smith 2022", "Johnson 2022")
+  )
+})
 

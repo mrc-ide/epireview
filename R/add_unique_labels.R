@@ -98,7 +98,9 @@ pretty_article_label <- function(articles, mark_multiple) {
       ## If there is more than one study from the same author in the same 
       ## year, they will end up with the same label. This is not ideal, so
       ## we will mark these studies with a number.      
-      articles <- mark_multiple_estimates(articles, "article_label")
+      articles <- mark_multiple_estimates(
+        articles, "article_label", label_type = "letters"
+      )
     }
     articles
 }
