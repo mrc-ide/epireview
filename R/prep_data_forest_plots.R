@@ -118,7 +118,7 @@ load_epidata <- function(pathogen) {
   cols <- c(
     "id", "first_author_surname", "year_publication", "article_label"
   )
-
+  articles_everything <- articles
   articles <- articles[, cols]
 
   ## Marburg parameters have entries like "Germany;Yugoslavia"
@@ -145,8 +145,9 @@ load_epidata <- function(pathogen) {
   message("Data loaded for ", pathogen)
   
   list(
-    articles = articles, params = params, models = models, outbreaks = outbreaks
-    )
+    articles = articles_everything, params = params, models = models, 
+    outbreaks = outbreaks
+  )
 }
 
 
