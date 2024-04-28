@@ -48,4 +48,4 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://mrc-ide.github.io/epireview/
 LazyData: true
-BugReports: https://mrc-ide.github.io/epireview/issues
+BugReports: https://github.com/mrc-ide/epireview/issues
