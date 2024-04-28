@@ -12,8 +12,6 @@ vignette: >
 
 There are several vignettes available:
 
--   [**Marburg Virus Disease (MVD)**](https://mrc-ide.github.io/epireview/articles/pathogen_marburg.html) with tables and figures from this paper that will be updated as new data are added to the database.
-
 -   [**Pathogen database options**](https://mrc-ide.github.io/epireview/articles/pathogen_database_field_options.html) which lists the options for each model, outbreak, or parameter field and describes how to access them using a function in the package.
 
 -   [**How to update the database with new article data**](https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html) to explain the process of updating the database with new article, model, outbreak, or pathogen data.
