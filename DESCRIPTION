@@ -1,6 +1,6 @@
 Package: epireview
 Title: Tools to update and summarise the latest pathogen data from the Pathogen Epidemiology Review Group (PERG)
-Version: 1.1.1
+Version: 1.1.3
 Authors@R: c(
     person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5213-4364")),
