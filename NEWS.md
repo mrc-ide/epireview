@@ -1,4 +1,4 @@
-# epireview 1.1.3
+# epireview 1.1.4
 
 * FEATURE: Add a function to assign QA scores based on answers to our questionnaire
 
