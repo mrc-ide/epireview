@@ -3,6 +3,7 @@
 * Major release adding new features from versions 1.1.1, 1.1.2, and 1.13.
 
 # epireview 1.1.3
+# epireview 1.1.4
 
 * FEATURE: Add a function to extract parameters.
 
