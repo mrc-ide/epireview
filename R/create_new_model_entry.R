@@ -9,6 +9,7 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
+#' @importFrom methods as
 #' @examples
 #' create_new_model_entry(
 #'   pathogen = 'marburg',

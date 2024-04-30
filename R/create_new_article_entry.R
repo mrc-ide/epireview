@@ -10,6 +10,7 @@
 #' @importFrom dplyr rowwise mutate select filter
 #' @importFrom stats na.omit
 #' @importFrom utils globalVariables
+#' @importFrom methods as
 #' @examples
 #' create_new_article_entry(
 #'   pathogen = "marburg",
@@ -98,7 +99,7 @@ create_new_article_entry <-
     for (col in colnames(old_articles)) {
       if (!(col %in% colnames(new_row))) {
         old_class <- class(old_articles[[col]])
-        new_row[[col]] <- as(NA, old_class)
+        new_row[[col]] <- methods::as(NA, old_class)
       }
     }
 

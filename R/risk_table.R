@@ -7,7 +7,7 @@
 #' table.
 #' @return returns flextable with summary of risk factor data
 #' @importFrom officer fp_border
-#' @importFrom dplyr mutate mutate filter select rowwise summarise
+#' @importFrom dplyr mutate if_else filter select rowwise summarise 
 #' @importFrom tidyr pivot_longer pivot_wider
 #' @importFrom stringr str_replace_all str_split
 #' @importFrom flextable set_flextable_defaults flextable fontsize

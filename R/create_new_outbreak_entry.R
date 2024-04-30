@@ -7,6 +7,7 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
+#' @importFrom methods as
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
 #' @examples

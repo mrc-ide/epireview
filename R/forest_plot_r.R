@@ -16,7 +16,7 @@
 #' @param reorder_studies Logical. If TRUE, the studies will be reordered using
 #' the \code{\link{reorder_studies}} function. Default is TRUE.
 #' @param ... Additional arguments to be passed to the 
-#' \code{\link[forestplot]{forest_plot}} function.
+#' \code{\link[forest_plot]{forest_plot}} function.
 #'
 #' @return A ggplot2 object representing the forest plot for effective 
 #' reproduction number (Rt).
@@ -72,6 +72,7 @@ forest_plot_r0 <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
 }
 
 ## Internal function; not exported
+##' @importFrom scales squish
 forest_plot_rt_int <- function(rt_r0, ulim, reorder_studies, ...) {
   rt_r0 <- reparam_gamma(rt_r0)
   rt_r0 <- param_pm_uncertainty(rt_r0)

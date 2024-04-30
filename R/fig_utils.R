@@ -70,7 +70,7 @@ country_palette <- function(x = NULL) {
 ##' Define a consistent color palette for use in
 ##' figures
 ##'
-##'##' @param x a list of parameters. Optional. If missing, the entire
+##' @param x a list of parameters. Optional. If missing, the entire
 ##' palette is returned.
 ##' @return a named list of colors that can be used
 ##' in forest plots for manually setting colors

@@ -10,6 +10,7 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
+#' @importFrom methods as
 #' @examples
 #' create_new_parameter_entry <-
 #'   function(pathogen = "marburg",

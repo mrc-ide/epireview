@@ -16,7 +16,7 @@ forest plot.}
 the \code{\link{reorder_studies}} function. Default is TRUE.}
 
 \item{...}{Additional arguments to be passed to the
-\code{\link[forestplot]{forest_plot}} function.}
+\code{\link[forest_plot]{forest_plot}} function.}
 }
 \description{
 Create forest plot for incubation period

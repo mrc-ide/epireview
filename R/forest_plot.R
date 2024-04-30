@@ -14,7 +14,7 @@
 #' @param facet_by (Optional) Variable to facet the plot by.
 #' @param shape_by (Optional) Variable to shape the points by.
 #' @param col_by (Optional) Variable to color the points by.
-#' @param shape_palette (Optional) Palette for shaping the points. Optional unless shape_by is
+#' @param shp_palette (Optional) Palette for shaping the points. Optional unless shape_by is
 #' not one of 'parameter_value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
 #' not one of 'parameter_type' or 'population_country'.
@@ -64,7 +64,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     geom_point(aes(x = .data[['mid']], y = .data[['article_label']])) +
     geom_errorbar(
       aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['article_label']],
-          lty = uncertainty_type)
+          lty = .data[['uncertainty_type']])
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
     ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) + 
@@ -87,7 +87,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
       p <- p + scale_shape_manual(values = shp_palette)
     } else {
       shp_palette <- shape_palette(shape_by)
-      if (! is.null(shape_palette)) {
+      if (! is.null(shp_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
