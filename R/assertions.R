@@ -43,3 +43,19 @@ assert_string <- function(x, message = "%s must be character string", name = dep
   }
   invisible(TRUE)
 }
+
+assert_data_frame <- function(x, message = "%s must be a data frame", name = deparse(substitute(x))) {
+  if (!is.data.frame(x)) {
+    stop(sprintf(message, name), call. = FALSE)
+  }
+  invisible(TRUE)
+}
+
+assert_params <- function(x, message = "%s must have a column named 'parameter_type'. 
+                                        Did you load the data using load_epidata?", name = deparse(substitute(x))) {
+  assert_data_frame(x)
+  if (!"parameter_type" %in% colnames(x)) {
+    stop(sprintf(message, name), call. = FALSE)
+  }
+  invisible(TRUE)
+}
