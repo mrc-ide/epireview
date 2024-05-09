@@ -1,4 +1,4 @@
-id,covidence_id,pathogen,first_author_first_name,first_author_surname,article_title,doi,journal,year_publication,volume,issue,page_first,page_last,paper_copy_only,notes,qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7
+id,covidence_id,pathogen,first_author_surname,first_author_first_name,article_title,doi,journal,year_publication,volume,issue,page_first,page_last,paper_copy_only,notes,qa_m1,qa_m2,qa_a3,qa_a4,qa_d5,qa_d6,qa_d7
 9f62e47ed45a53c1336e8e63d7d7f6cb,18,Lassa mammarenavirus,Webb,PA,"Lassa Fever In Children In Sierra-Leone, West-Africa",NA,Transactions Of The Royal Society Of Tropical Medicine And Hygiene,1986,80,4,577,582,FALSE,"Study in Children
 Seasonal cluster in April; May and August",Yes,No,NA,NA,Yes,No,No
 7f4b4528feba7ce6d3a5033854ea7a42,49,Lassa mammarenavirus,Van Der Waals,Fransje,Hemorrhagic-Fever Virus-Infections In An Isolated Rain-Forest Area Of Central Liberia - Limitations Of The Indirect Immunofluorescence Slide Test For Antibody Screening In Africa,NA,Tropical And Geographical Medicine,1986,38,3,209,214,TRUE,"Link with Epilepsy
