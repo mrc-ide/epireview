@@ -44,8 +44,6 @@ create_new_parameter_entry(
 \item{pathogen}{name of pathogen}
 
 \item{new_param}{all the required details for the new parameter entry}
-
-\item{vignette_prepend}{string to allow loading data in vignettes}
 }
 \value{
 new row of data to be added to the outbreak data set using the
