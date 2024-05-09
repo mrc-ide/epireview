@@ -2,7 +2,6 @@
 #'
 #' @param pathogen name of pathogen
 #' @param new_param all the required details for the new parameter entry
-#' @param vignette_prepend string to allow loading data in vignettes
 #' @return new row of data to be added to the outbreak data set using the
 #' append_new_entry_to_table() function
 #' @importFrom tibble as_tibble as_tibble_row
