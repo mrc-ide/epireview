@@ -8,9 +8,10 @@ test_that("pretty article labels work", {
     covidence_id = 123,
     stringsAsFactors = FALSE
   )
-  result1 <- pretty_article_label(articles1, mark_multiple = mark_multiple)
+  result1 <- suppressWarnings(
+    pretty_article_label(articles1, mark_multiple = mark_multiple)
+  )
   expect_equal(result1$article_label, "Smith 2022")
-
   # Test case 2: articles with missing author information
   articles2 <- data.frame(
     first_author_first_name = "John",
@@ -24,7 +25,9 @@ test_that("pretty article labels work", {
     pretty_article_label(articles2, mark_multiple = mark_multiple), 
     "There are 1 articles with missing first author surname."
   )
-  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
+  result <- suppressWarnings(
+    pretty_article_label(articles2, mark_multiple = mark_multiple)
+  )
   expect_equal(result$article_label, "John 2022")
 
  articles2 <- data.frame(
@@ -36,7 +39,9 @@ test_that("pretty article labels work", {
   )
   expect_warning(pretty_article_label(articles2, mark_multiple = mark_multiple))
   
-  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
+  result <- suppressWarnings(
+    pretty_article_label(articles2, mark_multiple = mark_multiple)
+  )
   expect_equal(result$article_label, "123 2022")
 
  articles2 <- data.frame(
@@ -47,7 +52,9 @@ test_that("pretty article labels work", {
     stringsAsFactors = FALSE
   )
   expect_warning(pretty_article_label(articles2, mark_multiple = mark_multiple))
-  result <- pretty_article_label(articles2, mark_multiple = mark_multiple)
+  result <- suppressWarnings(
+    pretty_article_label(articles2, mark_multiple = mark_multiple)
+  )
   expect_equal(result$article_label, "123 123")
 
   # Test case 3: articles with multiple studies from the same author in the same year
