@@ -151,10 +151,9 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' @param col The column name for the table type. For parameters this is
 #' "parameter_type"; for models this is "model_type"; for outbreaks this is 
 #' "outbreak_country".
-#' @param labels Type of labels to add to distinguish multiple estimates. Must 
-#' be one of "letters" or "numbers".
-#' @param label_type Type of labels to add to distinguish multiple estimates. Must
-#' be one of "letters" or "numbers". 
+#'
+#' @param label_type Type of labels to add to distinguish multiple estimates. 
+#' Must be one of "letters" or "numbers". 
 #' @return The modified data frame with updated article_label
 #'
 #' @examples
