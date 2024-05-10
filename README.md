@@ -20,6 +20,31 @@ To install the latest version of epireview, use:
 ```r
 remotes::install_github('mrc-ide/epireview')
 ```
+## Quick start
+
+To load pathogen-specific data, do
+```r
+ebola <- epireview::load_epidata("ebola")
+```
+At the moment, the package hosts data for Ebola, Marburg and Lassa.
+
+This will load a list consisting of four elements (articles, params, outbreaks, models).
+
+To visualise parameter values,
+
+```r
+params <- ebola[["params"]]
+forest_plot_rt(params, col_by = "population_country", shape_by = "parameter_value_type")
+```
+
+Some other functions of interest are 
+
+```r
+forest_plot_r0(params)
+forest_plot_serial_interval(params)
+forest_plot_incubation_period(params)
+forest_plot_infectious_period(params)
+```
 
 ## Project overview
 The COVID-19 pandemic has highlighted the critical role that mathematical modelling can play in supporting evidence-based decision-making during outbreaks (e.g. to project the expected epidemic size, the required hospital capacity and assess the potential population-level impact of interventions). However, early in an epidemic, modelling efforts can be hampered and delayed by the lack of a centralised resource summarising existing model structures and input parameters for the disease of interest. Literature reviews are therefore often conducted during epidemics to identify plausible parameter ranges and/or existing mathematical model structures (e.g. Van Kerkhove et al. Scientific data 2015) and are mostly limited to individual parameters.
