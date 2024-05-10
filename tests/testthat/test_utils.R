@@ -50,19 +50,16 @@ test_that("value_type_palette returns the correct values", {
     `std dev` = 17,
     sd = 17,
     other = 18,
-    Other = 18
+    Other = 18,
+    Unspecified = 5,
+    unspecified = 5
   ))
 
   # Test case 2: Single value
-  expect_equal(value_type_palette("Mean"), list(
-    Mean = 16
-  ))
+  expect_equal(value_type_palette("Mean"), list(Mean = 16))
 
   # Test case 3: Multiple values
-  expect_equal(value_type_palette(c("A", "B")), list(
-    A = 16,
-    B = 15
-  ))
+  expect_equal(value_type_palette(c("A", "B")), list(A = 16, B = 15))
 
   # Test case 4: Invalid length of input vector
   expect_error(value_type_palette(letters))
