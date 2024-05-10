@@ -183,7 +183,7 @@ colour_palette <- function(col_by = c("parameter_type", "population_country"), .
 #' @return A shape palette based on the specified shape_by parameter.
 #'
 #' @examples
-#' shape_palette("value_type")
+#' shape_palette("parameter_value_type")
 #'
 #' @export
 shape_palette <- function(shape_by = c("parameter_value_type"), ...) {

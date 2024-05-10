@@ -20,6 +20,6 @@ A shape palette based on the specified shape_by parameter.
 This function generates a shape palette based on the specified shape_by parameter.
 }
 \examples{
-shape_palette("value_type")
+shape_palette("parameter_value_type")
 
 }
