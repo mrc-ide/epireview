@@ -15,7 +15,7 @@ palette is returned.}
 a named list of colors that can be used
 in forest plots for manually setting colors
 with for example
-\code{\link{ggplot2:scale_color_manual}{scale_color_manual}}
+\code{\link[ggplot2:scale_color_manual]{scale_color_manual}}
 }
 \description{
 Define a consistent color palette for use in

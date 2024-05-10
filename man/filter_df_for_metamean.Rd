@@ -12,7 +12,7 @@ following: parameter_value, parameter_unit, population_sample_size,
 parameter_value_type, parameter_uncertainty_singe_type,
 parameter_uncertainty_type, parameter_uncertainty_lower_value,
 parameter_uncertainty_upper_value. This will typically be the \code{params}
-data.frame from the output of \code{\link{load_epireview}}.}
+data.frame from the output of \code{load_epireview}.}
 }
 \value{
 a parameter dataframe with relevant rows selected and additional columns

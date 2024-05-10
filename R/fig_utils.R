@@ -75,7 +75,7 @@ country_palette <- function(x = NULL) {
 ##' @return a named list of colors that can be used
 ##' in forest plots for manually setting colors
 ##' with for example
-##' \code{\link{ggplot2:scale_color_manual}{scale_color_manual}}
+##' \code{\link[ggplot2:scale_color_manual]{scale_color_manual}}
 ##' @author Sangeeta Bhatia
 parameter_palette <- function(x) {
   out <- list(
