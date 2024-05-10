@@ -49,9 +49,10 @@ If you wish to color by a different variable, you must provide a palette.
 \examples{
 df <- data.frame(
   mid = c(1, 2, 3),
-  y = c("A", "B", "C"),
+  article_label = c("A", "B", "C"),
   low = c(0.5, 1.5, 2.5),
-  high = c(1.5, 2.5, 3.5)
+  high = c(1.5, 2.5, 3.5),
+  uncertainty_type = c("Range", "Range", "Range**")
 )
 forest_plot(df)
 }

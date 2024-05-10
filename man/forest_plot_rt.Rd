@@ -16,7 +16,7 @@ forest plot.}
 the \code{\link{reorder_studies}} function. Default is TRUE.}
 
 \item{...}{Additional arguments to be passed to the
-\code{\link[forest_plot]{forest_plot}} function.}
+\code{\link{forest_plot}} function.}
 }
 \value{
 A ggplot2 object representing the forest plot for effective
@@ -27,13 +27,7 @@ This function generates a forest plot for the effective reproduction number
 (Rt) using the provided data frame.
 }
 \examples{
-df <- data.frame(
-  article_label = c("Study A", "Study B", "Study C"),
-  parameter_type = c("Effective (Re)", "Effective (Re)", "Effective (Re)"),
-  estimate = c(1.5, 2.0, 1.8),
-  lower_limit = c(1.2, 1.7, 1.5),
-  upper_limit = c(1.8, 2.3, 2.1)
-)
+df <- load_epidata("ebola")[["params"]]
 forest_plot_rt(df)
 
 }

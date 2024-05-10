@@ -16,7 +16,7 @@
 #' @param reorder_studies Logical. If TRUE, the studies will be reordered using
 #' the \code{\link{reorder_studies}} function. Default is TRUE.
 #' @param ... Additional arguments to be passed to the 
-#' \code{\link[forest_plot]{forest_plot}} function.
+#' \code{\link{forest_plot}} function.
 #'
 #' @return A ggplot2 object representing the forest plot for effective 
 #' reproduction number (Rt).
@@ -24,13 +24,7 @@
 #' @importFrom ggplot2 scale_x_continuous geom_vline labs theme element_blank
 #'
 #' @examples
-#' df <- data.frame(
-#'   article_label = c("Study A", "Study B", "Study C"),
-#'   parameter_type = c("Effective (Re)", "Effective (Re)", "Effective (Re)"),
-#'   estimate = c(1.5, 2.0, 1.8),
-#'   lower_limit = c(1.2, 1.7, 1.5),
-#'   upper_limit = c(1.8, 2.3, 2.1)
-#' )
+#' df <- load_epidata("ebola")[["params"]]
 #' forest_plot_rt(df)
 #'
 #' @export
@@ -53,12 +47,7 @@ forest_plot_rt <- function(df, ulim = 10, reorder_studies = TRUE, ...) {
 #' @return ggplot2 object.
 #'
 #' @examples
-#' df <- data.frame(parameter_type = c("Reproduction number (Basic R0)", 
-#'                                     "Reproduction number (Basic R0)"),
-#'                  study = c("Study A", "Study B"),
-#'                  estimate = c(1.5, 2.0),
-#'                  lower_ci = c(1.2, 1.8),
-#'                  upper_ci = c(1.8, 2.2))
+#' df <- load_epidata("ebola")[["params"]]
 #' forest_plot_r0(df, ulim = 2.5, reorder_studies = TRUE)
 #'
 #' @export

@@ -31,6 +31,6 @@ articles <- data.frame(
   year_publication = c(2010, NA, 2022),
   covidence_id = c("ABC123", "DEF456", "GHI789")
 )
-pretty_study_labels(articles)
+pretty_article_label(articles, mark_multiple = TRUE)
 
 }
