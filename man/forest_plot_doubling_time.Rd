@@ -4,7 +4,7 @@
 \alias{forest_plot_doubling_time}
 \title{Calculate and plot the forest plot for doubling time}
 \usage{
-forest_plot_doubling_time(df, ulim, reorder_studies, ...)
+forest_plot_doubling_time(df, ulim = 30, reorder_studies = TRUE, ...)
 }
 \arguments{
 \item{df}{The data frame containing the necessary data for generating the
