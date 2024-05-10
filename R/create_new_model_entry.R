@@ -10,23 +10,6 @@
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
 #' @importFrom methods as
-#' @examples
-#' create_new_model_entry(
-#'   pathogen = 'marburg',
-#'   new_model = list(
-#'     article_id           = as.numeric(1),
-#'     model_type           = as.character("Compartmental"),
-#'     compartmental_type   = as.character("SEIR, SIR"),
-#'     stoch_deter          = as.character("Deterministic"),
-#'     theoretical_model    = as.logical(FALSE),
-#'     interventions_type   = as.character("Vaccination"),
-#'     code_available       = as.logical(TRUE),
-#'     transmission_route   = as.character("Sexual"),
-#'     assumptions          = as.character("Unspecified"),
-#'     covidence_id         = as.integer(2059)
-#'   )
-#' )
-#'
 #' @export
 create_new_model_entry <-
   function(pathogen = NA,
