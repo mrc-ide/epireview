@@ -7,9 +7,10 @@ test_that("reorder_studies correctly reorders the data frame", {
     population_country = c("c1", "c2", "c1", "c2", "c1"),
     article_label = letters[1:5]
   )
+  df <- param_pm_uncertainty(df)
   df_reordered <- reorder_studies(df)
   expect_equal(
-    levels(df_reordered$y), c("a", "e", "c", "b", "d"))
+    levels(df_reordered$article_label), c("a", "e", "c", "b", "d"))
 
   ## Test with NAs present
   df <- data.frame(
@@ -19,8 +20,9 @@ test_that("reorder_studies correctly reorders the data frame", {
     population_country = c("c1", "c2", "c1", "c2", "c1"),
     article_label = letters[1:5]
   )
+  df <- param_pm_uncertainty(df)
   df_reordered <- reorder_studies(df)
   expect_equal(
-    levels(df_reordered$y), c("e", "c", "a","b", "d"))
+    levels(df_reordered$article_label), c("e", "a", "c","b", "d"))
 
 })
