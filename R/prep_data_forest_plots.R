@@ -2,12 +2,15 @@
 ##'
 ##' This function assigns short labels to otherwise very long parameter
 ##' names. It is generally not intended to be called directly but is used by
-##' \code{\link{prep_data_forest_plot}}
+##' \code{\link{load_epidata}} when the data is loaded.
 ##'
-##' @param x data.frame containing a column called "parameter_type"
-##' @param parameter_type_full optional. User can specify the full value of a parameter type not already included in the function.
+##' @param x data.frame containing a column called "parameter_type",  This will 
+##' typically be the `params`data.frame from the output of \code{load_epireview}.
+##' @param parameter_type_full optional. User can specify the full value of a 
+##' parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return data.frame with a new column called "parameter_type_short"
+##' @export
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
@@ -150,6 +153,8 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' "outbreak_country".
 #' @param labels Type of labels to add to distinguish multiple estimates. Must 
 #' be one of "letters" or "numbers".
+#' @param label_type Type of labels to add to distinguish multiple estimates. Must
+#' be one of "letters" or "numbers". 
 #' @return The modified data frame with updated article_label
 #'
 #' @examples
