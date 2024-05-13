@@ -39,7 +39,6 @@ Imports:
 Suggests:
     knitr,
     lifecycle,
-    meta,
     tidyverse,
     testthat (>= 3.0.0),
     rmarkdown
