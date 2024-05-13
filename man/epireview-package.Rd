@@ -12,22 +12,23 @@ Contains the latest open access pathogen data from the Pathogen Epidemiology Rev
 Useful links:
 \itemize{
   \item \url{https://mrc-ide.github.io/epireview/}
-  \item Report bugs at \url{https://mrc-ide.github.io/epireview/issues}
+  \item Report bugs at \url{https://github.com/mrc-ide/epireview/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Rebecca Nash \email{r.nash@imperial.ac.uk} (\href{https://orcid.org/0000-0002-5213-4364}{ORCID})
+\strong{Maintainer}: Sangeeta Bhatia \email{s.bhatia@imperial.ac.uk} (\href{https://orcid.org/0000-0001-6525-101X}{ORCID})
 
 Authors:
 \itemize{
+  \item Rebecca Nash \email{r.nash@imperial.ac.uk} (\href{https://orcid.org/0000-0002-5213-4364}{ORCID})
   \item Christian Morgenstern \email{c.morgenstern@imperial.ac.uk} (\href{https://orcid.org/0000-0003-3735-1130}{ORCID})
-  \item Sangeeta Bhatia \email{s.bhatia@imperial.ac.uk} (\href{https://orcid.org/0000-0001-6525-101X}{ORCID})
   \item Richard Sheppard \email{richard.sheppard11@imperial.ac.uk}
   \item Joseph Hicks \email{j.hicks@imperial.ac.uk}
   \item Gina Cuomo-Dannenburg (\href{https://orcid.org/0000-0001-6821-0352}{ORCID})
   \item Ruth McCabe (\href{https://orcid.org/0000-0002-6368-9103}{ORCID})
   \item Kelly McCain (\href{https://orcid.org/0000-0003-2393-2217}{ORCID})
+  \item Anne Cori (\href{https://orcid.org/0000-0002-8443-9162}{ORCID})
 }
 
 }

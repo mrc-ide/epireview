@@ -20,7 +20,7 @@
 #' 
 #' @return returns plot with a summary of the human delays
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
-#' 
+#' @importFrom scales squish
 #' 
 #' @export 
 forest_plot_delay_int <- function(df, ulim, reorder_studies, ...) {

@@ -12,16 +12,24 @@
 #' 
 #' @param df The input dataframe to be reordered
 #' @return The reordered dataframe
+#' @export
 #' @seealso \code{\link{forest_plot_rt}}  \code{\link{forest_plot_r0}}
 #' @examples
 #' ebola <- load_epidata("ebola")
 #' params <- ebola$params
-#' rt <- filter_cols(
-#'   params, "parameter_type", "in", "Reproduction number (Effective, Re)")
-#' reorder_studies(rt)
+#' rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]
+#' 
+#' reorder_studies(param_pm_uncertainty(rt))
 #' 
 #'
 reorder_studies <- function(df) {
+
+  if (! "mid" %in% colnames(df)) {
+    stop(
+      "mid column not found in the data frame, did you forget to call param_pm_uncertainty?",
+      call. = FALSE
+    )
+  }
 
   res <- by(df, df$population_country, function(x) {
     ## By default order puts NAs at the end

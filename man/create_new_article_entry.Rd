@@ -28,30 +28,3 @@ append_new_entry_to_table() function
 \description{
 Create new article entry
 }
-\examples{
-create_new_article_entry(
-  pathogen = "marburg",
-  new_article = list(
-    first_author_first_name = as.character("Joe"),
-    first_author_surname = as.character("Blocks"),
-    article_title = as.character("hello"),
-    doi = as.character("NA"),
-    journal = as.character("ABC"),
-    year_publication = as.integer(2000),
-    volume = as.integer(NA),
-    issue = as.integer(NA),
-    page_first = as.integer(NA),
-    page_last = as.integer(NA),
-    paper_copy_only = as.logical(NA),
-    notes = as.character(NA),
-    qa_m1 = as.integer(1),
-    qa_m2 = as.integer(0),
-    qa_a3 = as.integer(NA),
-    qa_a4 = as.integer(1),
-    qa_d5 = as.integer(0),
-    qa_d6 = as.integer(NA),
-    qa_d7 = as.integer(1)
-  )
-
-)
-}

@@ -4,7 +4,11 @@
 \alias{mark_multiple_estimates}
 \title{Distinguish multiple estimates from the same study}
 \usage{
-mark_multiple_estimates(df, col = "parameter_type")
+mark_multiple_estimates(
+  df,
+  col = "parameter_type",
+  label_type = c("letters", "numbers")
+)
 }
 \arguments{
 \item{df}{The data frame containing the estimates.}
@@ -12,6 +16,9 @@ mark_multiple_estimates(df, col = "parameter_type")
 \item{col}{The column name for the table type. For parameters this is
 "parameter_type"; for models this is "model_type"; for outbreaks this is
 "outbreak_country".}
+
+\item{label_type}{Type of labels to add to distinguish multiple estimates.
+Must be one of "letters" or "numbers".}
 }
 \value{
 The modified data frame with updated article_label
@@ -29,6 +36,6 @@ they will then be labeled as s 1 and s 2.
 \examples{
 df <- data.frame(article_label = c("A", "A", "B", "B", "C"),
                  parameter_type = c("X", "X", "Y", "Y", "Z"))
-mark_multiple_estimates(df)
+mark_multiple_estimates(df, label_type = "numbers")
 
 }

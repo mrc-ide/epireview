@@ -6,25 +6,17 @@ test_that('Ebola articles, models, and parameters are ok', {
   params <- load_epidata_raw("ebola", "parameter")
 
   ## 520 articles for Ebola
-  expect_equal(nrow(articles), 520)
-  expect_equal(
-    length(unique(articles$covidence_id)), 520
-  )
+  expect_equal(nrow(articles), 516)
+  expect_equal(length(unique(articles$covidence_id)), 516)
 
+  expect_equal(nrow(models), 294)
+  expect_equal(ncol(models), 12)
+  expect_equal(length(unique(models$covidence_id)), 279)
 
-  expect_equal(nrow(models), 296)
-  expect_equal(ncol(models), 13)
-  expect_equal(
-    length(unique(models$covidence_id)), 278
-  )
-
-
-  expect_equal(nrow(params), 1226)
-  expect_equal(ncol(params), 61)
-  expect_equal(
-    length(unique(params$covidence_id)), 356
-  )
-
+  expect_equal(nrow(params), 1224)
+  expect_equal(ncol(params), 73)
+  expect_equal(length(unique(params$covidence_id)), 348)
+  
   expect_snapshot(head(articles))
   expect_snapshot(tail(articles))
 

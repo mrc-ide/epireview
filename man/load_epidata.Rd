@@ -4,13 +4,15 @@
 \alias{load_epidata}
 \title{Retrieve pathogen-specific data}
 \usage{
-load_epidata(pathogen)
+load_epidata(pathogen, mark_multiple = TRUE)
 }
 \arguments{
 \item{pathogen}{name of pathogen. Must be one of the priority pathogens
 exactly as specified in the package. You can get a list of the
-priority pathogens currently included in the package by calling
-\code{priority_pathogens()}.}
+priority pathogens currently included in the package by calling}
+
+\item{mark_multiple}{logical. If TRUE, multiple studies from the same
+author in the same year will be marked with a suffix to distinguish them.}
 }
 \value{
 a list of length 2. The first element is a data.frame
@@ -29,4 +31,7 @@ Data in the three files can be linked using article identifier.
 This function will read in the pathogen-specific articles and
 parameters files and join them into a data.frame. The resulting
 data set can be used to create a forest plot.
+}
+\seealso{
+\code{\link{load_epidata}}
 }
