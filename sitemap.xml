@@ -13,13 +13,13 @@
     <loc>https://mrc-ide.github.io/epireview/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/articles/load-filter-view-epidata.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/articles/pathogen_database_field_options.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html</loc>
-  </url>
-  <url>
-    <loc>https://mrc-ide.github.io/epireview/articles/pathogen_marburg.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/authors.html</loc>
@@ -28,7 +28,22 @@
     <loc>https://mrc-ide.github.io/epireview/index.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/append_new_entry_to_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/article_column_type.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/check_ulim.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/color_palette.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/country_palette.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/create_new_article_entry.html</loc>
@@ -43,9 +58,6 @@
     <loc>https://mrc-ide.github.io/epireview/reference/create_new_parameter_entry.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/data_forest_plots.html</loc>
-  </url>
-  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/data_outbreak_table.html</loc>
   </url>
   <url>
@@ -58,16 +70,43 @@
     <loc>https://mrc-ide.github.io/epireview/reference/delay_table.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_delay.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/delays_to_days.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_mutations.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/epireview-package.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_r.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/filter_cols.html</loc>
   </url>
   <url>
-    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_severity.html</loc>
+    <loc>https://mrc-ide.github.io/epireview/reference/filter_df_for_metamean.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_delay_int.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_doubling_time.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_incubation_period.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_infectious_period.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_r0.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_rt.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/forest_plot_serial_interval.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/get_parameter.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/get_table_field_options.html</loc>
@@ -76,7 +115,13 @@
     <loc>https://mrc-ide.github.io/epireview/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/invert_inverse_params.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/load_epidata.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/load_epidata_raw.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/marburg_article.html</loc>
@@ -100,15 +145,57 @@
     <loc>https://mrc-ide.github.io/epireview/reference/marburg_parameter.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/mark_multiple_estimates.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/model_column_type.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/outbreak_column_type.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/outbreak_table.html</loc>
   </url>
   <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/param_pm_uncertainty.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/parameter_column_type.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/parameter_palette.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/pretty_article_label.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/priority_pathogens.html</loc>
+  </url>
+  <url>
     <loc>https://mrc-ide.github.io/epireview/reference/quality_assessment_plots.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/reorder_studies.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/reparam_gamma.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/risk_table.html</loc>
   </url>
   <url>
     <loc>https://mrc-ide.github.io/epireview/reference/sero_table.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/shape_palette.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/short_parameter_type.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/theme_epireview.html</loc>
+  </url>
+  <url>
+    <loc>https://mrc-ide.github.io/epireview/reference/value_type_palette.html</loc>
   </url>
 </urlset>
