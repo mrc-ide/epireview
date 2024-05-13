@@ -36,36 +36,31 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
   x
 }
 
-
-
-
-
-##' Retrieve pathogen-specific data
-##'
-##' @details
-##' The data extracted in the systematic review has been stored in three
-##' files - one each for articles, parameters, and transmission models.
-##' Data in the three files can be linked using article identifier.
-##' This function will read in the pathogen-specific articles and
-##' parameters files and join them into a data.frame. The resulting
-##' data set can be used to create a forest plot.
-##'
-##' @param pathogen name of pathogen. Must be one of the priority pathogens
-##' exactly as specified in the package. You can get a list of the
-##' priority pathogens currently included in the package by calling
-##' \code{priority_pathogens()}.
-##' 
-##' @param mark_multiple logical. If TRUE, multiple studies from the same
-##' author in the same year will be marked with a suffix to distinguish them.
-##' @return a list of length 2. The first element is a data.frame
-##' called "params" with articles information (authors, publication year)
-##' combined with the parameters. The second element is a data.frame
-##' called "models" with all transmission models extracted for this
-##' pathogen.
-##' @importFrom readr read_csv
-##' @importFrom dplyr left_join
-##' @export
-
+#' Retrieve pathogen-specific data
+#'
+#' @details
+#' The data extracted in the systematic review has been stored in three
+#' files - one each for articles, parameters, and transmission models.
+#' Data in the three files can be linked using article identifier.
+#' This function will read in the pathogen-specific articles and
+#' parameters files and join them into a data.frame. The resulting
+#' data set can be used to create a forest plot.
+#'
+#' @param pathogen name of pathogen. Must be one of the priority pathogens
+#' exactly as specified in the package. You can get a list of the
+#' priority pathogens currently included in the package by calling
+#' @seealso \code{\link{load_epidata}}
+#' 
+#' @param mark_multiple logical. If TRUE, multiple studies from the same
+#' author in the same year will be marked with a suffix to distinguish them.
+#' @return a list of length 2. The first element is a data.frame
+#' called "params" with articles information (authors, publication year)
+#' combined with the parameters. The second element is a data.frame
+#' called "models" with all transmission models extracted for this
+#' pathogen.
+#' @importFrom readr read_csv
+#' @importFrom dplyr left_join
+#' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   assert_pathogen(pathogen)
