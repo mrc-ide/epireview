@@ -2,7 +2,7 @@
 % Please edit documentation in R/forest_plot_other.R
 \name{forest_plot_doubling_time}
 \alias{forest_plot_doubling_time}
-\title{Calculate and plot the forest plot for doubling time}
+\title{Forest plot for doubling time}
 \usage{
 forest_plot_doubling_time(df, ulim = 30, reorder_studies = TRUE, ...)
 }
@@ -16,7 +16,7 @@ forest plot.}
 the \code{\link{reorder_studies}} function. Default is TRUE.}
 
 \item{...}{Additional arguments to be passed to the
-\code{\link[forestplot]{forest_plot}} function.}
+\code{\link{forest_plot}} function.}
 }
 \value{
 A forest plot object.
@@ -26,8 +26,7 @@ This function calculates the doubling time and creates a forest plot
 to visualize the results.
 }
 \examples{
-df <- data.frame(parameter_type = c("Doubling time", "Doubling time"),
-                 value = c(5, 10))
+df <- load_epidata("ebola")[["params"]]
 forest_plot_doubling_time(df, ulim = 20, reorder_studies = TRUE)
 
 }

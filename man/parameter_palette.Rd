@@ -7,15 +7,19 @@ figures}
 \usage{
 parameter_palette(x)
 }
+\arguments{
+\item{x}{a list of parameters. Optional. If missing, the entire
+palette is returned.}
+}
 \value{
 a named list of colors that can be used
 in forest plots for manually setting colors
 with for example
-\code{\link{ggplot2:scale_color_manual}{scale_color_manual}}
+\code{\link[ggplot2:scale_color_manual]{scale_color_manual}}
 }
 \description{
-##' @param x a list of parameters. Optional. If missing, the entire
-palette is returned.
+Define a consistent color palette for use in
+figures
 }
 \author{
 Sangeeta Bhatia

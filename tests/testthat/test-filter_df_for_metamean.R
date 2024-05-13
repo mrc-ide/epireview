@@ -1,6 +1,6 @@
 df <- load_epidata("lassa")[["params"]]
 o2h_df <- df[df$parameter_type %in% "Human delay - symptom onset>admission to care", ]
-df <- filter_df_for_metamean(o2h_df)
+df <- suppressWarnings(suppressMessages((filter_df_for_metamean(o2h_df))))
 
 test_that("filtering parameter dataframe for meta mean works",{
 

@@ -7,7 +7,7 @@
 get_parameter(data, parameter_name)
 }
 \arguments{
-\item{data}{parameter dataframe output from \code{\link{load_epidata()}}}
+\item{data}{parameter dataframe output from \code{\link{load_epidata}}}
 
 \item{parameter_name}{name of the parameter type to retrieve, ensuring the
 name matches that in data}

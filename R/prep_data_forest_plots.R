@@ -2,12 +2,15 @@
 ##'
 ##' This function assigns short labels to otherwise very long parameter
 ##' names. It is generally not intended to be called directly but is used by
-##' \code{\link{prep_data_forest_plot}}
+##' \code{\link{load_epidata}} when the data is loaded.
 ##'
-##' @param x data.frame containing a column called "parameter_type"
-##' @param parameter_type_full optional. User can specify the full value of a parameter type not already included in the function.
+##' @param x data.frame containing a column called "parameter_type",  This will 
+##' typically be the `params`data.frame from the output of \code{load_epireview}.
+##' @param parameter_type_full optional. User can specify the full value of a 
+##' parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return data.frame with a new column called "parameter_type_short"
+##' @export
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
@@ -33,36 +36,31 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
   x
 }
 
-
-
-
-
-##' Retrieve pathogen-specific data
-##'
-##' @details
-##' The data extracted in the systematic review has been stored in three
-##' files - one each for articles, parameters, and transmission models.
-##' Data in the three files can be linked using article identifier.
-##' This function will read in the pathogen-specific articles and
-##' parameters files and join them into a data.frame. The resulting
-##' data set can be used to create a forest plot.
-##'
-##' @param pathogen name of pathogen. Must be one of the priority pathogens
-##' exactly as specified in the package. You can get a list of the
-##' priority pathogens currently included in the package by calling
-##' \code{priority_pathogens()}.
-##' 
-##' @param mark_multiple logical. If TRUE, multiple studies from the same
-##' author in the same year will be marked with a suffix to distinguish them.
-##' @return a list of length 2. The first element is a data.frame
-##' called "params" with articles information (authors, publication year)
-##' combined with the parameters. The second element is a data.frame
-##' called "models" with all transmission models extracted for this
-##' pathogen.
-##' @importFrom readr read_csv
-##' @importFrom dplyr left_join
-##' @export
-
+#' Retrieve pathogen-specific data
+#'
+#' @details
+#' The data extracted in the systematic review has been stored in three
+#' files - one each for articles, parameters, and transmission models.
+#' Data in the three files can be linked using article identifier.
+#' This function will read in the pathogen-specific articles and
+#' parameters files and join them into a data.frame. The resulting
+#' data set can be used to create a forest plot.
+#'
+#' @param pathogen name of pathogen. Must be one of the priority pathogens
+#' exactly as specified in the package. You can get a list of the
+#' priority pathogens currently included in the package by calling
+#' @seealso \code{\link{load_epidata}}
+#' 
+#' @param mark_multiple logical. If TRUE, multiple studies from the same
+#' author in the same year will be marked with a suffix to distinguish them.
+#' @return a list of length 2. The first element is a data.frame
+#' called "params" with articles information (authors, publication year)
+#' combined with the parameters. The second element is a data.frame
+#' called "models" with all transmission models extracted for this
+#' pathogen.
+#' @importFrom readr read_csv
+#' @importFrom dplyr left_join
+#' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   assert_pathogen(pathogen)
@@ -148,8 +146,9 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' @param col The column name for the table type. For parameters this is
 #' "parameter_type"; for models this is "model_type"; for outbreaks this is 
 #' "outbreak_country".
-#' @param labels Type of labels to add to distinguish multiple estimates. Must 
-#' be one of "letters" or "numbers".
+#'
+#' @param label_type Type of labels to add to distinguish multiple estimates. 
+#' Must be one of "letters" or "numbers". 
 #' @return The modified data frame with updated article_label
 #'
 #' @examples
@@ -184,30 +183,5 @@ mark_multiple_estimates <- function(df, col = "parameter_type", label_type = c("
   }
   df
 }
-##' Prepapre pathogen-specific data for input use in forest plots
-##' @details
-##' This function prepares the pathogen-specific data for use in forest plots.
-##' It applies the desired filters using \code{\link{filter_cols}} and then
-##' renames the columns to be used in the forest plot. Central value is renamed
-##' to "mid", lower and upper uncertainty bounds are renamed to "low" and "high"
-##' respectively. The resulting data.frame can be used to create a basic forest plot using
-##' \code{\link{forest_plot}}. The basic workflow is (a) load data, (b) filter and prepare data, and 
-##' (c) create forest plot.
-##' @inheritParams filter_cols
-##' @return data.frame a filtered data.frame with the following columns: article_label, parameter_type,
-##' mid, low, high
-prepare_data_forest_plot <- function(df, cols, funs, vals) {
 
-  df <- filter_cols(df, cols, funs, vals)
 
-  df <- df %>%
-    mutate(
-      mid = parameter_value,
-      low = parameter_uncertainty_lower_value,
-      high = parameter_uncertainty_upper_value
-    ) %>%
-    select(article_label, parameter_type, mid, low, high)
-
-  df
-
-}

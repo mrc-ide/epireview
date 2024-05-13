@@ -1,10 +1,11 @@
 ## function name get_parameter
 
 #' retrieve all parameters of specified type
-#' @param data parameter dataframe output from \code{\link{load_epidata()}}
+#' @param data parameter dataframe output from \code{\link{load_epidata}}
 #' @param parameter_name name of the parameter type to retrieve, ensuring the 
 #' name matches that in data
 #' @return dataframe with all parameter estimates and specified columns
+#' @export
 #' @examples
 #' df <- load_epidata(pathogen = "ebola")
 #' get_parameter(data = df$params, parameter_name = "Human delay - serial interval")

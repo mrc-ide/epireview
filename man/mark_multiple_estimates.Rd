@@ -17,8 +17,8 @@ mark_multiple_estimates(
 "parameter_type"; for models this is "model_type"; for outbreaks this is
 "outbreak_country".}
 
-\item{labels}{Type of labels to add to distinguish multiple estimates. Must
-be one of "letters" or "numbers".}
+\item{label_type}{Type of labels to add to distinguish multiple estimates.
+Must be one of "letters" or "numbers".}
 }
 \value{
 The modified data frame with updated article_label

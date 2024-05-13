@@ -7,9 +7,11 @@
 short_parameter_type(x, parameter_type_full, parameter_type_short)
 }
 \arguments{
-\item{x}{data.frame containing a column called "parameter_type"}
+\item{x}{data.frame containing a column called "parameter_type",  This will
+typically be the \code{params}data.frame from the output of \code{load_epireview}.}
 
-\item{parameter_type_full}{optional. User can specify the full value of a parameter type not already included in the function.}
+\item{parameter_type_full}{optional. User can specify the full value of a
+parameter type not already included in the function.}
 
 \item{parameter_type_short}{optional. Shorter value of parameter_type_full}
 }
@@ -19,7 +21,7 @@ data.frame with a new column called "parameter_type_short"
 \description{
 This function assigns short labels to otherwise very long parameter
 names. It is generally not intended to be called directly but is used by
-\code{\link{prep_data_forest_plot}}
+\code{\link{load_epidata}} when the data is loaded.
 }
 \author{
 Sangeeta Bhatia

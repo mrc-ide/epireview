@@ -26,9 +26,9 @@ forest plot functions (e.g. \code{\link{forest_plot_rt}}).
 \examples{
 ebola <- load_epidata("ebola")
 params <- ebola$params
-rt <- filter_cols(
-  params, "parameter_type", "in", "Reproduction number (Effective, Re)")
-reorder_studies(rt)
+rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]
+
+reorder_studies(param_pm_uncertainty(rt))
 
 
 }
