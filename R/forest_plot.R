@@ -18,7 +18,7 @@
 #' not one of 'parameter_value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
 #' not one of 'parameter_type' or 'population_country'.
-#' @param unique_label Choose whether research articles with multiple items have unique y-axis identifiers or not.
+#' @param unique_label (Optional) User can provide custom labels for forest plot y-axis. Must match length of dataframe.
 #' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
@@ -63,9 +63,6 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## note that if you use dashed linetype here, then the legend only shows
   ## a single dash, which is of course indisguishable from a solid line.
 
-  # Preprocess the dataframe to remove bracketed numbers
-  df$article_label_clean <- gsub("\\s*\\(\\d+\\)$", "", df$article_label)
-
   p <- ggplot(df) +
     geom_point(aes(x = .data[['mid']],
                    y = .data[['article_label']])) +
@@ -106,9 +103,14 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     }
   }
 
-  # if(!unique_label){
-  #   p <- p + scale_y_discrete(labels = df$article_label_clean)
-  # }
+  if(!is.na(unique_label)){
+    ## Check that the provided unique_label is the correct length:
+    if (length(unique_label) != length(df$article_label)) {
+      stop("The length of 'unique_label' must match the number of unique labels in the data frame.")
+    } else {
+      p <- p + scale_y_discrete(labels = unique_label)
+    }
+  }
 
   if (!is.na(col_by)) {
     p <- p + aes(col = .data[[col_by]])
