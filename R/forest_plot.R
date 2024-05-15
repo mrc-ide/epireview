@@ -37,7 +37,7 @@
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     shp_palette = NA,
     col_palette = NA,
-    unique_label = FALSE) {
+    unique_label = NA) {
 
   ## ggplot2 will put all article labels on the y-axis
   ## even if mid, low, and high are NA. We will filter them out
@@ -106,9 +106,9 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     }
   }
 
-  if(!unique_label){
-    p <- p + scale_y_discrete(labels = df$article_label_clean)
-  }
+  # if(!unique_label){
+  #   p <- p + scale_y_discrete(labels = df$article_label_clean)
+  # }
 
   if (!is.na(col_by)) {
     p <- p + aes(col = .data[[col_by]])
