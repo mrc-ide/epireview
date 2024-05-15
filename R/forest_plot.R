@@ -18,6 +18,7 @@
 #' not one of 'parameter_value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
 #' not one of 'parameter_type' or 'population_country'.
+#' @param unique_label Choose whether research articles with multiple items have unique y-axis identifiers or not.
 #' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
@@ -35,7 +36,8 @@
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     shp_palette = NA,
-    col_palette = NA) {
+    col_palette = NA,
+    unique_label = FALSE) {
 
   ## ggplot2 will put all article labels on the y-axis
   ## even if mid, low, and high are NA. We will filter them out
@@ -72,7 +74,6 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
           lty = .data[['uncertainty_type']])
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
-    scale_y_discrete(labels = df$article_label_clean) +
     ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) +
     theme_epireview()
 
@@ -103,6 +104,10 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
 
 
     }
+  }
+
+  if(!unique_label){
+    p <- p + scale_y_discrete(labels = df$article_label_clean)
   }
 
   if (!is.na(col_by)) {
