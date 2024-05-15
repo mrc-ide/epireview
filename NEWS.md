@@ -1,3 +1,7 @@
+#epireview 1.2.1
+
+* Added the functionality to define custom y-axis labels for forest plots.
+
 # epireview 1.2.0
 
 * Major release adding new features from versions 1.1.1, 1.1.2, and 1.13.
