@@ -8,10 +8,10 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-**
-Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
-The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with us (email s.bhatia@imperial.ac.uk).
-**
+
+_Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
+The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with by [email](s.bhatia@imperial.ac.uk)._
+
 
 epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
@@ -49,7 +49,8 @@ forest_plot_infectious_period(params)
 ## Project overview
 The COVID-19 pandemic has highlighted the critical role that mathematical modelling can play in supporting evidence-based decision-making during outbreaks (e.g. to project the expected epidemic size, the required hospital capacity and assess the potential population-level impact of interventions). However, early in an epidemic, modelling efforts can be hampered and delayed by the lack of a centralised resource summarising existing model structures and input parameters for the disease of interest. Literature reviews are therefore often conducted during epidemics to identify plausible parameter ranges and/or existing mathematical model structures (e.g. Van Kerkhove et al. Scientific data 2015) and are mostly limited to individual parameters.
 
-A group of ~20 volunteer researchers currently or formerly at Imperial College London with an interest in outbreaks are working together to systematically review the mathematical models and parameters for the nine World Health Organization (WHO) 2019 blue-print priority pathogens: Nairo virus (Crimean-Congo haemorrhagic fever), Ebola virus, Henipa virus, Lassa mammarenavirus, Marburg virus, Middle East respiratory syndrome coronavirus (MERS-CoV), Rift Valley fever virus, Severe Acute Respiratory Syndrome coronavirus (SARS-CoV-1), and Zika virus. These are pathogens, or strains thereof, for which there are no approved vaccines or treatments and hence where we anticipate mathematical modelling is likely to play a major role in supporting the epidemic response. We do not include SARS-CoV-2 because vaccines exist for this pathogen and the body of literature far exceeds the capacity of our team. For each pathogen, we will review published mathematical models, information on transmission, evolution, natural history and severity, as well as seroprevalence studies and reported sizes of previous outbreaks. The quality of each paper will also be assessed as part of the review. 
+A group of ~20 volunteer researchers currently or formerly at Imperial College London with an interest in outbreaks are working together to systematically review the mathematical models and parameters for the nine World Health Organization (WHO) 2019 blue-print priority pathogens: Nairo virus (Crimean-Congo haemorrhagic fever), Ebola virus, Henipa virus, Lassa mammarenavirus, Marburg virus, Middle East respiratory syndrome coronavirus (MERS-CoV), Rift Valley fever virus, Severe Acute Respiratory Syndrome coronavirus (SARS-CoV-1), and Zika virus. These are pathogens, or strains thereof, for which there are no approved vaccines or treatments and hence where we anticipate mathematical modelling is likely to play a major role in supporting the epidemic response. We do not include SARS-CoV-2 because vaccines exist for this pathogen and the body of literature far exceeds the capacity of our team. For each pathogen, we will review published mathematical models, information on transmission, evolution, natural history and severity, as well as seroprevalence studies and reported sizes of previous outbreaks. The quality of each paper will also be assessed as part of the review. This series of systematic reviews is registered with PROSPERO:
+ [CRD42023393345](https://www.crd.york.ac.uk/prospero/display_record.php?RecordID&RecordID=393345)
 
 ## Pathogen database
 One output of this project will be a database initially populated with all the information extracted that can be easily updated with new parameter estimates or information on additional pathogens as these become available. 
@@ -62,17 +63,17 @@ One output of this project will be a database initially populated with all the i
 
 ## Pathogen overview and timeline
 
-| Pathogen  | Titles & Abstracts screened | Contact | Living review | doi|
-| --------- |         -------------------:|      -- |           --  | -- |
-| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html)| https://doi.org/10.1016/S1473-3099(23)00515-7 |
-| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| https://doi.org/10.1101/2024.03.20.24304571|
-| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| https://doi.org/10.1101/2024.03.23.24304596|
-| Henipa virus  |           959 | s.bhatia@imperial.ac.uk|||
-| SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk |||
-| Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk|||
-| Zika virus|              4,518| kem22@ic.ac.uk|||
-| Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk|||
-| MERS-CoV|               10,382| acori@ic.ac.uk|||
-| Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk|||
+| Pathogen  | Titles & Abstracts screened | Contact | Living review | last lit review update | doi|
+| --------- |         -------------------:|      -- |           --  | -- | -- |
+| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html)|Mar 2023 | https://doi.org/10.1016/S1473-3099(23)00515-7 |
+| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| Jul 2023|https://doi.org/10.1101/2024.03.20.24304571|
+| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| Aug 2023|https://doi.org/10.1101/2024.03.23.24304596|
+| Henipa virus  |           959 | s.bhatia@imperial.ac.uk||2019||
+| SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk ||Nov 2023||
+| Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||2019||
+| Zika virus|              4,518| kem22@ic.ac.uk||Feb 2024||
+| Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||2019||
+| MERS-CoV|               10,382| acori@ic.ac.uk||2019||
+| Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).
