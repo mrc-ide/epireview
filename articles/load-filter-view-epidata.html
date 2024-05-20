@@ -95,14 +95,15 @@
 <span><span class="co">#&gt;   dat &lt;- vroom(...)</span></span>
 <span><span class="co">#&gt;   problems(dat)</span></span>
 <span><span class="co">#&gt; Warning in load_epidata("ebola"): No outbreaks information found for ebola</span></span>
-<span><span class="co">#&gt; Data loaded for ebola</span></span>
-<span><span class="va">params</span> <span class="op">&lt;-</span> <span class="va">ebola</span><span class="op">[[</span><span class="st">"params"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; Data loaded for ebola</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="va">ebola</span><span class="op">[[</span><span class="st">"params"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_cols.html">filter_cols</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"article_qa_score"</span>, funs <span class="op">=</span> <span class="st">"&gt;"</span>, vals <span class="op">=</span> <span class="st">"50"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/forest_plot_rt.html">forest_plot_rt</a></span><span class="op">(</span><span class="va">params</span>, col_by <span class="op">=</span> <span class="st">"population_country"</span>, shape_by <span class="op">=</span> <span class="st">"parameter_value_type"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 5 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <p><img src="load-filter-view-epidata_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/forest_plot_r0.html">forest_plot_r0</a></span><span class="op">(</span><span class="va">params</span>, col_by <span class="op">=</span> <span class="st">"population_country"</span>, shape_by <span class="op">=</span> <span class="st">"parameter_value_type"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 9 rows containing missing values or values outside the scale range</span></span>
