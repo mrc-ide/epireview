@@ -4,17 +4,14 @@
 \alias{assign_qa_score}
 \title{Assign quality assessment score to each article}
 \usage{
-assign_qa_score(articles, params, models, ignore_error = FALSE)
+assign_qa_score(articles, ignore_errors = FALSE)
 }
 \arguments{
-\item{articles}{data.frame  loaded from \code{load_epidata_raw} function}
-
-\item{params}{data.frame  loaded from \code{load_epidata_raw} function}
-
-\item{models}{data.frame  loaded from \code{load_epidata_raw} function}
+\item{articles}{data.frame loaded from \code{load_epidata} function}
 }
 \value{
-article data.frame with an updated column containing QS score out of 100.
+article data.frame with an updated column containing QS score out of
+100.
 }
 \description{
 Assign quality assessment score to each article
