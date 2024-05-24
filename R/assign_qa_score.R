@@ -17,7 +17,7 @@
 #' @return a named list consisting of two elements. The first element of the 
 #' list is the article data.frame with an updated column containing three new columns:
 #' \code{qs_denominator} (total number of questions answered), \code{qs_numerator}
-#' (number of questions answered 'yes') and \code{qs_score} (QA score). The second
+#' (number of questions answered 'yes') and \code{qa_score} (QA score). The second
 #' element of the list (named errors) is a data.frame containing articles 
 #' with all NA answers.
 #' @seealso \code{\link{qa_questions}}

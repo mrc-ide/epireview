@@ -1,9 +1,12 @@
+# epireview 1.2.1
+
+* FEATURE: New function to assign QA score to articles in a simple and consistent manner.
+
 # epireview 1.2.0
 
 * Major release adding new features from versions 1.1.1, 1.1.2, and 1.13.
 
 # epireview 1.1.3
-# epireview 1.1.4
 
 * FEATURE: Add a function to extract parameters.
 
