@@ -73,7 +73,7 @@ One output of this project will be a database initially populated with all the i
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||2019||
 | Zika virus|              4,518| kem22@ic.ac.uk||Feb 2024||
 | Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||2019||
-| MERS-CoV|               10,382| acori@ic.ac.uk||2019||
+| MERS-CoV|               10,382| rom116@ic.ac.uk||2019||
 | Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).
