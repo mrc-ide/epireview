@@ -24,76 +24,54 @@
 #' database when the resolved entries are merged with the rest of the data.
 #' However, in practice, while resolving conflicts for multiple parameters or
 #' models, extractors may delete the row with Id1 in one case and the row with
-#' Id2 in another case. This can lead to the same article having multiple ids.
-#'
+#' Id2 in another case. This can lead to the same article having multiple ids
+#' in parameters, models, or outbreaks.
+#' Because an article that has been double extracted will have been aasigned two
+#' ids, it is also possible that the retained id in articles is not the same as
+#' the retained id in parameters, models, or outbreaks. This can lead to rows
+#' in parameters, models, or outbreaks that are not linked to any article. 
 #' @export
-make_unique_id <- function(articles, params, models, outbreaks) {
+make_unique_id <- function(articles, df) {
   ## Check if there are any duplicate covidence ids in the articles table.
-  ## Generally, you can expect that there won't be any duplicates here.
+  ## Generally, you can expect that there won't be any duplicates in articles
+  ## and duplicates in one or all of the other tables. 
   dups <- do.call(what = "rbind", args = by(
-    articles, articles$covidence_id,
-    function(x) {
-      data.frame(covidence_id = x$covidence_id[1], n_ids = length(unique(x$id)))
+    df, df$covidence_id,
+    function(x1) {
+      data.frame(
+        covidence_id = x1$covidence_id[1], n_ids = length(unique(x1$id))
+      )
     }
   ))
-
-  ## Check if there are any duplicate covidence ids in the params table.
-  dups_p <- do.call(what = "rbind", args = by(
-    params, params$covidence_id,
-    function(x) {
-      data.frame(covidence_id = x$covidence_id[1], n_ids = length(unique(x$id)))
-    }
-  ))
-
-  ## Check if there are any duplicate covidence ids in the models table.
-  dups_m <- do.call(what = "rbind", args = by(
-    models, models$covidence_id,
-    function(x) {
-      data.frame(covidence_id = x$covidence_id[1], n_ids = length(unique(x$id)))
-    }
-  ))
-
-  ## Check if there are any duplicate covidence ids in the outbreaks table.
-  dups_o <- do.call(what = "rbind", args = by(
-    outbreaks, outbreaks$covidence_id,
-    function(x) {
-      data.frame(covidence_id = x$covidence_id[1], n_ids = length(unique(x$id)))
-    }
-  ))
+  
   dups <- dups[dups$n_ids > 1, ]
-  dups_p <- dups_p[dups_p$n_ids > 1, ]
-  dups_m <- dups_m[dups_m$n_ids > 1, ]
-  dups_o <- dups_o[dups_o$n_ids > 1, ]
-
-  no_dups <- FALSE
+  
   if (nrow(dups) == 0) {
     message("No duplicate covidence ids found in articles")
-    no_dups <- TRUE
+    return(df)
   }
-  if (nrow(dups_p) == 0) {
-    message("No duplicate covidence ids found in params")
-    no_dups <- no_dups & TRUE
-  }
-  if (nrow(dups_m) == 0) {
-    message("No duplicate covidence ids found in models")
-    no_dups <- no_dups & TRUE
-  }
-  if (nrow(dups_o) == 0) {
-    message("No duplicate covidence ids found in outbreaks")
-    no_dups <- no_dups & TRUE
-  }
-
-  if (no_dups) {
-    return(
-      list(
-        articles = articles, params = params, models = models, 
-        outbreaks = outbreaks, 
-      )
-    )
-  }
+  
   ## If there are duplicates, we need to replace one of the ids. We will make
   ## a lookup table of covidence ids to ids and use it to fix all the tables.
+  dups$id <- articles$id[match(dups$covidence_id, articles$covidence_id)]
 
-  return(list(articles = articles, models = models, outbreaks = outbreaks, 
-    params = params))
+  ## Now find ids in df that are not present in articles; these also need to be
+  ## fixed.
+  missing_ids <- setdiff(df$id, articles$id)
+  cov_ids <- unique(df$covidence_id[df$id %in% missing_ids])
+  cov_ids <- cov_ids[!cov_ids %in% dups$covidence_id]
+  more_fixes <- data.frame(
+    covidence_id = cov_ids,
+    n_ids = 0, ## Not used; adding so that we can rbind
+    id = articles$id[match(cov_ids, articles$covidence_id)]
+  )
+  dups <- rbind(dups, more_fixes)
+  ## For each covidence id in dups, find all rows in params with that 
+  ## covidence id and replace the id with the id in dups.
+  for (i in 1:nrow(dups)) {
+    cov_id <- dups$covidence_id[i]
+    id <- dups$id[i]
+    df$id[df$covidence_id == cov_id] <- id
+  }
+  df
 }
