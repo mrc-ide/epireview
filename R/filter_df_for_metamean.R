@@ -91,13 +91,13 @@ filter_df_for_metamean <- function(df) {
     df,
     xbar = ifelse(.data[["parameter_value_type"]] == "Mean", .data[["parameter_value"]], NA),
     median = ifelse(.data[["parameter_value_type"]] == "Median", .data[["parameter_value"]], NA),
-    q1 = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "iqr"),
+    q1 = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    q3 = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "iqr"),
+    q3 = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_upper_value"]], NA),
-    min = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "range"),
+    min = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    max = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "range"),
+    max = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range"),
       .data[["parameter_uncertainty_upper_value"]], NA)
   )
 
