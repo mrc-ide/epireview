@@ -95,9 +95,9 @@ filter_df_for_metamean <- function(df) {
       .data[["parameter_uncertainty_lower_value"]], NA),
     q3 = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_upper_value"]], NA),
-    min = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range"),
+    min = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range")&!str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    max = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range"),
+    max = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range")&!str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_upper_value"]], NA)
   )
 
