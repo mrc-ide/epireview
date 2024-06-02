@@ -82,22 +82,22 @@ filter_df_for_metamean <- function(df) {
   df <- df %>% filter(!is.na(.data[["population_sample_size"]])) %>%
     filter(!is.na(.data[["parameter_value"]])) %>%
     filter(
-      (.data[["parameter_value_type"]] == 'Mean' & str_detect(.data[["parameter_uncertainty_singe_type"]], 'Standard deviation')) |
-      (.data[["parameter_value_type"]] == 'Median' & str_detect(.data[["parameter_uncertainty_type"]], 'IQR')) |
-      (.data[["parameter_value_type"]] == 'Median' & str_detect(.data[["parameter_uncertainty_type"]], 'Range'))
+      (.data[["parameter_value_type"]] == 'Mean' & str_detect(str_to_lower(.data[["parameter_uncertainty_singe_type"]]), 'standard deviation')) |
+      (.data[["parameter_value_type"]] == 'Median' & str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), 'iqr')) |
+      (.data[["parameter_value_type"]] == 'Median' & str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), 'range'))
     )
 
   df <- mutate(
     df,
     xbar = ifelse(.data[["parameter_value_type"]] == "Mean", .data[["parameter_value"]], NA),
     median = ifelse(.data[["parameter_value_type"]] == "Median", .data[["parameter_value"]], NA),
-    q1 = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "IQR"),
+    q1 = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    q3 = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "IQR"),
+    q3 = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_upper_value"]], NA),
-    min = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "Range"),
+    min = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "range"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    max = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "Range"),
+    max = ifelse(str_to_lower(str_detect(.data[["parameter_uncertainty_type"]]), "range"),
       .data[["parameter_uncertainty_upper_value"]], NA)
   )
 
