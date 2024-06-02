@@ -82,22 +82,22 @@ filter_df_for_metamean <- function(df) {
   df <- df %>% filter(!is.na(.data[["population_sample_size"]])) %>%
     filter(!is.na(.data[["parameter_value"]])) %>%
     filter(
-      (.data[["parameter_value_type"]] == 'Mean' & .data[["parameter_uncertainty_singe_type"]] == 'Standard deviation (Sd)') |
-      (.data[["parameter_value_type"]] == 'Median' & .data[["parameter_uncertainty_type"]] == 'Inter Quartile Range (IQR)') |
-      (.data[["parameter_value_type"]] == 'Median' & .data[["parameter_uncertainty_type"]] == 'Range')
+      (.data[["parameter_value_type"]] == 'Mean' & str_detect(.data[["parameter_uncertainty_singe_type"]], 'Standard deviation')) |
+      (.data[["parameter_value_type"]] == 'Median' & str_detect(.data[["parameter_uncertainty_type"]], 'IQR')) |
+      (.data[["parameter_value_type"]] == 'Median' & str_detect(.data[["parameter_uncertainty_type"]], 'Range'))
     )
 
   df <- mutate(
     df,
     xbar = ifelse(.data[["parameter_value_type"]] == "Mean", .data[["parameter_value"]], NA),
     median = ifelse(.data[["parameter_value_type"]] == "Median", .data[["parameter_value"]], NA),
-    q1 = ifelse(.data[["parameter_uncertainty_type"]] == "Inter Quartile Range (IQR)",
+    q1 = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "IQR"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    q3 = ifelse(.data[["parameter_uncertainty_type"]] == "Inter Quartile Range (IQR)",
+    q3 = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "IQR"),
       .data[["parameter_uncertainty_upper_value"]], NA),
-    min = ifelse(.data[["parameter_uncertainty_type"]] == "Range",
+    min = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "Range"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    max = ifelse(.data[["parameter_uncertainty_type"]] == "Range",
+    max = ifelse(str_detect(.data[["parameter_uncertainty_type"]], "Range"),
       .data[["parameter_uncertainty_upper_value"]], NA)
   )
 
