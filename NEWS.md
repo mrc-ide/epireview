@@ -1,6 +1,6 @@
-#epireview 1.2.1
+# epireview 1.2.1
 
-* Added the functionality to define custom y-axis labels for forest plots.
+* FEATURE: New function to assign QA score to articles in a simple and consistent manner.
 
 # epireview 1.2.0
 
