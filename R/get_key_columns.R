@@ -9,6 +9,13 @@
 #' @export
 #'
 #' @examples
+#' lassa_data <- load_epidata("lassa")
+#' lassa_params <- lassa_data$params
+#' cfr_lassa <- get_parameter(
+#'   data = lassa_params,
+#'   parameter_name = "Severity - case fatality rate (CFR)"
+#' )
+#' get_key_columns(data = cfr_lassa, parameter_name = "cfr")
 get_key_columns <- function(data,
                             parameter_name = c("cfr", "delays", "sero", "risk",
                                                "reproduction_number",

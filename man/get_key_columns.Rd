@@ -22,3 +22,12 @@ A \code{data.frame} with the key columns for the selected parameter.
 \description{
 Subset the epidemiological parameter columns by parameter type
 }
+\examples{
+lassa_data <- load_epidata("lassa")
+lassa_params <- lassa_data$params
+cfr_lassa <- get_parameter(
+  data = lassa_params,
+  parameter_name = "Severity - case fatality rate (CFR)"
+)
+get_key_columns(data = cfr_lassa, parameter_name = "cfr")
+}
