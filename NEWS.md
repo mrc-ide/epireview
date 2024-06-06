@@ -1,3 +1,7 @@
+# epireview 1.2.2
+
+* BUG-FIX: Fixes Issue #56 where some article labels were NA because of an article being associated with multiple ids
+
 # epireview 1.2.1
 
 * FEATURE: New function to assign QA score to articles in a simple and consistent manner.
