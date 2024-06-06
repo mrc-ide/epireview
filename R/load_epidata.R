@@ -24,13 +24,13 @@
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-                                                "outbreak", "model", "parameter_type")) {
+                                                "outbreak", "model", "par_types")) {
 
   # assertions
 
   if (missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak' or 'model'")
+         one of 'article', 'parameter', 'outbreak', 'model', or 'par_types'")
   }
 
   assert_pathogen(pathogen)
@@ -44,7 +44,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     parameter = pps[pps$pathogen == pathogen, "params_file"],
     outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
     model = pps[pps$pathogen == pathogen, "models_file"],
-    parameter_type = "partype.csv"
+    par_types = "partypes.csv"
   )
   ## Get column types based on table type
   col_types <- switch(
