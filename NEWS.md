@@ -1,3 +1,7 @@
+# epireview 1.2.2
+
+* BUG FIX: Updated outbreak and parameter column types. 
+
 # epireview 1.2.1
 
 * FEATURE: New function to assign QA score to articles in a simple and consistent manner.
