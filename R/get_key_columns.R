@@ -32,6 +32,15 @@ get_key_columns <- function(data,
                       reproduction_number = reproduction_number_key_columns,
                       genomic = genomic_key_columns)
   cols <- do.call(cols_func, args = list())
+  if (!all(cols %in% colnames(data))) {
+    warning(
+    "THIS FUNCTIONALITY IS UNDER ACTIVE DEVELOPMENT\n" ,
+    "Some of the key columns are not found in the data, only returning ",
+    "those found",
+    call. = FALSE
+    )
+    cols <- cols[cols %in% colnames(data)]
+  }
   data <- data[, cols]
   return(data)
 }
