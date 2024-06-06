@@ -2,7 +2,7 @@
 
 #' retrieve all parameters of specified type
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
-#' @param parameter_name name of the parameter type to retrieve, ensuring the 
+#' @param parameter_name name of the parameter type to retrieve, ensuring the
 #' name matches that in data
 #' @return dataframe with all parameter estimates and specified columns
 #' @export
@@ -31,13 +31,75 @@ get_parameter <- function(data, parameter_name) {
 
   # Check if there are any entries that match 'parameter_name'
   if (sum(data$parameter_type == parameter_name) == 0) {
-    stop("Error: No entries found matching the specified 'parameter_name'. 
+    stop("Error: No entries found matching the specified 'parameter_name'.
       Check spelling and case of 'parameter name'.")
   }
 
   # Extract and return the matching rows
   get_param <- data[data$parameter_type == parameter_name, , drop = FALSE]
-  
+
   get_param
 }
+
+#' Retrieve all incubation period values for a given pathogen
+#'
+#' @param data
+#'
+#' @return
+#' @export
+#' @name get_specific
+#'
+#' @examples
+#'
+#'
+get_incubation_period <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Human delay - incubation period"),
+    "delays"
+  )
+
+
+}
+
+#' @name get_specific
+
+get_serial_interval <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Human delay - serial interval"),
+    "delays"
+  )
+
+}
+
+
+#' @name get_specific
+get_generation_time <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Human delay - generation time"),
+    "delays"
+  )
+
+}
+
+
+#'@name get_specific
+get_cfr <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Severity - case fatality rate (CFR)"),
+    "cfr"
+  )
+
+}
+
+
+
+
+
+
+
+
 
