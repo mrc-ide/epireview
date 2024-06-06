@@ -27,7 +27,7 @@ assert_table <- function(x, message = paste(
                          ),
                          name = deparse(substitute(x))) {
   assert_string(x)
-  table_names <- c("article", "parameter", "outbreak", "model")
+  table_names <- c("article", "parameter", "outbreak", "model", "par_types")
   if (!x %in% table_names) {
     stop(sprintf(message, name), call. = FALSE)
   }
@@ -62,12 +62,12 @@ assert_params <- function(x, message = "%s must have a column named 'parameter_t
 }
 
 assert_articles <- function(x, message = "%s must have columns
-   'first_author_first_name', 'first_author_surname', 'year_publication', 
-   'covidence_id'. Did you load the data using load_epidata?", 
+   'first_author_first_name', 'first_author_surname', 'year_publication',
+   'covidence_id'. Did you load the data using load_epidata?",
    name = deparse(substitute(x))) {
   assert_data_frame(x)
   cols_needed <- c(
-    "first_author_first_name", "first_author_surname", 
+    "first_author_first_name", "first_author_surname",
     "year_publication", "covidence_id",
     "qa_m1", "qa_m2", "qa_a3", "qa_a4", "qa_d5", "qa_d6", "qa_d7")
   if (!all(cols_needed %in% colnames(x))) {
