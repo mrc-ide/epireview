@@ -28,7 +28,7 @@ get_key_columns <- function(data,
                       cfr = cfr_key_columns,
                       delays = delays_key_columns,
                       sero = sero_key_columns,
-                      risk = risk_key_columns,
+                      risk = risk_factor_key_columns,
                       reproduction_number = reproduction_number_key_columns,
                       genomic = genomic_key_columns)
   cols <- do.call(cols_func, args = list())
@@ -97,7 +97,7 @@ sero_key_columns <- function() {
 #'
 #' @return A `character` vector.
 #' @keywords internal
-risk_factors_key_columns <- function() {
+risk_factor_key_columns <- function() {
   c(key_columns(),
     c(
       "riskfactor_outcome", "riskfactor_name", "riskfactor_significant",
