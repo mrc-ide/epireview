@@ -1,3 +1,7 @@
+# epireview 1.2.2
+
+* Added custom axis-label functionality to forest_plot(), and fixed a bug whereby single uncertainty names would be used for paired uncertainty values.
+
 # epireview 1.2.1
 
 * FEATURE: New function to assign QA score to articles in a simple and consistent manner.
