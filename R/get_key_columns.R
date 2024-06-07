@@ -2,7 +2,7 @@
 #'
 #' @param data The parameter `data.frame` (`$param`) from [load_epidata()].
 #' @param parameter_name A `character` string with the parameter name. Options
-#' are: `"cfr"`, `"delays"`, `"sero"`, `"risk"`,
+#' are: `"cfr"`, `"delay"`, `"sero"`, `"risk"`,
 #' `"reproduction_number"`, and `"genomic"`.
 #'
 #' @return A `data.frame` with the key columns for the selected parameter.
@@ -17,7 +17,7 @@
 #' )
 #' get_key_columns(data = cfr_lassa, parameter_name = "cfr")
 get_key_columns <- function(data,
-                            parameter_name = c("cfr", "delays", "sero", "risk",
+                            parameter_name = c("cfr", "delay", "sero", "risk",
                                                "reproduction_number",
                                                "genomic")) {
   if (!is.data.frame(data)) {
@@ -26,7 +26,7 @@ get_key_columns <- function(data,
   parameter_name <- match.arg(parameter_name)
   cols_func <- switch(parameter_name,
                       cfr = cfr_key_columns,
-                      delays = delays_key_columns,
+                      delay = delay_key_columns,
                       sero = sero_key_columns,
                       risk = risk_factor_key_columns,
                       reproduction_number = reproduction_number_key_columns,
@@ -73,7 +73,7 @@ cfr_key_columns <- function() {
 #'
 #' @return A `character` vector.
 #' @keywords internal
-delays_key_columns <- function() {
+delay_key_columns <- function() {
   c(key_columns(), c(
     "parameter_value", "parameter_unit", "distribution_type",
     "distribution_par1_value", "distribution_par2_value", "other_delay_start",
