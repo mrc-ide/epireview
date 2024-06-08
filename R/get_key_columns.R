@@ -77,8 +77,8 @@ cfr_key_columns <- function() {
 delays_key_columns <- function() {
   c(key_columns(), c(
     "parameter_value", "parameter_unit", "distribution_type",
-    "distribution_par1_value", "distribution_par2_value", "other_delay_start",
-    "other_delay_end"
+    "distribution_par1_value", "distribution_par2_value",
+    "other_delay_start","other_delay_end"
   ))
 }
 
@@ -89,7 +89,8 @@ delays_key_columns <- function() {
 #' @keywords internal
 sero_key_columns <- function() {
   c(key_columns(),
-    c("parameter_value", "cfr_ifr_numerator", "cfr_ifr_denominator")
+    c("parameter_type","parameter_value",
+      "cfr_ifr_numerator", "cfr_ifr_denominator")
   )
 }
 
