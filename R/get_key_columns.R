@@ -20,7 +20,10 @@ get_key_columns <- function(data,
                             parameter_name = c("cfr", "delays", "sero",
                                                "risk_factors",
                                                "reproduction_number",
-                                               "genomic")) {
+                                               "genomic",
+                                               "attack_rate",
+                                               "doubling_time",
+                                               "growth_rate")) {
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
@@ -31,7 +34,10 @@ get_key_columns <- function(data,
                       sero = sero_key_columns,
                       risk_factors = risk_factors_key_columns,
                       reproduction_number = reproduction_number_key_columns,
-                      genomic = genomic_key_columns)
+                      genomic = genomic_key_columns,
+                      attack_rate = attack_double_growth_key_columns,
+                      doubling_time = attack_double_growth_key_columns,
+                      growth_rate = attack_double_growth_key_columns)
   cols <- do.call(cols_func, args = list())
   if (!all(cols %in% colnames(data))) {
     warning(
@@ -132,6 +138,20 @@ genomic_key_columns <- function() {
       "parameter_type","parameter_value",
       "parameter_unit", "exponent", "genome_site",
       "genomic_sequence_available"
+    )
+  )
+}
+
+#' Key columns for attack rate, doubling time and growth rate parameters in the `$params` table from
+#' [load_epidata()]
+#'
+#' @return A `character` vector.
+#' @keywords internal
+attack_double_growth_key_columns <- function() {
+  c(key_columns(),
+    c(
+      "parameter_value",
+      "parameter_unit", "exponent"
     )
   )
 }
