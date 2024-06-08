@@ -156,3 +156,7 @@ attack_double_growth_key_columns <- function() {
   )
 }
 
+
+
+### still missing (for marburg, ebola, lassa): Overdispersion, Relative contribution - human to human
+
