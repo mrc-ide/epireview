@@ -17,7 +17,8 @@
 #' )
 #' get_key_columns(data = cfr_lassa, parameter_name = "cfr")
 get_key_columns <- function(data,
-                            parameter_name = c("cfr", "delays", "sero", "risk",
+                            parameter_name = c("cfr", "delays", "sero",
+                                               "risk_factors",
                                                "reproduction_number",
                                                "genomic")) {
   if (!is.data.frame(data)) {
@@ -28,7 +29,7 @@ get_key_columns <- function(data,
                       cfr = cfr_key_columns,
                       delays = delays_key_columns,
                       sero = sero_key_columns,
-                      risk = risk_key_columns,
+                      risk_factors = risk_factors_key_columns,
                       reproduction_number = reproduction_number_key_columns,
                       genomic = genomic_key_columns)
   cols <- do.call(cols_func, args = list())
@@ -52,7 +53,7 @@ get_key_columns <- function(data,
 #' @keywords internal
 key_columns <- function() {
   c(
-    "article_label", "population_sample_size", "population_location",
+    "article_label", "population_sample_size", "population_country",
     "population_group", "method_disaggregated", "parameter_type"
   )
 }
