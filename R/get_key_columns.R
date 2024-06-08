@@ -129,7 +129,8 @@ reproduction_number_key_columns <- function() {
 genomic_key_columns <- function() {
   c(key_columns(),
     c(
-      "parameter_value", "parameter_unit", "exponent", "genome_site",
+      "parameter_type","parameter_value",
+      "parameter_unit", "exponent", "genome_site",
       "genomic_sequence_available"
     )
   )
