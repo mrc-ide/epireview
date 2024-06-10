@@ -157,6 +157,18 @@ attack_double_growth_key_columns <- function() {
 }
 
 
+#' Key columns for overdispersion and relative contribution to transmission from human-human transmission parameters in the `$params` table from
+#' [load_epidata()]
+#'
+#' @return A `character` vector.
+#' @keywords internal
+overdispersion_contribution_key_columns <- function() {
+  c(key_columns(),
+    c(
+      "parameter_value",
+      "parameter_unit", "exponent"
+    )
+  )
+}
 
-### still missing (for marburg, ebola, lassa): Overdispersion, Relative contribution - human to human
 
