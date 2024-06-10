@@ -23,7 +23,9 @@ get_key_columns <- function(data,
                                                "genomic",
                                                "attack_rate",
                                                "doubling_time",
-                                               "growth_rate")) {
+                                               "growth_rate",
+                                               "overdispersion",
+                                               "relative_contribution")) {
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
@@ -37,7 +39,10 @@ get_key_columns <- function(data,
                       genomic = genomic_key_columns,
                       attack_rate = attack_double_growth_key_columns,
                       doubling_time = attack_double_growth_key_columns,
-                      growth_rate = attack_double_growth_key_columns)
+                      growth_rate = attack_double_growth_key_columns,
+                      overdispersion = overdispersion_contribution_key_columns,
+                      relative_contribution = overdispersion_contribution_key_columns
+                      )
   cols <- do.call(cols_func, args = list())
   if (!all(cols %in% colnames(data))) {
     warning(
