@@ -1,10 +1,10 @@
 ## function name get_parameter
 
-#' retrieve all parameters of specified type
+#' retrieve all parameters of specified type or class
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
-#' @param parameter_name name of the parameter type to retrieve, ensuring the
+#' @param parameter_name name of the parameter type or parameter class to retrieve, ensuring the
 #' name matches that in data
-#' @return dataframe with all parameter estimates and specified columns
+#' @return dataframe with all parameter estimates and columns
 #' @export
 #' @examples
 #' df <- load_epidata(pathogen = "ebola")
@@ -29,29 +29,48 @@ get_parameter <- function(data, parameter_name) {
     stop("Error: 'data' does not contain the required 'parameter_type' column.")
   }
 
-  # Check if there are any entries that match 'parameter_name'
-  if (sum(data$parameter_type == parameter_name) == 0) {
+  # Validate that 'parameter_class' column exists in 'data'
+  if (!"parameter_class" %in% names(data)) {
+    stop("Error: 'data' does not contain the required 'parameter_class' column.")
+  }
+
+  # Check if there are any entries that match 'parameter_name' or 'parameter_class'
+  if (sum(data$parameter_type == parameter_name) == 0 & sum(data$parameter_class == parameter_name) == 0) {
     stop("Error: No entries found matching the specified 'parameter_name'.
       Check spelling and case of 'parameter name'.")
   }
 
-  # Extract and return the matching rows
-  get_param <- data[data$parameter_type == parameter_name, , drop = FALSE]
+  # if
+  if(parameter_name %in% data$parameter_type){
+
+    # Extract and return the matching rows
+    get_param <- data[data$parameter_type == parameter_name, , drop = FALSE]
+
+  }
+  else if(parameter_name %in% data$parameter_class){
+
+    # Extract and return the matching rows
+    get_param <- data[data$parameter_class == parameter_name, , drop = FALSE]
+
+  }
 
   get_param
 }
 
-#' Retrieve all incubation period values for a given pathogen
+
+
+#' Retrieve all incubation period parameters for a given pathogen
 #'
-#' @param data
+#' @param data parameter dataframe output from \code{\link{load_epidata}}
 #'
-#' @return
+#' @return dataframe with all parameter estimates of this type and key columns (see \code{\link{get_key_columns}})
 #' @export
 #' @name get_specific
 #'
 #' @examples
-#'
-#'
+#' df <- load_epidata(pathogen = "lassa")
+#' get_incubation_period(data = df$params)
+
 get_incubation_period <- function(data){
 
   get_key_columns(
@@ -59,11 +78,10 @@ get_incubation_period <- function(data){
     "delays"
   )
 
-
 }
 
+#' Retrieve all serial interval parameters for a given pathogen
 #' @name get_specific
-
 get_serial_interval <- function(data){
 
   get_key_columns(
@@ -73,7 +91,7 @@ get_serial_interval <- function(data){
 
 }
 
-
+#' Retrieve all generation time parameters for a given pathogen
 #' @name get_specific
 get_generation_time <- function(data){
 
@@ -84,7 +102,19 @@ get_generation_time <- function(data){
 
 }
 
+#' Retrieve all delay parameters for a given pathogen
+#'@name get_specific
+get_delays <- function(data){
 
+  get_key_columns(
+    get_parameter(data,"Human delay"),
+    "delays"
+  )
+
+}
+
+
+#' Retrieve all CFR parameters for a given pathogen
 #'@name get_specific
 get_cfr <- function(data){
 
@@ -95,11 +125,105 @@ get_cfr <- function(data){
 
 }
 
+#' Retrieve all risk factor parameters for a given pathogen
+#'@name get_specific
+get_risk_factors <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Risk factors"),
+    "risk_factors"
+  )
+
+}
+
+#' Retrieve all genomic parameters for a given pathogen
+#'@name get_specific
+get_genomic <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Mutations"),
+    "genoomic"
+  )
+
+}
+
+#' Retrieve all reproduction number parameters for a given pathogen
+#'@name get_specific
+get_reproduction_number <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Reproduction number"),
+    "reproduction_number"
+  )
+
+}
+
+#' Retrieve all seroprevalence parameters for a given pathogen
+#'@name get_specific
+get_seroprevalence <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Seroprevalence"),
+    "sero"
+  )
+
+}
+
+#' Retrieve all doubling time parameters for a given pathogen
+#'@name get_specific
+get_doubling_time <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Doubling time"),
+    "doubling_time"
+  )
+
+}
+
+#' Retrieve all attack rate parameters for a given pathogen
+#'@name get_specific
+get_attack_rate <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Attack rate"),
+    "attack_rate"
+  )
+
+}
 
 
+#' Retrieve all growth rate parameters for a given pathogen
+#'@name get_specific
+get_growth_rate <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Growth rate (r)"),
+    "growth_rate"
+  )
+
+}
 
 
+#' Retrieve all overdispersion parameters for a given pathogen
+#'@name get_specific
+get_overdispersion <- function(data){
 
+  get_key_columns(
+    get_parameter(data,"Overdispersion"),
+    "overdispersion"
+  )
 
+}
+
+#' Retrieve all overdispersion parameters for a given pathogen
+#'@name get_specific
+get_relative_contribution <- function(data){
+
+  get_key_columns(
+    get_parameter(data,"Relative contribution"),
+    "relative_contribution"
+  )
+
+}
 
 
