@@ -1,6 +1,7 @@
 # epireview 1.2.3
 
 * BUG-FIX: Fixes #71; file names are changed to match function names for consistency.
+* FEATURE: addresses #80 by including doi in article columns merged with other key dfs.
 
 # epireview 1.2.1
 
