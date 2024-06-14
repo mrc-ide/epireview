@@ -1,3 +1,7 @@
+# epireview 1.2.4
+
+* BUG FIX: Updated outbreak and parameter column types. Fixes warnings being issued when lassa or ebola data were loaded.
+
 # epireview 1.2.3
 
 * BUG-FIX: Fixes Issue #56 where some article labels were NA because of an article being associated with multiple ids.
