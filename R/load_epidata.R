@@ -1,268 +1,141 @@
-#' Loads raw data for a particular pathogen
+##' Short labels parameters for use in figures
+##'
+##' This function assigns short labels to otherwise very long parameter
+##' names. It is generally not intended to be called directly but is used by
+##' \code{\link{load_epidata}} when the data is loaded.
+##'
+##' @param x data.frame containing a column called "parameter_type",  This will 
+##' typically be the `params`data.frame from the output of \code{load_epireview}.
+##' @param parameter_type_full optional. User can specify the full value of a 
+##' parameter type not already included in the function.
+##' @param parameter_type_short optional. Shorter value of parameter_type_full
+##' @return data.frame with a new column called "parameter_type_short"
+##' @export
+##' @author Sangeeta Bhatia
+short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
+
+  x$parameter_type_short <- case_when(
+    x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
+    x$parameter_type == "Reproduction number (Effective, Re)" ~ "Effective (Re)",
+    x$parameter_type == "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
+    x$parameter_type == "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
+  )
+
+  if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
+    x$parameter_type_short <- case_when(
+      x$parameter_type == parameter_type_full ~ parameter_type_short
+    )
+  } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
+    stop("Please specify both parameter_type_full and parameter_type_short")
+  } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
+    stop("Please specify both parameter_type_full and parameter_type_short")
+  }
+
+  x
+}
+
+#' Retrieve pathogen-specific data
 #'
 #' @details
-#' This function will return the raw data as a data.frame. The
-#' csv files of the models, outbreaks, and parameters for a pathogen
-#' do not contain information on the source but only an "article_id"
-#' that can be used to merge them with the articles. If you wish to
-#' retrieve linked information or multiple tables at the same time,
-#' use \code{load_epidata} instead.
+#' The data extracted in the systematic review has been stored in three
+#' files - one each for articles, parameters, and transmission models.
+#' Data in the three files can be linked using article identifier.
+#' This function will read in the pathogen-specific articles and
+#' parameters files and join them into a data.frame. The resulting
+#' data set can be used to create a forest plot.
 #'
-#'
-#' @inheritParams load_epidata
-#'
-#' @param table the table to be loaded. Must be one of
-#' "article", "parameter", "outbreak", or "model"
-#'
-#'
+#' @param pathogen name of pathogen. Must be one of the priority pathogens
+#' exactly as specified in the package. You can get a list of the
+#' priority pathogens currently included in the package by calling
+#' @seealso \code{\link{load_epidata}}
 #' 
-#' @return data.frame reading in the csv the specified pathogen table
+#' @param mark_multiple logical. If TRUE, multiple studies from the same
+#' author in the same year will be marked with a suffix to distinguish them.
+#' @return a list of length 2. The first element is a data.frame
+#' called "params" with articles information (authors, publication year)
+#' combined with the parameters. The second element is a data.frame
+#' called "models" with all transmission models extracted for this
+#' pathogen.
 #' @importFrom readr read_csv
-#' @seealso
-#' [load_epidata()] for a more user-friendly interface
-#' @examples
-#' load_epidata_raw(pathogen = "marburg", table = "outbreak")
+#' @importFrom dplyr left_join
 #' @export
-load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-                                                "outbreak", "model")) {
-  
-  # assertions
-  
-  if (missing(pathogen) | missing(table)) {
-    stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak' or 'model'")
-  }
-  
+load_epidata <- function(pathogen, mark_multiple = TRUE) {
+
   assert_pathogen(pathogen)
-  assert_table(table)
-  
-  pps <- priority_pathogens()
-  
-  fname <- switch(
-    table,
-    article =  pps[pps$pathogen == pathogen, "articles_file"],
-    parameter = pps[pps$pathogen == pathogen, "params_file"],
-    outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
-    model = pps[pps$pathogen == pathogen, "models_file"],
-  )
-  ## Get column types based on table type
-  col_types <- switch(
-    table,
-    article = article_column_type(),
-    parameter = parameter_column_type(),
-    outbreak = outbreak_column_type(),
-    model = model_column_type()
-  )
-  
-  if (is.na(fname)) {
-    warning(paste("No data found for ", pathogen))
-    return(NULL)
-  } else {
-    file_path <- system.file("extdata", fname, package = "epireview")
-    ## Temporarily read in without column types as column names for the 
-    ## same table can change between pathogens
-    tmp <- read_csv(file_path, show_col_types = FALSE)
-    ## col_types will have more columns than tmp, so we need to select
-    ## only the columns that are in tmp
-    ## This is because the column names can change between pathogens
-    ## for instance, pathogens extracted after SARS will have additional
-    ## parameters.
-    cols <- intersect(colnames(tmp), names(col_types))
-    col_types <- col_types[cols]
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
+
+  articles <- load_epidata_raw(pathogen, "article")
+  models <- load_epidata_raw(pathogen, "model")
+  outbreaks <- load_epidata_raw(pathogen, "outbreak")
+  params <- load_epidata_raw(pathogen, "parameter")
+
+  models_extracted <- TRUE
+  outbreaks_extracted <- TRUE
+  params_extracted <- TRUE
+
+  if (! inherits(articles, "data.frame")) {
+    stop(paste("No article information found for ", pathogen))
   }
-  out
+
+  if (! inherits(models, "data.frame")) {
+    warning(paste("No models information found for ", pathogen))
+    ## flip the flag to indicate that no models were found
+    models_extracted <- FALSE
+  }
+
+  if (! inherits(outbreaks, "data.frame")) {
+    warning(paste("No outbreaks information found for ", pathogen))
+    outbreaks_extracted <- FALSE
+  }
   
-}
-
-
-## Define column types for each table
-## These are used to read in the data
-## and to validate the data
-#' Define the column types for the article data frame
-#'
-#' This function defines the column types for the article data frame used in the epireview package.
-#' readr is generally good at guessing the
-#' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which 
-#' is particularly undesirable for us. 
-#' The function is intended to be used
-#' internally by \code{load_epidata_raw} where the files are being read. 
-#' @inheritParams load_epidata_raw
-#' @return A list of column types for the article data frame
-#' @importFrom readr col_character col_integer col_logical
-#' @seealso parameter_column_type, outbreak_column_type, model_column_type
-#' @export
-article_column_type <- function(pathogen) {
-  out <- list(
-    id = col_character(),
-    covidence_id = col_integer(),
-    pathogen = col_character(),
-    first_author_first_name = col_character(),
-    first_author_surname = col_character(),
-    article_title = col_character(),
-    doi = col_character(),
-    journal = col_character(),
-    year_publication = col_integer(),
-    volume = col_integer(),
-    issue = col_integer(),
-    page_first = col_integer(),
-    page_last = col_integer(),
-    paper_copy_only = col_logical(),
-    notes = col_character(),
-    qa_m1 = col_character(),
-    qa_m2 = col_character(),
-    qa_a3 = col_character(),
-    qa_a4 = col_character(),
-    qa_d5 = col_character(),
-    qa_d6 = col_character(),
-    qa_d7 = col_character()
-  )
-
-  out
-}
-
-#' parameter_column_type
-#'
-#' This function defines the column types for the parameters in the dataset.
-#' It returns a list of column types with their corresponding names.
-#' 
-#' @inherit article_column_type details return seealso 
-#' @export
-#'
-#' @examples
-#' parameter_column_type()
-#'
-#' @importFrom readr col_integer col_character col_double col_logical
-#'
-#' @keywords dataset, column types
-parameter_column_type <- function() {
-  out <- list(
-    parameter_data_id = col_character(),
-    id = col_character(),
-    article_id = col_integer(),
-    parameter_type = col_character(),
-    parameter_value = col_double(),
-    parameter_unit = col_character(),
-    parameter_lower_bound = col_double(),
-    parameter_upper_bound = col_double(),
-    parameter_value_type = col_character(),
-    parameter_uncertainty_single_value = col_double(),
-    parameter_uncertainty_singe_type = col_character(),
-    parameter_uncertainty_lower_value = col_double(),
-    parameter_uncertainty_upper_value = col_double(),
-    parameter_uncertainty_type = col_character(),
-    cfr_ifr_numerator = col_integer(),
-    cfr_ifr_denominator = col_integer(),
-    distribution_type = col_character(),
-    distribution_par1_value = col_double(),
-    distribution_par1_type = col_character(),
-    distribution_par1_uncertainty = col_logical(),
-    distribution_par2_value = col_double(),
-    distribution_par2_type = col_character(),
-    distribution_par2_uncertainty = col_logical(),
-    method_from_supplement = col_logical(),
-    method_moment_value = col_character(),
-    cfr_ifr_method = col_character(),
-    method_r = col_character(),
-    method_disaggregated_by = col_character(),
-    method_disaggregated = col_logical(),
-    method_disaggregated_only = col_logical(),
-    riskfactor_outcome = col_character(),
-    riskfactor_name = col_character(),
-    riskfactor_occupation = col_character(),
-    riskfactor_significant = col_character(),
-    riskfactor_adjusted = col_character(),
-    population_sex = col_character(),
-    population_sample_type = col_character(),
-    population_group = col_character(),
-    population_age_min = col_integer(),
-    population_age_max = col_integer(),
-    population_sample_size = col_integer(),
-    population_country = col_character(),
-    population_location = col_character(),
-    population_study_start_day = col_integer(),
-    population_study_start_month = col_character(),
-    population_study_start_year = col_integer(),
-    population_study_end_day = col_integer(),
-    population_study_end_month = col_character(),
-    population_study_end_year = col_integer(),
-    genome_site = col_character(),
-    genomic_sequence_available = col_logical(),
-    parameter_class = col_character(),
-    covidence_id = col_integer()
-  )
+  if (! inherits(params, "data.frame")) {
+    warning(paste("No params information found for ", pathogen))
+    params_extracted <- FALSE
+  }
   
-  out
-}
 
-
-#' outbreak_column_type
-#' 
-#' This function defines the column types for the outbreaks in the dataset.
-#' It returns a list of column types with their corresponding names.
-#' 
-#' @inherit article_column_type details return seealso
-#' @export
-#' @importFrom readr col_integer col_character col_double col_logical
-#' @keywords dataset, column types
-#' @examples
-#' outbreak_column_type()
-outbreak_column_type <- function() {
-  out <- list(
-    outbreak_id     = col_character(),
-    id = col_character(),
-    article_id           = col_integer(),
-    outbreak_start_day   = col_double(),
-    outbreak_start_month = col_character(),
-    outbreak_start_year  = col_double(),
-    outbreak_end_day     = col_double(),
-    outbreak_end_month   = col_character(),
-    outbreak_date_year   = col_double(),
-    outbreak_duration_months = col_double(),
-    outbreak_size        = col_double(),
-    asymptomatic_transmission = col_double(),
-    outbreak_country     = col_character(),
-    outbreak_location    = col_character(),
-    cases_confirmed      = col_double(),
-    cases_mode_detection = col_character(),
-    cases_suspected      = col_integer(),
-    cases_asymptomatic   = col_integer(),
-    deaths               = col_integer(),
-    cases_severe_hospitalised = col_integer(),
-    covidence_id         = col_integer()
+  articles <- pretty_article_label(articles, mark_multiple)
+  ## These are the columns we want to affix to the other tables 
+  ## to make them easier to work with; we don't want to add all of
+  ## articles.
+  cols <- c(
+    "id", "first_author_surname", "year_publication", "article_label"
   )
-  out
-}
+  articles_everything <- articles
+  articles <- articles[, cols]
 
-#' model_column_type
-#' 
-#' This function defines the column types for the models in the dataset.
-#' It returns a list of column types with their corresponding names.
-#' @inherit article_column_type details return seealso
-#' 
-#' @export
-#' @importFrom readr col_integer col_character col_double col_logical
-#' @keywords dataset, column types
-#' @examples
-#' model_column_type()
-model_column_type <- function() {
+  ## Marburg parameters have entries like "Germany;Yugoslavia"
+  ## For future pathogens, this should be cleaned up before data are
+  ## checked into epireview
+  params <- short_parameter_type(params)
+  params$parameter_value <- as.numeric(params$parameter_value)
+
+  if (params_extracted) {
+    params <- make_unique_id(articles_everything, params)
+    params <- left_join(params, articles, by = "id") |>
+      mark_multiple_estimates("parameter_type", label_type = "numbers")
+  } else params <- NULL
   
-  out <- list(
-    id = col_character(),
-    model_data_id       = col_character(),
-    article_id          = col_integer(),
-    pathogen            = col_character(),
-    ebola_variant       = col_character(),
-    model_type          = col_character(),
-    compartmental_type  = col_character(),
-    stoch_deter         = col_character(),
-    theoretical_model   = col_logical(),
-    interventions_type  = col_character(),
-    code_available      = col_logical(),
-    transmission_route  = col_character(),
-    assumptions         = col_character(),
-    covidence_id        = col_integer()
-  )
+  if (models_extracted) {
+    models <- make_unique_id(articles_everything, models)
+    models <- left_join(models, articles, by = "id") |>
+      mark_multiple_estimates("model_type", label_type = "numbers")
+  } else models <- NULL
 
-  out
+  if (outbreaks_extracted) {
+    outbreaks <- make_unique_id(articles_everything, outbreaks)
+    outbreaks <- left_join(outbreaks, articles, by = "id") |>
+      mark_multiple_estimates("outbreak_country", label_type = "numbers")
+  } else outbreaks <- NULL
+  
+  message("Data loaded for ", pathogen)
+  
+  list(
+    articles = articles_everything, params = params, models = models, 
+    outbreaks = outbreaks
+  )
 }
+
+
+
