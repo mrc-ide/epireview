@@ -3,7 +3,7 @@ incubation_period_inverse,Human delay - incubation period  (inverse parameter)
 reproduction_number_effective,Reproduction number (Effective, Re)
 infectious period ,Human delay - infectious period
 incubation_period,Human delay - incubation period
-severity_cfr,Severity - case fatality rate (CFR)
+cfr,Severity - case fatality rate (CFR)
 delay_onset_to_care,Human delay - Symptom Onset/Fever to Admission to Care/Hospitalisation
 delay_onset_to_death,Human delay - Symptom Onset/Fever to Death
 risk_factors,Risk factors
