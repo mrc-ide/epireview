@@ -23,11 +23,11 @@ assert_pathogen <- function(x, message = paste(
 #' @noRd
 assert_table <- function(x, message = paste(
                            "%s must be one of the priority pathogens table options:",
-                           paste("article", "parameter", "outbreak", "model", sep = ", ")
+                           paste("article", "parameter", "outbreak", "model", "param_name", sep = ", ")
                          ),
                          name = deparse(substitute(x))) {
   assert_string(x)
-  table_names <- c("article", "parameter", "outbreak", "model", "par_types")
+  table_names <- c("article", "parameter", "outbreak", "model", "param_name")
   if (!x %in% table_names) {
     stop(sprintf(message, name), call. = FALSE)
   }
