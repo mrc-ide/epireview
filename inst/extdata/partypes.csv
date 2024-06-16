@@ -1,8 +1,8 @@
 parameter_type_short,parameter_type
-delay_incubation_period_inverse,Human delay - incubation period  (inverse parameter)
-reproduction_number_effective,"Reproduction number (Effective, Re)"
-delay_infectious period ,Human delay - infectious period
-delay_incubation_period,Human delay - incubation period
+incubation_period_inverse,Human delay - incubation period  (inverse parameter)
+reproduction_number_effective,Reproduction number (Effective, Re)
+infectious period ,Human delay - infectious period
+incubation_period,Human delay - incubation period
 severity_cfr,Severity - case fatality rate (CFR)
 delay_onset_to_care,Human delay - Symptom Onset/Fever to Admission to Care/Hospitalisation
 delay_onset_to_death,Human delay - Symptom Onset/Fever to Death
@@ -15,7 +15,7 @@ delay_onset_to_reporting,Human delay - Symptom Onset/Fever to Reporting
 mutation_evolutionary_rate,Mutations - evolutionary rate
 attack_rate,Attack rate
 growth_rate,Growth rate (r)
-delay_serial_interval,Human delay - serial interval
+serial_interval,Human delay - serial interval
 delay_onset_to_diagnosis,Human delay - Symptom Onset/Fever to Diagnosis
 delay_onset_to_negative_test,Human delay - Symptom Onset/Fever to Negative test
 delay_onset_to_igm_detection,Human delay - Symptom Onset/Fever to IgM antibody detection
@@ -27,7 +27,7 @@ delay_symptom_onset_to_recovery_noninfectiousness,Human delay - Symptom Onset/Fe
 overdispersion,Overdispersion
 seroprevalence_igg,Seroprevalence - IgG
 delay_admission_to_discharge,Human delay - time in care (length of stay)
-delay_latent_period,Human delay - latent period
+latent_period,Human delay - latent period
 delay_symptom_onset_to_test,Human delay - Symptom Onset/Fever to Test
 delay_test_to_death,Human delay - Test to Death
 delay_test_to_discharge,Human delay - Test to Discharge from Care/Hospital
@@ -43,11 +43,11 @@ delay_exposure_to_death,Human delay - Exposure/Infection to Death
 seroprevalence_igM,Seroprevalence - IgM
 delay_exposure_to_onset,Human delay - Exposure/Infection to Symptom Onset/Fever
 tbd,Human delay - Symptom Onset/Fever to Other
-delay_latent_period_inverse,Human delay - latent period  (inverse parameter)
+latent_period_inverse,Human delay - latent period  (inverse parameter)
 seroprevalence_IFA,Seroprevalence - IFA
 mutation_rate,Mutations – mutation rate
 delay_exposure_to_recovery,Human delay - Exposure/Infection to Recovery/non-Infectiousness
-delay_generation_time,Human delay - generation time
+generation_time,Human delay - generation time
 delay_onset_to_undetectable,Human delay - Symptom Onset/Fever to First undetectable viremia
 delay_test_to_test_result,Human delay - Sample collection to Test result
 delay_onset_to_test_result,Human delay - Symptom Onset/Fever to Test result
@@ -62,7 +62,7 @@ delay_death_to_burial,Human delay - Death to Burial
 delay_exposure_to_quarantine,Human delay - Exposure/Infection to Quarantine
 delay_onset_to_hospital_death,Human delay - Symptom Onset/Fever to Death in hospital
 delay_onset_to_community_death,Human delay - Symptom Onset/Fever to Death in community
-delay_infectious_period_inverse,Human delay - infectious period  (inverse parameter)
+infectious_period_inverse,Human delay - infectious period  (inverse parameter)
 delay_notification_to_death,Human delay - Reporting to Death
 delay_notification_to_discharge,Human delay - Reporting to Discharge from Care/Hospital
 delay_onset_to_notification,Human delay - Symptom Onset/Fever to WHO notification
