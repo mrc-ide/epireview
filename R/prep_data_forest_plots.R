@@ -34,7 +34,7 @@ short_parameter_type <- function(x, pathogen, par_types, parameter_type_full, pa
                                paste0('Human delay - ', x$other_delay), x$parameter_type)
   }
 
-  x <- left_join(x, par_types, by = 'parameter_type')
+  x <- mrerge(x, par_types, by = 'parameter_type')
 
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     x$parameter_type_short <- case_when(
