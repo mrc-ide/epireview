@@ -99,6 +99,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
 
   articles <- pretty_article_label(articles, mark_multiple)
+  articles <- missing_doi_label(articles)
   cols <- c(
     "id", "first_author_surname", "year_publication", "article_label", "doi"
   )
