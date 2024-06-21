@@ -61,7 +61,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' models extracted for this pathogen including articles information as above.
 #' The fourth element is a data.frame called "outbreaks" which contains all
 #' of the outbreaks extracted for this pathogen, where available.
-#' @importFrom readr read_csv
+#' 
 #' @importFrom dplyr left_join
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
@@ -99,9 +99,10 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
 
   articles <- pretty_article_label(articles, mark_multiple)
-  articles <- missing_doi_label(articles)
+  articles <- update_article_info(articles)
   cols <- c(
-    "id", "first_author_surname", "year_publication", "article_label", "doi"
+    "id", "first_author_surname", "year_publication", "article_label", 
+    "article_info"
   )
   articles_everything <- articles
   articles <- articles[, cols]
