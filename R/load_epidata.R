@@ -100,6 +100,9 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   articles <- pretty_article_label(articles, mark_multiple)
   articles <- update_article_info(articles)
+  ## These are the columns we want to affix to the other tables 
+  ## to make them easier to work with; we don't want to add all of
+  ## articles.
   cols <- c(
     "id", "first_author_surname", "year_publication", "article_label", 
     "article_info"
@@ -114,16 +117,19 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   params$parameter_value <- as.numeric(params$parameter_value)
 
   if (params_extracted) {
+    params <- make_unique_id(articles_everything, params)
     params <- left_join(params, articles, by = "id") |>
       mark_multiple_estimates("parameter_type", label_type = "numbers")
   } else params <- NULL
 
   if (models_extracted) {
+    models <- make_unique_id(articles_everything, models)
     models <- left_join(models, articles, by = "id") |>
       mark_multiple_estimates("model_type", label_type = "numbers")
   } else models <- NULL
 
   if (outbreaks_extracted) {
+    outbreaks <- make_unique_id(articles_everything, outbreaks)
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL
@@ -135,5 +141,6 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
     outbreaks = outbreaks
   )
 }
+
 
 
