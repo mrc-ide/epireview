@@ -15,11 +15,14 @@ priority pathogens currently included in the package by calling}
 author in the same year will be marked with a suffix to distinguish them.}
 }
 \value{
-a list of length 2. The first element is a data.frame
-called "params" with articles information (authors, publication year)
-combined with the parameters. The second element is a data.frame
-called "models" with all transmission models extracted for this
-pathogen.
+a list of length 4. The first element is a data.frame called "articles"
+which contains all of the information about the articles extracted for this
+pathogen. The second element is a data.frame called "params" with articles
+information (authors, publication year, doi) combined with the parameters.
+The third element is a data.frame called "models" with all transmission
+models extracted for this pathogen including articles information as above.
+The fourth element is a data.frame called "outbreaks" which contains all
+of the outbreaks extracted for this pathogen, where available.
 }
 \description{
 Retrieve pathogen-specific data

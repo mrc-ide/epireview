@@ -4,9 +4,9 @@
 ##' names. It is generally not intended to be called directly but is used by
 ##' \code{\link{load_epidata}} when the data is loaded.
 ##'
-##' @param x data.frame containing a column called "parameter_type",  This will 
+##' @param x data.frame containing a column called "parameter_type",  This will
 ##' typically be the `params`data.frame from the output of \code{load_epireview}.
-##' @param parameter_type_full optional. User can specify the full value of a 
+##' @param parameter_type_full optional. User can specify the full value of a
 ##' parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return data.frame with a new column called "parameter_type_short"
@@ -50,15 +50,18 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' exactly as specified in the package. You can get a list of the
 #' priority pathogens currently included in the package by calling
 #' @seealso \code{\link{load_epidata}}
-#' 
+#'
 #' @param mark_multiple logical. If TRUE, multiple studies from the same
 #' author in the same year will be marked with a suffix to distinguish them.
-#' @return a list of length 2. The first element is a data.frame
-#' called "params" with articles information (authors, publication year)
-#' combined with the parameters. The second element is a data.frame
-#' called "models" with all transmission models extracted for this
-#' pathogen.
-#' @importFrom readr read_csv
+#' @return a list of length 4. The first element is a data.frame called "articles"
+#' which contains all of the information about the articles extracted for this
+#' pathogen. The second element is a data.frame called "params" with articles
+#' information (authors, publication year, doi) combined with the parameters.
+#' The third element is a data.frame called "models" with all transmission
+#' models extracted for this pathogen including articles information as above.
+#' The fourth element is a data.frame called "outbreaks" which contains all
+#' of the outbreaks extracted for this pathogen, where available.
+#' 
 #' @importFrom dplyr left_join
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
@@ -88,19 +91,21 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
     warning(paste("No outbreaks information found for ", pathogen))
     outbreaks_extracted <- FALSE
   }
-  
+
   if (! inherits(params, "data.frame")) {
     warning(paste("No params information found for ", pathogen))
     params_extracted <- FALSE
   }
-  
+
 
   articles <- pretty_article_label(articles, mark_multiple)
+  articles <- update_article_info(articles)
   ## These are the columns we want to affix to the other tables 
   ## to make them easier to work with; we don't want to add all of
   ## articles.
   cols <- c(
-    "id", "first_author_surname", "year_publication", "article_label"
+    "id", "first_author_surname", "year_publication", "article_label", 
+    "article_info"
   )
   articles_everything <- articles
   articles <- articles[, cols]
@@ -116,7 +121,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
     params <- left_join(params, articles, by = "id") |>
       mark_multiple_estimates("parameter_type", label_type = "numbers")
   } else params <- NULL
-  
+
   if (models_extracted) {
     models <- make_unique_id(articles_everything, models)
     models <- left_join(models, articles, by = "id") |>
@@ -128,11 +133,11 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL
-  
+
   message("Data loaded for ", pathogen)
-  
+
   list(
-    articles = articles_everything, params = params, models = models, 
+    articles = articles_everything, params = params, models = models,
     outbreaks = outbreaks
   )
 }
