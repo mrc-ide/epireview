@@ -5,7 +5,10 @@
 ##' \code{\link{load_epidata}} when the data is loaded.
 ##'
 ##' @param x data.frame containing a column called "parameter_type",  This will
-##' typically be the `params`data.frame from the output of \code{load_epireview}.
+##' typically be the `params`data.frame from the output of \code{load_epidata}.
+##' @param param_name data.frame containing 2 columns called "parameter_type_short"
+##' and "parameter_type". This will be in the 'param_name' data.frame from the
+##' output of \code{load_epidata}.
 ##' @param parameter_type_full optional. User can specify the full value of a
 ##' parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
