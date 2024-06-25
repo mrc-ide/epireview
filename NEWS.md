@@ -1,3 +1,8 @@
+# epireview 1.2.6
+
+* FEATURE: Added custom axis-label functionality to forest_plot()
+* BUG FIX: Fixed a bug whereby single uncertainty names would be used for paired uncertainty values.
+
 # epireview 1.2.5
 
 * FEATURE: addresses #80 by including doi in article columns merged with other key dfs.
