@@ -12,29 +12,25 @@
 ##' @return data.frame with a new column called "parameter_type_short"
 ##' @export
 ##' @author Sangeeta Bhatia
-short_parameter_type <- function(x, pathogen, par_types, parameter_type_full, parameter_type_short) {
+short_parameter_type <- function(x, param_name, parameter_type_full, parameter_type_short) {
 
-  if(pathogen == 'marburg'){
-    x$other_delay <- case_when(
-      x$parameter_type == "Human delay - time symptom to outcome" &
-        x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
-      x$parameter_type == "Human delay - time symptom to outcome" &
-        x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)",
-      TRUE ~ NA
-    )
+  x$other_delay <- case_when(
+    x$parameter_type == "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
+    x$parameter_type == "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)",
+    x$parameter_type == 'Human delay - other human delay (go to section)' ~
+      paste0(tolower(str_replace(x$other_delay_start, 'Other: ', '')), ' to ',
+             tolower(str_replace(x$other_delay_end, 'Other: ', ''))),
+    TRUE ~ NA)
 
-    x$parameter_type <- ifelse(x$parameter_type == 'Human delay - time symptom to outcome',
-                               paste0('Human delay - ', tolower(x$other_delay)), x$parameter_type)
-  } else if(pathogen == 'lassa'){
-    x$other_delay <- ifelse(x$parameter_type == 'Human delay - other human delay (go to section)',
-                            paste0(tolower(str_replace(x$other_delay_start, 'Other: ', '')), ' to ',
-                                   tolower(str_replace(x$other_delay_end, 'Other: ', ''))), NA)
+  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - time symptom to outcome',
+                             paste0('Human delay - ', tolower(x$other_delay)), x$parameter_type)
 
-    x$parameter_type <- ifelse(x$parameter_type == 'Human delay - other human delay (go to section)',
-                               paste0('Human delay - ', x$other_delay), x$parameter_type)
-  }
+  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - other human delay (go to section)',
+                             paste0('Human delay - ', x$other_delay), x$parameter_type)
 
-  x <- merge(x, par_types, by = 'parameter_type')
+  x <- merge(x, param_name, by = 'parameter_type')
 
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     x$parameter_type_short <- case_when(
@@ -82,7 +78,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   models <- load_epidata_raw(pathogen, "model")
   outbreaks <- load_epidata_raw(pathogen, "outbreak")
   params <- load_epidata_raw(pathogen, "parameter")
-  par_types <- load_epidata_raw(pathogen, "par_types")
+  param_name <- load_epidata_raw(pathogen, "param_name")
 
   models_extracted <- TRUE
   outbreaks_extracted <- TRUE
@@ -119,7 +115,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   ## Marburg parameters have entries like "Germany;Yugoslavia"
   ## For future pathogens, this should be cleaned up before data are
   ## checked into epireview
-  params <- short_parameter_type(params, pathogen, par_types)
+  params <- short_parameter_type(params, pathogen, param_name)
   params$parameter_value <- as.numeric(params$parameter_value)
 
   if (params_extracted) {
