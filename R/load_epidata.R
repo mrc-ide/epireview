@@ -44,7 +44,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     parameter = pps[pps$pathogen == pathogen, "params_file"],
     outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
     model = pps[pps$pathogen == pathogen, "models_file"],
-    par_types = "param_name.csv"
+    param_name = "param_name.csv"
   )
   ## Get column types based on table type
   col_types <- switch(
@@ -263,6 +263,31 @@ model_column_type <- function() {
     transmission_route  = col_character(),
     assumptions         = col_character(),
     covidence_id        = col_integer()
+  )
+
+  out
+}
+
+
+#' Define the column types for the param_name data frame
+#'
+#' This function defines the column types for the param_name data frame used in the epireview package.
+#' readr is generally good at guessing the
+#' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
+#' is particularly undesirable for us.
+#' The function is intended to be used
+#' internally by \code{load_epidata_raw} where the files are being read.
+#' @inherit article_column_type details return seealso
+#'
+#' @export
+#' @importFrom readr col_integer col_character col_double col_logical
+#' @keywords dataset, column types
+#' @examples
+param_name_column_type <- function() {
+
+  out <- list(
+    parameter_type_short = col_character(),
+    parameter_type       = col_character()
   )
 
   out
