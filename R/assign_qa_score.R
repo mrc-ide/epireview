@@ -24,7 +24,7 @@
 #' @export
 #' @examples
 #' lassa <- load_epidata("lassa")
-#' lassa_qa <- assign_qa_score(lassa$articles)
+#' lassa_qa <- assign_qa_score(lassa$articles, ignore_errors = FALSE)
 #' head(lassa_qa$articles[, c("qa_denominator", "qa_numerator", "qa_score")])
 assign_qa_score <- function(articles, ignore_errors = FALSE) {
   
