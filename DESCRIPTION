@@ -1,6 +1,6 @@
 Package: epireview
 Title: Tools to update and summarise the latest pathogen data from the Pathogen Epidemiology Review Group (PERG)
-Version: 1.2.1
+Version: 1.2.6
 Authors@R: c(
     person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5213-4364")),
@@ -13,7 +13,8 @@ Authors@R: c(
     person("Gina", "Cuomo-Dannenburg", role = "aut", comment = c(ORCID = "0000-0001-6821-0352")),
     person("Ruth", "McCabe", role = "aut", comment = c(ORCID = "0000-0002-6368-9103")),
     person("Kelly", "McCain", role = "aut", comment = c(ORCID = "0000-0003-2393-2217")),
-    person("Anne", "Cori", role = "aut", comment = c(ORCID = "0000-0002-8443-9162")))
+    person("Anne", "Cori", role = "aut", comment = c(ORCID = "0000-0002-8443-9162")),
+    person("Thomas", "Rawson", role = "aut", comment = c(ORCID = "0000-0001-8182-4279")))
 Description: Contains the latest open access pathogen data from the Pathogen Epidemiology Review Group (PERG). Tools are available to update pathogen databases with new peer-reviewed data as it becomes available, and to summarise the latest data using tables and figures.
 License: GPL (>= 3)
 Depends:
@@ -44,7 +45,7 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://mrc-ide.github.io/epireview/

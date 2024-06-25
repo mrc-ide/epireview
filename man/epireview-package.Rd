@@ -29,6 +29,7 @@ Authors:
   \item Ruth McCabe (\href{https://orcid.org/0000-0002-6368-9103}{ORCID})
   \item Kelly McCain (\href{https://orcid.org/0000-0003-2393-2217}{ORCID})
   \item Anne Cori (\href{https://orcid.org/0000-0002-8443-9162}{ORCID})
+  \item Thomas Rawson (\href{https://orcid.org/0000-0001-8182-4279}{ORCID})
 }
 
 }
