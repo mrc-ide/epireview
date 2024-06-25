@@ -69,7 +69,8 @@ filter_df_for_metamean <- function(df) {
             Rows with non-NA parameter_value and NA parameter_unit will be
             removed."
     )
-    df <- filter(df,!( is.na(.data[["parameter_value"]]) & !is.na(.data[["parameter_unit"]]) ))
+    df <- filter(df,!( is.na(.data[["parameter_value"]]) & 
+      !is.na(.data[["parameter_unit"]]) ))
   }
 
   # values of the parameter must all have the same units
@@ -82,23 +83,42 @@ filter_df_for_metamean <- function(df) {
   df <- df %>% filter(!is.na(.data[["population_sample_size"]])) %>%
     filter(!is.na(.data[["parameter_value"]])) %>%
     filter(
-      (.data[["parameter_value_type"]] == 'Mean' & str_detect(str_to_lower(.data[["parameter_uncertainty_singe_type"]]), 'standard deviation')) |
-      (.data[["parameter_value_type"]] == 'Median' & str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), 'iqr')) |
-      (.data[["parameter_value_type"]] == 'Median' & str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), 'range'))
+      (.data[["parameter_value_type"]] == 'Mean' & 
+        grepl(x = tolower(.data[["parameter_uncertainty_singe_type"]]), 
+          pattern = 'standard deviation')) |
+      (.data[["parameter_value_type"]] == 'Median' & 
+        grepl(x = tolower(.data[["parameter_uncertainty_type"]]), 
+          pattern = 'iqr')) |
+      (.data[["parameter_value_type"]] == 'Median' & 
+        grepl(x = tolower(.data[["parameter_uncertainty_type"]]), 
+          pattern = 'range'))
     )
 
   df <- mutate(
     df,
-    xbar = ifelse(.data[["parameter_value_type"]] == "Mean", .data[["parameter_value"]], NA),
-    median = ifelse(.data[["parameter_value_type"]] == "Median", .data[["parameter_value"]], NA),
-    q1 = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
+    xbar = ifelse(
+      .data[["parameter_value_type"]] == "Mean", .data[["parameter_value"]], NA),
+    median = ifelse(
+      .data[["parameter_value_type"]] == "Median", .data[["parameter_value"]], NA
+    ),
+    q1 = ifelse(
+      grepl(x = tolower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_lower_value"]], NA),
-    q3 = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
+    q3 = ifelse(grepl(x = tolower(.data[["parameter_uncertainty_type"]]), "iqr"),
       .data[["parameter_uncertainty_upper_value"]], NA),
-    min = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range")&!str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
-      .data[["parameter_uncertainty_lower_value"]], NA),
-    max = ifelse(str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "range")&!str_detect(str_to_lower(.data[["parameter_uncertainty_type"]]), "iqr"),
-      .data[["parameter_uncertainty_upper_value"]], NA)
+    min = ifelse(
+      grepl(
+        x = tolower(.data[["parameter_uncertainty_type"]]), pattern = "range"
+      ) &
+      !grepl(x = tolower(.data[["parameter_uncertainty_type"]]), "iqr"),
+      .data[["parameter_uncertainty_lower_value"]], NA
+    ),
+    max = ifelse(
+      grepl(x = tolower(.data[["parameter_uncertainty_type"]]), pattern = "range"
+      ) &
+      !grepl(x = tolower(.data[["parameter_uncertainty_type"]]), pattern = "iqr"),
+      .data[["parameter_uncertainty_upper_value"]], NA
+    )
   )
 
   df
