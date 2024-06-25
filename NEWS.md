@@ -1,3 +1,8 @@
+* epireview 1.2.7
+
+* FEATURE: filter_df_for_metamean now includes rows with uncertainty types introduced
+specifically for SARS.
+
 # epireview 1.2.6
 
 * FEATURE: Added custom axis-label functionality to forest_plot()
