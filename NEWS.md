@@ -1,6 +1,23 @@
+# epireview 1.2.6
+
+* FEATURE: Added custom axis-label functionality to forest_plot()
+* BUG FIX: Fixed a bug whereby single uncertainty names would be used for paired uncertainty values.
+
+# epireview 1.2.5
+
+* FEATURE: addresses #80 by including doi in article columns merged with other key dfs.
+
+# epireview 1.2.4
+
+* BUG FIX: Updated outbreak and parameter column types. Fixes warnings being issued when lassa or ebola data were loaded.
+
+# epireview 1.2.3
+
+* BUG-FIX: Fixes Issue #56 where some article labels were NA because of an article being associated with multiple ids.
+
 # epireview 1.2.2
 
-* Added custom axis-label functionality to forest_plot(), and fixed a bug whereby single uncertainty names would be used for paired uncertainty values.
+* BUG-FIX: Fixes #71; file names are changed to match function names for consistency.
 
 # epireview 1.2.1
 
