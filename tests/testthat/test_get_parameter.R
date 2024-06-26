@@ -35,3 +35,35 @@ test_that("Function returns correct subset of data", {
   expect_equal(nrow(result), 1)
   expect_equal(result$parameter_value, 1)
 })
+
+
+## testing specific get_parameter functions
+
+
+
+test_that("Function returns correct delay data", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("lassa")$params))
+
+  expect_equal(nrow(get_delays(data)),
+               length(which(data$parameter_class=="Human delay"))
+    )
+
+  expect_equal(nrow(get_incubation_period(data)),
+               length(which(data$parameter_type=="Human delay - incubation period"))
+  )
+
+})
+
+test_that("Function returns correct seroprevalence data", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("lassa")$params))
+
+  expect_equal(nrow(get_seroprevalence(data)),
+               length(which(data$parameter_class=="Seroprevalence"))
+  )
+
+})
+
+
+
