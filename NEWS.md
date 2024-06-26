@@ -1,3 +1,7 @@
+# epireview 1.2.2
+
+* FEATURE: functions to get specific parameters for a given pathogen.
+
 # epireview 1.2.1
 
 * FEATURE: New function to assign QA score to articles in a simple and consistent manner.
