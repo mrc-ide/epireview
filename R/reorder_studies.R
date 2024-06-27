@@ -48,6 +48,8 @@ reorder_studies <- function(df) {
   df$article_label <- factor(df$article_label,
     levels = unique(df$article_label, ordered = TRUE)
   )
-  
+  ## unfactorise the population_country column
+  df2$population_country <- as.character(df2$population_country)
+
   df
 }
