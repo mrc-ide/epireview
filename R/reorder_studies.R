@@ -11,6 +11,8 @@
 #' forest plot functions (e.g. \code{\link{forest_plot_rt}}).
 #' 
 #' @param df The input dataframe to be reordered
+#' @param reorder_by character. The name of the column to reorder the data by. 
+#' Default is "population_country"
 #' @return The reordered dataframe
 #' @export
 #' @seealso \code{\link{forest_plot_rt}}  \code{\link{forest_plot_r0}}
@@ -28,6 +30,12 @@ reorder_studies <- function(df, reorder_by = "population_country") {
     stop(
       "mid column not found in the data frame, did you forget to call 
       param_pm_uncertainty?",
+      call. = FALSE
+    )
+  }
+  if (! reorder_by %in% colnames(df)) {
+    stop(
+      paste0(reorder_by, " column not found in the data frame"),
       call. = FALSE
     )
   }
