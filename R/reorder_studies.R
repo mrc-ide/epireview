@@ -17,7 +17,7 @@
 #' @examples
 #' ebola <- load_epidata("ebola")
 #' params <- ebola$params
-#' rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]
+#' rt <- params[params$parameter_type == "Reproduction number (Effective, Re)",]
 #' 
 #' reorder_studies(param_pm_uncertainty(rt))
 #' 
@@ -26,11 +26,17 @@ reorder_studies <- function(df) {
 
   if (! "mid" %in% colnames(df)) {
     stop(
-      "mid column not found in the data frame, did you forget to call param_pm_uncertainty?",
+      "mid column not found in the data frame, did you forget to call 
+      param_pm_uncertainty?",
       call. = FALSE
     )
   }
-
+  ## This will add NA as a valid factor level that is put at the end by
+  ## default. So rows will not be dropped if they have NA in the 
+  ## population_country. However note that you cannot then use is.na to check
+  ## for NAs in this column. You should use df$population_country %in% NA to
+  ## subset the data frame.
+  df$population_country <- addNA(df$population_country, ifany = TRUE)
   res <- by(df, df$population_country, function(x) {
     ## By default order puts NAs at the end
     x[order(x$mid), ]
