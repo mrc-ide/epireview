@@ -22,7 +22,7 @@
 #' reorder_studies(param_pm_uncertainty(rt))
 #' 
 #'
-reorder_studies <- function(df) {
+reorder_studies <- function(df, reorder_by = "population_country") {
 
   if (! "mid" %in% colnames(df)) {
     stop(
@@ -34,10 +34,10 @@ reorder_studies <- function(df) {
   ## This will add NA as a valid factor level that is put at the end by
   ## default. So rows will not be dropped if they have NA in the 
   ## population_country. However note that you cannot then use is.na to check
-  ## for NAs in this column. You should use df$population_country %in% NA to
+  ## for NAs in this column. You should use df[[reorder_by]] %in% NA to
   ## subset the data frame.
-  df$population_country <- addNA(df$population_country, ifany = TRUE)
-  res <- by(df, df$population_country, function(x) {
+  df[[reorder_by]] <- addNA(df[[reorder_by]], ifany = TRUE)
+  res <- by(df, df[[reorder_by]], function(x) {
     ## By default order puts NAs at the end
     x[order(x$mid), ]
   })
@@ -49,7 +49,7 @@ reorder_studies <- function(df) {
     levels = unique(df$article_label, ordered = TRUE)
   )
   ## unfactorise the population_country column
-  df2$population_country <- as.character(df2$population_country)
+  df[[reorder_by]] <- as.character(df[[reorder_by]])
 
   df
 }
