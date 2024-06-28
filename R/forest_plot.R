@@ -67,8 +67,10 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     geom_point(aes(x = .data[['mid']],
                    y = .data[['article_label']])) +
     geom_errorbar(
-      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['article_label']],
-          lty = .data[['uncertainty_type']])
+      aes(
+        xmin = .data[['low']], xmax = .data[['high']], 
+        y = .data[['article_label']],
+        lty = .data[['uncertainty_type']])
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
     ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) +
@@ -88,7 +90,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.na(shp_palette)) {
-      p <- p + scale_shape_manual(values = shp_palette)
+      p <- p + scale_shape_manual(values = shp_palette, na.value = 4)
     } else {
       shp_palette <- shape_palette(shape_by)
       if (! is.null(shp_palette)) {
@@ -106,7 +108,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   if(!is.na(unique_label)){
     ## Check that the provided unique_label is the correct length:
     if (length(unique_label) != length(df$article_label)) {
-      stop("The length of 'unique_label' must match the number of unique labels in the data frame.")
+      stop("The length of 'unique_label' must match the number of unique labels 
+        in the data frame.")
     } else {
       p <- p + scale_y_discrete(labels = unique_label)
     }
@@ -118,7 +121,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.na(col_palette)) {
-      p <- p + scale_color_manual(values = col_palette)
+      p <- p + scale_color_manual(values = col_palette, na.value = "gray")
     } else {
       col_palette <- color_palette(col_by)
       if (! is.null(col_palette)) {

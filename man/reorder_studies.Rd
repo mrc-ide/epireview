@@ -4,10 +4,13 @@
 \alias{reorder_studies}
 \title{Reorder articles based on parameter value}
 \usage{
-reorder_studies(df)
+reorder_studies(df, reorder_by = "population_country")
 }
 \arguments{
 \item{df}{The input dataframe to be reordered}
+
+\item{reorder_by}{character. The name of the column to reorder the data by.
+Default is "population_country"}
 }
 \value{
 The reordered dataframe
@@ -26,7 +29,7 @@ forest plot functions (e.g. \code{\link{forest_plot_rt}}).
 \examples{
 ebola <- load_epidata("ebola")
 params <- ebola$params
-rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]
+rt <- params[params$parameter_type == "Reproduction number (Effective, Re)",]
 
 reorder_studies(param_pm_uncertainty(rt))
 

@@ -1,3 +1,8 @@
+* epireview 1.2.8
+* BUG FIX: Fixes #73 which caused rows of the params dataset to be dropped during if reordering the population  
+country was NA.
+* FEATURE: reorder_studies can now reorder by any column in the params dataset
+
 * epireview 1.2.7
 
 * FEATURE: filter_df_for_metamean now includes rows with uncertainty types introduced
