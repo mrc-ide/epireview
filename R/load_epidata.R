@@ -14,14 +14,23 @@
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
-  x$parameter_type_short <- case_when(
-    x$parameter_type == "Reproduction number (Basic R0)" ~ "Basic (R0)",
-    x$parameter_type == "Reproduction number (Effective, Re)" ~ "Effective (Re)",
+  x$other_delay <- case_when(
     x$parameter_type == "Human delay - time symptom to outcome" &
       x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
     x$parameter_type == "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)"
-  )
+      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)",
+    x$parameter_type == 'Human delay - other human delay (go to section)' ~
+      paste0(tolower(str_replace(x$other_delay_start, 'Other: ', '')), ' to ',
+             tolower(str_replace(x$other_delay_end, 'Other: ', ''))),
+    TRUE ~ NA)
+
+  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - time symptom to outcome',
+                             paste0('Human delay - ', tolower(x$other_delay)), x$parameter_type)
+
+  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - other human delay (go to section)',
+                             paste0('Human delay - ', x$other_delay), x$parameter_type)
+
+  x <- merge(x, param_name, by = 'parameter_type')
 
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     x$parameter_type_short <- case_when(
@@ -61,7 +70,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' models extracted for this pathogen including articles information as above.
 #' The fourth element is a data.frame called "outbreaks" which contains all
 #' of the outbreaks extracted for this pathogen, where available.
-#' 
+#'
 #' @importFrom dplyr left_join
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
@@ -72,6 +81,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   models <- load_epidata_raw(pathogen, "model")
   outbreaks <- load_epidata_raw(pathogen, "outbreak")
   params <- load_epidata_raw(pathogen, "parameter")
+  param_name <- load_epidata_raw(pathogen, "param_name")
 
   models_extracted <- TRUE
   outbreaks_extracted <- TRUE
@@ -100,11 +110,11 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   articles <- pretty_article_label(articles, mark_multiple)
   articles <- update_article_info(articles)
-  ## These are the columns we want to affix to the other tables 
+  ## These are the columns we want to affix to the other tables
   ## to make them easier to work with; we don't want to add all of
   ## articles.
   cols <- c(
-    "id", "first_author_surname", "year_publication", "article_label", 
+    "id", "first_author_surname", "year_publication", "article_label",
     "article_info"
   )
   articles_everything <- articles
@@ -142,5 +152,55 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   )
 }
 
+#' Distinguish multiple estimates from the same study
+#'
+#' @details
+#' If a study has more than one estimate for the same parameter_type/model/outbreak,
+#' we add a suffix to the article_label to distinguish them
+#' otherwise they will be plotted on the same line in the forest plot. Say
+#' we have two estimates for the same parameter_type (p) from the same study (s),
+#' they will then be labeled as s 1 and s 2.
+#'
+#'
+#'
+#' @param df The data frame containing the estimates.
+#' @param col The column name for the table type. For parameters this is
+#' "parameter_type"; for models this is "model_type"; for outbreaks this is
+#' "outbreak_country".
+#'
+#' @param label_type Type of labels to add to distinguish multiple estimates.
+#' Must be one of "letters" or "numbers".
+#' @return The modified data frame with updated article_label
+#'
+#' @examples
+#' df <- data.frame(article_label = c("A", "A", "B", "B", "C"),
+#'                  parameter_type = c("X", "X", "Y", "Y", "Z"))
+#' mark_multiple_estimates(df, label_type = "numbers")
+#'
+#' @export
+mark_multiple_estimates <- function(df, col = "parameter_type", label_type = c("letters", "numbers")) {
 
+  match.arg(label_type)
 
+  dups <- as.data.frame(
+    table(article_label = df[["article_label"]], params = df[[col]])
+  )
+
+  dups <- dups[dups$Freq > 1, ]
+  ## go through each duplicate and add a suffix to article_label
+  for (i in seq_len(nrow(dups))) {
+    article <- dups$article_label[i]
+    param <- dups[["params"]][i]
+    ## get the rows in params that correspond to this article and param
+    rows <- df$article_label %in% article & df[[col]] %in% param
+    ## add a suffix to the article_label
+    nrows <- sum(rows)
+    if (label_type == "letters") {
+      labels <- letters[seq_len(nrows)]
+    } else if (label_type == "numbers") {
+      labels <- seq_len(nrows)
+    }
+    df$article_label[rows] <- paste0(article, " (", labels, ")")
+  }
+  df
+}

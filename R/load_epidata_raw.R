@@ -15,7 +15,7 @@
 #' "article", "parameter", "outbreak", or "model"
 #'
 #'
-#' 
+#'
 #' @return data.frame reading in the csv the specified pathogen table
 #' @importFrom readr read_csv
 #' @seealso
@@ -24,26 +24,27 @@
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-                                                "outbreak", "model")) {
-  
+                                                "outbreak", "model", "param_name")) {
+
   # assertions
-  
+
   if (missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak' or 'model'")
+         one of 'article', 'parameter', 'outbreak', 'model', or 'param_name'")
   }
-  
+
   assert_pathogen(pathogen)
   assert_table(table)
-  
+
   pps <- priority_pathogens()
-  
+
   fname <- switch(
     table,
     article =  pps[pps$pathogen == pathogen, "articles_file"],
     parameter = pps[pps$pathogen == pathogen, "params_file"],
     outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
     model = pps[pps$pathogen == pathogen, "models_file"],
+    param_name = "param_name.csv"
   )
   ## Get column types based on table type
   col_types <- switch(
@@ -51,15 +52,16 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     article = article_column_type(),
     parameter = parameter_column_type(),
     outbreak = outbreak_column_type(),
-    model = model_column_type()
+    model = model_column_type(),
+    param_name = param_name_column_type()
   )
-  
+
   if (is.na(fname)) {
     warning(paste("No data found for ", pathogen))
     return(NULL)
   } else {
     file_path <- system.file("extdata", fname, package = "epireview")
-    ## Temporarily read in without column types as column names for the 
+    ## Temporarily read in without column types as column names for the
     ## same table can change between pathogens
     tmp <- read_csv(file_path, show_col_types = FALSE)
     ## col_types will have more columns than tmp, so we need to select
@@ -69,10 +71,10 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## parameters.
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
+    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp))
   }
   out
-  
+
 }
 
 
@@ -83,10 +85,10 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' This function defines the column types for the article data frame used in the epireview package.
 #' readr is generally good at guessing the
-#' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which 
-#' is particularly undesirable for us. 
+#' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
+#' is particularly undesirable for us.
 #' The function is intended to be used
-#' internally by \code{load_epidata_raw} where the files are being read. 
+#' internally by \code{load_epidata_raw} where the files are being read.
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
 #' @importFrom readr col_character col_integer col_logical
@@ -125,8 +127,8 @@ article_column_type <- function(pathogen) {
 #'
 #' This function defines the column types for the parameters in the dataset.
 #' It returns a list of column types with their corresponding names.
-#' 
-#' @inherit article_column_type details return seealso 
+#'
+#' @inherit article_column_type details return seealso
 #' @export
 #'
 #' @examples
@@ -191,16 +193,16 @@ parameter_column_type <- function() {
     parameter_class = col_character(),
     covidence_id = col_integer()
   )
-  
+
   out
 }
 
 
 #' outbreak_column_type
-#' 
+#'
 #' This function defines the column types for the outbreaks in the dataset.
 #' It returns a list of column types with their corresponding names.
-#' 
+#'
 #' @inherit article_column_type details return seealso
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
@@ -235,18 +237,18 @@ outbreak_column_type <- function() {
 }
 
 #' model_column_type
-#' 
+#'
 #' This function defines the column types for the models in the dataset.
 #' It returns a list of column types with their corresponding names.
 #' @inherit article_column_type details return seealso
-#' 
+#'
 #' @export
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' model_column_type()
 model_column_type <- function() {
-  
+
   out <- list(
     id = col_character(),
     model_data_id       = col_character(),
@@ -262,6 +264,30 @@ model_column_type <- function() {
     transmission_route  = col_character(),
     assumptions         = col_character(),
     covidence_id        = col_integer()
+  )
+
+  out
+}
+
+#' Define the column types for the param_name data frame
+#'
+#' This function defines the column types for the param_name data frame used in the epireview package.
+#' readr is generally good at guessing the
+#' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
+#' is particularly undesirable for us.
+#' The function is intended to be used
+#' internally by \code{load_epidata_raw} where the files are being read.
+#' @inherit article_column_type details return seealso
+#'
+#' @export
+#' @importFrom readr col_integer col_character col_double col_logical
+#' @keywords dataset, column types
+#' @examples
+param_name_column_type <- function() {
+
+  out <- list(
+    parameter_type_short = col_character(),
+    parameter_type       = col_character()
   )
 
   out
