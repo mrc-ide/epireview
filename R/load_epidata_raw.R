@@ -52,7 +52,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     article = article_column_type(),
     parameter = parameter_column_type(),
     outbreak = outbreak_column_type(),
-    model = model_column_type()
+    model = model_column_type(),
     param_name = param_name_column_type()
   )
 
