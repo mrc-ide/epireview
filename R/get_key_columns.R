@@ -17,12 +17,10 @@
 #' )
 #' get_key_columns(data = cfr_lassa, parameter_name = "cfr")
 get_key_columns <- function(data,
-<<<<<<< HEAD
-                            parameter_name = c("cfr", "delays", "sero",
+                            parameter_name = c("cfr",
+                                               "delays",
+                                               "sero",
                                                "risk_factors",
-=======
-                            parameter_name = c("cfr", "delay", "sero", "risk",
->>>>>>> get_key_cols
                                                "reproduction_number",
                                                "genomic",
                                                "attack_rate",
@@ -38,11 +36,7 @@ get_key_columns <- function(data,
                       cfr = cfr_key_columns,
                       delay = delay_key_columns,
                       sero = sero_key_columns,
-<<<<<<< HEAD
                       risk_factors = risk_factors_key_columns,
-=======
-                      risk = risk_factor_key_columns,
->>>>>>> get_key_cols
                       reproduction_number = reproduction_number_key_columns,
                       genomic = genomic_key_columns,
                       attack_rate = attack_double_growth_key_columns,
