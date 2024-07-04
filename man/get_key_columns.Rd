@@ -6,14 +6,14 @@
 \usage{
 get_key_columns(
   data,
-  parameter_name = c("cfr", "delays", "sero", "risk", "reproduction_number", "genomic")
+  parameter_name = c("cfr", "delay", "sero", "risk", "reproduction_number", "genomic")
 )
 }
 \arguments{
 \item{data}{The parameter \code{data.frame} (\verb{$param}) from \code{\link[=load_epidata]{load_epidata()}}.}
 
 \item{parameter_name}{A \code{character} string with the parameter name. Options
-are: \code{"cfr"}, \code{"delays"}, \code{"sero"}, \code{"risk"},
+are: \code{"cfr"}, \code{"delay"}, \code{"sero"}, \code{"risk"},
 \code{"reproduction_number"}, and \code{"genomic"}.}
 }
 \value{
