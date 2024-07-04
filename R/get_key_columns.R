@@ -27,14 +27,19 @@ get_key_columns <- function(data,
                                                "doubling_time",
                                                "growth_rate",
                                                "overdispersion",
-                                               "relative_contribution")) {
+                                               "relative_contribution"),
+                            all_cols=FALSE) {
+
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
-  parameter_name <- match.arg(parameter_name)
+
+  if(all_cols==FALSE){
+
+     parameter_name <- match.arg(parameter_name)
   cols_func <- switch(parameter_name,
                       cfr = cfr_key_columns,
-                      delay = delay_key_columns,
+                      delays = delay_key_columns,
                       sero = sero_key_columns,
                       risk_factors = risk_factors_key_columns,
                       reproduction_number = reproduction_number_key_columns,
@@ -55,6 +60,13 @@ get_key_columns <- function(data,
     )
     cols <- cols[cols %in% colnames(data)]
   }
+
+  }
+  else{
+    cols <- colnames(data)
+  }
+
+
   data <- data[, cols]
   return(data)
 }
@@ -66,8 +78,9 @@ get_key_columns <- function(data,
 #' @keywords internal
 key_columns <- function() {
   c(
-    "article_label", "population_sample_size", "population_country",
-    "population_group", "method_disaggregated", "parameter_type"
+    "article_label", "population_country","population_sample_size",
+    "population_sample_type", "population_group",
+    "method_disaggregated", "parameter_type"
   )
 }
 
