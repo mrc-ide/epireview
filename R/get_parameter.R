@@ -71,44 +71,48 @@ get_parameter <- function(data, parameter_name) {
 #' df <- load_epidata(pathogen = "lassa")
 #' get_incubation_period(data = df$params)
 
-get_incubation_period <- function(data){
+get_incubation_period <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Human delay - incubation period"),
-    "delays"
+    "delays",
+    ...
   )
 
 }
 
 #' Retrieve all serial interval parameters for a given pathogen
 #' @name get_specific
-get_serial_interval <- function(data){
+get_serial_interval <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Human delay - serial interval"),
-    "delays"
+    "delays",
+    ...
   )
 
 }
 
 #' Retrieve all generation time parameters for a given pathogen
 #' @name get_specific
-get_generation_time <- function(data){
+get_generation_time <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Human delay - generation time"),
-    "delays"
+    "delays",
+    ...
   )
 
 }
 
 #' Retrieve all delay parameters for a given pathogen
 #'@name get_specific
-get_delays <- function(data){
+get_delays <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Human delay"),
-    "delays"
+    "delays",
+    ...
   )
 
 }
@@ -116,77 +120,84 @@ get_delays <- function(data){
 
 #' Retrieve all CFR parameters for a given pathogen
 #'@name get_specific
-get_cfr <- function(data){
+get_cfr <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Severity - case fatality rate (CFR)"),
-    "cfr"
+    "cfr",
+    ...
   )
 
 }
 
 #' Retrieve all risk factor parameters for a given pathogen
 #'@name get_specific
-get_risk_factors <- function(data){
+get_risk_factors <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Risk factors"),
-    "risk_factors"
+    "risk_factors",
+    ...
   )
 
 }
 
 #' Retrieve all genomic parameters for a given pathogen
 #'@name get_specific
-get_genomic <- function(data){
+get_genomic <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Mutations"),
-    "genoomic"
+    "genoomic",
+    ...
   )
 
 }
 
 #' Retrieve all reproduction number parameters for a given pathogen
 #'@name get_specific
-get_reproduction_number <- function(data){
+get_reproduction_number <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Reproduction number"),
-    "reproduction_number"
+    "reproduction_number",
+    ...
   )
 
 }
 
 #' Retrieve all seroprevalence parameters for a given pathogen
 #'@name get_specific
-get_seroprevalence <- function(data){
+get_seroprevalence <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Seroprevalence"),
-    "sero"
+    "sero",
+    ...
   )
 
 }
 
 #' Retrieve all doubling time parameters for a given pathogen
 #'@name get_specific
-get_doubling_time <- function(data){
+get_doubling_time <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Doubling time"),
-    "doubling_time"
+    "doubling_time",
+    ...
   )
 
 }
 
 #' Retrieve all attack rate parameters for a given pathogen
 #'@name get_specific
-get_attack_rate <- function(data){
+get_attack_rate <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Attack rate"),
-    "attack_rate"
+    "attack_rate",
+    ...
   )
 
 }
@@ -194,11 +205,12 @@ get_attack_rate <- function(data){
 
 #' Retrieve all growth rate parameters for a given pathogen
 #'@name get_specific
-get_growth_rate <- function(data){
+get_growth_rate <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Growth rate (r)"),
-    "growth_rate"
+    "growth_rate",
+    ...
   )
 
 }
@@ -206,22 +218,24 @@ get_growth_rate <- function(data){
 
 #' Retrieve all overdispersion parameters for a given pathogen
 #'@name get_specific
-get_overdispersion <- function(data){
+get_overdispersion <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Overdispersion"),
-    "overdispersion"
+    "overdispersion",
+    ...
   )
 
 }
 
 #' Retrieve all overdispersion parameters for a given pathogen
 #'@name get_specific
-get_relative_contribution <- function(data){
+get_relative_contribution <- function(data,...){
 
   get_key_columns(
     get_parameter(data,"Relative contribution"),
-    "relative_contribution"
+    "relative_contribution",
+    ...
   )
 
 }
