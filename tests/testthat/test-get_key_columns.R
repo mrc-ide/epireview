@@ -270,7 +270,6 @@ test_that("get_key_columns works for ebola genomic", {
   )
 })
 
-
 test_that("get_key_columns returns all columns when all_cols=TRUE", {
   df_key <- get_key_columns(data = lassa_params,  parameter_name = "cfr")
   df_all <- get_key_columns(data = lassa_params,  parameter_name = "cfr",all_cols = TRUE)
