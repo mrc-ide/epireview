@@ -66,4 +66,19 @@ test_that("Function returns correct seroprevalence data", {
 })
 
 
+test_that("all_columns argument has pulled through to get_ functions", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("ebola")$params))
+
+  expect_equal(ncol(get_seroprevalence(data,all_columns=TRUE)),
+               ncol(data))
+
+})
+
+
+
+
+
+
+
 
