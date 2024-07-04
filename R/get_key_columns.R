@@ -115,7 +115,7 @@ delay_key_columns <- function() {
 #' @keywords internal
 sero_key_columns <- function() {
   c(key_columns(),
-    c("parameter_type","parameter_value",
+    c("parameter_value",
       "cfr_ifr_numerator", "cfr_ifr_denominator")
   )
 }
@@ -155,7 +155,7 @@ reproduction_number_key_columns <- function() {
 genomic_key_columns <- function() {
   c(key_columns(),
     c(
-      "parameter_type","parameter_value",
+      "parameter_value",
       "parameter_unit", "exponent", "genome_site",
       "genomic_sequence_available"
     )
