@@ -31,13 +31,13 @@ get_key_columns <- function(data,
                                                "growth_rate",
                                                "overdispersion",
                                                "relative_contribution"),
-                            all_cols=FALSE) {
+                            all_columns=FALSE) {
 
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
 
-  if(all_cols==FALSE){
+  if(all_columns==FALSE){
 
      parameter_name <- match.arg(parameter_name)
   cols_func <- switch(parameter_name,
