@@ -125,7 +125,7 @@ sero_key_columns <- function() {
 #'
 #' @return A `character` vector.
 #' @keywords internal
-risk_factor_key_columns <- function() {
+risk_factors_key_columns <- function() {
   c(key_columns(),
     c(
       "riskfactor_outcome", "riskfactor_name", "riskfactor_significant",
