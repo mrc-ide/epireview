@@ -4,7 +4,7 @@
 #' @param parameter_name A `character` string with the parameter name. Options
 #' are: `"cfr"`, `"delay"`, `"sero"`, `"risk"`,
 #' `"reproduction_number"`, and `"genomic"`.
-#' @param all_cols The default is FALSE meaning that only the key columns specified
+#' @param all_columns The default is FALSE meaning that only the key columns specified
 #' for the specific #' parameter will be retrieved.If this is TRUE, then all columns
 #'  in the dataframe will be retrieved.
 #'
