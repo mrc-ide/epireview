@@ -6,7 +6,10 @@
 \usage{
 get_key_columns(
   data,
-  parameter_name = c("cfr", "delay", "sero", "risk", "reproduction_number", "genomic")
+  parameter_name = c("cfr", "delays", "sero", "risk_factors", "reproduction_number",
+    "genomic", "attack_rate", "doubling_time", "growth_rate", "overdispersion",
+    "relative_contribution"),
+  all_columns = FALSE
 )
 }
 \arguments{
@@ -15,6 +18,10 @@ get_key_columns(
 \item{parameter_name}{A \code{character} string with the parameter name. Options
 are: \code{"cfr"}, \code{"delay"}, \code{"sero"}, \code{"risk"},
 \code{"reproduction_number"}, and \code{"genomic"}.}
+
+\item{all_columns}{The default is FALSE meaning that only the key columns specified
+for the specific #' parameter will be retrieved.If this is TRUE, then all columns
+in the dataframe will be retrieved.}
 }
 \value{
 A \code{data.frame} with the key columns for the selected parameter.
