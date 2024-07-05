@@ -4,9 +4,9 @@
 #' @param parameter_name A `character` string with the parameter name. Options
 #' are: `"cfr"`, `"delay"`, `"sero"`, `"risk"`,
 #' `"reproduction_number"`, and `"genomic"`.
-#' @param all_columns The default is FALSE meaning that only the key columns specified
-#' for the specific #' parameter will be retrieved.If this is TRUE, then all columns
-#'  in the dataframe will be retrieved.
+#' @param all_columns The default is FALSE meaning that only the key columns 
+#' specified for the specific parameter will be retrieved. If TRUE, then all 
+#' columns in the data.frame will be retrieved.
 #'
 #' @return A `data.frame` with the key columns for the selected parameter.
 #' @export
@@ -31,15 +31,15 @@ get_key_columns <- function(data,
                                                "growth_rate",
                                                "overdispersion",
                                                "relative_contribution"),
-                            all_columns=FALSE) {
+                            all_columns = FALSE) {
 
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
 
-  if(all_columns==FALSE){
+  if(! isTRUE(all_columns)){
 
-     parameter_name <- match.arg(parameter_name)
+  parameter_name <- match.arg(parameter_name)
   cols_func <- switch(parameter_name,
                       cfr = cfr_key_columns,
                       delays = delay_key_columns,
@@ -63,15 +63,11 @@ get_key_columns <- function(data,
     )
     cols <- cols[cols %in% colnames(data)]
   }
-
-  }
-  else{
-    cols <- colnames(data)
-  }
-
+} else cols <- colnames(data)
 
   data <- data[, cols]
-  return(data)
+  
+  data
 }
 
 #' Key columns across all parameters in the `$params` table from
@@ -165,8 +161,8 @@ genomic_key_columns <- function() {
   )
 }
 
-#' Key columns for attack rate, doubling time and growth rate parameters in the `$params` table from
-#' [load_epidata()]
+#' Key columns for attack rate, doubling time and growth rate parameters in the 
+#' `$params` table from [load_epidata()]
 #'
 #' @return A `character` vector.
 #' @keywords internal
@@ -180,7 +176,8 @@ attack_double_growth_key_columns <- function() {
 }
 
 
-#' Key columns for overdispersion and relative contribution to transmission from human-human transmission parameters in the `$params` table from
+#' Key columns for overdispersion and relative contribution to transmission from 
+#' human-human transmission parameters in the `$params` table from
 #' [load_epidata()]
 #'
 #' @return A `character` vector.
