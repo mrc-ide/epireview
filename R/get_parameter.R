@@ -2,8 +2,8 @@
 
 #' retrieve all parameters of specified type or class
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
-#' @param parameter_name name of the parameter type or parameter class to retrieve, ensuring the
-#' name matches that in data
+#' @param parameter_name name of the parameter type or parameter class to 
+#' retrieve, ensuring the name matches that in data
 #' @return dataframe with all parameter estimates and columns
 #' @export
 #' @examples
@@ -35,7 +35,8 @@ get_parameter <- function(data, parameter_name) {
   }
 
   # Check if there are any entries that match 'parameter_name' or 'parameter_class'
-  if (sum(data$parameter_type == parameter_name) == 0 & sum(data$parameter_class == parameter_name) == 0) {
+  if (sum(data$parameter_type == parameter_name) == 0 & 
+    sum(data$parameter_class == parameter_name) == 0) {
     stop("Error: No entries found matching the specified 'parameter_name'.
       Check spelling and case of 'parameter name'.")
   }
@@ -63,7 +64,8 @@ get_parameter <- function(data, parameter_name) {
 #'
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
 #'
-#' @return dataframe with all parameter estimates of this type and key columns (see \code{\link{get_key_columns}})
+#' @return dataframe with all parameter estimates of this type and key columns 
+#' (see \code{\link{get_key_columns}})
 #' @export
 #' @name get_specific
 #'
