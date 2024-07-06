@@ -37,7 +37,8 @@ Imports:
     pals,
     paletteer,
     methods,
-    scales
+    scales,
+    cli
 Suggests:
     knitr,
     lifecycle,

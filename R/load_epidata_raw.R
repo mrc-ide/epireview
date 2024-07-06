@@ -55,7 +55,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   )
   
   if (is.na(fname)) {
-    warning(paste("No data found for ", pathogen))
+    warning(paste("No data found for", pathogen))
     return(NULL)
   } else {
     file_path <- system.file("extdata", fname, package = "epireview")

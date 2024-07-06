@@ -63,6 +63,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' of the outbreaks extracted for this pathogen, where available.
 #'
 #' @importFrom dplyr left_join
+#' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
@@ -78,25 +79,22 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   params_extracted <- TRUE
 
   if (! inherits(articles, "data.frame")) {
-    stop(paste("No article information found for ", pathogen))
+    cli_abort(paste("No article information found for", pathogen))
   }
 
   if (! inherits(models, "data.frame")) {
-    warning(paste(pathogen, "does not have any extracted model information.
-                  Outbreaks will be set to NULL"))
+    cli_alert_warning(paste(pathogen, "does not have any extracted model information. Models will be set to NULL."))
     ## flip the flag to indicate that no models were found
     models_extracted <- FALSE
   }
 
   if (! inherits(outbreaks, "data.frame")) {
-    message(paste(pathogen, "does not have any extracted outbreaks information.
-                  Outbreaks will be set to NULL"))
+    cli_alert_info(paste(pathogen, "does not have any extracted outbreaks information. Outbreaks will be set to NULL."))
     outbreaks_extracted <- FALSE
   }
 
   if (! inherits(params, "data.frame")) {
-    warning(paste(pathogen, "does not have any extracted parameter information.
-                  Outbreaks will be set to NULL"))
+    cli_alert_warning(paste(pathogen, "does not have any extracted parameter information. Parameters will be set to NULL."))
     params_extracted <- FALSE
   }
 
@@ -137,7 +135,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL
 
-  message("Data loaded for ", pathogen)
+  cli_alert_success(paste("Data loaded for", pathogen))
 
   list(
     articles = articles_everything, params = params, models = models,
