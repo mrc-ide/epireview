@@ -36,14 +36,16 @@
 #' @param articles A dataframe with the articles table
 #' @param df A dataframe with the table that needs to be checked for duplicate
 #' covidence ids. Both articles and df will be loaded through \code{load_epidata}
+#' @param df_name A the name of the df that will be loaded through \code{load_epidata}.
+#'  This is useful for improving the user
 #' @return A dataframe with the same structure as df, but with unique ids for
-#' each covidence id. 
-#' 
-make_unique_id <- function(articles, df) {
-  
+#' each covidence id.
+#'
+make_unique_id <- function(articles, df, df_name) {
   ## Can happen for marburg
   if (! "covidence_id" %in% colnames(df)) {
-    message("The dataframe does not have a covidence_id column")
+    message(sprintf("The %s dataframe does not have a covidence_id column",
+                    df_name))
     return(df)
   }
   ## Check if there are any duplicate covidence ids in the articles table.

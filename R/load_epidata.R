@@ -117,19 +117,19 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   params$parameter_value <- as.numeric(params$parameter_value)
 
   if (params_extracted) {
-    params <- make_unique_id(articles_everything, params)
+    params <- make_unique_id(articles_everything, params, "params")
     params <- left_join(params, articles, by = "id") |>
       mark_multiple_estimates("parameter_type", label_type = "numbers")
   } else params <- NULL
 
   if (models_extracted) {
-    models <- make_unique_id(articles_everything, models)
+    models <- make_unique_id(articles_everything, models, "models")
     models <- left_join(models, articles, by = "id") |>
       mark_multiple_estimates("model_type", label_type = "numbers")
   } else models <- NULL
 
   if (outbreaks_extracted) {
-    outbreaks <- make_unique_id(articles_everything, outbreaks)
+    outbreaks <- make_unique_id(articles_everything, outbreaks, "outbreaks")
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL

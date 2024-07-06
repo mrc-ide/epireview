@@ -4,13 +4,16 @@
 \alias{make_unique_id}
 \title{Ensure that each article gets a unique id across all tables}
 \usage{
-make_unique_id(articles, df)
+make_unique_id(articles, df, df_name)
 }
 \arguments{
 \item{articles}{A dataframe with the articles table}
 
 \item{df}{A dataframe with the table that needs to be checked for duplicate
 covidence ids. Both articles and df will be loaded through \code{load_epidata}}
+
+\item{df_name}{A the name of the df that will be loaded through \code{load_epidata}.
+This is useful for improving the user}
 }
 \value{
 A dataframe with the same structure as df, but with unique ids for
