@@ -82,18 +82,21 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   }
 
   if (! inherits(models, "data.frame")) {
-    warning(paste("No models information found for ", pathogen))
+    warning(paste(pathogen, "does not have any extracted model information.
+                  Outbreaks will be set to NULL"))
     ## flip the flag to indicate that no models were found
     models_extracted <- FALSE
   }
 
   if (! inherits(outbreaks, "data.frame")) {
-    message(paste("No outbreaks information found for ", pathogen))
+    message(paste(pathogen, "does not have any extracted outbreaks information.
+                  Outbreaks will be set to NULL"))
     outbreaks_extracted <- FALSE
   }
 
   if (! inherits(params, "data.frame")) {
-    warning(paste("No params information found for ", pathogen))
+    warning(paste(pathogen, "does not have any extracted parameter information.
+                  Outbreaks will be set to NULL"))
     params_extracted <- FALSE
   }
 
