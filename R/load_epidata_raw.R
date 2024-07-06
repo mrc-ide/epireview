@@ -69,12 +69,51 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## parameters.
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp)) 
+
+    check_column_types(file_path, col_types, colnames(tmp))
+
+    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp))
   }
   out
   
 }
 
+
+# TODO: add documentation
+check_column_types <- function(file_path, col_types, raw_colnames){
+  tmp_vroom <- vroom::vroom(file_path, col_types = col_types)
+  tmp_problem <- vroom::problems(tmp_vroom)
+
+  if (NROW(tmp_problem) > 0){
+    # update the values in col to the actual column names
+    tmp_problem$col<- sapply(tmp_problem["col"],
+                                 function(i) raw_colnames[i])
+
+
+    # update the file to only the csv; assumes no "/" in the csv filename
+    cli_alert_danger(paste("There is an issue with ",
+                           basename(tmp_problem$file[1]),
+                           "The following columns have (n) issues:"))
+
+    olid <- cli_ol()
+
+    problem_col_df <-as.data.frame(table(tmp_problem$col))
+    for (i in 1:NROW(problem_col_df)){
+      cli_li(paste(problem_col_df[i,1], " (n=", problem_col_df[i,2], ")", sep=""))
+    }
+
+    cli_end(olid)
+
+    tmpfile <- tempfile(fileext = ".csv")
+    write.csv(tmp_problem, file=tmpfile)
+
+    cli_alert_info(
+      paste("The errors have been written to a temporary csv that you can find here:",
+            tmpfile)
+      )
+    cli_abort("The data cannot be loaded until these errors are fixed.")
+  }
+}
 
 ## Define column types for each table
 ## These are used to read in the data
