@@ -88,7 +88,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   }
 
   if (! inherits(outbreaks, "data.frame")) {
-    warning(paste("No outbreaks information found for ", pathogen))
+    message(paste("No outbreaks information found for ", pathogen))
     outbreaks_extracted <- FALSE
   }
 
