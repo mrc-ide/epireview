@@ -61,7 +61,6 @@ make_unique_id <- function(articles, df) {
   dups <- dups[dups$n_ids > 1, ]
   
   if (nrow(dups) == 0) {
-    message("No duplicate covidence ids found")
     return(df)
   }
   
