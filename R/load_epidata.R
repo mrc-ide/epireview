@@ -61,17 +61,17 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' models extracted for this pathogen including articles information as above.
 #' The fourth element is a data.frame called "outbreaks" which contains all
 #' of the outbreaks extracted for this pathogen, where available.
-#' 
+#'
 #' @importFrom dplyr left_join
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   assert_pathogen(pathogen)
 
-  articles <- load_epidata_raw(pathogen, "article")
-  models <- load_epidata_raw(pathogen, "model")
-  outbreaks <- load_epidata_raw(pathogen, "outbreak")
-  params <- load_epidata_raw(pathogen, "parameter")
+  articles <- suppressWarnings(load_epidata_raw(pathogen, "article"))
+  models <- suppressWarnings(load_epidata_raw(pathogen, "model"))
+  outbreaks <- suppressWarnings(load_epidata_raw(pathogen, "outbreak"))
+  params <- suppressWarnings(load_epidata_raw(pathogen, "parameter"))
 
   models_extracted <- TRUE
   outbreaks_extracted <- TRUE
