@@ -20,63 +20,79 @@
 #'   covidence_id = c("ABC123", "DEF456", "GHI789")
 #' )
 #' pretty_article_label(articles, mark_multiple = TRUE)
-#'
+#' @importFrom cli cli_warn
 #' @export
 pretty_article_label <- function(articles, mark_multiple) {
     assert_articles(articles)
-    ## Warning if there are missing values for first_author_surname
-    surname_missing <- is.na(articles$first_author_surname)
-    if (sum(surname_missing) > 0) {
-        warning(
-            paste(
-                "There are", sum(surname_missing), "articles with missing",
-                "first author surname."
-            )
-        )
-    }
-    ## Warning if there are missing values for first_author_first_name
-    ## first_author_first_name is only used if first_author_surname is missing
-    ## so we check if both are missing
-    both_missing <- surname_missing & is.na(articles$first_author_first_name)
+  ## Warning if there are missing values for first_author_surname
+  surname_missing <- is.na(articles$first_author_surname)
 
-    if (sum(both_missing) > 0) {
-        warning(
-            paste(
-                "There are", sum(both_missing), "articles with missing",
-                "first author surname and first author first name."
-            )
-        )
-    }
+  is_are  <- c("is", "are")
+  article_articles <- c("article", "articles")
 
-    ## If both names are missing and covidence id is NA, prefix will be NA
-    all_missing <- both_missing & is.na(articles$covidence_id)
-    if (sum(all_missing) > 0) {
-        warning(
-            paste(
-                "There are", sum(all_missing), "articles with missing",
-                "first author surname, first author first name, and covidence id."
-            )
-        )
+  if (sum(surname_missing) > 0) {
+    n_surname_missing <- sum(surname_missing)
+    plural <- (n_surname_missing > 1) + 1
+
+    cli_warn(
+      paste(
+        "There", is_are[plural], n_surname_missing, article_articles[plural],
+        "with missing first author surname."
+      )
+    )
+  }
+  ## Warning if there are missing values for first_author_first_name
+  ## first_author_first_name is only used if first_author_surname is missing
+  ## so we check if both are missing
+  both_missing <- surname_missing & is.na(articles$first_author_first_name)
+
+  if (sum(both_missing) > 0) {
+    n_both_missing <- sum(both_missing)
+    plural <- (n_both_missing > 1) + 1
+
+    cli_warn(
+      paste("There", is_are[plural], n_both_missing, article_articles[plural],
+            "with missing first author surname and first author first name."
+      )
+    )
+  }
+
+  ## If both names are missing and covidence id is NA, prefix will be NA
+  all_missing <- both_missing & is.na(articles$covidence_id)
+  if (sum(all_missing) > 0) {
+
+    n_all_missing <- sum(all_missing)
+    plural <- (n_all_missing > 1) + 1
+
+    cli_warn(
+      paste("There", is_are[plural], n_all_missing, article_articles[plural],
+            "with missing first author surname, first author first name, and covidence id."
+      )
+      )
     }
     ## If year_publication is missing
     year_missing <- is.na(articles$year_publication)
     if (sum(year_missing) > 0) {
-        warning(
-            paste(
-                "There are", sum(year_missing), "articles with missing",
-                "year of publication."
-            )
+      n_year_missing <- sum(year_missing)
+      plural <- (n_year_missing > 1) + 1
+
+      cli_warn(
+        paste("There", is_are[plural], n_year_missing, article_articles[plural],
+              "with missing year of publication."
         )
+      )
     }
     ## If year_publication is missing and covidence id is NA, suffix will be NA
     all_missing <- year_missing & is.na(articles$covidence_id)
     if (sum(all_missing) > 0) {
-        warning(
-            paste(
-                "There are", sum(all_missing), "articles with missing",
-                "year of publication and covidence id."
-            )
+      n_all_missing <- sum(all_missing)
+      plural <- (n_all_missing > 1) + 1
+
+      cli_warn(
+        paste("There", is_are[plural], n_all_missing, article_articles[plural],
+              "with missing year of publication and covidence id."
         )
+      )
     }
     prefix <- ifelse(
         ! is.na(articles$first_author_surname),
