@@ -22,6 +22,7 @@
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
+#' @importFrom cli cli_warn cli_abort
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
                                                 "outbreak", "model")) {
@@ -29,8 +30,8 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   # assertions
   
   if (missing(pathogen) | missing(table)) {
-    stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak' or 'model'")
+    cli_abort("pathogen and table name must be supplied. table can be
+              one of 'article', 'parameter', 'outbreak' or 'model'")
   }
   
   assert_pathogen(pathogen)
@@ -55,7 +56,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   )
   
   if (is.na(fname)) {
-    warning(paste("No data found for", pathogen))
+    cli_warn(paste("No data found for", pathogen))
     return(NULL)
   } else {
     file_path <- system.file("extdata", fname, package = "epireview")
@@ -91,9 +92,9 @@ check_column_types <- function(file_path, col_types, raw_colnames){
 
 
     # update the file to only the csv; assumes no "/" in the csv filename
-    cli_alert_danger(paste("There is an issue with ",
+    cli_alert_danger(paste("There is an issue with",
                            basename(tmp_problem$file[1]),
-                           "The following columns have (n) issues:"))
+                           ". The following columns have (n) issues:"))
 
     olid <- cli_ol()
 

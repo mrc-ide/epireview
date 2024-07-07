@@ -113,12 +113,13 @@ forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE,
 #'                  inverse_param = c(FALSE, TRUE, FALSE))
 #' invert_inverse_params(df)
 #' # Output:
+#' @importFrom cli cli_warn
 #' @export
 invert_inverse_params <- function(df) {
 
   idx <- df$inverse_param ## Already a logical vector
   if (!any(idx)) {
-    warning("No parameters to invert.")
+    cli_warn("No parameters to invert.")
     return(df)
   }
 

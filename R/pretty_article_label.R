@@ -124,25 +124,26 @@ pretty_article_label <- function(articles, mark_multiple) {
 
 #' Include key article information when DOI is missing
 #'
-#' This function appends pretty_article_label to include the journal and we use 
-#' this information to fill in any entry where the DOI is missing. (Note: DOIs 
+#' This function appends pretty_article_label to include the journal and we use
+#' this information to fill in any entry where the DOI is missing. (Note: DOIs
 #' were introduced in the late 1990s and so articles from before this time often
 #' do not have one.)
 #'
 #' @param articles A data frame containing information about the articles. This
 #' will typically be the output of \code{load_epidata_raw}.
 #'
-#' 
+#'
 #' @return A modified data frame with an updated column "doi"
-#' with NA values replaced with either (1) article_label appended to include 
+#' with NA values replaced with either (1) article_label appended to include
 #' journal where available or (2) just article_label when journal entry is NA.
+#' @importFrom cli cli_abort
 #' @export
 #'
 #' @examples
 #' articles <- data.frame(
 #'   doi = c("10.123", NA, "10.234"),
 #'   article_label = c("Smith 2020", "Smith 1979", "Smith 2023"),
-#'   
+#'
 #'   journal = c("Science", "Nature", "The Lancet")
 #' )
 #' update_article_info(articles)
@@ -152,26 +153,26 @@ update_article_info <- function(articles){
 
   ## does article_label column exist
   if(!"article_label" %in% colnames(articles)){
-    stop("Dataframe does not include article_label column. Please use function 
+    cli_abort("Dataframe does not include article_label column. Please use function
     pretty_article_label before proceeding.")
   }
 
   ## Logic:
-  ## if the entry has a doi then we don't have to do anything and we keep that 
+  ## if the entry has a doi then we don't have to do anything and we keep that
   ## column as it is
   ## if the entry doesn't have a doi we have two options:
   ## 1) journal is not NA and so we append journal to the article_label
   ## 2) journal is NA and so we just stick with the article_label as it was
   articles$article_info <- NA
   articles$article_info <- ifelse(
-    !is.na(articles$doi), 
-    articles$doi, 
+    !is.na(articles$doi),
+    articles$doi,
     ifelse(!is.na(articles$journal),
       paste0(articles$article_label, " (", articles$journal, ")"),
       articles$article_label
     )
   )
-  
+
   articles
 
 }

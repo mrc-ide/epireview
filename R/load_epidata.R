@@ -10,6 +10,7 @@
 ##' parameter type not already included in the function.
 ##' @param parameter_type_short optional. Shorter value of parameter_type_full
 ##' @return data.frame with a new column called "parameter_type_short"
+##' @importFrom cli cli_abort
 ##' @export
 ##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
@@ -28,9 +29,9 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
       x$parameter_type == parameter_type_full ~ parameter_type_short
     )
   } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
-    stop("Please specify both parameter_type_full and parameter_type_short")
+    cli_abort("Please specify both parameter_type_full and parameter_type_short")
   } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
-    stop("Please specify both parameter_type_full and parameter_type_short")
+    cli_abort("Please specify both parameter_type_full and parameter_type_short")
   }
 
   x

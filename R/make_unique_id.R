@@ -40,12 +40,13 @@
 #'  This is useful for improving the user
 #' @return A dataframe with the same structure as df, but with unique ids for
 #' each covidence id.
+#' @importFrom cli cli_inform
 #'
 make_unique_id <- function(articles, df, df_name) {
   ## Can happen for marburg
   if (! "covidence_id" %in% colnames(df)) {
-    message(sprintf("The %s dataframe does not have a covidence_id column",
-                    df_name))
+    cli_inform(sprintf("Note: the %s dataframe does not have a covidence_id column",
+                       df_name))
     return(df)
   }
   ## Check if there are any duplicate covidence ids in the articles table.
