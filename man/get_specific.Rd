@@ -18,46 +18,51 @@
 \alias{get_relative_contribution}
 \title{Retrieve all incubation period parameters for a given pathogen}
 \usage{
-get_incubation_period(data, ...)
+get_incubation_period(data, all_columns)
 
-get_serial_interval(data, ...)
+get_serial_interval(data, all_columns)
 
-get_generation_time(data, ...)
+get_generation_time(data, all_columns)
 
-get_delays(data, ...)
+get_delays(data, all_columns)
 
-get_cfr(data, ...)
+get_cfr(data, all_columns)
 
-get_risk_factors(data, ...)
+get_risk_factors(data, all_columns)
 
-get_genomic(data, ...)
+get_genomic(data, all_columns)
 
-get_reproduction_number(data, ...)
+get_reproduction_number(data, all_columns)
 
-get_seroprevalence(data, ...)
+get_seroprevalence(data, all_columns)
 
-get_doubling_time(data, ...)
+get_doubling_time(data, all_columns)
 
-get_attack_rate(data, ...)
+get_attack_rate(data, all_columns)
 
-get_growth_rate(data, ...)
+get_growth_rate(data, all_columns)
 
-get_overdispersion(data, ...)
+get_overdispersion(data, all_columns)
 
-get_relative_contribution(data, ...)
+get_relative_contribution(data, all_columns)
 }
 \arguments{
 \item{data}{parameter dataframe output from \code{\link{load_epidata}}}
+
+\item{all_columns}{The default is FALSE meaning that only the key columns
+specified for the specific parameter will be retrieved. If TRUE, then all
+columns in the data.frame will be retrieved.}
 }
 \value{
-dataframe with all parameter estimates of this type and key columns (see \code{\link{get_key_columns}})
+dataframe with all parameter estimates of this type and key columns
+(see \code{\link{get_key_columns}})
 }
 \description{
 Retrieve all incubation period parameters for a given pathogen
 
-Retrieve all serial interval parameters for a given pathogen
+Retrieve all serial interval estimates for a given pathogen
 
-Retrieve all generation time parameters for a given pathogen
+Retrieve all generation time estimates for a given pathogen
 
 Retrieve all delay parameters for a given pathogen
 
@@ -83,5 +88,5 @@ Retrieve all overdispersion parameters for a given pathogen
 }
 \examples{
 df <- load_epidata(pathogen = "lassa")
-get_incubation_period(data = df$params)
+get_incubation_period(data = df$params, all_columns = FALSE)
 }

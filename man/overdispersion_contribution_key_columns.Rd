@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_key_columns.R
 \name{overdispersion_contribution_key_columns}
 \alias{overdispersion_contribution_key_columns}
-\title{Key columns for overdispersion and relative contribution to transmission from human-human transmission parameters in the \verb{$params} table from
+\title{Key columns for overdispersion and relative contribution to transmission from
+human-human transmission parameters in the \verb{$params} table from
 \code{\link[=load_epidata]{load_epidata()}}}
 \usage{
 overdispersion_contribution_key_columns()
@@ -11,7 +12,8 @@ overdispersion_contribution_key_columns()
 A \code{character} vector.
 }
 \description{
-Key columns for overdispersion and relative contribution to transmission from human-human transmission parameters in the \verb{$params} table from
+Key columns for overdispersion and relative contribution to transmission from
+human-human transmission parameters in the \verb{$params} table from
 \code{\link[=load_epidata]{load_epidata()}}
 }
 \keyword{internal}

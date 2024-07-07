@@ -270,14 +270,17 @@ test_that("get_key_columns works for ebola genomic", {
   )
 })
 
-test_that("get_key_columns returns all columns when all_cols=TRUE", {
+test_that("get_key_columns returns all columns when all_columns = TRUE", {
   df_key <- get_key_columns(data = lassa_params,  parameter_name = "cfr")
-  df_all <- get_key_columns(data = lassa_params,  parameter_name = "cfr",all_cols = TRUE)
+  df_all <- get_key_columns(
+    data = lassa_params,  parameter_name = "cfr", all_columns = TRUE
+  )
   expect_s3_class(df_key, class = "data.frame")
   expect_s3_class(df_all, class = "data.frame")
   expect_lt(ncol(df_key),ncol(df_all))
   expect_identical(dim(df_key),c(374L, 11L))
-  expect_identical(dim(df_all),c(374L, 63L))
+  ## load_epidata creates an extra column article_info
+  expect_identical(dim(df_all),c(374L, 64L)) 
 })
 
 

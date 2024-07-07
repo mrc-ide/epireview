@@ -47,8 +47,7 @@ get_parameter <- function(data, parameter_name) {
     # Extract and return the matching rows
     get_param <- data[data$parameter_type == parameter_name, , drop = FALSE]
 
-  }
-  else if(parameter_name %in% data$parameter_class){
+  } else if(parameter_name %in% data$parameter_class){
 
     # Extract and return the matching rows
     get_param <- data[data$parameter_class == parameter_name, , drop = FALSE]
@@ -71,7 +70,7 @@ get_parameter <- function(data, parameter_name) {
 #'
 #' @examples
 #' df <- load_epidata(pathogen = "lassa")
-#' get_incubation_period(data = df$params)
+#' get_incubation_period(data = df$params, all_columns = FALSE)
 
 get_incubation_period <- function(data, all_columns){
 

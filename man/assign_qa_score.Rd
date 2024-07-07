@@ -5,8 +5,6 @@
 \title{Assign quality assessment score to each article}
 \usage{
 assign_qa_score(articles, ignore_errors = FALSE)
-
-assign_qa_score(articles, ignore_errors = FALSE)
 }
 \arguments{
 \item{articles}{data.frame loaded from \code{load_epidata} function}
@@ -26,40 +24,6 @@ with all NA answers.
 }
 \description{
 Assign quality assessment score to each article
-
-Assign quality assessment score to each article
-}
-\details{
-We have used a bespoke 7 question quality assessment (QA) questionnaire to
-assess the quality of articles. The questions can be retrieved using the
-\code{qa_questions} function. The function assigns a QA score to each article
-as the number of questions answered 'yes' divided by the total number of
-questions answered (an answer might be NA if the question is not relevant to
-the article under consideration).
-Articles with all NA answers are excluded from the QA unless \code{ignore_errors}
-is set to \code{TRUE}.
-
-We have used a bespoke 7 question quality assessment (QA) questionnaire to
-assess the quality of articles. The questions can be retrieved using the
-\code{qa_questions} function. The function assigns a QA score to each article
-as the number of questions answered 'yes' divided by the total number of
-questions answered (an answer might be NA if the question is not relevant to
-the article under consideration).
-Articles with all NA answers are excluded from the QA unless \code{ignore_errors}
-is set to \code{TRUE}.
-}
-\examples{
-lassa <- load_epidata("lassa")
-lassa_qa <- assign_qa_score(lassa$articles)
-head(lassa_qa$articles[, c("qa_denominator", "qa_numerator", "qa_score")])
-lassa <- load_epidata("lassa")
-lassa_qa <- assign_qa_score(lassa$articles)
-head(lassa_qa$articles[, c("qa_denominator", "qa_numerator", "qa_score")])
-}
-\seealso{
-\code{\link{qa_questions}}
-
-\code{\link{qa_questions}}
 }
 \details{
 We have used a bespoke 7 question quality assessment (QA) questionnaire to

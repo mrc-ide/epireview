@@ -9,8 +9,7 @@ country was NA.
 
 # epireview 1.2.7
 
-* FEATURE: filter_df_for_metamean now includes rows with uncertainty types introduced
-specifically for SARS.
+* FEATURE: filter_df_for_metamean now includes rows with uncertainty types introduced specifically for SARS.
 
 # epireview 1.2.6
 

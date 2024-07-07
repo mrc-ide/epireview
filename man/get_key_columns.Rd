@@ -19,9 +19,9 @@ get_key_columns(
 are: \code{"cfr"}, \code{"delay"}, \code{"sero"}, \code{"risk"},
 \code{"reproduction_number"}, and \code{"genomic"}.}
 
-\item{all_columns}{The default is FALSE meaning that only the key columns specified
-for the specific #' parameter will be retrieved.If this is TRUE, then all columns
-in the dataframe will be retrieved.}
+\item{all_columns}{The default is FALSE meaning that only the key columns
+specified for the specific parameter will be retrieved. If TRUE, then all
+columns in the data.frame will be retrieved.}
 }
 \value{
 A \code{data.frame} with the key columns for the selected parameter.

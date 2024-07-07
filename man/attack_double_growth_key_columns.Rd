@@ -2,8 +2,8 @@
 % Please edit documentation in R/get_key_columns.R
 \name{attack_double_growth_key_columns}
 \alias{attack_double_growth_key_columns}
-\title{Key columns for attack rate, doubling time and growth rate parameters in the \verb{$params} table from
-\code{\link[=load_epidata]{load_epidata()}}}
+\title{Key columns for attack rate, doubling time and growth rate parameters in the
+\verb{$params} table from \code{\link[=load_epidata]{load_epidata()}}}
 \usage{
 attack_double_growth_key_columns()
 }
@@ -11,7 +11,7 @@ attack_double_growth_key_columns()
 A \code{character} vector.
 }
 \description{
-Key columns for attack rate, doubling time and growth rate parameters in the \verb{$params} table from
-\code{\link[=load_epidata]{load_epidata()}}
+Key columns for attack rate, doubling time and growth rate parameters in the
+\verb{$params} table from \code{\link[=load_epidata]{load_epidata()}}
 }
 \keyword{internal}

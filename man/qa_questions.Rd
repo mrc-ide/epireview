@@ -7,23 +7,13 @@ This function returns the list of 7 questions used to assess quality of
 articles.}
 \usage{
 qa_questions()
-
-qa_questions()
 }
 \value{
 a data.frame with the following columns: (a) qnames: these are the
 names of the corresponding columns in the articles data.frame; (b) qtext:
 the text of the question, and (c) notes: any additional notes.
-
-a data.frame with the following columns: (a) qnames: these are the
-names of the corresponding columns in the articles data.frame; (b) qtext:
-the text of the question, and (c) notes: any additional notes.
 }
 \description{
-Quality assessment questionnaire
-This function returns the list of 7 questions used to assess quality of
-articles.
-
 Quality assessment questionnaire
 This function returns the list of 7 questions used to assess quality of
 articles.
