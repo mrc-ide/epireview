@@ -112,7 +112,8 @@ check_column_types <- function(file_path, col_types, raw_colnames){
       paste("The errors have been written to a temporary csv that you can find here:",
             tmpfile)
       )
-    cli_abort("The data cannot be loaded until these errors are fixed.")
+    cli_abort("The data cannot be loaded until these errors are fixed.",
+              call=NULL)
   }
 }
 
