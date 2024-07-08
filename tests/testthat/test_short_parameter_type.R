@@ -4,9 +4,11 @@ test_that("Function creates a new var called parameter_type_short", {
   result_raw <- short_parameter_type(result_raw)
   result <- load_epidata(pathogen = 'lassa')$params
 
-  param_name_ebola <- load_epidata_raw('ebola', table = 'param_name')
-  param_name_lassa <- load_epidata_raw('lassa', table = 'param_name')
+  expect_true('parameter_type_short' %in% colnames(result))
+  expect_true(all(! is.na(result$parameter_type_short)))
 
-  expect_equal(param_name_ebola, param_name_lassa)
-  expect_equal(result_raw$parameter_type_short, result$parameter_type_short)
+  chk1 <- unique(
+    result$parameter_type_short[result$parameter_type %in% "Seroprevalence - PRNT"]
+  )
+  expect_equal(chk1, "seroprevalence_prnt")
 })
