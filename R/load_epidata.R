@@ -1,41 +1,53 @@
-##' Short labels parameters for use in figures
-##'
-##' This function assigns short labels to otherwise very long parameter
-##' names. It is generally not intended to be called directly but is used by
-##' \code{\link{load_epidata}} when the data is loaded.
-##'
-##' @param x data.frame containing a column called "parameter_type",  This will
-##' typically be the `params`data.frame from the output of \code{load_epireview}.
-##' @param parameter_type_full optional. User can specify the full value of a
-##' parameter type not already included in the function.
-##' @param parameter_type_short optional. Shorter value of parameter_type_full
-##' @return data.frame with a new column called "parameter_type_short"
-##' @export
-##' @author Sangeeta Bhatia
+#' Short labels parameters for use in figures
+#' @details
+#' This function assigns short labels to otherwise very long parameter
+#' names. It is generally not intended to be called directly but is used by
+#' \code{\link{load_epidata}} when the data is loaded. The short parameter names
+#' are read from the file "param_name.csv" in the package. If you want to supply
+#' your own short names, you can do so by specifying the parameter_type_full and
+#' parameter_type_short arguments. Note however that if parameter_type_full does 
+#' not contain all the parameter types in the data, the short label 
+#' (parameter_type_short) will be NA for missing values. It is therefore easier
+#' and recommended that you update the column parameter_type_short once the data
+#' are loaded via \code{\link{load_epidata}}.
+#'
+#' @param x data.frame containing a column called "parameter_type",  This will
+#' typically be the `params`data.frame from the output of \code{load_epireview}.
+#' @param parameter_type_full optional. User can specify the full value of a
+#' parameter type not already included in the function.
+#' @param parameter_type_short optional. Shorter value of parameter_type_full
+#' @return data.frame with a new column called "parameter_type_short"
+#' @export
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
-  x$other_delay <- case_when(
-    x$parameter_type == "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome == "Death" ~ "Time symptom to outcome (Death)",
-    x$parameter_type == "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome == "Other" ~ "Time symptom to outcome (Other)",
-    x$parameter_type == 'Human delay - other human delay (go to section)' ~
-      paste0(tolower(str_replace(x$other_delay_start, 'Other: ', '')), ' to ',
-             tolower(str_replace(x$other_delay_end, 'Other: ', ''))),
-    TRUE ~ NA)
+  x$other_delay <- NA_character_
+  idx <- x$parameter_type %in% "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome %in% "Death" 
+  x$other_delay[idx] <- "Time symptom to outcome (Death)"
 
-  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - time symptom to outcome',
-                             paste0('Human delay - ', tolower(x$other_delay)), x$parameter_type)
+  idx <- x$parameter_type %in% "Human delay - time symptom to outcome" &
+      x$riskfactor_outcome %in% "Other" 
+  x$other_delay[idx] <- "Time symptom to outcome (Other)"
+  
+  idx <- x$parameter_type %in% 'Human delay - other human delay (go to section)' 
+  x$other_delay[idx] <- paste0(
+    tolower(gsub('Other: ', '', x$other_delay_start[idx])), ' to ',
+    tolower(gsub('Other: ', '', x$other_delay_end[idx]))
+  )
+  x$parameter_type[idx] <- paste0('Human delay - ', x$other_delay[idx])
 
-  x$parameter_type <- ifelse(x$parameter_type == 'Human delay - other human delay (go to section)',
-                             paste0('Human delay - ', x$other_delay), x$parameter_type)
-
-  x <- merge(x, param_name, by = 'parameter_type')
+  idx <- x$parameter_type %in% 'Human delay - time symptom to outcome'
+  x$parameter_type[idx] <- paste0('Human delay - ', tolower(x$other_delay[idx]))
 
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
-    x$parameter_type_short <- case_when(
-      x$parameter_type == parameter_type_full ~ parameter_type_short
-    )
+    idx <- match(x$parameter_type, parameter_type_full)
+    if (any(is.na(idx))) {
+      warning("Some parameter types in the data do not have a short label.
+        Using the full parameter type instead.")
+    }
+    x$parameter_type_short <- NA_character_
+    x$parameter_type_short[! is.na(idx)] <- 
+      parameter_type_short[idx[! is.na(idx)]]
   } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
     stop("Please specify both parameter_type_full and parameter_type_short")
   } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
@@ -52,8 +64,9 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' files - one each for articles, parameters, and transmission models.
 #' Data in the three files can be linked using article identifier.
 #' This function will read in the pathogen-specific articles and
-#' parameters files and join them into a data.frame. The resulting
-#' data set can be used to create a forest plot.
+#' parameters files and join them into a data.frame. This function also
+#' creates user-friendly short labels for the "parameter_type" column in params
+#' data.frame. See \code{\link{short_parameter_type}} for more details.
 #'
 #' @param pathogen name of pathogen. Must be one of the priority pathogens
 #' exactly as specified in the package. You can get a list of the
@@ -81,7 +94,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   models <- load_epidata_raw(pathogen, "model")
   outbreaks <- load_epidata_raw(pathogen, "outbreak")
   params <- load_epidata_raw(pathogen, "parameter")
-  param_name <- load_epidata_raw(pathogen, "param_name")
+
 
   models_extracted <- TRUE
   outbreaks_extracted <- TRUE
@@ -120,10 +133,12 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   articles_everything <- articles
   articles <- articles[, cols]
 
-  ## Marburg parameters have entries like "Germany;Yugoslavia"
-  ## For future pathogens, this should be cleaned up before data are
-  ## checked into epireview
-  params <- short_parameter_type(params)
+  param_names <- read.csv2(
+    system.file("extdata", "param_name.csv", package = "epireview")
+  )  
+  params <- short_parameter_type(
+    params, param_names$parameter_type_full, param_names$parameter_type_short
+  )
   params$parameter_value <- as.numeric(params$parameter_value)
 
   if (params_extracted) {
