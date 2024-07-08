@@ -11,6 +11,7 @@
 #' @importFrom stats na.omit
 #' @importFrom utils globalVariables
 #' @importFrom methods as
+#' @importFrom cli cli_abort
 #' @export
 create_new_article_entry <-
   function(pathogen = NA,
@@ -89,7 +90,7 @@ create_new_article_entry <-
 
     # check if article already exists in data by looking for doi
     if (is.character(new_row$doi) && new_row$doi %in% na.omit(old_articles$doi)) {
-      stop("doi exists in data already!")
+      cli_abort("doi exists in data already!")
     }
 
     # validate that the entries make sense
@@ -120,7 +121,7 @@ create_new_article_entry <-
     rules_summary <- summary(rules_output)
 
     if (sum(rules_summary$fails) > 0) {
-      stop(as_tibble(rules_summary) %>% filter(fails > 0))
+      cli_abort(as_tibble(rules_summary) %>% filter(fails > 0))
     }
 
     return(new_row)

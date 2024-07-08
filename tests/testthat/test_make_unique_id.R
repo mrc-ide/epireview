@@ -3,7 +3,7 @@ test_that("Each covidence id is assigned a unique id across all tables", {
   params <- load_epidata_raw("lassa", "parameter")
   ## Check that there are duplicate ids in this dataset
   nids <- length(unique(params$id[params$covidence_id == 18]))
-  fixed <- make_unique_id(articles, params)
+  fixed <- make_unique_id(articles, params, "params")
   n_fixed_ids <- length(unique(fixed$id[fixed$covidence_id == 18]))
   expect_true(n_fixed_ids == 1L)
 

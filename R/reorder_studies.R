@@ -14,6 +14,7 @@
 #' @param reorder_by character. The name of the column to reorder the data by. 
 #' Default is "population_country"
 #' @return The reordered dataframe
+#' @importFrom cli cli_abort
 #' @export
 #' @seealso \code{\link{forest_plot_rt}}  \code{\link{forest_plot_r0}}
 #' @examples
@@ -27,16 +28,16 @@
 reorder_studies <- function(df, reorder_by = "population_country") {
 
   if (! "mid" %in% colnames(df)) {
-    stop(
-      "mid column not found in the data frame, did you forget to call 
+    cli_abort(
+      "mid column not found in the data frame, did you forget to call
       param_pm_uncertainty?",
-      call. = FALSE
+      call = NULL
     )
   }
   if (! reorder_by %in% colnames(df)) {
-    stop(
+    cli_abort(
       paste0(reorder_by, " column not found in the data frame"),
-      call. = FALSE
+      call = NULL
     )
   }
   ## This will add NA as a valid factor level that is put at the end by

@@ -8,6 +8,7 @@
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
 #' @importFrom methods as
+#' @importFrom cli cli_abort
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
 #' @export
@@ -31,8 +32,8 @@ create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   if (!(new_row$article_id %in% articles$article_id &&
         articles[articles$article_id == new_row$article_id, ]$covidence_id ==
         new_row$covidence_id))
-    stop("Article_id + Covidence_id pair does not exist in article data")
-  
+    cli_abort("Article_id + Covidence_id pair does not exist in article data")
+
   # available options for fields
   file_path_ob <- system.file("extdata",
                               paste0(pathogen, "_dropdown_outbreaks.csv"),
@@ -64,7 +65,7 @@ create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   print(as_tibble(rules_summary) %>% filter(fails > 0))
   
   if (sum(rules_summary$fails) > 0) {
-    stop(as_tibble(rules_summary) %>% filter(fails > 0))
+    cli_abort(as_tibble(rules_summary) %>% filter(fails > 0))
   }
   
   ## Check for columns in old data that are not in new data

@@ -20,17 +20,32 @@ test_that("pretty article labels work", {
     covidence_id = 123,
     stringsAsFactors = FALSE
   )
-  
+
   expect_warning(
-    pretty_article_label(articles2, mark_multiple = mark_multiple), 
-    "There are 1 articles with missing first author surname."
+    pretty_article_label(articles2, mark_multiple = mark_multiple),
+    "There is 1 article with missing first author surname."
   )
+
   result <- suppressWarnings(
     pretty_article_label(articles2, mark_multiple = mark_multiple)
   )
   expect_equal(result$article_label, "John 2022")
 
- articles2 <- data.frame(
+  # Checking warning with multiple missing authors
+  articles2 <- data.frame(
+    first_author_first_name = c("John", "Jane"),
+    first_author_surname = c(NA, NA),
+    year_publication = c(2022, 2021),
+    covidence_id = c(123, 456),
+    stringsAsFactors = FALSE
+  )
+
+  expect_warning(
+    pretty_article_label(articles2, mark_multiple = mark_multiple),
+    "There are 2 articles with missing first author surname."
+  )
+
+  articles2 <- data.frame(
     first_author_first_name = NA,
     first_author_surname = NA,
     year_publication = 2022,

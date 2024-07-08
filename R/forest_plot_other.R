@@ -9,13 +9,14 @@
 #' @examples
 #' df <- load_epidata("ebola")[["params"]]
 #' forest_plot_doubling_time(df, ulim = 20, reorder_studies = TRUE)
+#' @importFrom cli cli_abort
 #'
 #' @export
 forest_plot_doubling_time <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
     
     x <- df[df$parameter_type %in% c("Doubling time"), ]
     if (nrow(x) == 0) {
-        stop("Input data does not contain doubling time parameters")
+      cli_abort("Input data does not contain doubling time parameters")
     }
     check_ulim(x, ulim, "doubling time")
     p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
