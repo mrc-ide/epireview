@@ -106,7 +106,7 @@ check_column_types <- function(file_path, col_types, raw_colnames){
     cli_end(olid)
 
     tmpfile <- tempfile(fileext = ".csv")
-    write.csv(tmp_problem, file=tmpfile)
+    write_csv(tmp_problem, file=tmpfile)
 
     cli_alert_info(
       paste("The errors have been written to a temporary csv that you can find here:",
