@@ -38,7 +38,8 @@ Imports:
     paletteer,
     methods,
     scales,
-    cli
+    cli,
+    vroom
 Suggests:
     knitr,
     lifecycle,

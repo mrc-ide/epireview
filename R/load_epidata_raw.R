@@ -76,14 +76,32 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp))
   }
   out
-  
+
 }
 
 
-# TODO: add documentation
+#' Checks that the column types of the input csv matches the column types
+#' expected by epireview.
+#'
+#' This function creates a vroom object (the same type created by read_csv) and
+#' checks if there are any problems with the file. If there are it will provide
+#' the offending columns and the number problematic rows (per column).
+#' A csv with the details of the issue will be written to a tmp file and
+#' the location will be provided.
+#' This function will prevent data from being loaded until all column types are
+#' correct.
+#'
+#' The function is intended to be used
+#' internally by \code{load_epidata_raw} where the files are being read.
+#'
+#' @importFrom readr write_csv
+#' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
+#' @importFrom vroom vroom problems
+#' @seealso article_column_type parameter_column_type, outbreak_column_type, model_column_type
+#' @export
 check_column_types <- function(file_path, col_types, raw_colnames){
-  tmp_vroom <- vroom::vroom(file_path, col_types = col_types)
-  tmp_problem <- vroom::problems(tmp_vroom)
+  tmp_vroom <- vroom(file_path, col_types = col_types)
+  tmp_problem <- problems(tmp_vroom)
 
   if (NROW(tmp_problem) > 0){
     # update the values in col to the actual column names
