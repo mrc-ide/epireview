@@ -7,6 +7,16 @@ expected by epireview.}
 \usage{
 check_column_types(file_path, col_types, raw_colnames)
 }
+\arguments{
+\item{file_path}{The path to the csv file for which the column types are to
+be checked}
+
+\item{col_types}{The column types expected by epireview. These are specified
+in the column type functions (e.g., article_column_type, parameter_column_type)
+and are used to read in the data.}
+
+\item{raw_colnames}{The column names of the csv file}
+}
 \description{
 This function creates a vroom object (the same type created by read_csv) and
 checks if there are any problems with the file. If there are it will provide
@@ -21,5 +31,6 @@ The function is intended to be used
 internally by \code{load_epidata_raw} where the files are being read.
 }
 \seealso{
-article_column_type parameter_column_type, outbreak_column_type, model_column_type
+article_column_type parameter_column_type, outbreak_column_type,
+model_column_type
 }

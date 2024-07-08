@@ -93,11 +93,17 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' The function is intended to be used
 #' internally by \code{load_epidata_raw} where the files are being read.
-#'
+#' @param file_path The path to the csv file for which the column types are to 
+#' be checked
+#' @param col_types The column types expected by epireview. These are specified
+#' in the column type functions (e.g., article_column_type, parameter_column_type)
+#' and are used to read in the data.
+#' @param raw_colnames The column names of the csv file
 #' @importFrom readr write_csv
 #' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
 #' @importFrom vroom vroom problems
-#' @seealso article_column_type parameter_column_type, outbreak_column_type, model_column_type
+#' @seealso article_column_type parameter_column_type, outbreak_column_type, 
+#' model_column_type
 #' @export
 check_column_types <- function(file_path, col_types, raw_colnames){
   tmp_vroom <- vroom(file_path, col_types = col_types)
