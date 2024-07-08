@@ -4,8 +4,8 @@
 #' @param parameter_name A `character` string with the parameter name. Options
 #' are: `"cfr"`, `"delay"`, `"sero"`, `"risk"`,
 #' `"reproduction_number"`, and `"genomic"`.
-#' @param all_columns The default is FALSE meaning that only the key columns 
-#' specified for the specific parameter will be retrieved. If TRUE, then all 
+#' @param all_columns The default is FALSE meaning that only the key columns
+#' specified for the specific parameter will be retrieved. If TRUE, then all
 #' columns in the data.frame will be retrieved.
 #'
 #' @return A `data.frame` with the key columns for the selected parameter.
@@ -66,7 +66,7 @@ get_key_columns <- function(data,
 } else cols <- colnames(data)
 
   data <- data[, cols]
-  
+
   data
 }
 
@@ -77,7 +77,8 @@ get_key_columns <- function(data,
 #' @keywords internal
 key_columns <- function() {
   c(
-    "article_label", "population_country","population_sample_size",
+    "article_label", "article_info", "population_country",
+    "population_sample_size",
     "population_sample_type", "population_group",
     "method_disaggregated", "parameter_type"
   )
@@ -161,7 +162,7 @@ genomic_key_columns <- function() {
   )
 }
 
-#' Key columns for attack rate, doubling time and growth rate parameters in the 
+#' Key columns for attack rate, doubling time and growth rate parameters in the
 #' `$params` table from [load_epidata()]
 #'
 #' @return A `character` vector.
@@ -176,7 +177,7 @@ attack_double_growth_key_columns <- function() {
 }
 
 
-#' Key columns for overdispersion and relative contribution to transmission from 
+#' Key columns for overdispersion and relative contribution to transmission from
 #' human-human transmission parameters in the `$params` table from
 #' [load_epidata()]
 #'
