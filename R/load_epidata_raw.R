@@ -30,7 +30,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 
   if (missing(pathogen) | missing(table)) {
     stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak', 'model', or 'param_name'")
+         one of 'article', 'parameter', 'outbreak', 'model'.")
   }
 
   assert_pathogen(pathogen)
@@ -43,8 +43,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     article =  pps[pps$pathogen == pathogen, "articles_file"],
     parameter = pps[pps$pathogen == pathogen, "params_file"],
     outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
-    model = pps[pps$pathogen == pathogen, "models_file"],
-    param_name = "param_name.csv"
+    model = pps[pps$pathogen == pathogen, "models_file"]
   )
   ## Get column types based on table type
   col_types <- switch(
@@ -52,8 +51,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     article = article_column_type(),
     parameter = parameter_column_type(),
     outbreak = outbreak_column_type(),
-    model = model_column_type(),
-    param_name = param_name_column_type()
+    model = model_column_type()    
   )
 
   if (is.na(fname)) {
@@ -71,7 +69,8 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## parameters.
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, col_select = colnames(tmp))
+    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, 
+      col_select = colnames(tmp))
   }
   out
 
