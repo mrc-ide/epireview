@@ -17,6 +17,9 @@ is particularly undesirable for us.
 The function is intended to be used
 internally by \code{load_epidata_raw} where the files are being read.
 }
+\examples{
+param_name_column_type
+}
 \seealso{
 parameter_column_type, outbreak_column_type, model_column_type
 }

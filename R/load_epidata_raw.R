@@ -282,6 +282,7 @@ model_column_type <- function() {
 #' @importFrom readr col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
+#' param_name_column_type
 param_name_column_type <- function() {
 
   out <- list(
