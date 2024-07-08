@@ -45,7 +45,7 @@ test_that("check_column_types works as expected", {
 
   tmp2 <- as.data.frame(read_csv(tmpfile, show_col_types = FALSE))
 
-  expect_error(suppressWarnings(check_column_types(tmpfile, col_types, colnames(tmp))))
+  expect_error(suppressWarnings(check_column_types(tmpfile, col_types, colnames(tmp2))))
 
   # *--------------------------------- Test 4 ---------------------------------*
   # *------------------ multiple column, 1 row type mismatch ------------------*
