@@ -32,5 +32,4 @@ articles <- data.frame(
   covidence_id = c("ABC123", "DEF456", "GHI789")
 )
 pretty_article_label(articles, mark_multiple = TRUE)
-
 }

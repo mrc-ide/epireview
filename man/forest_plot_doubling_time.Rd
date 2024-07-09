@@ -28,5 +28,4 @@ to visualize the results.
 \examples{
 df <- load_epidata("ebola")[["params"]]
 forest_plot_doubling_time(df, ulim = 20, reorder_studies = TRUE)
-
 }

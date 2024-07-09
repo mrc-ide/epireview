@@ -18,21 +18,7 @@
 #' @param parameter_type_short optional. Shorter value of parameter_type_full
 #' @return data.frame with a new column called "parameter_type_short"
 #' @export
-##' Short labels parameters for use in figures
-##'
-##' This function assigns short labels to otherwise very long parameter
-##' names. It is generally not intended to be called directly but is used by
-##' \code{\link{load_epidata}} when the data is loaded.
-##'
-##' @param x data.frame containing a column called "parameter_type",  This will
-##' typically be the `params`data.frame from the output of \code{load_epireview}.
-##' @param parameter_type_full optional. User can specify the full value of a
-##' parameter type not already included in the function.
-##' @param parameter_type_short optional. Shorter value of parameter_type_full
-##' @return data.frame with a new column called "parameter_type_short"
-##' @importFrom cli cli_abort
-##' @export
-##' @author Sangeeta Bhatia
+#' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
   x$other_delay <- NA_character_
@@ -100,6 +86,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' of the outbreaks extracted for this pathogen, where available.
 #'
 #' @importFrom dplyr left_join
+#' @importFrom utils read.csv2
 #' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {

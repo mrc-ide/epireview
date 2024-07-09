@@ -32,7 +32,7 @@ Authors:
   \item Anne Cori (\href{https://orcid.org/0000-0002-8443-9162}{ORCID})
   \item Thomas Rawson (\href{https://orcid.org/0000-0001-8182-4279}{ORCID})
   \item Patrick Doohan (\href{https://orcid.org/0000-0001-8076-1106}{ORCID})
-  \item Tristan Naidoo (\href{https://orcid.org/-12392}{ORCID})
+  \item Tristan Naidoo (-12392)
 }
 
 }

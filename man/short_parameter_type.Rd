@@ -33,3 +33,6 @@ not contain all the parameter types in the data, the short label
 and recommended that you update the column parameter_type_short once the data
 are loaded via \code{\link{load_epidata}}.
 }
+\author{
+Sangeeta Bhatia
+}

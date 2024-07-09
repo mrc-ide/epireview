@@ -1,3 +1,8 @@
+# epireview 1.2.11
+
+* FEATURE: Adds a R-user friendly parameter name to the params table loaded via
+load_epidata. This also makes parameter names consistent across pathogens. Addresses #59.
+
 # epireview 1.2.10
 
 * FEATURE: Moves error logging cli package and improves warnings addressing #57 and #21
