@@ -1,3 +1,7 @@
+# epireview 1.2.12
+
+* FEATURE: Addresses #98 by including article_info as key column returned when parameter specific getters are invoked.
+
 # epireview 1.2.11
 
 * FEATURE: Adds a R-user friendly parameter name to the params table loaded via
