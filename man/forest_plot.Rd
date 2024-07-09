@@ -10,7 +10,8 @@ forest_plot(
   shape_by = NA,
   col_by = NA,
   shp_palette = NA,
-  col_palette = NA
+  col_palette = NA,
+  unique_label = NA
 )
 }
 \arguments{
@@ -25,11 +26,13 @@ uncertainty interval}
 
 \item{col_by}{(Optional) Variable to color the points by.}
 
+\item{shp_palette}{(Optional) Palette for shaping the points. Optional unless shape_by is
+not one of 'parameter_value_type'.}
+
 \item{col_palette}{Palette for coloring the points. Optional unless col_by is
 not one of 'parameter_type' or 'population_country'.}
 
-\item{shape_palette}{(Optional) Palette for shaping the points. Optional unless shape_by is
-not one of 'parameter_value_type'.}
+\item{unique_label}{(Optional) User can provide custom labels for forest plot y-axis. Must match length of dataframe.}
 }
 \value{
 A ggplot2 object representing the forest plot.
@@ -49,9 +52,10 @@ If you wish to color by a different variable, you must provide a palette.
 \examples{
 df <- data.frame(
   mid = c(1, 2, 3),
-  y = c("A", "B", "C"),
+  article_label = c("A", "B", "C"),
   low = c(0.5, 1.5, 2.5),
-  high = c(1.5, 2.5, 3.5)
+  high = c(1.5, 2.5, 3.5),
+  uncertainty_type = c("Range", "Range", "Range**")
 )
 forest_plot(df)
 }

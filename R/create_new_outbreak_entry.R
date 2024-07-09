@@ -7,33 +7,10 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
+#' @importFrom methods as
+#' @importFrom cli cli_abort
 #' @return return new row of data to be added to the outbreak data set using
 #' the append_new_entry_to_table() function
-#' @examples
-#' create_new_outbreak_entry(
-#'   pathogen = "marburg",
-#'   new_outbreak = list(
-#'     article_id           = as.numeric(1),
-#'     outbreak_start_day   = as.numeric(NA),
-#'     outbreak_start_month = as.character(NA),
-#'     outbreak_start_year  = as.numeric(1999),
-#'     outbreak_end_day     = as.numeric(NA),
-#'     outbreak_end_month   = as.character(NA),
-#'     outbreak_date_year   = as.numeric(2001),
-#'     outbreak_duration_months = as.numeric(NA),
-#'     outbreak_size        = as.numeric(2),
-#'     asymptomatic_transmission = as.numeric(0),
-#'     outbreak_country     = as.character("Tanzania"),
-#'     outbreak_location    = as.character(NA),
-#'     cases_confirmed      = as.numeric(NA),
-#'     cases_mode_detection = as.character(NA),
-#'     cases_suspected      = as.integer(NA),
-#'     cases_asymptomatic   = as.integer(NA),
-#'     deaths               = as.integer(2),
-#'     cases_severe_hospitalised = as.integer(NA),
-#'     covidence_id         = as.integer(2059)
-#'   )
-#' )
 #' @export
 create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   
@@ -55,8 +32,8 @@ create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   if (!(new_row$article_id %in% articles$article_id &&
         articles[articles$article_id == new_row$article_id, ]$covidence_id ==
         new_row$covidence_id))
-    stop("Article_id + Covidence_id pair does not exist in article data")
-  
+    cli_abort("Article_id + Covidence_id pair does not exist in article data")
+
   # available options for fields
   file_path_ob <- system.file("extdata",
                               paste0(pathogen, "_dropdown_outbreaks.csv"),
@@ -88,7 +65,7 @@ create_new_outbreak_entry <- function(pathogen, new_outbreak) {
   print(as_tibble(rules_summary) %>% filter(fails > 0))
   
   if (sum(rules_summary$fails) > 0) {
-    stop(as_tibble(rules_summary) %>% filter(fails > 0))
+    cli_abort(as_tibble(rules_summary) %>% filter(fails > 0))
   }
   
   ## Check for columns in old data that are not in new data

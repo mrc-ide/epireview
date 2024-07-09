@@ -20,6 +20,31 @@ To install the latest version of epireview, use:
 ```r
 remotes::install_github('mrc-ide/epireview')
 ```
+## Quick start
+
+To load pathogen-specific data, do
+```r
+ebola <- epireview::load_epidata("ebola")
+```
+At the moment, the package hosts data for Ebola, Marburg and Lassa.
+
+This will load a list consisting of four elements (articles, params, outbreaks, models).
+
+To visualise parameter values,
+
+```r
+params <- ebola[["params"]]
+forest_plot_rt(params, col_by = "population_country", shape_by = "parameter_value_type")
+```
+
+Some other functions of interest are 
+
+```r
+forest_plot_r0(params)
+forest_plot_serial_interval(params)
+forest_plot_incubation_period(params)
+forest_plot_infectious_period(params)
+```
 
 ## Project overview
 The COVID-19 pandemic has highlighted the critical role that mathematical modelling can play in supporting evidence-based decision-making during outbreaks (e.g. to project the expected epidemic size, the required hospital capacity and assess the potential population-level impact of interventions). However, early in an epidemic, modelling efforts can be hampered and delayed by the lack of a centralised resource summarising existing model structures and input parameters for the disease of interest. Literature reviews are therefore often conducted during epidemics to identify plausible parameter ranges and/or existing mathematical model structures (e.g. Van Kerkhove et al. Scientific data 2015) and are mostly limited to individual parameters.
@@ -37,17 +62,17 @@ One output of this project will be a database initially populated with all the i
 
 ## Pathogen overview and timeline
 
-| Pathogen  | Titles & Abstracts screened | Contact | doi|
-| --------- |         -------------------:|      -- | -- |
-| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | https://doi.org/10.1016/S1473-3099(23)00515-7
-| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|https://doi.org/10.1101/2024.03.20.24304571|
-| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |https://doi.org/10.1101/2024.03.23.24304596|
-| Henipa virus  |           959 | s.bhatia@imperial.ac.uk||
-| SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk || 
-| Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||
-| Zika virus|              4,518| kem22@ic.ac.uk||
-| Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||
-| MERS-CoV|               10,382| acori@ic.ac.uk||
-| Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||
+| Pathogen  | Titles & Abstracts screened | Contact | Living review | doi|
+| --------- |         -------------------:|      -- |           --  | -- |
+| Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html)| https://doi.org/10.1016/S1473-3099(23)00515-7 |
+| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| https://doi.org/10.1101/2024.03.20.24304571|
+| Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| https://doi.org/10.1101/2024.03.23.24304596|
+| Henipa virus  |           959 | s.bhatia@imperial.ac.uk|||
+| SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk |||
+| Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk|||
+| Zika virus|              4,518| kem22@ic.ac.uk|||
+| Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk|||
+| MERS-CoV|               10,382| acori@ic.ac.uk|||
+| Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk|||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).

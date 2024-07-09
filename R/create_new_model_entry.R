@@ -9,23 +9,8 @@
 #' @importFrom dplyr select
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
-#' @examples
-#' create_new_model_entry(
-#'   pathogen = 'marburg',
-#'   new_model = list(
-#'     article_id           = as.numeric(1),
-#'     model_type           = as.character("Compartmental"),
-#'     compartmental_type   = as.character("SEIR, SIR"),
-#'     stoch_deter          = as.character("Deterministic"),
-#'     theoretical_model    = as.logical(FALSE),
-#'     interventions_type   = as.character("Vaccination"),
-#'     code_available       = as.logical(TRUE),
-#'     transmission_route   = as.character("Sexual"),
-#'     assumptions          = as.character("Unspecified"),
-#'     covidence_id         = as.integer(2059)
-#'   )
-#' )
-#'
+#' @importFrom methods as
+#' @importFrom cli cli_abort
 #' @export
 create_new_model_entry <-
   function(pathogen = NA,
@@ -66,8 +51,8 @@ create_new_model_entry <-
     # Need to check that article_id & covidence_id exist in the articles table.
     if (!(new_row$article_id %in% articles$article_id &&
           articles[articles$article_id ==
-                     new_row$article_id, ]$covidence_id == new_row$covidence_id))
-      stop("Article_id + Covidence_id pair does not exist in article data")
+                   new_row$article_id, ]$covidence_id == new_row$covidence_id))
+      cli_abort("Article_id + Covidence_id pair does not exist in article data")
 
     #available options for fields
     file_path_ob <- system.file("extdata", paste0(pathogen, "_dropdown_models.csv"),
@@ -110,7 +95,7 @@ create_new_model_entry <-
     print(as_tibble(rules_summary) %>% filter(fails > 0))
 
     if (sum(rules_summary$fails) > 0) {
-      stop(as_tibble(rules_summary) %>% filter(fails > 0))
+      cli_abort(as_tibble(rules_summary) %>% filter(fails > 0))
     }
 
     return(new_row)

@@ -12,7 +12,7 @@ Contains the latest open access pathogen data from the Pathogen Epidemiology Rev
 Useful links:
 \itemize{
   \item \url{https://mrc-ide.github.io/epireview/}
-  \item Report bugs at \url{https://mrc-ide.github.io/epireview/issues}
+  \item Report bugs at \url{https://github.com/mrc-ide/epireview/issues}
 }
 
 }
@@ -28,7 +28,11 @@ Authors:
   \item Gina Cuomo-Dannenburg (\href{https://orcid.org/0000-0001-6821-0352}{ORCID})
   \item Ruth McCabe (\href{https://orcid.org/0000-0002-6368-9103}{ORCID})
   \item Kelly McCain (\href{https://orcid.org/0000-0003-2393-2217}{ORCID})
+  \item Joshua Lambert (\href{https://orcid.org/0000-0001-5218-3046}{ORCID})
   \item Anne Cori (\href{https://orcid.org/0000-0002-8443-9162}{ORCID})
+  \item Thomas Rawson (\href{https://orcid.org/0000-0001-8182-4279}{ORCID})
+  \item Patrick Doohan (\href{https://orcid.org/0000-0001-8076-1106}{ORCID})
+  \item Tristan Naidoo (-12392)
 }
 
 }

@@ -27,7 +27,7 @@ selected columns.
 x <- load_epidata('marburg')
 p <- x$params
 filter_cols(p, "parameter_type", "==", "Attack rate")
-filter_cols(p, "parameter_type", "in", list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
-
+filter_cols(p, "parameter_type", "in", 
+  list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
 
 }

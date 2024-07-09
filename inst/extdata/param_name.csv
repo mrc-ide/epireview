@@ -1,0 +1,108 @@
+parameter_type_short;parameter_type_full
+attack_rate;Attack rate
+cfr;Severity - case fatality rate (CFR)
+delay_admission_to_death;Human delay - Admission to Care/Hospitalisation to Death
+delay_admission_to_death;Human delay - admission to care>death
+delay_admission_to_death_inverse;Human delay - Admission to Care/Hospitalisation to Death  (inverse parameter)
+delay_admission_to_discharge;Human delay - Admission to Care/Hospitalisation to Discharge from Care/Hospital
+delay_admission_to_discharge;Human delay - admission to care>discharge/recovery
+delay_admission_to_negative_test;Human delay - Admission to Care/Hospitalisation to Negative test
+delay_admission_to_outcome;Human delay - Admission to Care/Hospitalisation to Death/Recovery
+delay_admission_to_recovery;Human delay - Admission to Care/Hospitalisation to Recovery/non-Infectiousness
+delay_admission_to_recovery_inverse;Human delay - Admission to Care/Hospitalisation to Recovery/non-Infectiousness  (inverse parameter)
+delay_admission_to_resolution;Human delay - admission to care/hospitalisation to symptom resolution
+delay_antibac_start_to_end;Human delay - start of antibacterial therapy to end of antibacterial therapy
+delay_careseeking_to_onset;Human delay - Health center visit to Symptom Onset/Fever
+delay_collection_to_result;Human delay - specimen collection to test result
+delay_death_to_burial;Human delay - Death to Burial
+delay_death_to_burial_inverse;Human delay - Death to Burial  (inverse parameter)
+delay_exposure_to_admission;Human delay - Exposure/Infection to Admission to Care/Hospitalisation
+delay_exposure_to_clearance;Human delay - Exposure/Infection to Clearance of Ebola virus RNA from seminal fluid in 50% of male survivors
+delay_exposure_to_clearance;Human delay - Exposure/Infection to Clearance of Ebola virus RNA from seminal fluid in 90% of male survivors
+delay_exposure_to_contact_tracing;Human delay - Exposure/Infection to Contacted by Contact Tracing
+delay_exposure_to_death;Human delay - Exposure/Infection to Death
+delay_exposure_to_infectious_inverse;Human delay - Exposure/Infection to Infectiousness  (inverse parameter)
+delay_exposure_to_onset;Human delay - Exposure/Infection to Symptom Onset/Fever
+delay_exposure_to_quarantine;Human delay - Exposure/Infection to Quarantine
+delay_exposure_to_recovery;Human delay - Exposure/Infection to Recovery/non-Infectiousness
+delay_funeral_start_to_end;Human delay - Funeral start to Funeral end
+delay_index_to_contacts_vaccination;Human delay - Index Case Diagnosis to Vaccination of Contacts
+delay_infectious_to_death;Human delay - Infectiousness to Death
+delay_infectious_to_outcome;Human delay - Exposure/Infection to Death/Recovery
+delay_infectious_to_recovery;Human delay - Infectiousness to Recovery/non-Infectiousness
+delay_noninfectious_to_discharge;Human delay - Recovery/non-Infectiousness to Discharge from Care/Hospital
+delay_noninfectious_to_test_result;Human delay - Recovery/non-Infectiousness to Test result
+delay_notification_to_death;Human delay - Reporting to Death
+delay_notification_to_death;Human delay - WHO notification to Death
+delay_notification_to_discharge;Human delay - Reporting to Discharge from Care/Hospital
+delay_notification_to_discharge;Human delay - WHO notification to Discharge from Care/Hospital
+delay_onset_to_admission;Human delay - symptom onset>admission to care
+delay_onset_to_care;Human delay - Symptom Onset/Fever to Admission to Care/Hospitalisation
+delay_onset_to_careseeking;Human delay - Symptom Onset/Fever to Seeking Care
+delay_onset_to_careseeking;Human delay - time symptom to careseeking
+delay_onset_to_community_death;Human delay - Symptom Onset/Fever to Death in community
+delay_onset_to_death;Human delay - Symptom Onset/Fever to Death
+delay_onset_to_death;Human delay - symptom onset>death
+delay_onset_to_death;Human delay - time symptom to outcome (death)
+delay_onset_to_diagnosis;Human delay - Symptom Onset/Fever to Diagnosis
+delay_onset_to_diagnosis;Human delay - symptom onset/fever to sample collection/diagnosis
+delay_onset_to_discharge;Human delay - Symptom Onset/Fever to Discharge from Care/Hospital
+delay_onset_to_discharge;Human delay - symptom onset>discharge/recovery
+delay_onset_to_discharge_inverse;Human delay - time in care (length of stay)  (inverse parameter)
+delay_onset_to_hospital_death;Human delay - Symptom Onset/Fever to Death in hospital
+delay_onset_to_igg_detection;Human delay - Symptom Onset/Fever to IgG antibody detection
+delay_onset_to_igm_detection;Human delay - Symptom Onset/Fever to IgM antibody detection
+delay_onset_to_negative_test;Human delay - Symptom Onset/Fever to Negative test
+delay_onset_to_notification;Human delay - Symptom Onset/Fever to WHO notification
+delay_onset_to_other;Human delay - Symptom Onset/Fever to Other
+delay_onset_to_other;Human delay - time symptom to outcome (other)
+delay_onset_to_outcome;Human delay - time symptom to outcome
+delay_onset_to_quarantine;Human delay - Symptom Onset/Fever to Quarantine
+delay_onset_to_recovery_inverse;Human delay - Symptom Onset/Fever to Recovery/non-Infectiousness  (inverse parameter)
+delay_onset_to_reporting;Human delay - Symptom Onset/Fever to Reporting
+delay_onset_to_resolution;Human delay - symptom onset/fever to symptom resolution
+delay_onset_to_specimen;Human delay - symptom onset/fever to specimen collection
+delay_onset_to_test_result;Human delay - Symptom Onset/Fever to Test result
+delay_onset_to_treatment_start;Human delay - symptom onset/fever to start of ribavirin treatment
+delay_onset_to_undetectable;Human delay - Symptom Onset/Fever to First undetectable viremia
+delay_oxygen_start_to_end;Human delay - start of oxygen therapy to end of oxygen therapy
+delay_positive_to_negative_test;Human delay - Positive test to Negative test
+delay_sample_to_result_released;Human delay - Sample collection to Release of sequencing data to response teams
+delay_suspected_to_death;Human delay - Suspected to Death
+delay_symptom_onset_to_recovery_noninfectiousness;Human delay - Symptom Onset/Fever to Recovery/non-Infectiousness
+delay_symptom_onset_to_test;Human delay - Symptom Onset/Fever to Test
+delay_test_to_admission;Human delay - Test to Admission to Care/Hospitalisation
+delay_test_to_death;Human delay - Test to Death
+delay_test_to_discharge;Human delay - Test to Discharge from Care/Hospital
+delay_test_to_test_result;Human delay - Sample collection to Test result
+delay_test_to_test_result;Human delay - Test to Test result
+delay_treatment_start_to_end;Human delay - Start of treatment to End of treatment
+delay_treatment_start_to_end;Human delay - start of ribavirin treatment to end of ribavirin treatment
+doubling_time;Doubling time
+generation_time;Human delay - generation time
+growth_rate;Growth rate (r)
+incubation_period;Human delay - incubation period
+incubation_period_inverse;Human delay - incubation period  (inverse parameter)
+infectious period ;Human delay - infectious period
+infectious_period_inverse;Human delay - infectious period  (inverse parameter)
+latent_period;Human delay - latent period
+latent_period_inverse;Human delay - latent period  (inverse parameter)
+mutation_evolutionary_rate;Mutations - evolutionary rate
+mutation_rate;Mutations – mutation rate
+mutation_substitution;Mutations - substitution rate
+mutations_mutation_rate;Mutations - mutation rate
+mutations_substitution_rate;Mutations – substitution rate
+overdispersion;Overdispersion
+relative_cont_human_to_human;Relative contribution - human to human
+reproduction_number_basic;Reproduction number (Basic R0)
+reproduction_number_effective;Reproduction number (Effective, Re)
+risk_factors;Risk factors
+serial_interval;Human delay - serial interval
+seroprevalence_HAI_HI;Seroprevalence - HAI/HI
+seroprevalence_IFA;Seroprevalence - IFA
+seroprevalence_igM;Seroprevalence - IgM
+seroprevalence_igg;Seroprevalence - IgG
+seroprevalence_prnt;Seroprevalence - PRNT
+seroprevalence_unspecified;Seroprevalence - Unspecified
+time_in_care;Human delay - time in care
+time_in_care;Human delay - time in care (length of stay)

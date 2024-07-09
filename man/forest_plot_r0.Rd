@@ -29,12 +29,7 @@ This function generates a forest plot for the reproduction number (Basic R0)
 using the provided data frame.
 }
 \examples{
-df <- data.frame(parameter_type = c("Reproduction number (Basic R0)", 
-                                    "Reproduction number (Basic R0)"),
-                 study = c("Study A", "Study B"),
-                 estimate = c(1.5, 2.0),
-                 lower_ci = c(1.2, 1.8),
-                 upper_ci = c(1.8, 2.2))
+df <- load_epidata("ebola")[["params"]]
 forest_plot_r0(df, ulim = 2.5, reorder_studies = TRUE)
 
 }
