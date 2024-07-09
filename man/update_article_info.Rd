@@ -25,7 +25,7 @@ do not have one.)
 articles <- data.frame(
   doi = c("10.123", NA, "10.234"),
   article_label = c("Smith 2020", "Smith 1979", "Smith 2023"),
-  
+
   journal = c("Science", "Nature", "The Lancet")
 )
 update_article_info(articles)

@@ -19,9 +19,19 @@ parameter type not already included in the function.}
 data.frame with a new column called "parameter_type_short"
 }
 \description{
+Short labels parameters for use in figures
+}
+\details{
 This function assigns short labels to otherwise very long parameter
 names. It is generally not intended to be called directly but is used by
-\code{\link{load_epidata}} when the data is loaded.
+\code{\link{load_epidata}} when the data is loaded. The short parameter names
+are read from the file "param_name.csv" in the package. If you want to supply
+your own short names, you can do so by specifying the parameter_type_full and
+parameter_type_short arguments. Note however that if parameter_type_full does
+not contain all the parameter types in the data, the short label
+(parameter_type_short) will be NA for missing values. It is therefore easier
+and recommended that you update the column parameter_type_short once the data
+are loaded via \code{\link{load_epidata}}.
 }
 \author{
 Sangeeta Bhatia
