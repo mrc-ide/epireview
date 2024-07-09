@@ -57,8 +57,8 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     idx <- match(x$parameter_type, parameter_type_full)
     if (any(is.na(idx))) {
-      cli_warning("Some parameter types in the data do not have a short label.
-        Using the full parameter type instead.")
+      cli_alert_warning("Some parameter types in the data do not have a short 
+        label. Using the full parameter type instead.")
     }
     x$parameter_type_short <- NA_character_
     x$parameter_type_short[! is.na(idx)] <- 
