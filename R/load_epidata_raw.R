@@ -22,6 +22,7 @@
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
+#' @importFrom cli cli_warn cli_abort
 #' @export
 load_epidata_raw <- function(pathogen, table = c("article", "parameter",
                                                 "outbreak", "model", "param_name")) {
@@ -29,8 +30,8 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   # assertions
 
   if (missing(pathogen) | missing(table)) {
-    stop("pathogen and table name must be supplied. table can be
-         one of 'article', 'parameter', 'outbreak', 'model'.")
+    cli_abort("pathogen and table name must be supplied. table can be
+              one of 'article', 'parameter', 'outbreak' or 'model'")
   }
 
   assert_pathogen(pathogen)
@@ -55,7 +56,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
   )
 
   if (is.na(fname)) {
-    warning(paste("No data found for ", pathogen))
+    cli_warn(paste("No data found for", pathogen))
     return(NULL)
   } else {
     file_path <- system.file("extdata", fname, package = "epireview")
@@ -69,13 +70,77 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## parameters.
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
-    out <- read_csv(file_path, col_types = col_types, show_col_types = FALSE, 
-      col_select = colnames(tmp))
+    check_column_types(file_path, col_types, colnames(tmp))
+    out <- read_csv(
+      file_path, col_types = col_types, show_col_types = FALSE, 
+      col_select = colnames(tmp)
+    )
   }
   out
 
 }
 
+
+#' Checks that the column types of the input csv matches the column types
+#' expected by epireview.
+#'
+#' This function creates a vroom object (the same type created by read_csv) and
+#' checks if there are any problems with the file. If there are it will provide
+#' the offending columns and the number problematic rows (per column).
+#' A csv with the details of the issue will be written to a tmp file and
+#' the location will be provided.
+#' This function will prevent data from being loaded until all column types are
+#' correct.
+#'
+#' The function is intended to be used
+#' internally by \code{load_epidata_raw} where the files are being read.
+#' @param file_path The path to the csv file for which the column types are to 
+#' be checked
+#' @param col_types The column types expected by epireview. These are specified
+#' in the column type functions (e.g., article_column_type, parameter_column_type)
+#' and are used to read in the data.
+#' @param raw_colnames The column names of the csv file
+#' @importFrom readr write_csv
+#' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
+#' @importFrom vroom vroom problems
+#' @seealso article_column_type parameter_column_type, outbreak_column_type, 
+#' model_column_type
+#' @export
+check_column_types <- function(file_path, col_types, raw_colnames){
+  tmp_vroom <- vroom(file_path, col_types = col_types)
+  tmp_problem <- problems(tmp_vroom)
+
+  if (NROW(tmp_problem) > 0){
+    # update the values in col to the actual column names
+    tmp_problem$col<- sapply(tmp_problem["col"],
+                                 function(i) raw_colnames[i])
+
+
+    # update the file to only the csv; assumes no "/" in the csv filename
+    cli_alert_danger(paste("There is an issue with",
+                           basename(tmp_problem$file[1]),
+                           ". The following columns have (n) issues:"))
+
+    olid <- cli_ol()
+
+    problem_col_df <-as.data.frame(table(tmp_problem$col))
+    for (i in 1:NROW(problem_col_df)){
+      cli_li(paste(problem_col_df[i,1], " (n=", problem_col_df[i,2], ")", sep=""))
+    }
+
+    cli_end(olid)
+
+    tmpfile <- tempfile(fileext = ".csv")
+    write_csv(tmp_problem, file=tmpfile)
+
+    cli_alert_info(
+      paste("The errors have been written to a temporary csv that you can find here:",
+            tmpfile)
+      )
+    cli_abort("The data cannot be loaded until these errors are fixed.",
+              call=NULL)
+  }
+}
 
 ## Define column types for each table
 ## These are used to read in the data

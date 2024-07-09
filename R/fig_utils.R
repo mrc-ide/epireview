@@ -39,6 +39,7 @@ theme_epireview <- function(
 #'
 #' @importFrom paletteer paletteer_d
 #' @importFrom pals polychrome
+#' @importFrom cli cli_abort
 #'
 #' @export
 country_palette <- function(x = NULL) {
@@ -57,7 +58,7 @@ country_palette <- function(x = NULL) {
     x <- countries
   } else {
     if (length(x) > length(pal)) {
-      stop(paste0("More than", length(pal)," countries provided. Please provide 
+      cli_abort(paste0("More than", length(pal)," countries provided. Please provide
         a vector of length", length(pal)," or less"))
     } else {
       pal <- pal[1:length(x)]
@@ -76,6 +77,7 @@ country_palette <- function(x = NULL) {
 ##' in forest plots for manually setting colors
 ##' with for example
 ##' \code{\link[ggplot2:scale_color_manual]{scale_color_manual}}
+##' @importFrom cli cli_abort
 ##' @author Sangeeta Bhatia
 parameter_palette <- function(x) {
   out <- list(
@@ -93,10 +95,10 @@ parameter_palette <- function(x) {
       out <- colrs[seq_along(x)]
       names(out) <- x
     } else {
-      stop(
-        paste0("Pre-defined palette has only ", n_colrs, " colors. Please 
-          provide a vector of length ", n_colrs, " or less")
-          )
+      cli_abort(
+        paste0("Pre-defined palette has only ", n_colrs, " colors. Please
+             provide a vector of length ", n_colrs, " or less")
+      )
     }
   }
   out[x]
@@ -111,6 +113,7 @@ parameter_palette <- function(x) {
 ##' @return a named list of shapes where names are value types (mean,
 ##' median, std dev etc.)
 ##'
+##' @importFrom cli cli_abort
 ##' @author Sangeeta Bhatia
 value_type_palette <- function(x = NULL) {
   out <- list(
@@ -136,7 +139,7 @@ value_type_palette <- function(x = NULL) {
       out <- shapes[seq_along(x)]
       names(out) <- x
     } else {
-      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please 
+      cli_abort(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please
         provide a vector of length ", n_shapes, " or less"))
     }
   }

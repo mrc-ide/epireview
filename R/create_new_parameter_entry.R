@@ -10,6 +10,7 @@
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
 #' @importFrom methods as
+#' @importFrom cli cli_abort
 #' @examples
 #' create_new_parameter_entry <-
 #'   function(pathogen = "marburg",
@@ -136,7 +137,7 @@ create_new_parameter_entry <-
   if (!(new_row$article_id %in% articles$article_id &&
         articles[articles$article_id == new_row$article_id, ]$covidence_id ==
         new_row$covidence_id))
-    stop("Article_id + Covidence_id pair does not exist in article data")
+    cli_abort("Article_id + Covidence_id pair does not exist in article data")
 
 
   #available options for fields
@@ -162,7 +163,7 @@ create_new_parameter_entry <-
   print(as_tibble(rules_summary) %>% filter(fails > 0))
 
   if (sum(rules_summary$fails) > 0)
-    stop(as_tibble(rules_summary) %>% filter(fails > 0))
+    cli_abort(as_tibble(rules_summary) %>% filter(fails > 0))
 
   ## Check for columns in old data that are not in new data
   ## and add them to new data with NA values with the same class

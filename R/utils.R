@@ -19,7 +19,7 @@
 #' @examples
 #' df <- data.frame(parameter_value = c(10, 20, 30))
 #' check_ulim(df, 25, "parameter")
-#'
+#' @importFrom cli cli_warn
 #' @export
 check_ulim <- function(df, ulim, param) {
   ulim_data <- max(df$parameter_value, na.rm = TRUE)
@@ -27,7 +27,7 @@ check_ulim <- function(df, ulim, param) {
     msg <- paste("The maximum", param, "is ", ulim_data,
                  "; the ulim is set to ", ulim,
                  ". Some points may not be plotted. Consider increasing ulim.")
-    warning(msg)
+    cli_warn(msg)
   }
   ## Return suggested ulim = max of parameter_value rounded to nearest 10
   round(ulim_data, -1)

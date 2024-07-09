@@ -18,6 +18,21 @@
 #' @param parameter_type_short optional. Shorter value of parameter_type_full
 #' @return data.frame with a new column called "parameter_type_short"
 #' @export
+##' Short labels parameters for use in figures
+##'
+##' This function assigns short labels to otherwise very long parameter
+##' names. It is generally not intended to be called directly but is used by
+##' \code{\link{load_epidata}} when the data is loaded.
+##'
+##' @param x data.frame containing a column called "parameter_type",  This will
+##' typically be the `params`data.frame from the output of \code{load_epireview}.
+##' @param parameter_type_full optional. User can specify the full value of a
+##' parameter type not already included in the function.
+##' @param parameter_type_short optional. Shorter value of parameter_type_full
+##' @return data.frame with a new column called "parameter_type_short"
+##' @importFrom cli cli_abort
+##' @export
+##' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
   x$other_delay <- NA_character_
@@ -42,16 +57,16 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
   if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
     idx <- match(x$parameter_type, parameter_type_full)
     if (any(is.na(idx))) {
-      warning("Some parameter types in the data do not have a short label.
+      cli_warning("Some parameter types in the data do not have a short label.
         Using the full parameter type instead.")
     }
     x$parameter_type_short <- NA_character_
     x$parameter_type_short[! is.na(idx)] <- 
       parameter_type_short[idx[! is.na(idx)]]
   } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
-    stop("Please specify both parameter_type_full and parameter_type_short")
+    cli_abort("Please specify both parameter_type_full and parameter_type_short")
   } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
-    stop("Please specify both parameter_type_full and parameter_type_short")
+    cli_abort("Please specify both parameter_type_full and parameter_type_short")
   }
 
   x
@@ -85,15 +100,16 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' of the outbreaks extracted for this pathogen, where available.
 #'
 #' @importFrom dplyr left_join
+#' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
   assert_pathogen(pathogen)
 
-  articles <- load_epidata_raw(pathogen, "article")
-  models <- load_epidata_raw(pathogen, "model")
-  outbreaks <- load_epidata_raw(pathogen, "outbreak")
-  params <- load_epidata_raw(pathogen, "parameter")
+  articles <- suppressWarnings(load_epidata_raw(pathogen, "article"))
+  models <- suppressWarnings(load_epidata_raw(pathogen, "model"))
+  outbreaks <- suppressWarnings(load_epidata_raw(pathogen, "outbreak"))
+  params <- suppressWarnings(load_epidata_raw(pathogen, "parameter"))
 
 
   models_extracted <- TRUE
@@ -101,22 +117,25 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   params_extracted <- TRUE
 
   if (! inherits(articles, "data.frame")) {
-    stop(paste("No article information found for ", pathogen))
+    cli_abort(paste("No article information found for", pathogen))
   }
 
   if (! inherits(models, "data.frame")) {
-    warning(paste("No models information found for ", pathogen))
+    cli_alert_warning(paste(pathogen, "does not have any extracted model 
+      information. Models will be set to NULL."))
     ## flip the flag to indicate that no models were found
     models_extracted <- FALSE
   }
 
   if (! inherits(outbreaks, "data.frame")) {
-    warning(paste("No outbreaks information found for ", pathogen))
+    cli_alert_info(paste(pathogen, "does not have any extracted outbreaks 
+      information. Outbreaks will be set to NULL."))
     outbreaks_extracted <- FALSE
   }
 
   if (! inherits(params, "data.frame")) {
-    warning(paste("No params information found for ", pathogen))
+    cli_alert_warning(paste(pathogen, "does not have any extracted parameter 
+      information. Parameters will be set to NULL."))
     params_extracted <- FALSE
   }
 
@@ -142,24 +161,24 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   params$parameter_value <- as.numeric(params$parameter_value)
 
   if (params_extracted) {
-    params <- make_unique_id(articles_everything, params)
+    params <- make_unique_id(articles_everything, params, "params")
     params <- left_join(params, articles, by = "id") |>
       mark_multiple_estimates("parameter_type", label_type = "numbers")
   } else params <- NULL
 
   if (models_extracted) {
-    models <- make_unique_id(articles_everything, models)
+    models <- make_unique_id(articles_everything, models, "models")
     models <- left_join(models, articles, by = "id") |>
       mark_multiple_estimates("model_type", label_type = "numbers")
   } else models <- NULL
 
   if (outbreaks_extracted) {
-    outbreaks <- make_unique_id(articles_everything, outbreaks)
+    outbreaks <- make_unique_id(articles_everything, outbreaks, "outbreaks")
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
   } else outbreaks <- NULL
 
-  message("Data loaded for ", pathogen)
+  cli_alert_success(paste("Data loaded for", pathogen))
 
   list(
     articles = articles_everything, params = params, models = models,
@@ -193,7 +212,9 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' mark_multiple_estimates(df, label_type = "numbers")
 #'
 #' @export
-mark_multiple_estimates <- function(df, col = "parameter_type", label_type = c("letters", "numbers")) {
+mark_multiple_estimates <- function(df, 
+  col = "parameter_type", 
+  label_type = c("letters", "numbers")) {
 
   match.arg(label_type)
 

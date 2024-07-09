@@ -1,3 +1,7 @@
+# epireview 1.2.10
+
+* FEATURE: Moves error logging cli package and improves warnings addressing #57 and #21
+
 # epireview 1.2.9
 
 * FEATURE: functions to get specific parameters for a given pathogen.
