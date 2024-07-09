@@ -1,6 +1,6 @@
 Package: epireview
 Title: Tools to update and summarise the latest pathogen data from the Pathogen Epidemiology Review Group (PERG)
-Version: 1.2.9
+Version: 1.2.11
 Authors@R: c(
     person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5213-4364")),
@@ -15,7 +15,9 @@ Authors@R: c(
     person("Kelly", "McCain", role = "aut", comment = c(ORCID = "0000-0003-2393-2217")),
     person("Joshua", "Lambert", role = "aut", comment = c(ORCID = "0000-0001-5218-3046")),
     person("Anne", "Cori", role = "aut", comment = c(ORCID = "0000-0002-8443-9162")),
-    person("Thomas", "Rawson", role = "aut", comment = c(ORCID = "0000-0001-8182-4279")))
+    person("Thomas", "Rawson", role = "aut", comment = c(ORCID = "0000-0001-8182-4279")),
+    person("Patrick", "Doohan", role = "aut", comment = c(ORCID = "0000-0001-8076-1106")),
+    person("Tristan", "Naidoo", role = "aut", comment = c(ORCID = 0000-0001-9970-2421)))
 Description: Contains the latest open access pathogen data from the Pathogen Epidemiology Review Group (PERG). Tools are available to update pathogen databases with new peer-reviewed data as it becomes available, and to summarise the latest data using tables and figures.
 License: GPL (>= 3)
 Depends:
@@ -37,7 +39,9 @@ Imports:
     pals,
     paletteer,
     methods,
-    scales
+    scales,
+    cli,
+    vroom
 Suggests:
     knitr,
     lifecycle,

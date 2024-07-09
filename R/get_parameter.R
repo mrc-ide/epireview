@@ -2,9 +2,10 @@
 
 #' retrieve all parameters of specified type or class
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
-#' @param parameter_name name of the parameter type or parameter class to 
+#' @param parameter_name name of the parameter type or parameter class to
 #' retrieve, ensuring the name matches that in data
 #' @return dataframe with all parameter estimates and columns
+#' @importFrom cli cli_abort
 #' @export
 #' @examples
 #' df <- load_epidata(pathogen = "ebola")
@@ -16,28 +17,28 @@
 get_parameter <- function(data, parameter_name) {
   # Validate input: check if 'data' is a dataframe
   if (!is.data.frame(data)) {
-    stop("Error: 'data' should be a dataframe.")
+    cli_abort("Error: 'data' should be a dataframe.")
   }
 
   # Validate input: check if 'parameter_name' is a non-empty string
   if (!is.character(parameter_name) || parameter_name == "") {
-    stop("Error: 'parameter_name' must be a non-empty string.")
+    cli_abort("Error: 'parameter_name' must be a non-empty string.")
   }
 
   # Validate that 'parameter_type' column exists in 'data'
   if (!"parameter_type" %in% names(data)) {
-    stop("Error: 'data' does not contain the required 'parameter_type' column.")
+    cli_abort("Error: 'data' does not contain the required 'parameter_type' column.")
   }
 
   # Validate that 'parameter_class' column exists in 'data'
   if (!"parameter_class" %in% names(data)) {
-    stop("Error: 'data' does not contain the required 'parameter_class' column.")
+    cli_abort("Error: 'data' does not contain the required 'parameter_class' column.")
   }
 
   # Check if there are any entries that match 'parameter_name' or 'parameter_class'
-  if (sum(data$parameter_type == parameter_name) == 0 & 
-    sum(data$parameter_class == parameter_name) == 0) {
-    stop("Error: No entries found matching the specified 'parameter_name'.
+  if (sum(data$parameter_type == parameter_name) == 0 &
+      sum(data$parameter_class == parameter_name) == 0) {
+    cli_abort("Error: No entries found matching the specified 'parameter_name'.
       Check spelling and case of 'parameter name'.")
   }
 
@@ -63,7 +64,7 @@ get_parameter <- function(data, parameter_name) {
 #'
 #' @param data parameter dataframe output from \code{\link{load_epidata}}
 #' @inheritParams get_key_columns
-#' @return dataframe with all parameter estimates of this type and key columns 
+#' @return dataframe with all parameter estimates of this type and key columns
 #' (see \code{\link{get_key_columns}})
 #' @export
 #' @name get_specific

@@ -32,8 +32,9 @@ The data extracted in the systematic review has been stored in three
 files - one each for articles, parameters, and transmission models.
 Data in the three files can be linked using article identifier.
 This function will read in the pathogen-specific articles and
-parameters files and join them into a data.frame. The resulting
-data set can be used to create a forest plot.
+parameters files and join them into a data.frame. This function also
+creates user-friendly short labels for the "parameter_type" column in params
+data.frame. See \code{\link{short_parameter_type}} for more details.
 }
 \seealso{
 \code{\link{load_epidata}}

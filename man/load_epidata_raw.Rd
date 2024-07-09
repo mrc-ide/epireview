@@ -6,7 +6,7 @@
 \usage{
 load_epidata_raw(
   pathogen,
-  table = c("article", "parameter", "outbreak", "model")
+  table = c("article", "parameter", "outbreak", "model", "param_name")
 )
 }
 \arguments{

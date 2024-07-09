@@ -21,7 +21,7 @@
 #' added to facilitate the meta analysis of means. The additional columns are:
 #' xbar, median, q1, q3, min, max.
 #'
-#'
+#' @importFrom cli cli_inform cli_abort
 #' @export
 #'
 #' @examples
@@ -43,29 +43,29 @@ filter_df_for_metamean <- function(df) {
 
   if (!all(cols_needed %in% colnames(df))) {
     cols_missing <- cols_needed[!cols_needed %in% colnames(df)]
-    stop(
-      "df must have columns named: ", paste(cols_needed, collapse = ", "),
-      ". Columns missing: ", paste(cols_missing, collapse = ", "),
-      call. = FALSE
+    cli_abort(
+      paste("df must have columns named: ", paste(cols_needed, collapse = ", "),
+      ". Columns missing: ", paste(cols_missing, collapse = ", "), sep=""),
+      call = NULL
     )
   }
 
   ## Ensure that there is a single parameter type present
   if(length(unique(df$parameter_type)) != 1) {
-    stop("parameter_type must be the same across all values.", call. = FALSE)
+    cli_abort("parameter_type must be the same across all values.", call = NULL)
   }
 
   ## First check that there are no rows where a value is present but unit is
   ## missing, or vice versa
   if(any(is.na(df$parameter_value) & !is.na(df$parameter_unit))) {
-    message("parameter_value must be present if parameter_unit is present.
+    cli_inform("parameter_value must be present if parameter_unit is present.
             Rows with non-NA parameter_value and NA parameter_unit will be
             removed.")
     df <- filter(df,!( is.na(.data[["parameter_value"]]) & !is.na(.data[["parameter_unit"]]) ))
   }
 
   if(any(!is.na(df$parameter_value) & is.na(df$parameter_unit))) {
-    message("parameter_unit is missing but parameter_value is present.
+    cli_inform("parameter_unit is missing but parameter_value is present.
             Rows with non-NA parameter_value and NA parameter_unit will be
             removed."
     )
@@ -77,7 +77,7 @@ filter_df_for_metamean <- function(df) {
   if(length(unique(df$parameter_unit[!is.na(df$parameter_unit)])) != 1) {
     msg1 <- "parameter_unit must be the same across all values."
     msg2 <- "Consider calling delays_to_days() if you are working with delays."
-    stop(paste(msg1, msg2), call. = FALSE)
+    cli_abort(paste(msg1, msg2), call = NULL)
   }
 
   df <- df %>% filter(!is.na(.data[["population_sample_size"]])) %>%

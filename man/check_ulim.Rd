@@ -32,5 +32,4 @@ directly to update the default upper limit in the forest plot functions.
 \examples{
 df <- data.frame(parameter_value = c(10, 20, 30))
 check_ulim(df, 25, "parameter")
-
 }

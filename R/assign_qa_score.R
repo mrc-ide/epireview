@@ -21,6 +21,7 @@
 #' element of the list (named errors) is a data.frame containing articles 
 #' with all NA answers.
 #' @seealso \code{\link{qa_questions}}
+#' @importFrom cli cli_inform cli_abort
 #' @export
 #' @examples
 #' lassa <- load_epidata("lassa")
@@ -36,7 +37,7 @@ assign_qa_score <- function(articles, ignore_errors = FALSE) {
   if (! all(question_cols %in% colnames(articles))) {
     msg1 <- "Not all QA questions are present in the data"
     msg2 <- "Did you forget to use load_epidata to load data?"
-    stop(paste(msg1, msg2), call. = FALSE)
+    cli_abort(paste(msg1, msg2), call = NULL)
   }
   nquestions <- length(question_cols)
   answers <- articles[, question_cols]
@@ -44,7 +45,7 @@ assign_qa_score <- function(articles, ignore_errors = FALSE) {
   check <- apply(answers, 1, function(x) sum(is.na(x)))
   all_nas <- check == nquestions
   if (any(all_nas)) {
-    message(
+    cli_inform(
       paste(
         sum(all_nas), "articles have all NAs for QA questions; please check that
          this is expected. QA score for these articles is set to NA."
@@ -52,7 +53,7 @@ assign_qa_score <- function(articles, ignore_errors = FALSE) {
     )
     errors <- articles[all_nas, ]
     if (! ignore_errors) {
-      stop("Please correct the errors before proceeding", call. = FALSE)
+      cli_abort("Please correct the errors before proceeding", call = NULL)
     }
   }
   n_non_nas <- nquestions - check

@@ -24,6 +24,7 @@
 #' If you wish to color by a different variable, you must provide a palette.
 #' @return A ggplot2 object representing the forest plot.
 #' @import ggplot2
+#' @importFrom cli cli_warn cli_abort
 #' @export
 #' @examples
 #' df <- data.frame(
@@ -97,7 +98,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", shape_by, ".
+        cli_warn(paste("No palette was provided or found for ", shape_by, ".
           Using default palette"))
       }
 
@@ -108,7 +109,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   if(!is.na(unique_label)){
     ## Check that the provided unique_label is the correct length:
     if (length(unique_label) != length(df$article_label)) {
-      stop("The length of 'unique_label' must match the number of unique labels 
+      cli_abort("The length of 'unique_label' must match the number of unique labels
         in the data frame.")
     } else {
       p <- p + scale_y_discrete(labels = unique_label)
@@ -128,7 +129,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", col_by, ".
+        cli_warn(paste("No palette was provided or found for ", col_by, ".
         Using default palette"))
       }
 

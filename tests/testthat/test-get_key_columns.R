@@ -281,7 +281,8 @@ test_that("get_key_columns returns all columns when all_columns = TRUE", {
   expect_lt(ncol(df_key),ncol(df_all))
   expect_identical(dim(df_key),c(374L, 12L))
   ## load_epidata creates an extra column article_info
-  expect_identical(dim(df_all),c(374L, 64L))
+  expect_identical(dim(df_all),c(374L, 65L)) 
+
 })
 
 

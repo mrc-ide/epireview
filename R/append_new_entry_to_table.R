@@ -10,7 +10,7 @@
 #' (either TRUE or FALSE)
 #' @return table with new entry 
 #' @importFrom readr write_csv
-#'
+#' @importFrom cli cli_abort
 #' @export
 append_new_entry_to_table <- function(pathogen,
                                       table,
@@ -28,10 +28,10 @@ append_new_entry_to_table <- function(pathogen,
 
   if (!((sum(colnames(new_row) == colnames(old_table)) /
         length(colnames(new_row))) == 1))
-    stop("Schemas of new row and data sets do not match")
+    cli_abort("Schemas of new row and data sets do not match")
 
   if (table == "article" && new_row$article_id %in% old_table$article_id)
-    stop("article_id already exists in the data set")
+    cli_abort("article_id already exists in the data set")
 
   new_table <- rbind(old_table, new_row)
 
