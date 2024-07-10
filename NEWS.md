@@ -1,3 +1,10 @@
+# epireview 1.3.0
+
+* MAJOR RELEASE
+  - Improved messages when loading data via load_epidata
+  - User-friendly getters for key epi parameters
+  - Bug fixes
+  
 # epireview 1.2.13
 
 * FEATURE: new function to format parameter dataset so that it can be input into
