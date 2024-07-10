@@ -1,3 +1,66 @@
+#' Sanity checks before meta-analysis
+#' @details
+#' The function carries out a series of checks on the parameter dataframe to
+#' ensure that it is in the correct format for conducting a meta-analysis. 
+#' It checks that the input (1) consists of a single parameter type; (2) has the
+#' columns required for the meta-analysis; (3) does not have any row where a 
+#' value is present but the unit is missing, or vice versa. All such rows are 
+#' removed; and (4) has the same unit across all values of the parameter. The 
+#' function will throw an error if either there is more than one value of 
+#' parameter_type, or if the columns needed for the meta-analysis are missing,
+#' or if the parameter_unit is not the same across all values of the parameter.
+#' @inheritParams filter_df_for_metaprop
+#' @param cols_needed a character vector specifying the names of the columns
+#' required for the meta-analysis.
+#' @return a parameter dataframe with offending rows removed.
+#' @export
+check_df_for_meta <- function(df, cols_needed) {
+
+  ## Ensure that there is a single parameter type present
+  if(length(unique(df$parameter_type)) != 1) {
+    cli_abort("parameter_type must be the same across all values.", call = NULL)
+  }
+
+  if (!all(cols_needed %in% colnames(df))) {
+    cols_missing <- cols_needed[!cols_needed %in% colnames(df)]
+    cli_abort(
+      "df must have columns named: {cols_needed}. 
+      Column{?s} missing: {cols_missing}",
+      call = NULL
+    )
+  }
+  
+  ## First check that there are no rows where a value is present but unit is
+  ## missing, or vice versa
+  idx <- is.na(df$parameter_value) & !is.na(df$parameter_unit)
+  remove <- sum(idx)
+  if(any(idx)) {
+    cli_inform("parameter_value must be present if parameter_unit is present.
+            {remove} row{?s} with non-NA parameter_value and NA parameter_unit  
+            will be removed.")
+    df <- df[!(is.na(df$parameter_value) & !is.na(df$parameter_unit)), ]
+  }
+  
+  idx <- !is.na(df$parameter_value) & is.na(df$parameter_unit)
+  remove <- sum(idx)
+  if(any(idx)) {
+    cli_inform("parameter_unit is missing but parameter_value is present.
+            {remove} row{?s} with non-NA parameter_value and NA parameter_unit 
+            will be removed.")
+    df <- df[!(is.na(df$parameter_value) & !is.na(df$parameter_unit)), ]
+  }
+  
+  # values of the parameter must all have the same units
+  if(length(unique(df$parameter_unit[!is.na(df$parameter_unit)])) != 1) {
+    msg1 <- "parameter_unit must be the same across all values."
+    msg2 <- "Consider calling delays_to_days() if you are working with delays."
+    cli_abort(paste(msg1, msg2), call = NULL)
+  }
+  
+
+  
+  df
+}
 #' Check upper limit of parameter values
 #'
 #' @details

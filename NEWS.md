@@ -1,3 +1,8 @@
+# epireview 1.2.13
+
+* FEATURE: new function to format parameter dataset so that it can be input into
+meta-analysis of proportions.
+
 # epireview 1.2.12
 
 * FEATURE: Addresses #98 by including article_info as key column returned when parameter specific getters are invoked.
