@@ -12,7 +12,7 @@
 #' are loaded via \code{\link{load_epidata}}.
 #'
 #' @param x data.frame containing a column called "parameter_type",  This will
-#' typically be the `params`data.frame from the output of \code{load_epireview}.
+#' typically be the `params`data.frame from the output of \code{load_epidata}.
 #' @param parameter_type_full optional. User can specify the full value of a
 #' parameter type not already included in the function.
 #' @param parameter_type_short optional. Shorter value of parameter_type_full

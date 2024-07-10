@@ -11,7 +11,7 @@ filter_df_for_metaprop(df, num_col, denom_col)
 following: parameter_value, parameter_unit, plus two columns for the
 numerator and the denominator of the proportion of interest.
 This dataframe will typically be the \code{params}
-data.frame from the output of \code{\link{load_epireview}}.}
+data.frame from the output of \code{\link{load_epidata}}.}
 
 \item{num_col}{a string specifying the column name for the column containing
 the numerator of the proportion of interest.}
@@ -29,8 +29,11 @@ Prepare parameter dataframe for meta analysis of proportions
 \details{
 The function checks that the format of df is adequate for conducting a meta
 analysis of proportions. It filters the dataframe to only include rows that
-meet the required format.
-TODO: add more description here re the required format
+meet the required format by (1) removing rows where the denominator is missing,
+and (2) removing rows where both the numerator column or parameter value are
+missing. If the numerator column is missing and the parameter value is present,
+the numerator is imputed as the parameter value divided by 100 times the
+denominator.
 }
 \examples{
 ## preparing data for meta analyses of CFR for Lassa
