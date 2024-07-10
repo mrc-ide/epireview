@@ -2,21 +2,21 @@
 % Please edit documentation in R/get_parameter.R
 \name{get_parameter}
 \alias{get_parameter}
-\title{retrieve all parameters of specified type}
+\title{retrieve all parameters of specified type or class}
 \usage{
 get_parameter(data, parameter_name)
 }
 \arguments{
 \item{data}{parameter dataframe output from \code{\link{load_epidata}}}
 
-\item{parameter_name}{name of the parameter type to retrieve, ensuring the
-name matches that in data}
+\item{parameter_name}{name of the parameter type or parameter class to
+retrieve, ensuring the name matches that in data}
 }
 \value{
-dataframe with all parameter estimates and specified columns
+dataframe with all parameter estimates and columns
 }
 \description{
-retrieve all parameters of specified type
+retrieve all parameters of specified type or class
 }
 \examples{
 df <- load_epidata(pathogen = "ebola")

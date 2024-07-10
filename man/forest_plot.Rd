@@ -10,7 +10,8 @@ forest_plot(
   shape_by = NA,
   col_by = NA,
   shp_palette = NA,
-  col_palette = NA
+  col_palette = NA,
+  unique_label = NA
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ not one of 'parameter_value_type'.}
 
 \item{col_palette}{Palette for coloring the points. Optional unless col_by is
 not one of 'parameter_type' or 'population_country'.}
+
+\item{unique_label}{(Optional) User can provide custom labels for forest plot y-axis. Must match length of dataframe.}
 }
 \value{
 A ggplot2 object representing the forest plot.

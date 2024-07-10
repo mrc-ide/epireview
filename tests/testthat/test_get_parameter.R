@@ -4,6 +4,7 @@ mock_data <- data.frame(
                      "Attack rate",
                      "Reproduction number (Basic R0)"),
   parameter_value = c(1, 2, 2.5),
+  parameter_class = c("Human delay", "Severity", "Transmission"),
   stringsAsFactors = FALSE
 )
 
@@ -35,3 +36,50 @@ test_that("Function returns correct subset of data", {
   expect_equal(nrow(result), 1)
   expect_equal(result$parameter_value, 1)
 })
+
+
+## testing specific get_parameter functions
+
+
+
+test_that("Function returns correct delay data", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("lassa")$params))
+
+  expect_equal(nrow(get_delays(data, all_columns = TRUE)),
+               length(which(data$parameter_class=="Human delay"))
+    )
+
+  expect_equal(nrow(get_incubation_period(data, all_columns = TRUE)),
+               length(which(data$parameter_type=="Human delay - incubation period"))
+  )
+
+})
+
+test_that("Function returns correct seroprevalence data", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("lassa")$params))
+
+  expect_equal(nrow(get_seroprevalence(data, all_columns = TRUE)),
+               length(which(data$parameter_class=="Seroprevalence"))
+  )
+
+})
+
+
+test_that("all_columns argument has pulled through to get_ functions", {
+
+  data <- suppressWarnings(suppressMessages(load_epidata("ebola")$params))
+
+  expect_equal(ncol(get_seroprevalence(data, all_columns = TRUE)),
+               ncol(data))
+
+})
+
+
+
+
+
+
+
+

@@ -13,6 +13,7 @@
 #' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs
 #' ggplot_add
 #' @importFrom patchwork wrap_plots
+#' @importFrom cli cli_abort
 #' @examples
 #' quality_assessment_plots(pathogen = "marburg")
 #' @export
@@ -24,7 +25,7 @@ quality_assessment_plots <- function(pathogen = NA,
   assert_pathogen(pathogen)
 
   if (is.na(pathogen)) {
-    stop("pathogen name must be supplied")
+    cli_abort("pathogen name must be supplied")
   }
 
   file_path <- system.file("extdata", paste0(pathogen, "_article.csv"),
