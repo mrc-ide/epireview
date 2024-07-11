@@ -2,9 +2,13 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - develop
   pull_request:
-    branches: [main, master]
+    branches:
+      - main
+      - develop
   release:
     types: [published]
   workflow_dispatch:
@@ -40,7 +44,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           clean: false
