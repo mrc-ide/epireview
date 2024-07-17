@@ -6,7 +6,7 @@ articles:
   load-filter-view-epidata: load-filter-view-epidata.html
   pathogen_database_field_options: pathogen_database_field_options.html
   pathogen_database_update: pathogen_database_update.html
-last_built: 2024-07-10T19:39Z
+last_built: 2024-07-17T16:52Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles
