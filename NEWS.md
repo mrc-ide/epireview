@@ -1,5 +1,10 @@
 # epireview 1.3.0
 
+* FEATURE
+  - Updated lassa data available following updated literature search
+
+# epireview 1.3.0
+
 * MAJOR RELEASE
   - Improved messages when loading data via load_epidata
   - User-friendly getters for key epi parameters
