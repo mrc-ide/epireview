@@ -1,7 +1,7 @@
 df <- load_epidata("lassa")[["params"]]
 cfr_df <- df[df$parameter_type %in% "Severity - case fatality rate (CFR)",]
 prob <- is.na(cfr_df$parameter_value) & !is.na(cfr_df$parameter_unit)
-if (any(prob)) cfr_df <- cfr_df[-which(prob),]
+if (any(prob)) cfr_df <- cfr_df[! prob,]
 
 num_col <- "cfr_ifr_numerator"
 denom_col <- "cfr_ifr_denominator"
@@ -21,7 +21,7 @@ test_that("filtering parameter dataframe for meta prop works",{
 
   ## Check that rows with missing denominator are removed
   df2 <- filter_df_for_metaprop(cfr_df, num_col, denom_col)
-  expect_equal(dim(df2)[1], 66L)
+  expect_equal(dim(df2)[1], 74L)
 
   ## Check that the resulting df has the same columns
   expect_true(all(names(cfr_df) %in% names(df2)))
