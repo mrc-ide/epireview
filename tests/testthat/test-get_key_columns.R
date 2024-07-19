@@ -10,7 +10,7 @@ suppressWarnings({
 test_that("get_key_columns works for lassa cfr", {
   df <- get_key_columns(data = lassa_params, parameter_name = "cfr")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 12L))
+  expect_identical(dim(df), c(440L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country",
@@ -25,7 +25,7 @@ test_that("get_key_columns works for lassa cfr", {
 test_that("get_key_columns works for lassa delays", {
   df <- get_key_columns(data = lassa_params, parameter_name = "delays")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 15L))
+  expect_identical(dim(df), c(440L, 15L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -40,7 +40,7 @@ test_that("get_key_columns works for lassa delays", {
 test_that("get_key_columns works for lassa sero", {
   df <- get_key_columns(data = lassa_params, parameter_name = "sero")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 11L))
+  expect_identical(dim(df), c(440L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -53,7 +53,7 @@ test_that("get_key_columns works for lassa sero", {
 test_that("get_key_columns works for lassa risk", {
   df <- get_key_columns(data = lassa_params, parameter_name = "risk_factors")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 12L))
+  expect_identical(dim(df), c(440L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -70,7 +70,7 @@ test_that("get_key_columns works for lassa reproduction_number", {
     parameter_name = "reproduction_number"
   )
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 11L))
+  expect_identical(dim(df), c(440L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -83,7 +83,7 @@ test_that("get_key_columns works for lassa reproduction_number", {
 test_that("get_key_columns works for lassa genomic", {
   df <- get_key_columns(data = lassa_params,  parameter_name = "genomic")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(374L, 13L))
+  expect_identical(dim(df), c(440L, 13L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -279,9 +279,9 @@ test_that("get_key_columns returns all columns when all_columns = TRUE", {
   expect_s3_class(df_key, class = "data.frame")
   expect_s3_class(df_all, class = "data.frame")
   expect_lt(ncol(df_key),ncol(df_all))
-  expect_identical(dim(df_key),c(374L, 12L))
+  expect_identical(dim(df_key),c(440L, 12L))
   ## load_epidata creates an extra column article_info
-  expect_identical(dim(df_all),c(374L, 65L)) 
+  expect_identical(dim(df_all),c(440L, 68L)) 
 
 })
 
