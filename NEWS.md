@@ -1,3 +1,7 @@
+# epireview 1.3.1
+
+* BUG-FIX: Fixes #104 using readr::read_delim to read in parameter type short names
+
 # epireview 1.3.0
 
 * MAJOR RELEASE
