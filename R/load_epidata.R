@@ -86,7 +86,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' of the outbreaks extracted for this pathogen, where available.
 #'
 #' @importFrom dplyr left_join
-#' @importFrom utils read.csv2
+#' @importFrom readr read_delim
 #' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
@@ -138,9 +138,10 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   )
   articles_everything <- articles
   articles <- articles[, cols]
-
-  param_names <- read.csv2(
-    system.file("extdata", "param_name.csv", package = "epireview")
+  
+  param_names <- read_delim(
+    system.file("extdata", "param_name.csv", package = "epireview"),
+    delim = ";"
   )  
   params <- short_parameter_type(
     params, param_names$parameter_type_full, param_names$parameter_type_short
