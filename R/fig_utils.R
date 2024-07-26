@@ -199,3 +199,34 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
   }
   shape_palette
 }
+
+#' Create a custom color palette.
+#' @description This utility function creates a named color vector from user-supplied vectors of labels and color values.
+#' The length of the label and color vectors must be the same.
+#' The resulting custom color palette can be used as the color palette in other plotting functions.
+#'
+#' @param labels A vector of labels to be used as names for the custom color palette.
+#' @param colors A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, eg "#808080" or color names recognized by R, eg "deepskyblue"
+#'
+#' @return A custom palette in the form of a named color vector.
+#'
+#' @examples
+#' labels <- c("Liberia", "Guinea", "Sierra Leone")
+#' colors <- c("#5A5156FF", "#E4E1E3FF", "#5050FFFF")
+#'
+#'custom_pal <- custom_palette(labels, colors)
+#'custom_pal
+#'
+#' @export
+custom_palette <- function(labels, colors) {
+  # An error will pop-up if the user supplies a different number of names or colors
+  if (length(labels) != length(colors)) {
+    stop(paste0("The number of colors supplied must match the number of different labels provided. You provided ", length(colors), " colors for ", length(labels), " labels. Please make sure that the vectors are of the same length."))
+  }
+
+  # Create the color vector
+  color_vector <- colors
+  names(color_vector) <- labels
+
+  return(color_vector)
+}
