@@ -151,3 +151,33 @@ test_that("reparam_gamma handles gamma distribution with Mean sd", {
   expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
   expect_equal(df$parameter_uncertainty_single_value, 3)
 })
+
+
+# Tests for custom_palette() ----------------------------------------------
+
+test_that("custom palette works with equal length vectors", {
+  labels <- c("Liberia", "Guinea", "Sierra Leone")
+  colors <- c("#5A5156FF", "#E4E1E3FF", "#5050FFFF")
+
+  custom_pal <- custom_palette(labels, colors)
+
+  expected_pal <- colors
+  names(expected_pal) <- labels
+
+  expect_equal(custom_pal, expected_pal)
+})
+
+
+test_that("custom palette prints error if length labels != length colors", {
+  # Test if length(labels) > length(colors)
+  labels <- c("Liberia", "Guinea", "Sierra Leone")
+  colors <- c("#5A5156FF", "#E4E1E3FF")
+
+  expect_error(custom_palette(labels, colors))
+
+  # Test if length(labels) < length(colors)
+  labels <- c("Liberia", "Guinea")
+  colors <- c("#5A5156FF", "#E4E1E3FF", "#5050FFFF")
+
+  expect_error(custom_palette(labels, colors))
+})
