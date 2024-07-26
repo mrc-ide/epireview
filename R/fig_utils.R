@@ -28,7 +28,7 @@ theme_epireview <- function(
 #'
 #' This function returns a color palette for countries.
 #'
-#' @param x A vector of country names. If provided, the function will return a 
+#' @param x A vector of country names. If provided, the function will return a
 #' color palette for the specified countries.
 #' @return A color palette for the specified countries.
 #' @examples
@@ -42,7 +42,9 @@ theme_epireview <- function(
 #'
 #' @export
 country_palette <- function(x = NULL) {
-  pal <- paletteer::paletteer_d("pals::polychrome")
+  # pal <- paletteer::paletteer_d("pals::polychrome") # previous palette
+  pal <- paletteer::paletteer_d("ggsci::default_igv")[1:36] # new palette, only first 36 colors
+
   class(pal) <- NULL
   countries <- c(
     'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
@@ -57,7 +59,7 @@ country_palette <- function(x = NULL) {
     x <- countries
   } else {
     if (length(x) > length(pal)) {
-      stop(paste0("More than", length(pal)," countries provided. Please provide 
+      stop(paste0("More than", length(pal)," countries provided. Please provide
         a vector of length", length(pal)," or less"))
     } else {
       pal <- pal[1:length(x)]
@@ -94,7 +96,7 @@ parameter_palette <- function(x) {
       names(out) <- x
     } else {
       stop(
-        paste0("Pre-defined palette has only ", n_colrs, " colors. Please 
+        paste0("Pre-defined palette has only ", n_colrs, " colors. Please
           provide a vector of length ", n_colrs, " or less")
           )
     }
@@ -136,7 +138,7 @@ value_type_palette <- function(x = NULL) {
       out <- shapes[seq_along(x)]
       names(out) <- x
     } else {
-      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please 
+      stop(paste0("Pre-defined palette has only ", n_shapes, " shapes. Please
         provide a vector of length ", n_shapes, " or less"))
     }
   }
@@ -147,12 +149,12 @@ value_type_palette <- function(x = NULL) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
-##' @param col_by a character vector specifying the parameter to color the 
+##' @param col_by a character vector specifying the parameter to color the
 ##' palette by.
-##' @param ... additional arguments to be passed to the underlying palette 
+##' @param ... additional arguments to be passed to the underlying palette
 ##' function.
 ##' These are treated as names of the palette elements.
-##' @return a named list of colors that can be used in forest plots for manually 
+##' @return a named list of colors that can be used in forest plots for manually
 ##' setting colors
 ##' @export
 color_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
@@ -161,7 +163,7 @@ color_palette <- function(col_by = c("parameter_type", "population_country"), ..
   col_palette <- NULL
   if (col_by == "parameter_type") {
     col_palette <- parameter_palette(other_args)
-  } 
+  }
   if (col_by == "population_country") {
     col_palette <- country_palette(other_args)
   }
@@ -171,7 +173,9 @@ color_palette <- function(col_by = c("parameter_type", "population_country"), ..
 ## Synonym for color_palette
 colour_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   color_palette(col_by, ...)
-}#' shape_palette function
+}
+
+#' shape_palette function
 #'
 #' This function generates a shape palette based on the specified shape_by parameter.
 #'

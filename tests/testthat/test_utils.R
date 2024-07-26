@@ -75,12 +75,12 @@ test_that("country_palette returns the correct palette", {
   expect_named(out)
 
   # Test case 2: Single country
-  expect_equal(country_palette("Liberia"), c(Liberia = "#5A5156FF"))
+  expect_equal(country_palette("Liberia"), c(Liberia = "#5050FFFF"))
 
   # Test case 3: Multiple countries
   expect_equal(country_palette(c("A", "B")), c(
-    A = "#5A5156FF",
-    B = "#E4E1E3FF"
+    A = "#5050FFFF",
+    B = "#CE3D32FF"
   ))
 
   # Test case 4: More than 36 countries provided
