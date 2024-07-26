@@ -1,3 +1,8 @@
+# epireview 1.3.2
+
+* BUG-FIX: Fixes #86 by removing a duplicated row. Also fixes an incorrectly entered method type for CFR, and incorrectly
+extracted population sizes. 
+
 # epireview 1.3.1
 
 * BUG-FIX: Fixes #104 using readr::read_delim to read in parameter type short names
