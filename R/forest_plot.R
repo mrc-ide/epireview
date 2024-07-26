@@ -34,7 +34,7 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shp_palette = NA,
+    shp_palette = NULL,
     col_palette = NULL) {
 
   ## ggplot2 will put all article labels on the y-axis
@@ -84,11 +84,11 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
-    if (!is.na(shp_palette)) {
+    if (!is.null(shp_palette)) {
       p <- p + scale_shape_manual(values = shp_palette)
     } else {
       shp_palette <- shape_palette(shape_by)
-      if (! is.null(shp_palette)) {
+      if (!is.null(shp_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
