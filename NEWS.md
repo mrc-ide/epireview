@@ -1,3 +1,7 @@
+# epireview 1.3.3
+
+* FEATURE: The argument to load_epidata is made case-insensitive. Addresses #96
+
 # epireview 1.3.2
 
 * BUG-FIX: Fixes #86 by removing a duplicated row. Also fixes an incorrectly entered method type for CFR, and incorrectly
