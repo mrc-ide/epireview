@@ -1,5 +1,8 @@
 test_that("load_epidata loads data as expected", {
 
+  ## Check that load_epidata argument is case insensitive
+  expect_no_error(suppressMessages(suppressWarnings(load_epidata("Marburg"))))
+  expect_no_error(suppressMessages(suppressWarnings(load_epidata("marBURG"))))
   # Check that the data loads without error
   expect_no_error(suppressMessages(suppressWarnings(load_epidata("marburg"))))
 

@@ -11,8 +11,9 @@ load_epidata_raw(
 }
 \arguments{
 \item{pathogen}{name of pathogen. Must be one of the priority pathogens
-exactly as specified in the package. You can get a list of the
-priority pathogens currently included in the package by calling}
+You can get a list of the
+priority pathogens currently included in the package by calling the function
+\code{\link{priority_pathogens}}.}
 
 \item{table}{the table to be loaded. Must be one of
 "article", "parameter", "outbreak", or "model"}
