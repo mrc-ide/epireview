@@ -10,6 +10,7 @@
 #' @importFrom tidyr replace_na
 #' @importFrom readr read_csv
 #' @importFrom stats na.omit
+#' @importFrom cli cli_abort
 #' @examples
 #' get_table_field_options(
 #'                        pathogen = "marburg", "model",
@@ -34,7 +35,7 @@ get_table_field_options <- function(pathogen, table = c("model", "parameter", "o
     package = "epireview")
   
   if (any(file_path_ob == "")) {
-    stop(paste0("No data found for ", pathogen))
+    cli_abort(paste0("No data found for ", pathogen))
   }
   model_options <- read_csv(file_path_ob, show_col_types = FALSE)
   

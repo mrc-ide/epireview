@@ -18,11 +18,13 @@
 #' not one of 'parameter_value_type'.
 #' @param col_palette Palette for coloring the points. Optional unless col_by is
 #' not one of 'parameter_type' or 'population_country'.
+#' @param unique_label (Optional) User can provide custom labels for forest plot y-axis. Must match length of dataframe.
 #' @importFrom ggforce facet_col
 #' @details epireview provides a default palette for parameters and countries.
 #' If you wish to color by a different variable, you must provide a palette.
 #' @return A ggplot2 object representing the forest plot.
 #' @import ggplot2
+#' @importFrom cli cli_warn cli_abort
 #' @export
 #' @examples
 #' df <- data.frame(
@@ -34,8 +36,9 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shp_palette = NULL,
-    col_palette = NULL) {
+    shp_palette = NA,
+    col_palette = NA,
+    unique_label = NA) {
 
   ## ggplot2 will put all article labels on the y-axis
   ## even if mid, low, and high are NA. We will filter them out
@@ -62,10 +65,13 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## a single dash, which is of course indisguishable from a solid line.
 
   p <- ggplot(df) +
-    geom_point(aes(x = .data[['mid']], y = .data[['article_label']])) +
+    geom_point(aes(x = .data[['mid']],
+                   y = .data[['article_label']])) +
     geom_errorbar(
-      aes(xmin = .data[['low']], xmax = .data[['high']], y = .data[['article_label']],
-          lty = .data[['uncertainty_type']])
+      aes(
+        xmin = .data[['low']], xmax = .data[['high']],
+        y = .data[['article_label']],
+        lty = .data[['uncertainty_type']])
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
     ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) +
@@ -85,18 +91,29 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.null(shp_palette)) {
-      p <- p + scale_shape_manual(values = shp_palette)
+      p <- p + scale_shape_manual(values = shp_palette, na.value = 4)
     } else {
       shp_palette <- shape_palette(shape_by)
       if (!is.null(shp_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", shape_by, ".
+        cli_warn(paste("No palette was provided or found for ", shape_by, ".
           Using default palette"))
       }
 
 
+    }
+
+  }
+
+  if(!is.na(unique_label)){
+    ## Check that the provided unique_label is the correct length:
+    if (length(unique_label) != length(df$article_label)) {
+      cli_abort("The length of 'unique_label' must match the number of unique labels
+        in the data frame.")
+    } else {
+      p <- p + scale_y_discrete(labels = unique_label)
     }
   }
 
@@ -106,14 +123,14 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.null(col_palette)) {
-      p <- p + scale_color_manual(values = col_palette)
+      p <- p + scale_color_manual(values = col_palette,  na.value = "gray")
     } else {
       col_palette <- color_palette(col_by)
       if (! is.null(col_palette)) {
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning
-        warning(paste("No palette was provided or found for ", col_by, ".
+        cli_warn(paste("No palette was provided or found for ", col_by, ".
         Using default palette"))
       }
 

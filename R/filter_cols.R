@@ -18,26 +18,25 @@
 #' filter_cols(p, "parameter_type", "in", 
 #'   list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
 #'
-#'
+#' @importFrom cli cli_abort
 #' @export
 filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 
   if (length(cols) != length(funs)) {
-    stop("Length of arguments cols is different from that of funs.
-          Please specify one function for each column in cols")
+    cli_abort("Length of arguments cols is different from that of funs.
+              Please specify one function for each column in cols")
   }
 
   if (length(funs) != length(vals)) {
-    stop("Length of arguments funs is different from that of vals.
-          Please specify values to be used for filtering columns in
-         cols")
+    cli_abort("Length of arguments funs is different from that of vals.
+    Please specify values to be used for filtering columns in cols")
   }
 
   match.arg(funs)
 
   if (any(! cols %in% colnames(x))) {
     msg <- "cols must be present in x as a column. Offending cols are "
-    stop(paste(msg, toString(cols[! cols %in% colnames(x)])))
+    cli_abort(paste(msg, toString(cols[! cols %in% colnames(x)])))
   }
 
   ## Make sure character and factor columns take in %in% or ==
@@ -54,7 +53,7 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 
   if (any_match) {
     msg <- "Non-character filter functions supplied to character columns. Offending columns are"
-    stop(paste(msg, toString(cols[any_match])))
+    cli_abort(paste(msg, toString(cols[any_match])))
   }
 
   filter <- rep(TRUE, nrow(x))

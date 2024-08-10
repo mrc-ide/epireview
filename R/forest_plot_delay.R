@@ -113,12 +113,13 @@ forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE,
 #'                  inverse_param = c(FALSE, TRUE, FALSE))
 #' invert_inverse_params(df)
 #' # Output:
+#' @importFrom cli cli_warn
 #' @export
 invert_inverse_params <- function(df) {
 
   idx <- df$inverse_param ## Already a logical vector
   if (!any(idx)) {
-    warning("No parameters to invert.")
+    cli_warn("No parameters to invert.")
     return(df)
   }
 
@@ -157,6 +158,7 @@ invert_inverse_params <- function(df) {
 #' # 1               1           Days
 #' # 2              49           Days
 #' # 3              30           Days
+#' @importFrom cli cli_alert_info cli_alert_warning cli_h2 cli_ol cli_li cli_end
 #' @export
 delays_to_days <- function(df) {
 
@@ -164,10 +166,30 @@ delays_to_days <- function(df) {
   ## and warn the user if this is not the case
   units <- tolower(df$parameter_unit)
   not_days <- unique(units[!units %in% "days"])
+
   if (!all(units %in% "days")) {
-    warning("Not all delays are in days. Other units are:", 
-                  paste(not_days, collapse = ", "))
-    warning("We will attempt to convert hours and weeks to days.")
+    cli_alert_warning(paste("Not all delays are in days. Other units are:",
+                      paste(not_days, collapse = ", ")))
+
+    hours_weeks <-  not_days[not_days %in% c("hours", "weeks")]
+
+    cli_alert_info("We will attempt the following conversions:")
+
+    # create a separate cli ordered list for hours and weeks
+    for (unit in hours_weeks){
+      cli_h2(paste(unit, " -> days", sep=""))
+      olid <- cli_ol()
+
+      # get a df of the conversions for the current unit and the number of rows
+      # to convert
+      conversion_df <- as.data.frame(table(df$parameter_type[units %in% unit]))
+      # use %in% incase there are NAs in units
+      for (i in 1:NROW(conversion_df)){
+        cli_li(paste(conversion_df[i,1], " (n=", conversion_df[i,2], ")", sep=""))
+      }
+
+      cli_end(olid)
+      }
   }
   ## Hours to days
   hours <- df$parameter_unit %in% "Hours"

@@ -12,7 +12,7 @@ assert_pathogen <- function(x, message = paste(
 
   pps <- priority_pathogens()
   if (!x %in% pps$pathogen) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
 
   invisible(TRUE)
@@ -23,13 +23,13 @@ assert_pathogen <- function(x, message = paste(
 #' @noRd
 assert_table <- function(x, message = paste(
                            "%s must be one of the priority pathogens table options:",
-                           paste("article", "parameter", "outbreak", "model", sep = ", ")
+                           paste("article", "parameter", "outbreak", "model", "param_name", sep = ", ")
                          ),
                          name = deparse(substitute(x))) {
   assert_string(x)
-  table_names <- c("article", "parameter", "outbreak", "model")
+  table_names <- c("article", "parameter", "outbreak", "model", "param_name")
   if (!x %in% table_names) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
   invisible(TRUE)
 }
@@ -39,7 +39,7 @@ assert_table <- function(x, message = paste(
 #' @noRd
 assert_string <- function(x, message = "%s must be character string", name = deparse(substitute(x))) {
   if (!is.character(x)) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
   invisible(TRUE)
 }
@@ -47,7 +47,7 @@ assert_string <- function(x, message = "%s must be character string", name = dep
 
 assert_data_frame <- function(x, message = "%s must be a data frame", name = deparse(substitute(x))) {
   if (!is.data.frame(x)) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
   invisible(TRUE)
 }
@@ -56,22 +56,21 @@ assert_params <- function(x, message = "%s must have a column named 'parameter_t
                                         Did you load the data using load_epidata?", name = deparse(substitute(x))) {
   assert_data_frame(x)
   if (!"parameter_type" %in% colnames(x)) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
   invisible(TRUE)
 }
 
 assert_articles <- function(x, message = "%s must have columns
-   'first_author_first_name', 'first_author_surname', 'year_publication', 
-   'covidence_id'. Did you load the data using load_epidata?", 
+   'first_author_first_name', 'first_author_surname', 'year_publication',
+   'covidence_id'. Did you load the data using load_epidata?",
    name = deparse(substitute(x))) {
   assert_data_frame(x)
   cols_needed <- c(
-    "first_author_first_name", "first_author_surname", 
-    "year_publication", "covidence_id",
-    "qa_m1", "qa_m2", "qa_a3", "qa_a4", "qa_d5", "qa_d6", "qa_d7")
+    "first_author_first_name", "first_author_surname",
+    "year_publication", "covidence_id")
   if (!all(cols_needed %in% colnames(x))) {
-    stop(sprintf(message, name), call. = FALSE)
+    cli_abort(sprintf(message, name), call = NULL)
   }
   invisible(TRUE)
 }

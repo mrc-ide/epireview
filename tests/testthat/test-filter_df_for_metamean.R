@@ -14,15 +14,9 @@ test_that("filtering parameter dataframe for meta mean works",{
                      "parameter_uncertainty_lower_value",
                      "parameter_uncertainty_upper_value")
 
-  msg1 <- paste(
-    "df must have columns named:",
-    paste(required_cols, collapse = ", ")
-  )
   for(i in required_cols){
     df1 <- df[, -grep(i, colnames(df))]
-    msg2 <- paste(". Columns missing:", i)
-    expected_err_msg <- paste0(msg1, msg2)
-    expect_error(filter_df_for_metamean(df1), expected_err_msg)
+    expect_error(filter_df_for_metamean(df1), regexp = i)
   }
 
   df1 <- df

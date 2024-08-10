@@ -11,27 +11,42 @@
 #' forest plot functions (e.g. \code{\link{forest_plot_rt}}).
 #' 
 #' @param df The input dataframe to be reordered
+#' @param reorder_by character. The name of the column to reorder the data by. 
+#' Default is "population_country"
 #' @return The reordered dataframe
+#' @importFrom cli cli_abort
 #' @export
 #' @seealso \code{\link{forest_plot_rt}}  \code{\link{forest_plot_r0}}
 #' @examples
 #' ebola <- load_epidata("ebola")
 #' params <- ebola$params
-#' rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]
+#' rt <- params[params$parameter_type == "Reproduction number (Effective, Re)",]
 #' 
 #' reorder_studies(param_pm_uncertainty(rt))
 #' 
 #'
-reorder_studies <- function(df) {
+reorder_studies <- function(df, reorder_by = "population_country") {
 
   if (! "mid" %in% colnames(df)) {
-    stop(
-      "mid column not found in the data frame, did you forget to call param_pm_uncertainty?",
-      call. = FALSE
+    cli_abort(
+      "mid column not found in the data frame, did you forget to call
+      param_pm_uncertainty?",
+      call = NULL
     )
   }
-
-  res <- by(df, df$population_country, function(x) {
+  if (! reorder_by %in% colnames(df)) {
+    cli_abort(
+      paste0(reorder_by, " column not found in the data frame"),
+      call = NULL
+    )
+  }
+  ## This will add NA as a valid factor level that is put at the end by
+  ## default. So rows will not be dropped if they have NA in the 
+  ## population_country. However note that you cannot then use is.na to check
+  ## for NAs in this column. You should use df[[reorder_by]] %in% NA to
+  ## subset the data frame.
+  df[[reorder_by]] <- addNA(df[[reorder_by]], ifany = TRUE)
+  res <- by(df, df[[reorder_by]], function(x) {
     ## By default order puts NAs at the end
     x[order(x$mid), ]
   })
@@ -42,6 +57,8 @@ reorder_studies <- function(df) {
   df$article_label <- factor(df$article_label,
     levels = unique(df$article_label, ordered = TRUE)
   )
-  
+  ## unfactorise the population_country column
+  df[[reorder_by]] <- as.character(df[[reorder_by]])
+
   df
 }
