@@ -70,10 +70,9 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' data.frame. See \code{\link{short_parameter_type}} for more details.
 #'
 #' @param pathogen name of pathogen. Must be one of the priority pathogens
-#' exactly as specified in the package. You can get a list of the
-#' priority pathogens currently included in the package by calling
-#' @seealso \code{\link{load_epidata}}
-#'
+#' You can get a list of the
+#' priority pathogens currently included in the package by calling the function
+#' \code{\link{priority_pathogens}}.
 #' @param mark_multiple logical. If TRUE, multiple studies from the same
 #' author in the same year will be marked with a suffix to distinguish them.
 #' @return a list of length 4. The first element is a data.frame called "articles"
@@ -86,11 +85,12 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' of the outbreaks extracted for this pathogen, where available.
 #'
 #' @importFrom dplyr left_join
-#' @importFrom utils read.csv2
+#' @importFrom readr read_delim
 #' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
 
+  pathogen <- tolower(pathogen)
   assert_pathogen(pathogen)
 
   articles <- suppressWarnings(load_epidata_raw(pathogen, "article"))
@@ -138,9 +138,10 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   )
   articles_everything <- articles
   articles <- articles[, cols]
-
-  param_names <- read.csv2(
-    system.file("extdata", "param_name.csv", package = "epireview")
+  
+  param_names <- read_delim(
+    system.file("extdata", "param_name.csv", package = "epireview"),
+    delim = ";"
   )  
   params <- short_parameter_type(
     params, param_names$parameter_type_full, param_names$parameter_type_short

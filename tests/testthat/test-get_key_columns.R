@@ -188,7 +188,7 @@ test_that("get_key_columns works for marburg genomic", {
 test_that("get_key_columns works for ebola cfr", {
   df <- get_key_columns(data = ebola_params, parameter_name = "cfr")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 12L))
+  expect_identical(dim(df), c(1223L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -202,7 +202,7 @@ test_that("get_key_columns works for ebola cfr", {
 test_that("get_key_columns works for ebola delays", {
   df <- get_key_columns(data = ebola_params, parameter_name = "delays")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 15L))
+  expect_identical(dim(df), c(1223L, 15L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -217,7 +217,7 @@ test_that("get_key_columns works for ebola delays", {
 test_that("get_key_columns works for ebola sero", {
   df <- get_key_columns(data = ebola_params, parameter_name = "sero")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 11L))
+  expect_identical(dim(df), c(1223L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -230,7 +230,7 @@ test_that("get_key_columns works for ebola sero", {
 test_that("get_key_columns works for ebola risk", {
   df <- get_key_columns(data = ebola_params, parameter_name = "risk")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 12L))
+  expect_identical(dim(df), c(1223L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -247,7 +247,7 @@ test_that("get_key_columns works for ebola reproduction_number", {
     parameter_name = "reproduction_number"
   )
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 11L))
+  expect_identical(dim(df), c(1223L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -260,7 +260,7 @@ test_that("get_key_columns works for ebola reproduction_number", {
 test_that("get_key_columns works for ebola genomic", {
   df <- get_key_columns(data = ebola_params,  parameter_name = "genomic")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1224L, 13L))
+  expect_identical(dim(df), c(1223L, 13L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",

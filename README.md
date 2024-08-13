@@ -66,7 +66,7 @@ One output of this project will be a database initially populated with all the i
 | Pathogen  | Titles & Abstracts screened | Contact | Living review | last lit review update | doi|
 | --------- |         -------------------:|      -- |           --  | -- | -- |
 | Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html)|Mar 2023 | https://doi.org/10.1016/S1473-3099(23)00515-7 |
-| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| Jul 2023|https://doi.org/10.1101/2024.03.20.24304571|
+| Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| Jul 2023|https://doi.org/10.1016/S1473-3099(24)00374-8|
 | Lassa Mammarenavirus  | 1,760 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| Aug 2023|https://doi.org/10.1101/2024.03.23.24304596|
 | Henipa virus  |           959 | s.bhatia@imperial.ac.uk||2019||
 | SARS-CoV-1    |        11,918 | acori@ic.ac.uk, cm401@ic.ac.uk ||Nov 2023||
