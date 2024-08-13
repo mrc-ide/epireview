@@ -1,3 +1,7 @@
+# epireview 1.3.4
+
+* DATA: Adds SARS-CoV-1 data (articles, models, and parameters). Outbreaks were not extracted.
+
 # epireview 1.3.3
 
 * FEATURE: The argument to load_epidata is made case-insensitive. Addresses #96
