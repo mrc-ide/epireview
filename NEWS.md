@@ -1,3 +1,7 @@
+# epireview 1.3.5
+
+* BUG-FIX: Fixes #117. NA rows were being created because filter_df_for_metamean used == to compare strings, leading to NAs being created when the RHS was NA. Comparison now is being done using %in%.
+
 # epireview 1.3.4
 
 * DATA: Adds SARS-CoV-1 data (articles, models, and parameters). Outbreaks were not extracted.
