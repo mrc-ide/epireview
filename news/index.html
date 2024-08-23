@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">epireview</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,39 @@
       <small>Source: <a href="https://github.com/mrc-ide/epireview/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.0" id="epireview-140">epireview 1.4.0<a class="anchor" aria-label="anchor" href="#epireview-140"></a></h2>
+<ul><li>MAJOR RELEASE
+<ul><li>Bug fixes</li>
+<li>SARS-CoV-1 data release</li>
+<li>Minor fixes to Ebola data</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.6" id="epireview-136">epireview 1.3.6<a class="anchor" aria-label="anchor" href="#epireview-136"></a></h2>
+<ul><li><p>FEATURE: The default color palette is updated with a new one from ggsci and introduces a custom_palette() function to support multi-country label visualization.</p></li>
+<li><p>BUG FIX: Functionality to supply custom colour palette now works as expected.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.5" id="epireview-135">epireview 1.3.5<a class="anchor" aria-label="anchor" href="#epireview-135"></a></h2>
+<ul><li>BUG-FIX: Fixes <a href="https://github.com/mrc-ide/epireview/issues/117" class="external-link">#117</a>. NA rows were being created because filter_df_for_metamean used == to compare strings, leading to NAs being created when the RHS was NA. Comparison now is being done using %in%.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.4" id="epireview-134">epireview 1.3.4<a class="anchor" aria-label="anchor" href="#epireview-134"></a></h2>
+<ul><li>DATA: Adds SARS-CoV-1 data (articles, models, and parameters). Outbreaks were not extracted.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.3" id="epireview-133">epireview 1.3.3<a class="anchor" aria-label="anchor" href="#epireview-133"></a></h2>
+<ul><li>FEATURE: The argument to load_epidata is made case-insensitive. Addresses <a href="https://github.com/mrc-ide/epireview/issues/96" class="external-link">#96</a></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.2" id="epireview-132">epireview 1.3.2<a class="anchor" aria-label="anchor" href="#epireview-132"></a></h2>
+<ul><li>BUG-FIX: Fixes <a href="https://github.com/mrc-ide/epireview/issues/86" class="external-link">#86</a> by removing a duplicated row. Also fixes an incorrectly entered method type for CFR, and incorrectly extracted population sizes.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.1" id="epireview-131">epireview 1.3.1<a class="anchor" aria-label="anchor" href="#epireview-131"></a></h2>
+<ul><li>BUG-FIX: Fixes <a href="https://github.com/mrc-ide/epireview/issues/104" class="external-link">#104</a> using readr::read_delim to read in parameter type short names</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.3.0" id="epireview-130">epireview 1.3.0<a class="anchor" aria-label="anchor" href="#epireview-130"></a></h2>
 <ul><li>FEATURE
@@ -129,7 +162,7 @@ country was NA.</li>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Rebecca Nash, Christian Morgenstern, Cosmo Santoni, Sangeeta Bhatia, Richard Sheppard, Joseph Hicks, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain, Joshua Lambert, Anne Cori, Thomas Rawson, Patrick Doohan, Tristan Naidoo.</p>
+  <p>Developed by Rebecca Nash, Christian Morgenstern, Cosmo Santoni, Sangeeta Bhatia, Richard Sheppard, Joseph Hicks, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain, Joshua Lambert, Anne Cori, Thomas Rawson, Patrick Doohan, Tristan Naidoo, Shazia Ruybal-Pesántez.</p>
 </div>
 
 <div class="pkgdown-footer-right">

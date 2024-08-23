@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">epireview</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,16 @@ retrieve, ensuring the name matches that in data</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="load_epidata.html">load_epidata</a></span><span class="op">(</span>pathogen <span class="op">=</span> <span class="st">"ebola"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ebola does not have any extracted outbreaks </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> information. Outbreaks will be set to NULL.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">107</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ";"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (2): parameter_type_short, parameter_type_full</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Data loaded for ebola</span>
 <span class="r-in"><span><span class="fu">get_parameter</span><span class="op">(</span>data <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">params</span>, parameter_name <span class="op">=</span> <span class="st">"Human delay - serial interval"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 20 × 78</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 19 × 78</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id     parameter_data_id covidence_id pathogen parameter_type parameter_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> f49a9… 466f684ff8286fbd…          506 Ebola v… Human delay -…            12  </span>
@@ -91,12 +98,11 @@ retrieve, ensuring the name matches that in data</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 39354… 10f3384f1550a778…         <span style="text-decoration: underline;">5</span>939 Ebola v… Human delay -…            <span style="color: #BB0000;">NA</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 50dea… 631ec65830a82fbe…         <span style="text-decoration: underline;">6</span>346 Ebola v… Human delay -…            15.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 86e39… 5c8d68c39d1c3b98…        <span style="text-decoration: underline;">15</span>896 Ebola v… Human delay -…            15.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 86e39… e824649c690f81ba…        <span style="text-decoration: underline;">15</span>896 Ebola v… Human delay -…            15.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 40a29… 7f4ab651c48511df…        <span style="text-decoration: underline;">17</span>077 Ebola v… Human delay -…            15.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> b76dc… 0c3e02f80addfccc…        <span style="text-decoration: underline;">17</span>730 Ebola v… Human delay -…            12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> b76dc… c2e0739d6bc652e9…        <span style="text-decoration: underline;">17</span>730 Ebola v… Human delay -…            11.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 74b62… e2a59f5aa40ddbdf…        <span style="text-decoration: underline;">18</span>536 Ebola v… Human delay -…            12.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 66e1b… 4da557e3c2c22a10…        <span style="text-decoration: underline;">19</span>083 Ebola v… Human delay -…            <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 40a29… 7f4ab651c48511df…        <span style="text-decoration: underline;">17</span>077 Ebola v… Human delay -…            15.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> b76dc… 0c3e02f80addfccc…        <span style="text-decoration: underline;">17</span>730 Ebola v… Human delay -…            12  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> b76dc… c2e0739d6bc652e9…        <span style="text-decoration: underline;">17</span>730 Ebola v… Human delay -…            11.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 74b62… e2a59f5aa40ddbdf…        <span style="text-decoration: underline;">18</span>536 Ebola v… Human delay -…            12.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 66e1b… 4da557e3c2c22a10…        <span style="text-decoration: underline;">19</span>083 Ebola v… Human delay -…            <span style="color: #BB0000;">NA</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 72 more variables: exponent &lt;dbl&gt;, parameter_unit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   parameter_lower_bound &lt;dbl&gt;, parameter_upper_bound &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   parameter_value_type &lt;chr&gt;, parameter_uncertainty_single_value &lt;dbl&gt;,</span></span>
@@ -109,6 +115,13 @@ retrieve, ensuring the name matches that in data</p></dd>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There is 1 article with missing first author surname and first author first</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> name.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There is 1 article with missing year of publication.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">107</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">2</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ";"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">chr</span> (2): parameter_type_short, parameter_type_full</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `other_delay_start`.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `other_delay_end`.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Note: the params dataframe does not have a covidence_id column</span>
@@ -134,7 +147,7 @@ retrieve, ensuring the name matches that in data</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Rebecca Nash, Christian Morgenstern, Cosmo Santoni, Sangeeta Bhatia, Richard Sheppard, Joseph Hicks, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain, Joshua Lambert, Anne Cori, Thomas Rawson, Patrick Doohan, Tristan Naidoo.</p>
+  <p>Developed by Rebecca Nash, Christian Morgenstern, Cosmo Santoni, Sangeeta Bhatia, Richard Sheppard, Joseph Hicks, Gina Cuomo-Dannenburg, Ruth McCabe, Kelly McCain, Joshua Lambert, Anne Cori, Thomas Rawson, Patrick Doohan, Tristan Naidoo, Shazia Ruybal-Pesántez.</p>
 </div>
 
 <div class="pkgdown-footer-right">
