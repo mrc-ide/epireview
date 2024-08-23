@@ -8,8 +8,9 @@ load_epidata(pathogen, mark_multiple = TRUE)
 }
 \arguments{
 \item{pathogen}{name of pathogen. Must be one of the priority pathogens
-exactly as specified in the package. You can get a list of the
-priority pathogens currently included in the package by calling}
+You can get a list of the
+priority pathogens currently included in the package by calling the function
+\code{\link{priority_pathogens}}.}
 
 \item{mark_multiple}{logical. If TRUE, multiple studies from the same
 author in the same year will be marked with a suffix to distinguish them.}
@@ -35,7 +36,4 @@ This function will read in the pathogen-specific articles and
 parameters files and join them into a data.frame. This function also
 creates user-friendly short labels for the "parameter_type" column in params
 data.frame. See \code{\link{short_parameter_type}} for more details.
-}
-\seealso{
-\code{\link{load_epidata}}
 }

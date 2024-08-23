@@ -28,7 +28,7 @@ theme_epireview <- function(
 #'
 #' This function returns a color palette for countries.
 #'
-#' @param x A vector of country names. If provided, the function will return a 
+#' @param x A vector of country names. If provided, the function will return a
 #' color palette for the specified countries.
 #' @return A color palette for the specified countries.
 #' @examples
@@ -43,7 +43,9 @@ theme_epireview <- function(
 #'
 #' @export
 country_palette <- function(x = NULL) {
-  pal <- paletteer::paletteer_d("pals::polychrome")
+  # pal <- paletteer::paletteer_d("pals::polychrome") # previous palette
+  pal <- paletteer::paletteer_d("ggsci::default_igv")[1:36] # new palette, only first 36 colors
+
   class(pal) <- NULL
   countries <- c(
     'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
@@ -150,12 +152,12 @@ value_type_palette <- function(x = NULL) {
 ##' figures. Palettes are currently defined for
 ##' parameters and countries. Any other variable will
 ##' return NULL
-##' @param col_by a character vector specifying the parameter to color the 
+##' @param col_by a character vector specifying the parameter to color the
 ##' palette by.
-##' @param ... additional arguments to be passed to the underlying palette 
+##' @param ... additional arguments to be passed to the underlying palette
 ##' function.
 ##' These are treated as names of the palette elements.
-##' @return a named list of colors that can be used in forest plots for manually 
+##' @return a named list of colors that can be used in forest plots for manually
 ##' setting colors
 ##' @export
 color_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
@@ -164,7 +166,7 @@ color_palette <- function(col_by = c("parameter_type", "population_country"), ..
   col_palette <- NULL
   if (col_by == "parameter_type") {
     col_palette <- parameter_palette(other_args)
-  } 
+  }
   if (col_by == "population_country") {
     col_palette <- country_palette(other_args)
   }
@@ -174,7 +176,9 @@ color_palette <- function(col_by = c("parameter_type", "population_country"), ..
 ## Synonym for color_palette
 colour_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   color_palette(col_by, ...)
-}#' shape_palette function
+}
+
+#' shape_palette function
 #'
 #' This function generates a shape palette based on the specified shape_by parameter.
 #'
@@ -197,4 +201,35 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
     shape_palette <- value_type_palette(other_args)
   }
   shape_palette
+}
+
+#' Create a custom color palette.
+#' @description This utility function creates a named color vector from user-supplied vectors of labels and color values.
+#' The length of the label and color vectors must be the same.
+#' The resulting custom color palette can be used as the color palette in other plotting functions.
+#'
+#' @param labels A vector of labels to be used as names for the custom color palette.
+#' @param colors A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, eg "#808080" or color names recognized by R, eg "deepskyblue"
+#'
+#' @return A custom palette in the form of a named color vector.
+#'
+#' @examples
+#' labels <- c("Liberia", "Guinea", "Sierra Leone")
+#' colors <- c("#5A5156FF", "#E4E1E3FF", "#5050FFFF")
+#'
+#'custom_pal <- custom_palette(labels, colors)
+#'custom_pal
+#'
+#' @export
+custom_palette <- function(labels, colors) {
+  # An error will pop-up if the user supplies a different number of names or colors
+  if (length(labels) != length(colors)) {
+    stop(paste0("The number of colors supplied must match the number of different labels provided. You provided ", length(colors), " colors for ", length(labels), " labels. Please make sure that the vectors are of the same length."))
+  }
+
+  # Create the color vector
+  color_vector <- colors
+  names(color_vector) <- labels
+
+  return(color_vector)
 }
