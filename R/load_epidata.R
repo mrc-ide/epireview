@@ -141,7 +141,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   
   param_names <- read_delim(
     system.file("extdata", "param_name.csv", package = "epireview"),
-    delim = ";"
+    delim = ";", show_col_types = FALSE
   )  
   params <- short_parameter_type(
     params, param_names$parameter_type_full, param_names$parameter_type_short

@@ -17,7 +17,7 @@
 #'
 #'
 #' @return data.frame reading in the csv the specified pathogen table
-#' @importFrom readr read_csv
+#' @importFrom readr read_delim
 #' @seealso
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
@@ -62,7 +62,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     file_path <- system.file("extdata", fname, package = "epireview")
     ## Temporarily read in without column types as column names for the
     ## same table can change between pathogens
-    tmp <- read_csv(file_path, show_col_types = FALSE)
+    tmp <- read_delim(file_path, delim = ",", show_col_types = FALSE)
     ## col_types will have more columns than tmp, so we need to select
     ## only the columns that are in tmp
     ## This is because the column names can change between pathogens
@@ -71,8 +71,8 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
     check_column_types(file_path, col_types, colnames(tmp))
-    out <- read_csv(
-      file_path, col_types = col_types, show_col_types = FALSE, 
+    out <- read_delim(
+      file_path, col_types = col_types, show_col_types = FALSE, delim = ",",
       col_select = colnames(tmp)
     )
   }
