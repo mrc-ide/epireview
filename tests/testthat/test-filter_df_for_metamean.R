@@ -50,4 +50,12 @@ test_that("filtering parameter dataframe for meta mean works",{
   expect_true(all(!is.na(out$population_sample_size)))
   expect_true(all(!is.na(out$parameter_value)))
   expect_true(all(!is.na(out$parameter_unit)))
+
+  ## This dataset should have 17 rows after it is filtered through 
+  ## filter_df_for_metamean
+  x <- test_path("testdata", "offending_dataset.csv")
+  df <- read_csv(x, show_col_types = FALSE)
+  out <- filter_df_for_metamean(df)
+  expect_equal(dim(out)[1], 17L)
+  expect_true(all(!is.na(out$id)))
 })

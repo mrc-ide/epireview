@@ -43,21 +43,21 @@ filter_df_for_metamean <- function(df) {
   
   df <- df[!is.na(df[["population_sample_size"]]), ]
   df <- df[!is.na(df[["parameter_value"]]), ]
-  df <- df[df[["parameter_value_type"]] == 'Mean' & 
+  df <- df[df[["parameter_value_type"]] %in% 'Mean' & 
               grepl(x = tolower(df[["parameter_uncertainty_singe_type"]]), 
                     pattern = 'standard deviation') |
-              df[["parameter_value_type"]] == 'Median' & 
+              df[["parameter_value_type"]] %in% 'Median' & 
               grepl(x = tolower(df[["parameter_uncertainty_type"]]), 
                     pattern = 'iqr') |
-              df[["parameter_value_type"]] == 'Median' & 
+              df[["parameter_value_type"]] %in% 'Median' & 
               grepl(x = tolower(df[["parameter_uncertainty_type"]]), 
                     pattern = 'range'), ]
   
   df$xbar <- ifelse(
-    df[["parameter_value_type"]] == "Mean", df[["parameter_value"]], NA
+    df[["parameter_value_type"]] %in% "Mean", df[["parameter_value"]], NA
   )
   df$median <- ifelse(
-    df[["parameter_value_type"]] == "Median", df[["parameter_value"]], NA
+    df[["parameter_value_type"]] %in% "Median", df[["parameter_value"]], NA
   )
   df$q1 <- ifelse(
     grepl(x = tolower(df[["parameter_uncertainty_type"]]), "iqr"),
