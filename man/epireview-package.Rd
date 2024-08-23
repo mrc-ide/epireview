@@ -34,6 +34,7 @@ Authors:
   \item Thomas Rawson (\href{https://orcid.org/0000-0001-8182-4279}{ORCID})
   \item Patrick Doohan (\href{https://orcid.org/0000-0001-8076-1106}{ORCID})
   \item Tristan Naidoo (-12392)
+  \item Shazia Ruybal-Pesántez (\href{https://orcid.org/0000-0002-0495-179X}{ORCID})
 }
 
 }
