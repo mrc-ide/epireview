@@ -3,6 +3,7 @@
 * MAJOR RELEASE
   - Bug fixes
   - SARS-CoV-1 data release
+  - Minor fixes to Ebola data
 
 # epireview 1.3.6
 * FEATURE: The default color palette is updated with a new one from ggsci and introduces a custom_palette() function to support multi-country label visualization.
