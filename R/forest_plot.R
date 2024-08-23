@@ -36,10 +36,9 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shp_palette = NA,
-    col_palette = NA,
+    shp_palette = NULL,
+    col_palette = NULL,
     unique_label = NA) {
-
   ## ggplot2 will put all article labels on the y-axis
   ## even if mid, low, and high are NA. We will filter them out
   ## here to avoid that.
@@ -69,7 +68,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
                    y = .data[['article_label']])) +
     geom_errorbar(
       aes(
-        xmin = .data[['low']], xmax = .data[['high']], 
+        xmin = .data[['low']], xmax = .data[['high']],
         y = .data[['article_label']],
         lty = .data[['uncertainty_type']])
     ) +
@@ -90,11 +89,11 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
-    if (!is.na(shp_palette)) {
+    if (!is.null(shp_palette)) {
       p <- p + scale_shape_manual(values = shp_palette, na.value = 4)
     } else {
       shp_palette <- shape_palette(shape_by)
-      if (! is.null(shp_palette)) {
+      if (!is.null(shp_palette)) {
         p <- p + scale_shape_manual(values = shp_palette)
       } else {
         ## if no palette is found, use the default and issue a warning
@@ -104,6 +103,7 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
 
 
     }
+
   }
 
   if(!is.na(unique_label)){
@@ -121,8 +121,8 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## use the palette if provided, otherwise use the default
     ## as defined in epireview
     ## if neither is provided, use the default palette
-    if (!is.na(col_palette)) {
-      p <- p + scale_color_manual(values = col_palette, na.value = "gray")
+    if (!is.null(col_palette)) {
+      p <- p + scale_color_manual(values = col_palette,  na.value = "gray")
     } else {
       col_palette <- color_palette(col_by)
       if (! is.null(col_palette)) {

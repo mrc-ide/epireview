@@ -9,8 +9,8 @@ forest_plot(
   facet_by = NA,
   shape_by = NA,
   col_by = NA,
-  shp_palette = NA,
-  col_palette = NA,
+  shp_palette = NULL,
+  col_palette = NULL,
   unique_label = NA
 )
 }

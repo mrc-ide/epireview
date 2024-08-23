@@ -1,3 +1,8 @@
+# epireview 1.3.6
+* FEATURE: The default color palette is updated with a new one from ggsci and introduces a custom_palette() function to support multi-country label visualization.
+
+* BUG FIX: Functionality to supply custom colour palette now works as expected.
+
 # epireview 1.3.5
 
 * BUG-FIX: Fixes #117. NA rows were being created because filter_df_for_metamean used == to compare strings, leading to NAs being created when the RHS was NA. Comparison now is being done using %in%.
