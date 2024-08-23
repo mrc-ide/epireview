@@ -36,10 +36,9 @@
 #' )
 #' forest_plot(df)
 forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
-    shp_palette = NA,
-    col_palette = NA,
+    shp_palette = NULL,
+    col_palette = NULL,
     unique_label = NA) {
-
   ## ggplot2 will put all article labels on the y-axis
   ## even if mid, low, and high are NA. We will filter them out
   ## here to avoid that.
