@@ -138,7 +138,7 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   articles_everything <- articles
   articles <- articles[, cols]
   
-  param_names <- epireview_read_file("param_name.csv", delim = ";")  
+  param_names <- epireview_read_file("param_name.csv")  
   params <- short_parameter_type(
     params, param_names$parameter_type_full, param_names$parameter_type_short
   )

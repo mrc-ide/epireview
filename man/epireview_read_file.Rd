@@ -5,12 +5,10 @@
 \title{Intended for internal use only; setting desirable defaults for reading in
 data files.}
 \usage{
-epireview_read_file(fname, delim = ",", ...)
+epireview_read_file(fname, ...)
 }
 \arguments{
 \item{fname}{The name of the file to be read in.}
-
-\item{delim}{The delimiter used in the file. Default is ",".}
 
 \item{...}{Additional arguments to be passed to \code{\link{read_delim}}.}
 }

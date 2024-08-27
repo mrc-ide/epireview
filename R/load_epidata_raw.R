@@ -100,13 +100,13 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' @param raw_colnames The column names of the csv file
 #' @importFrom readr write_csv
 #' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
-#' @importFrom vroom vroom problems
+#' @importFrom vroom problems
 #' @seealso article_column_type parameter_column_type, outbreak_column_type, 
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
-  file_path <- system.file("extdata", fname, package = "epireview")
-  tmp_vroom <- vroom(file_path, col_types = col_types)
+  
+  tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
   if (NROW(tmp_problem) > 0){

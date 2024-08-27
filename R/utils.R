@@ -1,19 +1,18 @@
 #' Intended for internal use only; setting desirable defaults for reading in
 #' data files.
 #' @param fname The name of the file to be read in.
-#' @param delim The delimiter used in the file. Default is ",".
 #' @param ... Additional arguments to be passed to \code{\link{read_delim}}.
 #' @return A data frame read in from the file.
 #' @details This function is intended for internal use only. It is used to read
 #' in data files shipped with the package. The idea is to set desirable defaults
 #' in a single place. Mostly it makes reading files quiet by setting show_col_types
 #' to FALSE.
-#' @importFrom readr read_delim
+#' @importFrom vroom vroom
 #' @author Sangeeta Bhatia
-epireview_read_file <- function(fname, delim = ",", ...) {
-  read_delim(
+epireview_read_file <- function(fname, ...) {
+  vroom(
     system.file("extdata", fname, package = "epireview"),
-    delim = delim, show_col_types = FALSE, ...
+    show_col_types = FALSE, ...
   )
 }
 #' Sanity checks before meta-analysis
