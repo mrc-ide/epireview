@@ -17,7 +17,7 @@
 #'
 #'
 #' @return data.frame reading in the csv the specified pathogen table
-#' @importFrom readr read_csv
+#' @importFrom readr read_delim
 #' @seealso
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
@@ -59,10 +59,9 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     cli_warn(paste("No data found for", pathogen))
     return(NULL)
   } else {
-    file_path <- system.file("extdata", fname, package = "epireview")
     ## Temporarily read in without column types as column names for the
     ## same table can change between pathogens
-    tmp <- read_csv(file_path, show_col_types = FALSE)
+    tmp <- epireview_read_file(fname)
     ## col_types will have more columns than tmp, so we need to select
     ## only the columns that are in tmp
     ## This is because the column names can change between pathogens
@@ -70,10 +69,9 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     ## parameters.
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
-    check_column_types(file_path, col_types, colnames(tmp))
-    out <- read_csv(
-      file_path, col_types = col_types, show_col_types = FALSE, 
-      col_select = colnames(tmp)
+    check_column_types(fname, col_types, colnames(tmp))
+    out <- epireview_read_file(
+      fname, col_types = col_types, col_select = colnames(tmp)
     )
   }
   out
@@ -94,7 +92,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' The function is intended to be used
 #' internally by \code{load_epidata_raw} where the files are being read.
-#' @param file_path The path to the csv file for which the column types are to 
+#' @param fname The name of the csv file for which the column types are to 
 #' be checked
 #' @param col_types The column types expected by epireview. These are specified
 #' in the column type functions (e.g., article_column_type, parameter_column_type)
@@ -102,12 +100,13 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' @param raw_colnames The column names of the csv file
 #' @importFrom readr write_csv
 #' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
-#' @importFrom vroom vroom problems
+#' @importFrom vroom problems
 #' @seealso article_column_type parameter_column_type, outbreak_column_type, 
 #' model_column_type
 #' @export
-check_column_types <- function(file_path, col_types, raw_colnames){
-  tmp_vroom <- vroom(file_path, col_types = col_types)
+check_column_types <- function(fname, col_types, raw_colnames) {
+  
+  tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
   if (NROW(tmp_problem) > 0){

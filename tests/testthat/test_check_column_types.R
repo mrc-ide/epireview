@@ -14,7 +14,7 @@ test_that("check_column_types works as expected", {
   # *--------------------------------- Test 1 ---------------------------------*
   # *---------------------- No type issues in input csv -----------------------*
   # *--------------------------------------------------------------------------*
-  expect_no_error(check_column_types(file_path, col_types, colnames(tmp)))
+  expect_no_error(check_column_types(fname, col_types, colnames(tmp)))
 
   # *--------------------------------- Test 1 ---------------------------------*
   # *--------------------- 1 column, 1 row type mismatch ----------------------*

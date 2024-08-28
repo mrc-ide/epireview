@@ -4,10 +4,9 @@
 #' pathogen)
 #' @param prepend string to allow loading data in vignettes
 #' @return two plots to summarise the quality assessment scores
-#' @importFrom readr read_csv
+#' @importFrom readr read_delim
 #' @importFrom dplyr %>% filter group_by ungroup count n starts_with mutate
 #' case_when summarize
-#' @importFrom readr read_csv
 #' @importFrom tidyr pivot_longer
 #' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme_bw xlab ylab
 #' scale_x_continuous geom_bar scale_fill_manual coord_flip theme labs
@@ -32,7 +31,7 @@ quality_assessment_plots <- function(pathogen = NA,
                            package = "epireview")
   if (file_path == "")
     file_path <- paste0(prepend, "inst/extdata/", pathogen, "_article.csv")
-  quality <- read_csv(file_path)
+  quality <- read_delim(file_path, delim = ",", show_col_types = FALSE)
 
   # Deal with R CMD Check "no visible binding for global variable"
   year_publication <- score <- covidence_id <- Assessment <- Question <- NULL
