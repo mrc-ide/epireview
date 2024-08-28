@@ -21,7 +21,7 @@ Authors@R: c(
     person("Tristan", "Naidoo", role = "aut", comment = c(ORCID = 0000-0001-9970-2421)),
     person("Shazia", "Ruybal-Pesántez", role = "aut", comment = c(ORCID = "0000-0002-0495-179X")))
 Description: Contains the latest open access pathogen data from the Pathogen Epidemiology Review Group (PERG). Tools are available to update pathogen databases with new peer-reviewed data as it becomes available, and to summarise the latest data using tables and figures.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 Depends:
     epitrix,
     ggplot2,

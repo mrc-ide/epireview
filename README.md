@@ -77,3 +77,9 @@ One output of this project will be a database initially populated with all the i
 | Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).
+
+## License
+
+The **code** in this package is licensed under the MIT License. See the `LICENSE` file for details.
+
+The **data** in this package is released under the CC0 license and is in the public domain. See the `LICENSE-CC0` file for details.
