@@ -1,3 +1,7 @@
+# epireview 1.4.2
+
+* BUG FIX: Corrected author first/last name in lassa data
+
 # epireview 1.4.1
 
 - Consistent handling of how files are read in to provide a smoother user experience.
