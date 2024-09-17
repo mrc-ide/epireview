@@ -3,17 +3,17 @@
 #' In some instances, an article is associated with more than one id in the
 #' parameters, models, or outbreaks tables. 
 #' This can lead to unexpected failures because we use the id to join the
-#' articles with other dataframes. This section will resolve the issue by
+#' articles with other dataframes. This function will resolve the issue by
 #' first checking if a covidence id is mapped to more than one id. If it is, we
 #' replace one of the two ensuring that the same id is used across
 #' articles, models, outbreaks, and parameters. This function is not expected to
-#' be used directly by the user, but is called by \code{load_epidata}. Hence
+#' be used directly by the user, but is called by \code{\link{load_epidata}}. Hence
 #' checks on arguments are not implemented.
 #' @section Need for article ids: 
 #' Why do we need article ids in the first place? Why not use covidence id?
 #' To ease the process of data extraction, we created a separate database for
 #' each extractor, with the goal of then merging the databases into a single
-#' database. Within each individual databse, the different dataframes are linked
+#' database. Within each individual database, the different dataframes are linked
 #' by Access generated primary keys. These keys are unique to each database,
 #' but are not unique across databases. To merge the databases, we therefore
 #' generate a unique id for each article using \code{\link[ids]{random_id}}.
@@ -21,7 +21,7 @@
 #' because covidence id is only present in the articles table.
 #' @section Why does an article end up with multiple ids? :
 #' Articles that have been extracted by two extractors will have multiple ids.
-#' In principle, this should not be a problem, because as extractors resolve
+#' In principle, this should not be a problem because as extractors resolve
 #' differences in data extracted, they generate a consensus entry by deleting
 #' one of the entries so that only one of the two ids should enter back into the
 #' database when the resolved entries are merged with the rest of the data.
@@ -35,9 +35,11 @@
 #' in parameters, models, or outbreaks that are not linked to any article. 
 #' @param articles A dataframe with the articles table
 #' @param df A dataframe with the table that needs to be checked for duplicate
-#' covidence ids. Both articles and df will be loaded through \code{load_epidata}
-#' @param df_name A the name of the df that will be loaded through \code{load_epidata}.
-#'  This is useful for improving the user
+#' covidence ids. Both articles and df will be loaded through 
+#' \code{\link{load_epidata}}.
+#' @param df_name A the name of the df that will be loaded through 
+#' \code{\link{load_epidata}}.
+#' 
 #' @return A dataframe with the same structure as df, but with unique ids for
 #' each covidence id.
 #' @importFrom cli cli_inform
