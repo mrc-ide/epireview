@@ -16,7 +16,7 @@ priority pathogens currently included in the package by calling the function
 \code{\link{priority_pathogens}}.}
 
 \item{table}{the table to be loaded. Must be one of
-"article", "parameter", "outbreak", or "model"}
+"article", "parameter", "outbreak", "model" or "param_name"}
 }
 \value{
 data.frame reading in the csv the specified pathogen table
