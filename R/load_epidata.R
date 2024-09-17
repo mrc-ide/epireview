@@ -12,8 +12,8 @@
 #' are loaded via \code{\link{load_epidata}}.
 #'
 #' @param x data.frame containing a column called "parameter_type",  This will
-#' typically be the `params`data.frame from the output of \code{load_epidata}.
-#' @param parameter_type_full optional. User can specify the full value of a
+#' typically be the `params` data.frame from the output of \code{\link{load_epidata}}.
+#' @param parameter_type_full optional. User can specify the full name  of a
 #' parameter type not already included in the function.
 #' @param parameter_type_short optional. Shorter value of parameter_type_full
 #' @return data.frame with a new column called "parameter_type_short"
@@ -61,20 +61,21 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' Retrieve pathogen-specific data
 #'
 #' @details
-#' The data extracted in the systematic review has been stored in three
-#' files - one each for articles, parameters, and transmission models.
-#' Data in the three files can be linked using article identifier.
-#' This function will read in the pathogen-specific articles and
-#' parameters files and join them into a data.frame. This function also
+#' The data extracted in the systematic review has been stored in four
+#' files - one each for articles, parameters, outbreaks, and transmission models.
+#' Data in these files can be linked using article identifier.
+#' This function will read in the pathogen-specific files and join them into a 
+#' data.frame. This function also
 #' creates user-friendly short labels for the "parameter_type" column in params
 #' data.frame. See \code{\link{short_parameter_type}} for more details.
 #'
-#' @param pathogen name of pathogen. Must be one of the priority pathogens
-#' You can get a list of the
+#' @param pathogen name of pathogen. This argument is case-insensitive.
+#' Must be one of the priority pathogens You can get a list of the
 #' priority pathogens currently included in the package by calling the function
 #' \code{\link{priority_pathogens}}.
 #' @param mark_multiple logical. If TRUE, multiple studies from the same
-#' author in the same year will be marked with a suffix to distinguish them.
+#' author in the same year will be marked with an numeric suffix to 
+#' distinguish them. See \code{\link{mark_multiple_estimates}} for more details.
 #' @return a list of length 4. The first element is a data.frame called "articles"
 #' which contains all of the information about the articles extracted for this
 #' pathogen. The second element is a data.frame called "params" with articles
@@ -82,7 +83,9 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' The third element is a data.frame called "models" with all transmission
 #' models extracted for this pathogen including articles information as above.
 #' The fourth element is a data.frame called "outbreaks" which contains all
-#' of the outbreaks extracted for this pathogen, where available.
+#' of the outbreaks extracted for this pathogen, where available. If no data
+#' is available for a particular table, the corresponding element in the list
+#' will be NULL.
 #'
 #' @importFrom dplyr left_join
 #' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
@@ -173,17 +176,18 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
 #' Distinguish multiple estimates from the same study
 #'
 #' @details
-#' If a study has more than one estimate for the same parameter_type/model/outbreak,
+#' If a study has more than one estimate/model/outbreak for the same 
+#' parameter_type/model/outbreak,
 #' we add a suffix to the article_label to distinguish them
 #' otherwise they will be plotted on the same line in the forest plot. Say
 #' we have two estimates for the same parameter_type (p) from the same study (s),
 #' they will then be labeled as s 1 and s 2.
-#'
-#'
-#'
 #' @param df The data frame containing the estimates.
-#' @param col The column name for the table type. For parameters this is
-#' "parameter_type"; for models this is "model_type"; for outbreaks this is
+#' @param col The column name that identifies multiple enteries for a study. 
+#' Duplicate values in this column for a study will be marked with a suffix.
+#' Although the user can choose 
+#' any column here, the most logical choices are: for parameters - 
+#' "parameter_type"; for models - "model_type"; for outbreaks - 
 #' "outbreak_country".
 #'
 #' @param label_type Type of labels to add to distinguish multiple estimates.
