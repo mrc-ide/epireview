@@ -37,21 +37,29 @@ theme_epireview <- function(
 #'#' # Get color palette for specific countries
 #' country_palette(c('Liberia', 'Guinea', 'Sierra Leone'))
 #'
-#' @importFrom paletteer paletteer_d
-#' @importFrom pals polychrome
 #' @importFrom cli cli_abort
 #'
 #' @export
 country_palette <- function(x = NULL) {
-  # pal <- paletteer::paletteer_d("pals::polychrome") # previous palette
-  pal <- paletteer::paletteer_d("ggsci::default_igv")[1:36] # new palette, only first 36 colors
+  # Custom palette uses first 36 colours from
+  # paletteer::paletteer_d("ggsci::default_igv")[1:36]. Declared manually to
+  # reduce dependencies
+  pal <- c("#5050FFFF", "#CE3D32FF", "#749B58FF", "#F0E685FF",
+           "#466983FF", "#BA6338FF", "#5DB1DDFF", "#802268FF",
+           "#6BD76BFF", "#D595A7FF", "#924822FF", "#837B8DFF",
+           "#C75127FF", "#D58F5CFF", "#7A65A5FF", "#E4AF69FF",
+           "#3B1B53FF", "#CDDEB7FF", "#612A79FF", "#AE1F63FF",
+           "#E7C76FFF", "#5A655EFF", "#CC9900FF", "#99CC00FF",
+           "#A9A9A9FF", "#CC9900FF", "#99CC00FF", "#33CC00FF",
+           "#00CC33FF", "#00CC99FF", "#0099CCFF", "#0A47FFFF",
+           "#4775FFFF", "#FFC20AFF", "#FFD147FF", "#990033FF")
 
-  class(pal) <- NULL
   countries <- c(
     'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
     'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
     'Cameroon', 'Central African Republic', 'Republic of the Congo',
-    'Sudan', 'Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
+    'Sudan', '
+    Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
     'Equatorial Guinea', 'Angola', 'South Africa', 'Zambia', 'Tanzania',
     'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
     'United Kingdom', 'Unspecified'
