@@ -30,8 +30,6 @@ Depends:
 Imports:
     dplyr,
     readr,
-    pals,
-    paletteer,
     scales,
     cli,
     vroom
