@@ -232,7 +232,10 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
 custom_palette <- function(labels, colors) {
   # An error will pop-up if the user supplies a different number of names or colors
   if (length(labels) != length(colors)) {
-    stop(paste0("The number of colors supplied must match the number of different labels provided. You provided ", length(colors), " colors for ", length(labels), " labels. Please make sure that the vectors are of the same length."))
+    cli_abort(paste0("The number of colors supplied must match the number of
+                     different labels provided. You provided ", length(colors),
+                     " colors for ", length(labels), " labels. Please make sure
+                     that the vectors are of the same length."))
   }
 
   # Create the color vector
