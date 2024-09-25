@@ -172,10 +172,10 @@ color_palette <- function(col_by = c("parameter_type", "population_country"), ..
   match.arg(col_by)
   other_args <- list(...)
   col_palette <- NULL
-  if (col_by == "parameter_type") {
+  if (col_by %in% "parameter_type") {
     col_palette <- parameter_palette(other_args)
   }
-  if (col_by == "population_country") {
+  if (col_by %in% "population_country") {
     col_palette <- country_palette(other_args)
   }
   col_palette
@@ -205,7 +205,7 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
   match.arg(shape_by)
   other_args <- list(...)
   shape_palette <- NULL
-  if (shape_by == "parameter_value_type") {
+  if (shape_by %in% "parameter_value_type") {
     shape_palette <- value_type_palette(other_args)
   }
   shape_palette
