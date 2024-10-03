@@ -1,6 +1,10 @@
+# epireview 1.4.2
+
+* Code tidy-up and reduce dependancies
+
 # epireview 1.4.1
 
-- Consistent handling of how files are read in to provide a smoother user experience.
+* Consistent handling of how files are read in to provide a smoother user experience.
 
 # epireview 1.4.0
 

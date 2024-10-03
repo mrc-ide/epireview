@@ -10,8 +10,8 @@ load_epidata_raw(
 )
 }
 \arguments{
-\item{pathogen}{name of pathogen. Must be one of the priority pathogens
-You can get a list of the
+\item{pathogen}{name of pathogen. This argument is case-insensitive.
+Must be one of the priority pathogens You can get a list of the
 priority pathogens currently included in the package by calling the function
 \code{\link{priority_pathogens}}.}
 
