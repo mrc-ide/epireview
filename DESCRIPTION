@@ -1,6 +1,6 @@
 Package: epireview
 Title: Tools to update and summarise the latest pathogen data from the Pathogen Epidemiology Review Group (PERG)
-Version: 1.4.1
+Version: 1.4.2
 Authors@R: c(
     person("Rebecca", "Nash", email = "r.nash@imperial.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5213-4364")),
@@ -28,19 +28,8 @@ Depends:
     ggforce,
     R (>= 3.3.0)
 Imports:
-    tibble,
     dplyr,
-    tidyr,
     readr,
-    patchwork,
-    flextable,
-    tm,
-    officer,
-    stringr,
-    validate,
-    pals,
-    paletteer,
-    methods,
     scales,
     cli,
     vroom
@@ -52,7 +41,7 @@ Suggests:
     rmarkdown
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 URL: https://mrc-ide.github.io/epireview/

@@ -12,12 +12,8 @@
 #' @inheritParams load_epidata
 #'
 #' @param table the table to be loaded. Must be one of
-#' "article", "parameter", "outbreak", or "model"
-#'
-#'
-#'
+#' "article", "parameter", "outbreak", "model" or "param_name"
 #' @return data.frame reading in the csv the specified pathogen table
-#' @importFrom readr read_delim
 #' @seealso
 #' [load_epidata()] for a more user-friendly interface
 #' @examples
@@ -141,20 +137,19 @@ check_column_types <- function(fname, col_types, raw_colnames) {
   }
 }
 
-## Define column types for each table
-## These are used to read in the data
-## and to validate the data
+
 #' Define the column types for the article data frame
 #'
 #' This function defines the column types for the article data frame used in the epireview package.
-#' readr is generally good at guessing the
+#' vroom is generally good at guessing the
 #' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
-#' is particularly undesirable for us.
-#' The function is intended to be used
-#' internally by \code{load_epidata_raw} where the files are being read.
+#' is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where 
+#' the files are being read.
+#' 
+#' 
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
-#' @importFrom readr col_character col_integer col_logical
+#' @importFrom vroom col_character col_integer col_logical
 #' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
 article_column_type <- function(pathogen) {
@@ -197,7 +192,7 @@ article_column_type <- function(pathogen) {
 #' @examples
 #' parameter_column_type()
 #'
-#' @importFrom readr col_integer col_character col_double col_logical
+#' @importFrom vroom col_integer col_character col_double col_logical
 #'
 #' @keywords dataset, column types
 parameter_column_type <- function() {
@@ -268,7 +263,7 @@ parameter_column_type <- function() {
 #'
 #' @inherit article_column_type details return seealso
 #' @export
-#' @importFrom readr col_integer col_character col_double col_logical
+#' @importFrom vroom col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' outbreak_column_type()
@@ -306,7 +301,7 @@ outbreak_column_type <- function() {
 #' @inherit article_column_type details return seealso
 #'
 #' @export
-#' @importFrom readr col_integer col_character col_double col_logical
+#' @importFrom vroom col_integer col_character col_double col_logical
 #' @keywords dataset, column types
 #' @examples
 #' model_column_type()

@@ -7,8 +7,8 @@
 article_column_type(pathogen)
 }
 \arguments{
-\item{pathogen}{name of pathogen. Must be one of the priority pathogens
-You can get a list of the
+\item{pathogen}{name of pathogen. This argument is case-insensitive.
+Must be one of the priority pathogens You can get a list of the
 priority pathogens currently included in the package by calling the function
 \code{\link{priority_pathogens}}.}
 }
@@ -17,11 +17,10 @@ A list of column types for the article data frame
 }
 \description{
 This function defines the column types for the article data frame used in the epireview package.
-readr is generally good at guessing the
+vroom is generally good at guessing the
 column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
-is particularly undesirable for us.
-The function is intended to be used
-internally by \code{load_epidata_raw} where the files are being read.
+is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where
+the files are being read.
 }
 \seealso{
 parameter_column_type, outbreak_column_type, model_column_type
