@@ -35,7 +35,8 @@
 #'   uncertainty_type = c("Range", "Range", "Range**")
 #' )
 #' forest_plot(df)
-forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
+forest_plot <- function(
+    df, facet_by = NA, shape_by = NA, col_by = NA,
     shp_palette = NULL,
     col_palette = NULL,
     unique_label = NA) {
@@ -64,23 +65,27 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
   ## a single dash, which is of course indisguishable from a solid line.
 
   p <- ggplot(df) +
-    geom_point(aes(x = .data[['mid']],
-                   y = .data[['article_label']])) +
+    geom_point(aes(
+      x = .data[["mid"]],
+      y = .data[["article_label"]]
+    )) +
     geom_errorbar(
       aes(
-        xmin = .data[['low']], xmax = .data[['high']],
-        y = .data[['article_label']],
-        lty = .data[['uncertainty_type']])
+        xmin = .data[["low"]], xmax = .data[["high"]],
+        y = .data[["article_label"]],
+        lty = .data[["uncertainty_type"]]
+      )
     ) +
     scale_linetype_manual(values = lty_map, breaks = "Range**") +
-    ##scale_y_discrete(breaks = df$article_label, labels = df$article_label) +
+    ## scale_y_discrete(breaks = df$article_label, labels = df$article_label) +
     theme_epireview()
 
   p <- p + theme(axis.title.y = element_blank())
 
   if (!is.na(facet_by)) {
     p <- p + facet_col(
-      ~.data[[facet_by]], scales = "free_y", space = "free"
+      ~ .data[[facet_by]],
+      scales = "free_y", space = "free"
     )
   }
 
@@ -100,13 +105,10 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
         cli_warn(paste("No palette was provided or found for ", shape_by, ".
           Using default palette"))
       }
-
-
     }
-
   }
 
-  if(!is.na(unique_label)){
+  if (!is.na(unique_label)) {
     ## Check that the provided unique_label is the correct length:
     if (length(unique_label) != length(df$article_label)) {
       cli_abort("The length of 'unique_label' must match the number of unique labels
@@ -122,19 +124,17 @@ forest_plot <- function(df, facet_by = NA, shape_by = NA, col_by = NA,
     ## as defined in epireview
     ## if neither is provided, use the default palette
     if (!is.null(col_palette)) {
-      p <- p + scale_color_manual(values = col_palette,  na.value = "gray")
+      p <- p + scale_color_manual(values = col_palette, na.value = "gray")
     } else {
       col_palette <- color_palette(col_by)
-      if (! is.null(col_palette)) {
+      if (!is.null(col_palette)) {
         p <- p + scale_color_manual(values = col_palette)
       } else {
         ## if the palette is not found, use the default and issue a warning
         cli_warn(paste("No palette was provided or found for ", col_by, ".
         Using default palette"))
       }
-
     }
   }
   p
-
 }

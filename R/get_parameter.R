@@ -13,7 +13,6 @@
 #' @examples
 #' df <- load_epidata(pathogen = "marburg")
 #' get_parameter(data = df$params, parameter_name = "Attack rate")
-
 get_parameter <- function(data, parameter_name) {
   # Validate input: check if 'data' is a dataframe
   if (!is.data.frame(data)) {
@@ -37,22 +36,18 @@ get_parameter <- function(data, parameter_name) {
 
   # Check if there are any entries that match 'parameter_name' or 'parameter_class'
   if (sum(data$parameter_type == parameter_name) == 0 &
-      sum(data$parameter_class == parameter_name) == 0) {
+    sum(data$parameter_class == parameter_name) == 0) {
     cli_abort("Error: No entries found matching the specified 'parameter_name'.
       Check spelling and case of 'parameter name'.")
   }
 
   # if
-  if(parameter_name %in% data$parameter_type){
-
+  if (parameter_name %in% data$parameter_type) {
     # Extract and return the matching rows
     get_param <- data[data$parameter_type == parameter_name, , drop = FALSE]
-
-  } else if(parameter_name %in% data$parameter_class){
-
+  } else if (parameter_name %in% data$parameter_class) {
     # Extract and return the matching rows
     get_param <- data[data$parameter_class == parameter_name, , drop = FALSE]
-
   }
 
   get_param
@@ -72,186 +67,155 @@ get_parameter <- function(data, parameter_name) {
 #' @examples
 #' df <- load_epidata(pathogen = "lassa")
 #' get_incubation_period(data = df$params, all_columns = FALSE)
-
-get_incubation_period <- function(data, all_columns){
-
+get_incubation_period <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Human delay - incubation period"),
+    get_parameter(data, "Human delay - incubation period"),
     "delays",
     all_columns
   )
-
 }
 
 #' Retrieve all serial interval estimates for a given pathogen
 #' @name get_specific
 #' @inheritParams get_key_columns
-get_serial_interval <- function(data, all_columns){
-
+get_serial_interval <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Human delay - serial interval"),
+    get_parameter(data, "Human delay - serial interval"),
     "delays",
     all_columns
   )
-
 }
 
 #' Retrieve all generation time estimates for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_generation_time <- function(data, all_columns){
-
+get_generation_time <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Human delay - generation time"),
+    get_parameter(data, "Human delay - generation time"),
     "delays",
     all_columns
   )
-
 }
 
 #' Retrieve all delay parameters for a given pathogen
-#'@name get_specific
-#'@inheritParams get_key_columns
-get_delays <- function(data, all_columns){
-
+#' @name get_specific
+#' @inheritParams get_key_columns
+get_delays <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Human delay"),
+    get_parameter(data, "Human delay"),
     "delays",
     all_columns
   )
-
 }
 
 
 #' Retrieve all CFR parameters for a given pathogen
-#'@name get_specific
-get_cfr <- function(data, all_columns){
-
+#' @name get_specific
+get_cfr <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Severity - case fatality rate (CFR)"),
+    get_parameter(data, "Severity - case fatality rate (CFR)"),
     "cfr",
     all_columns
   )
-
 }
 
 #' Retrieve all risk factor parameters for a given pathogen
-#'@inheritParams get_key_columns
-#'@name get_specific
-get_risk_factors <- function(data, all_columns){
-
+#' @inheritParams get_key_columns
+#' @name get_specific
+get_risk_factors <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Risk factors"),
+    get_parameter(data, "Risk factors"),
     "risk_factors",
     all_columns
   )
-
 }
 
 #' Retrieve all genomic parameters for a given pathogen
-#'@inheritParams get_key_columns
-#'@name get_specific
-get_genomic <- function(data, all_columns){
-
+#' @inheritParams get_key_columns
+#' @name get_specific
+get_genomic <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Mutations"),
+    get_parameter(data, "Mutations"),
     "genoomic",
     all_columns
   )
-
 }
 
 #' Retrieve all reproduction number parameters for a given pathogen
-#'@inheritParams get_key_columns
-#'@name get_specific
-get_reproduction_number <- function(data, all_columns){
-
+#' @inheritParams get_key_columns
+#' @name get_specific
+get_reproduction_number <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Reproduction number"),
+    get_parameter(data, "Reproduction number"),
     "reproduction_number",
     all_columns
   )
-
 }
 
 #' Retrieve all seroprevalence parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_seroprevalence <- function(data, all_columns){
-
+get_seroprevalence <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Seroprevalence"),
+    get_parameter(data, "Seroprevalence"),
     "sero",
-     all_columns
+    all_columns
   )
-
 }
 
 #' Retrieve all doubling time parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_doubling_time <- function(data, all_columns){
-
+get_doubling_time <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Doubling time"),
+    get_parameter(data, "Doubling time"),
     "doubling_time",
-     all_columns
+    all_columns
   )
-
 }
 
 #' Retrieve all attack rate parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_attack_rate <- function(data, all_columns){
-
+get_attack_rate <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Attack rate"),
+    get_parameter(data, "Attack rate"),
     "attack_rate",
     all_columns
   )
-
 }
 
 
 #' Retrieve all growth rate parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_growth_rate <- function(data, all_columns){
-
+get_growth_rate <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Growth rate (r)"),
+    get_parameter(data, "Growth rate (r)"),
     "growth_rate",
     all_columns
   )
-
 }
 
 
 #' Retrieve all overdispersion parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_overdispersion <- function(data, all_columns){
-
+get_overdispersion <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Overdispersion"),
+    get_parameter(data, "Overdispersion"),
     "overdispersion",
     all_columns
   )
-
 }
 
 #' Retrieve all overdispersion parameters for a given pathogen
 #' @inheritParams get_key_columns
 #' @name get_specific
-get_relative_contribution <- function(data, all_columns){
-
+get_relative_contribution <- function(data, all_columns) {
   get_key_columns(
-    get_parameter(data,"Relative contribution"),
+    get_parameter(data, "Relative contribution"),
     "relative_contribution",
     all_columns
   )
-
 }
-
-

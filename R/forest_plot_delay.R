@@ -1,42 +1,41 @@
 #' Create forest plot for human delays
 #' @details There are a number of 'delays' that are relevant to the pathogens
-#' we study. Some of the more commonly, and hence likely to be extracted for 
+#' we study. Some of the more commonly, and hence likely to be extracted for
 #' most pathogens, are infectious period, incubation period, and
 #' serial interval. However, there are many others reported by relatively few
 #' studies or relevant to only a few pathogens. This function is intended
 #' to serve as a template for creating forest plots for these delays. It will
 #' first reparameterise any delays reported in terms of the gamma distribution
-#' to the mean and standard deviation (see \code{\link{reparam_gamma}}). Then, 
+#' to the mean and standard deviation (see \code{\link{reparam_gamma}}). Then,
 #' any parameters reported as inverse (e.g., per day instead of days) will be
 #' inverted (see \code{\link{invert_inverse_params}}). Finally, all delays will
-#' be converted to days (see \code{\link{delays_to_days}}) before 
+#' be converted to days (see \code{\link{delays_to_days}}) before
 #' reordering the studies (if requested) and plotting the forest plot.
 #' We also provide some utility functions for the commonly used delays that are
-#' simply wrapper for this function. If however you are interested in 
+#' simply wrapper for this function. If however you are interested in
 #' some other delay, you will need to use this function directly, ensuring that
 #' the data frame you provide has only the relevant delays.
 #' @inheritParams forest_plot_rt
 #' @seealso \code{\link{forest_plot_serial_interval}}
-#' 
+#'
 #' @return returns plot with a summary of the human delays
 #' @importFrom ggplot2 aes theme_bw geom_point scale_y_discrete
 #' @importFrom scales squish
-#' 
-#' @export 
+#'
+#' @export
 forest_plot_delay_int <- function(df, ulim, reorder_studies, ...) {
-
-  df <- reparam_gamma(df) |> 
-    invert_inverse_params() |> 
+  df <- reparam_gamma(df) |>
+    invert_inverse_params() |>
     delays_to_days() |>
-    param_pm_uncertainty() 
-    
+    param_pm_uncertainty()
+
   if (reorder_studies) df <- reorder_studies(df)
   p <- forest_plot(df, ...)
-  p <- p +       
+  p <- p +
     scale_x_continuous(
       limits = c(0, ulim), expand = c(0, 0), oob = scales::squish,
       breaks = seq(0, ulim, by = 7) ## every week
-     ) 
+    )
   p
 }
 
@@ -44,12 +43,11 @@ forest_plot_delay_int <- function(df, ulim, reorder_studies, ...) {
 #' @details This function is a wrapper for \code{\link{forest_plot_delay_int}}
 #' that is specifically for the serial interval.
 #' @inheritParams forest_plot_delay_int
-#' @export 
+#' @export
 forest_plot_serial_interval <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
-  
   check_ulim(df, ulim, "serial interval")
   x <- df[df$parameter_type == "Human delay - serial interval", ]
-  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
     labs(x = "Serial interval (days)")
   p
 }
@@ -61,13 +59,14 @@ forest_plot_serial_interval <- function(df, ulim = 30, reorder_studies = TRUE, .
 #' @inheritParams forest_plot_delay_int
 #' @export
 forest_plot_incubation_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
-  
   ## Warn user is max incubation period is greater than ulim
-  
-  x <- df[df$parameter_type %in% c("Human delay - incubation period", 
-  "Human delay - incubation period  (inverse parameter)"), ]
+
+  x <- df[df$parameter_type %in% c(
+    "Human delay - incubation period",
+    "Human delay - incubation period  (inverse parameter)"
+  ), ]
   check_ulim(x, ulim, "incubation period")
-  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
     labs(x = "Incubation period (days)")
   p
 }
@@ -78,17 +77,18 @@ forest_plot_incubation_period <- function(df, ulim = 30, reorder_studies = TRUE,
 #' @inheritParams forest_plot_delay_int
 #' @export
 forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
-
-  x <- df[df$parameter_type %in% c("Human delay - infectious period", 
-  "Human delay - infectious period  (inverse parameter)"), ]
+  x <- df[df$parameter_type %in% c(
+    "Human delay - infectious period",
+    "Human delay - infectious period  (inverse parameter)"
+  ), ]
   check_ulim(x, ulim, "infectious period")
-  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) + 
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
     labs(x = "Infectious period (days)")
   p
 }
 
 #' Inverts the values of selected parameters in a data frame.
-#' Sometimes parameters are reported in inverse form (e.g., a delay might be 
+#' Sometimes parameters are reported in inverse form (e.g., a delay might be
 #' reported as per day instead of days). Here we carry out a very simple
 #' transformation to convert these to the correct form by inverting the parameter
 #' value and the uncertainty bounds. This may not be appropriate in all cases,
@@ -105,18 +105,19 @@ forest_plot_infectious_period <- function(df, ulim = 30, reorder_studies = TRUE,
 #' @param df A data frame containing the parameters to be inverted.
 #' @return The input data frame with the selected parameters inverted.
 #' @examples
-#' df <- data.frame(parameter_value = c(2, 3, 4),
-#'                  parameter_upper_bound = c(5, 6, 7),
-#'                  parameter_lower_bound = c(1, 2, 3),
-#'                  parameter_uncertainty_upper_value = c(0.1, 0.2, 0.3),
-#'                  parameter_uncertainty_lower_value = c(0.4, 0.5, 0.6),
-#'                  inverse_param = c(FALSE, TRUE, FALSE))
+#' df <- data.frame(
+#'   parameter_value = c(2, 3, 4),
+#'   parameter_upper_bound = c(5, 6, 7),
+#'   parameter_lower_bound = c(1, 2, 3),
+#'   parameter_uncertainty_upper_value = c(0.1, 0.2, 0.3),
+#'   parameter_uncertainty_lower_value = c(0.4, 0.5, 0.6),
+#'   inverse_param = c(FALSE, TRUE, FALSE)
+#' )
 #' invert_inverse_params(df)
 #' # Output:
 #' @importFrom cli cli_warn
 #' @export
 invert_inverse_params <- function(df) {
-
   idx <- df$inverse_param ## Already a logical vector
   if (!any(idx)) {
     cli_warn("No parameters to invert.")
@@ -129,29 +130,31 @@ invert_inverse_params <- function(df) {
   df$parameter_lower_bound[idx] <- 1 / tmp
 
   tmp <- df$parameter_uncertainty_upper_value[idx]
-  df$parameter_uncertainty_upper_value[idx] <- 
+  df$parameter_uncertainty_upper_value[idx] <-
     1 / df$parameter_uncertainty_lower_value[idx]
   df$parameter_uncertainty_lower_value[idx] <- 1 / tmp
   df$inverse_param[idx] <- FALSE
 
-  ## Even when a parameter has been extracted as inverse, its unit is the 
+  ## Even when a parameter has been extracted as inverse, its unit is the
   ## same as the original parameter because of the database design.
   ## So we don't need to change the unit.
-  df  
+  df
 }
 #'
 #' This function converts delays in different units (hours, weeks, months) to days.
 #' It checks if all delays are in days and warns the user if not. It then converts
 #' hours to days by dividing by 24, weeks to days by multiplying by 7, and months
-#' to days by multiplying by 30. 
+#' to days by multiplying by 30.
 #'
 #' @param df A data.frame containing delays and their units. This will typically
-#' be a subset of parameters from the data frame returned by 
+#' be a subset of parameters from the data frame returned by
 #' \code{\link{load_epidata}}.
 #' @return Updated data.frame with delays converted to days.
 #' @examples
-#' df <- data.frame(parameter_value = c(24, 7, 1),
-#'                  parameter_unit = c("Hours", "Weeks", "Months"))
+#' df <- data.frame(
+#'   parameter_value = c(24, 7, 1),
+#'   parameter_unit = c("Hours", "Weeks", "Months")
+#' )
 #' delays_to_days(df)
 #' # Output:
 #' #   parameter_value parameter_unit
@@ -161,62 +164,61 @@ invert_inverse_params <- function(df) {
 #' @importFrom cli cli_alert_info cli_alert_warning cli_h2 cli_ol cli_li cli_end
 #' @export
 delays_to_days <- function(df) {
-
   ## Check that all parameters have the same units (days)
   ## and warn the user if this is not the case
   units <- tolower(df$parameter_unit)
   not_days <- unique(units[!units %in% "days"])
 
   if (!all(units %in% "days")) {
-    cli_alert_warning(paste("Not all delays are in days. Other units are:",
-                      paste(not_days, collapse = ", ")))
+    cli_alert_warning(paste(
+      "Not all delays are in days. Other units are:",
+      paste(not_days, collapse = ", ")
+    ))
 
-    hours_weeks <-  not_days[not_days %in% c("hours", "weeks")]
+    hours_weeks <- not_days[not_days %in% c("hours", "weeks")]
 
     cli_alert_info("We will attempt the following conversions:")
 
     # create a separate cli ordered list for hours and weeks
-    for (unit in hours_weeks){
-      cli_h2(paste(unit, " -> days", sep=""))
+    for (unit in hours_weeks) {
+      cli_h2(paste(unit, " -> days", sep = ""))
       olid <- cli_ol()
 
       # get a df of the conversions for the current unit and the number of rows
       # to convert
       conversion_df <- as.data.frame(table(df$parameter_type[units %in% unit]))
       # use %in% incase there are NAs in units
-      for (i in 1:NROW(conversion_df)){
-        cli_li(paste(conversion_df[i,1], " (n=", conversion_df[i,2], ")", sep=""))
+      for (i in 1:NROW(conversion_df)) {
+        cli_li(paste(conversion_df[i, 1], " (n=", conversion_df[i, 2], ")", sep = ""))
       }
 
       cli_end(olid)
-      }
+    }
   }
   ## Hours to days
   hours <- df$parameter_unit %in% "Hours"
   df$parameter_value[hours] <- df$parameter_value[hours] / 24
-  df$parameter_uncertainty_lower_value[hours] <- 
+  df$parameter_uncertainty_lower_value[hours] <-
     df$parameter_uncertainty_lower_value[hours] / 24
-  df$parameter_uncertainty_upper_value[hours] <- 
+  df$parameter_uncertainty_upper_value[hours] <-
     df$parameter_uncertainty_upper_value[hours] / 24
   df$parameter_unit[hours] <- "Days"
 
   ## Weeks to days
   weeks <- df$parameter_unit %in% c("Weeks", "Week", "week", "weeks")
   df$parameter_value[weeks] <- df$parameter_value[weeks] * 7
-  df$parameter_uncertainty_lower_value[weeks] <- 
+  df$parameter_uncertainty_lower_value[weeks] <-
     df$parameter_uncertainty_lower_value[weeks] * 7
-  df$parameter_uncertainty_upper_value[weeks] <- 
+  df$parameter_uncertainty_upper_value[weeks] <-
     df$parameter_uncertainty_upper_value[weeks] * 7
 
-## months to days
+  ## months to days
   months <- df$parameter_unit %in% c("Months", "Month", "month", "months")
   df$parameter_value[months] <- df$parameter_value[months] * 30
-  df$parameter_uncertainty_lower_value[months] <- 
+  df$parameter_uncertainty_lower_value[months] <-
     df$parameter_uncertainty_lower_value[months] * 30
-  df$parameter_uncertainty_upper_value[months] <- 
+  df$parameter_uncertainty_upper_value[months] <-
     df$parameter_uncertainty_upper_value[months] * 30
 
   df
 }
-
-

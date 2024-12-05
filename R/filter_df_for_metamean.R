@@ -34,25 +34,33 @@
 #' ## o2h_df_filtered could then be used directly in meta analyses as:
 #' ## mtan <- metamean(data = o2h_df_filtered, ...)
 filter_df_for_metamean <- function(df) {
-  cols_needed <- c("parameter_value", "parameter_unit", "population_sample_size",
-                   "parameter_value_type", "parameter_uncertainty_singe_type",
-                   "parameter_uncertainty_type", "parameter_uncertainty_lower_value",
-                   "parameter_uncertainty_upper_value")
-  
+  cols_needed <- c(
+    "parameter_value", "parameter_unit", "population_sample_size",
+    "parameter_value_type", "parameter_uncertainty_singe_type",
+    "parameter_uncertainty_type", "parameter_uncertainty_lower_value",
+    "parameter_uncertainty_upper_value"
+  )
+
   df <- check_df_for_meta(df, cols_needed)
-  
+
   df <- df[!is.na(df[["population_sample_size"]]), ]
   df <- df[!is.na(df[["parameter_value"]]), ]
-  df <- df[df[["parameter_value_type"]] %in% 'Mean' & 
-              grepl(x = tolower(df[["parameter_uncertainty_singe_type"]]), 
-                    pattern = 'standard deviation') |
-              df[["parameter_value_type"]] %in% 'Median' & 
-              grepl(x = tolower(df[["parameter_uncertainty_type"]]), 
-                    pattern = 'iqr') |
-              df[["parameter_value_type"]] %in% 'Median' & 
-              grepl(x = tolower(df[["parameter_uncertainty_type"]]), 
-                    pattern = 'range'), ]
-  
+  df <- df[df[["parameter_value_type"]] %in% "Mean" &
+    grepl(
+      x = tolower(df[["parameter_uncertainty_singe_type"]]),
+      pattern = "standard deviation"
+    ) |
+    df[["parameter_value_type"]] %in% "Median" &
+      grepl(
+        x = tolower(df[["parameter_uncertainty_type"]]),
+        pattern = "iqr"
+      ) |
+    df[["parameter_value_type"]] %in% "Median" &
+      grepl(
+        x = tolower(df[["parameter_uncertainty_type"]]),
+        pattern = "range"
+      ), ]
+
   df$xbar <- ifelse(
     df[["parameter_value_type"]] %in% "Mean", df[["parameter_value"]], NA
   )
@@ -69,14 +77,14 @@ filter_df_for_metamean <- function(df) {
   )
   df$min <- ifelse(
     grepl(x = tolower(df[["parameter_uncertainty_type"]]), pattern = "range") &
-    !grepl(x = tolower(df[["parameter_uncertainty_type"]]), "iqr"),
+      !grepl(x = tolower(df[["parameter_uncertainty_type"]]), "iqr"),
     df[["parameter_uncertainty_lower_value"]], NA
   )
   df$max <- ifelse(
     grepl(x = tolower(df[["parameter_uncertainty_type"]]), pattern = "range") &
-    !grepl(x = tolower(df[["parameter_uncertainty_type"]]), pattern = "iqr"),
+      !grepl(x = tolower(df[["parameter_uncertainty_type"]]), pattern = "iqr"),
     df[["parameter_uncertainty_upper_value"]], NA
   )
-  
+
   df
 }

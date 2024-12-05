@@ -46,12 +46,14 @@ The function performs the following operations:
 }
 }
 \examples{
-df <- data.frame(parameter_value = c(2, 3, 4),
-                 parameter_upper_bound = c(5, 6, 7),
-                 parameter_lower_bound = c(1, 2, 3),
-                 parameter_uncertainty_upper_value = c(0.1, 0.2, 0.3),
-                 parameter_uncertainty_lower_value = c(0.4, 0.5, 0.6),
-                 inverse_param = c(FALSE, TRUE, FALSE))
+df <- data.frame(
+  parameter_value = c(2, 3, 4),
+  parameter_upper_bound = c(5, 6, 7),
+  parameter_lower_bound = c(1, 2, 3),
+  parameter_uncertainty_upper_value = c(0.1, 0.2, 0.3),
+  parameter_uncertainty_lower_value = c(0.4, 0.5, 0.6),
+  inverse_param = c(FALSE, TRUE, FALSE)
+)
 invert_inverse_params(df)
 # Output:
 }

@@ -38,8 +38,10 @@ we have two estimates for the same parameter_type (p) from the same study (s),
 they will then be labeled as s 1 and s 2.
 }
 \examples{
-df <- data.frame(article_label = c("A", "A", "B", "B", "C"),
-                 parameter_type = c("X", "X", "Y", "Y", "Z"))
+df <- data.frame(
+  article_label = c("A", "A", "B", "B", "C"),
+  parameter_type = c("X", "X", "Y", "Y", "Z")
+)
 mark_multiple_estimates(df, label_type = "numbers")
 
 }
