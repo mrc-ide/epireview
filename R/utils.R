@@ -1,12 +1,29 @@
+#' Intended for internal use only; setting desirable defaults for reading in
+#' data files.
+#' @param fname The name of the file to be read in.
+#' @param ... Additional arguments to be passed to \code{\link{read_delim}}.
+#' @return A data frame read in from the file.
+#' @details This function is intended for internal use only. It is used to read
+#' in data files shipped with the package. The idea is to set desirable defaults
+#' in a single place. Mostly it makes reading files quiet by setting show_col_types
+#' to FALSE.
+#' @importFrom vroom vroom
+#' @author Sangeeta Bhatia
+epireview_read_file <- function(fname, ...) {
+  vroom(
+    system.file("extdata", fname, package = "epireview"),
+    show_col_types = FALSE, ...
+  )
+}
 #' Sanity checks before meta-analysis
 #' @details
 #' The function carries out a series of checks on the parameter dataframe to
-#' ensure that it is in the correct format for conducting a meta-analysis. 
+#' ensure that it is in the correct format for conducting a meta-analysis.
 #' It checks that the input (1) consists of a single parameter type; (2) has the
-#' columns required for the meta-analysis; (3) does not have any row where a 
-#' value is present but the unit is missing, or vice versa. All such rows are 
-#' removed; and (4) has the same unit across all values of the parameter. The 
-#' function will throw an error if either there is more than one value of 
+#' columns required for the meta-analysis; (3) does not have any row where a
+#' value is present but the unit is missing, or vice versa. All such rows are
+#' removed; and (4) has the same unit across all values of the parameter. The
+#' function will throw an error if either there is more than one value of
 #' parameter_type, or if the columns needed for the meta-analysis are missing,
 #' or if the parameter_unit is not the same across all values of the parameter.
 #' @inheritParams filter_df_for_metaprop
@@ -15,50 +32,49 @@
 #' @return a parameter dataframe with offending rows removed.
 #' @export
 check_df_for_meta <- function(df, cols_needed) {
-
   ## Ensure that there is a single parameter type present
-  if(length(unique(df$parameter_type)) != 1) {
+  if (length(unique(df$parameter_type)) != 1) {
     cli_abort("parameter_type must be the same across all values.", call = NULL)
   }
 
   if (!all(cols_needed %in% colnames(df))) {
     cols_missing <- cols_needed[!cols_needed %in% colnames(df)]
     cli_abort(
-      "df must have columns named: {cols_needed}. 
+      "df must have columns named: {cols_needed}.
       Column{?s} missing: {cols_missing}",
       call = NULL
     )
   }
-  
+
   ## First check that there are no rows where a value is present but unit is
   ## missing, or vice versa
   idx <- is.na(df$parameter_value) & !is.na(df$parameter_unit)
   remove <- sum(idx)
-  if(any(idx)) {
+  if (any(idx)) {
     cli_inform("parameter_value must be present if parameter_unit is present.
-            {remove} row{?s} with non-NA parameter_value and NA parameter_unit  
+            {remove} row{?s} with non-NA parameter_value and NA parameter_unit
             will be removed.")
     df <- df[!(is.na(df$parameter_value) & !is.na(df$parameter_unit)), ]
   }
-  
+
   idx <- !is.na(df$parameter_value) & is.na(df$parameter_unit)
   remove <- sum(idx)
-  if(any(idx)) {
+  if (any(idx)) {
     cli_inform("parameter_unit is missing but parameter_value is present.
-            {remove} row{?s} with non-NA parameter_value and NA parameter_unit 
+            {remove} row{?s} with non-NA parameter_value and NA parameter_unit
             will be removed.")
     df <- df[!(is.na(df$parameter_value) & !is.na(df$parameter_unit)), ]
   }
-  
+
   # values of the parameter must all have the same units
-  if(length(unique(df$parameter_unit[!is.na(df$parameter_unit)])) != 1) {
+  if (length(unique(df$parameter_unit[!is.na(df$parameter_unit)])) != 1) {
     msg1 <- "parameter_unit must be the same across all values."
     msg2 <- "Consider calling delays_to_days() if you are working with delays."
     cli_abort(paste(msg1, msg2), call = NULL)
   }
-  
 
-  
+
+
   df
 }
 #' Check upper limit of parameter values
@@ -87,9 +103,11 @@ check_df_for_meta <- function(df, cols_needed) {
 check_ulim <- function(df, ulim, param) {
   ulim_data <- max(df$parameter_value, na.rm = TRUE)
   if (ulim_data > ulim) {
-    msg <- paste("The maximum", param, "is ", ulim_data,
-                 "; the ulim is set to ", ulim,
-                 ". Some points may not be plotted. Consider increasing ulim.")
+    msg <- paste(
+      "The maximum", param, "is ", ulim_data,
+      "; the ulim is set to ", ulim,
+      ". Some points may not be plotted. Consider increasing ulim."
+    )
     cli_warn(msg)
   }
   ## Return suggested ulim = max of parameter_value rounded to nearest 10
@@ -129,7 +147,7 @@ param_pm_uncertainty <- function(df) {
   ## `mid' value, even if choose to not plot some of them; see notes below.
   ## We deal with the easy case first. If parameter value is extraccted, that's
   ## the central value.
-  mid_not_na <- ! is.na(df$parameter_value)
+  mid_not_na <- !is.na(df$parameter_value)
 
   ## If parameter value is not extracted, then there are a few cases to consider.
   ## 1. paired uncertainty is extracted. In this case, we plot the uncertainty
@@ -137,7 +155,7 @@ param_pm_uncertainty <- function(df) {
   ## uncertainty is not going to make sense I think without a central value. so
   ## we don't consider that combination here.
   paired_not_na <- !is.na(df$parameter_uncertainty_lower_value) &
-    ! is.na(df$parameter_uncertainty_upper_value)
+    !is.na(df$parameter_uncertainty_upper_value)
   ## 2. both single and paired uncertainty are NA but parameter_lower_bound and
   ## parameter_upper_bound are extracted. In this case, we set the midpoint
   ## of the range as a mid value and the range as the low and high values. mid
@@ -153,20 +171,20 @@ param_pm_uncertainty <- function(df) {
 
   df$mid[mid_not_na] <- df$parameter_value[mid_not_na]
   x <- df$parameter_uncertainty_lower_value +
-  (df$parameter_uncertainty_upper_value - df$parameter_uncertainty_lower_value) / 2
-  df$mid[(! mid_not_na) & paired_not_na] <- x[(! mid_not_na) & paired_not_na]
+    (df$parameter_uncertainty_upper_value - df$parameter_uncertainty_lower_value) / 2
+  df$mid[(!mid_not_na) & paired_not_na] <- x[(!mid_not_na) & paired_not_na]
 
   x <- df$parameter_lower_bound +
     (df$parameter_upper_bound - df$parameter_lower_bound) / 2
-  df$mid[! mid_not_na & ! paired_not_na & range_not_na] <-
-    x[! mid_not_na & ! paired_not_na & range_not_na]
+  df$mid[!mid_not_na & !paired_not_na & range_not_na] <-
+    x[!mid_not_na & !paired_not_na & range_not_na]
 
   ## Create a variable that captures the type of "mid" value so that we can
   ## choose not to plot those that don't make sense.
   df$mid_type <- NA
   df$mid_type[mid_not_na] <- "Extracted"
-  df$mid_type[! mid_not_na & paired_not_na] <- "Uncertainty width"
-  df$mid_type[! mid_not_na & ! paired_not_na & range_not_na] <- "Range midpoint"
+  df$mid_type[!mid_not_na & paired_not_na] <- "Uncertainty width"
+  df$mid_type[!mid_not_na & !paired_not_na & range_not_na] <- "Range midpoint"
 
   ## Now we can calculate low and high values
   ## If parameter_uncertainty_single_value is not NA, we use it to calculate
@@ -184,17 +202,17 @@ param_pm_uncertainty <- function(df) {
 
   ## Finally, if neither single nor paired uncertainty is non-NA but range is
   ## available, we use it to set low and high values
-  df$low[! paired_not_na & range_not_na] <-
-    df$parameter_lower_bound[! paired_not_na & range_not_na]
-  df$high[! paired_not_na & range_not_na] <-
-    df$parameter_upper_bound[! paired_not_na & range_not_na]
+  df$low[!paired_not_na & range_not_na] <-
+    df$parameter_lower_bound[!paired_not_na & range_not_na]
+  df$high[!paired_not_na & range_not_na] <-
+    df$parameter_upper_bound[!paired_not_na & range_not_na]
 
   df$uncertainty_type <- NA
   df$uncertainty_type[single_uc_not_na] <-
     df$parameter_uncertainty_singe_type[single_uc_not_na]
   df$uncertainty_type[paired_not_na] <-
     df$parameter_uncertainty_type[paired_not_na]
-  df$uncertainty_type[! paired_not_na & range_not_na] <- "Range**"
+  df$uncertainty_type[!paired_not_na & range_not_na] <- "Range**"
 
   df
 }
@@ -214,7 +232,6 @@ param_pm_uncertainty <- function(df) {
 #'
 #' @export
 reparam_gamma <- function(df) {
-
   ## get rows whre parameter_value is na, and distribution_type is gamma
   ## and distribution_par1_type is Shape and distribution_par2_type is Scale
   ## and distribution_par1_value is not na and distribution_par2_value is not na
@@ -243,14 +260,14 @@ reparam_gamma <- function(df) {
   ## If we have a gamma distribution with Mead sd,
   ## we set the parameter_uncertainty_single_value to distribution_par2_value
   idx <- which(
-      df$distribution_type == "Gamma" &
+    df$distribution_type == "Gamma" &
       is.na(df$parameter_uncertainty_singe_type) &
       df$distribution_par2_type == "Mean sd"
   )
   df$parameter_uncertainty_single_value[idx] <- df$distribution_par2_value[idx]
   df$parameter_uncertainty_singe_type[idx] <- "Standard Deviation"
 
- df
+  df
 }
 
 ## Throwaway function to add id column to marburg files;

@@ -8,9 +8,9 @@ short_parameter_type(x, parameter_type_full, parameter_type_short)
 }
 \arguments{
 \item{x}{data.frame containing a column called "parameter_type",  This will
-typically be the \code{params}data.frame from the output of \code{load_epidata}.}
+typically be the \code{params} data.frame from the output of \code{\link{load_epidata}}.}
 
-\item{parameter_type_full}{optional. User can specify the full value of a
+\item{parameter_type_full}{optional. User can specify the full name  of a
 parameter type not already included in the function.}
 
 \item{parameter_type_short}{optional. Shorter value of parameter_type_full}

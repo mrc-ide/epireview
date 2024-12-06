@@ -13,13 +13,12 @@
 #'
 #' @export
 forest_plot_doubling_time <- function(df, ulim = 30, reorder_studies = TRUE, ...) {
-    
-    x <- df[df$parameter_type %in% c("Doubling time"), ]
-    if (nrow(x) == 0) {
-      cli_abort("Input data does not contain doubling time parameters")
-    }
-    check_ulim(x, ulim, "doubling time")
-    p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
-        labs(x = "Doubling time (days)")
-    p
+  x <- df[df$parameter_type %in% c("Doubling time"), ]
+  if (nrow(x) == 0) {
+    cli_abort("Input data does not contain doubling time parameters")
+  }
+  check_ulim(x, ulim, "doubling time")
+  p <- forest_plot_delay_int(x, ulim, reorder_studies, ...) +
+    labs(x = "Doubling time (days)")
+  p
 }

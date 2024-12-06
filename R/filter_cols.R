@@ -12,16 +12,17 @@
 #' @return A data frame with rows filtered based on the specified conditions.
 #'
 #' @examples
-#' x <- load_epidata('marburg')
+#' x <- load_epidata("marburg")
 #' p <- x$params
 #' filter_cols(p, "parameter_type", "==", "Attack rate")
-#' filter_cols(p, "parameter_type", "in", 
-#'   list(parameter_type = c("Attack rate", "Seroprevalence - IFA")))
+#' filter_cols(
+#'   p, "parameter_type", "in",
+#'   list(parameter_type = c("Attack rate", "Seroprevalence - IFA"))
+#' )
 #'
 #' @importFrom cli cli_abort
 #' @export
 filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
-
   if (length(cols) != length(funs)) {
     cli_abort("Length of arguments cols is different from that of funs.
               Please specify one function for each column in cols")
@@ -34,9 +35,9 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
 
   match.arg(funs)
 
-  if (any(! cols %in% colnames(x))) {
+  if (any(!cols %in% colnames(x))) {
     msg <- "cols must be present in x as a column. Offending cols are "
-    cli_abort(paste(msg, toString(cols[! cols %in% colnames(x)])))
+    cli_abort(paste(msg, toString(cols[!cols %in% colnames(x)])))
   }
 
   ## Make sure character and factor columns take in %in% or ==
@@ -62,14 +63,13 @@ filter_cols <- function(x, cols, funs = c("in", "==", ">", "<"), vals) {
     this_col <- cols[[idx]]
     this_val <- vals[[idx]]
     this_fun <- funs[[idx]]
-    filter <- switch(
-      this_fun,
+    filter <- switch(this_fun,
       ## Make sure NA is not matched
       "in" = filter & (!is.na(x[[this_col]]) & x[[this_col]] %in% this_val),
       ">" = filter & (!is.na(x[[this_col]]) & x[[this_col]] > this_val),
       "<" = filter & (!is.na(x[[this_col]]) & x[[this_col]] < this_val),
       "==" = filter & (!is.na(x[[this_col]]) & x[[this_col]] == this_val),
-      )
+    )
   }
 
   x[filter, ]

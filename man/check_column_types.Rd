@@ -5,10 +5,10 @@
 \title{Checks that the column types of the input csv matches the column types
 expected by epireview.}
 \usage{
-check_column_types(file_path, col_types, raw_colnames)
+check_column_types(fname, col_types, raw_colnames)
 }
 \arguments{
-\item{file_path}{The path to the csv file for which the column types are to
+\item{fname}{The name of the csv file for which the column types are to
 be checked}
 
 \item{col_types}{The column types expected by epireview. These are specified

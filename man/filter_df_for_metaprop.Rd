@@ -39,9 +39,10 @@ denominator.
 ## preparing data for meta analyses of CFR for Lassa
 
 df <- load_epidata("lassa")[["params"]]
-cfr_df <- df[df$parameter_type \%in\% "Severity - case fatality rate (CFR)",]
+cfr_df <- df[df$parameter_type \%in\% "Severity - case fatality rate (CFR)", ]
 cfr_filtered <- filter_df_for_metaprop(cfr_df,
-  num_col = "cfr_ifr_numerator", denom_col = "cfr_ifr_denominator")
+  num_col = "cfr_ifr_numerator", denom_col = "cfr_ifr_denominator"
+)
 ## cfr_filtered could then be used directly in meta analyses as:
 ## mtan <- metaprop(data = cfr_filtered, ...)
 }

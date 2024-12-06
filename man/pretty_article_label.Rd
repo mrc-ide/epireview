@@ -11,7 +11,8 @@ pretty_article_label(articles, mark_multiple)
 will typically be the output of \code{load_epidata_raw}.}
 
 \item{mark_multiple}{logical. If TRUE, multiple studies from the same
-author in the same year will be marked with a suffix to distinguish them.}
+author in the same year will be marked with an numeric suffix to
+distinguish them. See \code{\link{mark_multiple_estimates}} for more details.}
 }
 \value{
 A modified data frame with an additional column "article_label"

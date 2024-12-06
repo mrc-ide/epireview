@@ -24,8 +24,10 @@ hours to days by dividing by 24, weeks to days by multiplying by 7, and months
 to days by multiplying by 30.
 }
 \examples{
-df <- data.frame(parameter_value = c(24, 7, 1),
-                 parameter_unit = c("Hours", "Weeks", "Months"))
+df <- data.frame(
+  parameter_value = c(24, 7, 1),
+  parameter_unit = c("Hours", "Weeks", "Months")
+)
 delays_to_days(df)
 # Output:
 #   parameter_value parameter_unit

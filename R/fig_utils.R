@@ -3,11 +3,10 @@
 #' @inheritParams ggplot2::theme_bw
 #' @export
 theme_epireview <- function(
-  base_size = 11,
-  base_family = "",
-  base_line_size = base_size / 22,
-  base_rect_size = base_size / 22
-) {
+    base_size = 11,
+    base_family = "",
+    base_line_size = base_size / 22,
+    base_rect_size = base_size / 22) {
   update_geom_defaults("point", list(size = 3))
   update_geom_defaults("segment", list(lwd = 3, alpha = 0.4))
   update_geom_defaults("errorbar", list(lwd = 0.5, width = 0.4))
@@ -34,34 +33,44 @@ theme_epireview <- function(
 #' @examples
 #' # Get color palette for all countries
 #' country_palette()
-#'#' # Get color palette for specific countries
-#' country_palette(c('Liberia', 'Guinea', 'Sierra Leone'))
+#' #' # Get color palette for specific countries
+#' country_palette(c("Liberia", "Guinea", "Sierra Leone"))
 #'
-#' @importFrom paletteer paletteer_d
-#' @importFrom pals polychrome
 #' @importFrom cli cli_abort
-#'
+#' @examples country_palette()
 #' @export
 country_palette <- function(x = NULL) {
-  # pal <- paletteer::paletteer_d("pals::polychrome") # previous palette
-  pal <- paletteer::paletteer_d("ggsci::default_igv")[1:36] # new palette, only first 36 colors
+  # Custom palette uses first 36 colours from
+  # paletteer::paletteer_d("ggsci::default_igv")[1:36]. Declared manually to
+  # reduce dependencies
+  pal <- c(
+    "#5050FFFF", "#CE3D32FF", "#749B58FF", "#F0E685FF",
+    "#466983FF", "#BA6338FF", "#5DB1DDFF", "#802268FF",
+    "#6BD76BFF", "#D595A7FF", "#924822FF", "#837B8DFF",
+    "#C75127FF", "#D58F5CFF", "#7A65A5FF", "#E4AF69FF",
+    "#3B1B53FF", "#CDDEB7FF", "#612A79FF", "#AE1F63FF",
+    "#E7C76FFF", "#5A655EFF", "#CC9900FF", "#99CC00FF",
+    "#A9A9A9FF", "#CC9900FF", "#99CC00FF", "#33CC00FF",
+    "#00CC33FF", "#00CC99FF", "#0099CCFF", "#0A47FFFF",
+    "#4775FFFF", "#FFC20AFF", "#FFD147FF", "#990033FF"
+  )
 
-  class(pal) <- NULL
   countries <- c(
-    'Liberia', 'Guinea', 'Sierra Leone', 'Nigeria', 'Senegal', 'Mali',
-    'DRC', 'Gabon', 'Uganda', 'South Sudan', 'Kenya', 'Ethiopia',
-    'Cameroon', 'Central African Republic', 'Republic of the Congo',
-    'Sudan', 'Chad', 'Benin', 'Togo', 'Ghana', 'Burkina Faso', 'Ivory Coast',
-    'Equatorial Guinea', 'Angola', 'South Africa', 'Zambia', 'Tanzania',
-    'Djibouti', 'Somalia', 'Mozambique', 'Madagascar', 'Malawi', 'Zimbabwe',
-    'United Kingdom', 'Unspecified'
+    "Liberia", "Guinea", "Sierra Leone", "Nigeria", "Senegal", "Mali",
+    "DRC", "Gabon", "Uganda", "South Sudan", "Kenya", "Ethiopia",
+    "Cameroon", "Central African Republic", "Republic of the Congo",
+    "Sudan", "
+    Chad", "Benin", "Togo", "Ghana", "Burkina Faso", "Ivory Coast",
+    "Equatorial Guinea", "Angola", "South Africa", "Zambia", "Tanzania",
+    "Djibouti", "Somalia", "Mozambique", "Madagascar", "Malawi", "Zimbabwe",
+    "United Kingdom", "Unspecified"
   )
   if (missing(x) | length(x) == 0) {
     x <- countries
   } else {
     if (length(x) > length(pal)) {
-      cli_abort(paste0("More than", length(pal)," countries provided. Please provide
-        a vector of length", length(pal)," or less"))
+      cli_abort(paste0("More than", length(pal), " countries provided. Please provide
+        a vector of length", length(pal), " or less"))
     } else {
       pal <- pal[1:length(x)]
     }
@@ -79,9 +88,12 @@ country_palette <- function(x = NULL) {
 ##' in forest plots for manually setting colors
 ##' with for example
 ##' \code{\link[ggplot2:scale_color_manual]{scale_color_manual}}
+##' @examples
+##' parameter_palette()
 ##' @importFrom cli cli_abort
 ##' @author Sangeeta Bhatia
-parameter_palette <- function(x) {
+##' @export
+parameter_palette <- function(x = NULL) {
   out <- list(
     "Basic (R0)" = "#D95F02",
     "Reproduction number (Basic R0)" = "#D95F02",
@@ -107,16 +119,16 @@ parameter_palette <- function(x) {
 }
 
 ##' Define a consistent shape palette for use in forest plots
-##'
 ##' We map shape aesthetic to value type i.e., mean, median etc.
 ##' This function defines a shape palette that can be used in forest
 ##' plots
 ##' @param x a list of parameters
 ##' @return a named list of shapes where names are value types (mean,
 ##' median, std dev etc.)
-##'
+##' @examples value_type_palette()
 ##' @importFrom cli cli_abort
 ##' @author Sangeeta Bhatia
+##' @export
 value_type_palette <- function(x = NULL) {
   out <- list(
     Mean = 16,
@@ -159,15 +171,16 @@ value_type_palette <- function(x = NULL) {
 ##' These are treated as names of the palette elements.
 ##' @return a named list of colors that can be used in forest plots for manually
 ##' setting colors
+##' @examples color_palette("parameter_type")
 ##' @export
 color_palette <- function(col_by = c("parameter_type", "population_country"), ...) {
   match.arg(col_by)
   other_args <- list(...)
   col_palette <- NULL
-  if (col_by == "parameter_type") {
+  if (col_by %in% "parameter_type") {
     col_palette <- parameter_palette(other_args)
   }
-  if (col_by == "population_country") {
+  if (col_by %in% "population_country") {
     col_palette <- country_palette(other_args)
   }
   col_palette
@@ -197,7 +210,7 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
   match.arg(shape_by)
   other_args <- list(...)
   shape_palette <- NULL
-  if (shape_by == "parameter_value_type") {
+  if (shape_by %in% "parameter_value_type") {
     shape_palette <- value_type_palette(other_args)
   }
   shape_palette
@@ -209,7 +222,8 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
 #' The resulting custom color palette can be used as the color palette in other plotting functions.
 #'
 #' @param labels A vector of labels to be used as names for the custom color palette.
-#' @param colors A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, eg "#808080" or color names recognized by R, eg "deepskyblue"
+#' @param colors A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, e.g.,
+#' "#808080" or color names recognized by R, eg "deepskyblue"
 #'
 #' @return A custom palette in the form of a named color vector.
 #'
@@ -217,14 +231,19 @@ shape_palette <- function(shape_by = c("parameter_value_type"), ...) {
 #' labels <- c("Liberia", "Guinea", "Sierra Leone")
 #' colors <- c("#5A5156FF", "#E4E1E3FF", "#5050FFFF")
 #'
-#'custom_pal <- custom_palette(labels, colors)
-#'custom_pal
+#' custom_pal <- custom_palette(labels, colors)
+#' custom_pal
 #'
 #' @export
 custom_palette <- function(labels, colors) {
   # An error will pop-up if the user supplies a different number of names or colors
   if (length(labels) != length(colors)) {
-    stop(paste0("The number of colors supplied must match the number of different labels provided. You provided ", length(colors), " colors for ", length(labels), " labels. Please make sure that the vectors are of the same length."))
+    cli_abort(paste0(
+      "The number of colors supplied must match the number of
+                     different labels provided. You provided ", length(colors),
+      " colors for ", length(labels), " labels. Please make sure
+                     that the vectors are of the same length."
+    ))
   }
 
   # Create the color vector

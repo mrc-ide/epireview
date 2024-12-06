@@ -6,7 +6,7 @@ test_that("check_column_types works as expected", {
   fname <- pps[pps$pathogen == "lassa", "params_file"]
   col_types <- parameter_column_type()
   file_path <- system.file("extdata", fname, package = "epireview")
-  tmp <- as.data.frame(read_csv(file_path, show_col_types = FALSE))
+  tmp <- as.data.frame(vroom(file_path, show_col_types = FALSE))
 
   cols <- intersect(colnames(tmp), names(col_types))
   col_types <- col_types[cols]
@@ -14,7 +14,7 @@ test_that("check_column_types works as expected", {
   # *--------------------------------- Test 1 ---------------------------------*
   # *---------------------- No type issues in input csv -----------------------*
   # *--------------------------------------------------------------------------*
-  expect_no_error(check_column_types(file_path, col_types, colnames(tmp)))
+  expect_no_error(check_column_types(fname, col_types, colnames(tmp)))
 
   # *--------------------------------- Test 1 ---------------------------------*
   # *--------------------- 1 column, 1 row type mismatch ----------------------*
@@ -25,7 +25,7 @@ test_that("check_column_types works as expected", {
   tmpfile <- tempfile(fileext = ".csv")
   write_csv(tmp, file=tmpfile)
 
-  tmp <- as.data.frame(read_csv(tmpfile, show_col_types = FALSE))
+  tmp <- as.data.frame(vroom(tmpfile, show_col_types = FALSE))
 
   # Use the problematic tmp file in check_column_types
   # This should throw an opaque vroom warning, we'll suppress it for clarity of
@@ -43,7 +43,7 @@ test_that("check_column_types works as expected", {
   tmpfile <- tempfile(fileext = ".csv")
   write_csv(tmp2, file=tmpfile)
 
-  tmp2 <- as.data.frame(read_csv(tmpfile, show_col_types = FALSE))
+  tmp2 <- as.data.frame(vroom(tmpfile, show_col_types = FALSE))
 
   expect_error(suppressWarnings(check_column_types(tmpfile, col_types, colnames(tmp2))))
 
@@ -55,7 +55,7 @@ test_that("check_column_types works as expected", {
   tmpfile <- tempfile(fileext = ".csv")
   write_csv(tmp, file=tmpfile)
 
-  tmp <- as.data.frame(read_csv(tmpfile, show_col_types = FALSE))
+  tmp <- as.data.frame(vroom(tmpfile, show_col_types = FALSE))
 
   expect_error(suppressWarnings(check_column_types(tmpfile, col_types, colnames(tmp))))
 
@@ -68,7 +68,7 @@ test_that("check_column_types works as expected", {
   tmpfile <- tempfile(fileext = ".csv")
   write_csv(tmp, file=tmpfile)
 
-  tmp <- as.data.frame(read_csv(tmpfile, show_col_types = FALSE))
+  tmp <- as.data.frame(vroom(tmpfile, show_col_types = FALSE))
 
   expect_error(suppressWarnings(check_column_types(tmpfile, col_types, colnames(tmp))))
 })
