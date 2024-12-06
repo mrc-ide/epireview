@@ -7,13 +7,14 @@
 load_epidata(pathogen, mark_multiple = TRUE)
 }
 \arguments{
-\item{pathogen}{name of pathogen. Must be one of the priority pathogens
-You can get a list of the
+\item{pathogen}{name of pathogen. This argument is case-insensitive.
+Must be one of the priority pathogens You can get a list of the
 priority pathogens currently included in the package by calling the function
 \code{\link{priority_pathogens}}.}
 
 \item{mark_multiple}{logical. If TRUE, multiple studies from the same
-author in the same year will be marked with a suffix to distinguish them.}
+author in the same year will be marked with an numeric suffix to
+distinguish them. See \code{\link{mark_multiple_estimates}} for more details.}
 }
 \value{
 a list of length 4. The first element is a data.frame called "articles"
@@ -23,17 +24,19 @@ information (authors, publication year, doi) combined with the parameters.
 The third element is a data.frame called "models" with all transmission
 models extracted for this pathogen including articles information as above.
 The fourth element is a data.frame called "outbreaks" which contains all
-of the outbreaks extracted for this pathogen, where available.
+of the outbreaks extracted for this pathogen, where available. If no data
+is available for a particular table, the corresponding element in the list
+will be NULL.
 }
 \description{
 Retrieve pathogen-specific data
 }
 \details{
-The data extracted in the systematic review has been stored in three
-files - one each for articles, parameters, and transmission models.
-Data in the three files can be linked using article identifier.
-This function will read in the pathogen-specific articles and
-parameters files and join them into a data.frame. This function also
+The data extracted in the systematic review has been stored in four
+files - one each for articles, parameters, outbreaks, and transmission models.
+Data in these files can be linked using article identifier.
+This function will read in the pathogen-specific files and join them into a
+data.frame. This function also
 creates user-friendly short labels for the "parameter_type" column in params
 data.frame. See \code{\link{short_parameter_type}} for more details.
 }
