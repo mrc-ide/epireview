@@ -1,3 +1,7 @@
+# epireview 1.4.3
+
+* BUG FIX: Corrected author first/last name in lassa data
+
 # epireview 1.4.2
 
 * Code tidy-up and reduce dependancies
