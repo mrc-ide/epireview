@@ -136,7 +136,7 @@ get_risk_factors <- function(data, all_columns) {
 get_genomic <- function(data, all_columns) {
   get_key_columns(
     get_parameter(data, "Mutations"),
-    "genoomic",
+    "genomic",
     all_columns
   )
 }
