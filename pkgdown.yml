@@ -1,12 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   epireview_overview: epireview_overview.html
   load-filter-view-epidata: load-filter-view-epidata.html
-  pathogen_database_field_options: pathogen_database_field_options.html
-  pathogen_database_update: pathogen_database_update.html
-last_built: 2024-08-28T12:34Z
+last_built: 2024-12-06T09:47Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles
