@@ -67,7 +67,7 @@ One output of this project will be a database initially populated with all the i
 | --------- |         -------------------:|      -- |           --  | -- | -- |
 | Marburg virus | 4,460 | cm401@ic.ac.uk, gc4018@ic.ac.uk | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html)|Mar 2023 | https://doi.org/10.1016/S1473-3099(23)00515-7 |
 | Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| Jul 2023|https://doi.org/10.1016/S1473-3099(24)00374-8|
-| Lassa Mammarenavirus  | 2,817 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| Jun 2024|https://doi.org/10.1101/2024.03.23.24304596|
+| Lassa Mammarenavirus  | 2,817 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| Jun 2024|https://doi.org/10.1016/S2214-109X(24)00379-6|
 | Nipah virus  |           1483 | s.bhatia@imperial.ac.uk, tmn21@ic.ac.uk||Oct 2024||
 | SARS-CoV-1    |        14,929 | acori@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html)|Jun 2024|https://doi.org/10.1101/2024.08.13.24311934|
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||2019||
