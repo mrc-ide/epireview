@@ -1,3 +1,7 @@
+# epireview 1.4.4
+
+* Updated dataset for SARS-CoV-1
+
 # epireview 1.4.3
 
 * BUG FIX: Corrected author first/last name in lassa data
