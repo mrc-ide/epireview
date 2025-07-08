@@ -1,18 +1,18 @@
 #' Distinguish multiple estimates from the same study
 #'
 #' @details
-#' If a study has more than one estimate/model/outbreak for the same 
+#' If a study has more than one estimate/model/outbreak for the same
 #' parameter_type/model/outbreak,
 #' we add a suffix to the article_label to distinguish them
 #' otherwise they will be plotted on the same line in the forest plot. Say
 #' we have two estimates for the same parameter_type (p) from the same study (s),
 #' they will then be labeled as s 1 and s 2.
 #' @param df The data frame containing the estimates.
-#' @param col The column name that identifies multiple enteries for a study. 
+#' @param col The column name that identifies multiple enteries for a study.
 #' Duplicate values in this column for a study will be marked with a suffix.
-#' Although the user can choose 
-#' any column here, the most logical choices are: for parameters - 
-#' "parameter_type"; for models - "model_type"; for outbreaks - 
+#' Although the user can choose
+#' any column here, the most logical choices are: for parameters -
+#' "parameter_type"; for models - "model_type"; for outbreaks -
 #' "outbreak_country".
 #'
 #' @param label_type Type of labels to add to distinguish multiple estimates.
@@ -20,14 +20,15 @@
 #' @return The modified data frame with updated article_label
 #'
 #' @examples
-#' df <- data.frame(article_label = c("A", "A", "B", "B", "C"),
-#'                  parameter_type = c("X", "X", "Y", "Y", "Z"))
+#' df <- data.frame(
+#'   article_label = c("A", "A", "B", "B", "C"),
+#'   parameter_type = c("X", "X", "Y", "Y", "Z")
+#' )
 #' mark_multiple_estimates(df, label_type = "numbers")
 #'
 #' @export
 mark_multiple_estimates <- function(
-  df, col = "parameter_type", label_type = c("letters", "numbers")) {
-
+    df, col = "parameter_type", label_type = c("letters", "numbers")) {
   match.arg(label_type)
 
   dups <- as.data.frame(
@@ -52,5 +53,3 @@ mark_multiple_estimates <- function(
   }
   df
 }
-
-

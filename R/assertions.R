@@ -61,14 +61,16 @@ assert_params <- function(x, message = "%s must have a column named 'parameter_t
   invisible(TRUE)
 }
 
-assert_articles <- function(x, message = "%s must have columns
+assert_articles <- function(
+    x, message = "%s must have columns
    'first_author_first_name', 'first_author_surname', 'year_publication',
    'covidence_id'. Did you load the data using load_epidata?",
-   name = deparse(substitute(x))) {
+    name = deparse(substitute(x))) {
   assert_data_frame(x)
   cols_needed <- c(
     "first_author_first_name", "first_author_surname",
-    "year_publication", "covidence_id")
+    "year_publication", "covidence_id"
+  )
   if (!all(cols_needed %in% colnames(x))) {
     cli_abort(sprintf(message, name), call = NULL)
   }

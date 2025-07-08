@@ -9,7 +9,8 @@ custom_palette(labels, colors)
 \arguments{
 \item{labels}{A vector of labels to be used as names for the custom color palette.}
 
-\item{colors}{A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, eg "#808080" or color names recognized by R, eg "deepskyblue"}
+\item{colors}{A vector of colors to be used for the custom color palette. This can be in the form of HEX codes, e.g.,
+"#808080" or color names recognized by R, eg "deepskyblue"}
 }
 \value{
 A custom palette in the form of a named color vector.

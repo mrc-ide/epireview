@@ -5,8 +5,8 @@
 #' \code{\link{load_epidata}} when the data is loaded. The short parameter names
 #' are read from the file "param_name.csv" in the package. If you want to supply
 #' your own short names, you can do so by specifying the parameter_type_full and
-#' parameter_type_short arguments. Note however that if parameter_type_full does 
-#' not contain all the parameter types in the data, the short label 
+#' parameter_type_short arguments. Note however that if parameter_type_full does
+#' not contain all the parameter types in the data, the short label
 #' (parameter_type_short) will be NA for missing values. It is therefore easier
 #' and recommended that you update the column parameter_type_short once the data
 #' are loaded via \code{\link{load_epidata}}.
@@ -20,38 +20,37 @@
 #' @export
 #' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
-
   x$other_delay <- NA_character_
   idx <- x$parameter_type %in% "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome %in% "Death" 
+    x$riskfactor_outcome %in% "Death"
   x$other_delay[idx] <- "Time symptom to outcome (Death)"
 
   idx <- x$parameter_type %in% "Human delay - time symptom to outcome" &
-      x$riskfactor_outcome %in% "Other" 
+    x$riskfactor_outcome %in% "Other"
   x$other_delay[idx] <- "Time symptom to outcome (Other)"
-  
-  idx <- x$parameter_type %in% 'Human delay - other human delay (go to section)' 
+
+  idx <- x$parameter_type %in% "Human delay - other human delay (go to section)"
   x$other_delay[idx] <- paste0(
-    tolower(gsub('Other: ', '', x$other_delay_start[idx])), ' to ',
-    tolower(gsub('Other: ', '', x$other_delay_end[idx]))
+    tolower(gsub("Other: ", "", x$other_delay_start[idx])), " to ",
+    tolower(gsub("Other: ", "", x$other_delay_end[idx]))
   )
-  x$parameter_type[idx] <- paste0('Human delay - ', x$other_delay[idx])
+  x$parameter_type[idx] <- paste0("Human delay - ", x$other_delay[idx])
 
-  idx <- x$parameter_type %in% 'Human delay - time symptom to outcome'
-  x$parameter_type[idx] <- paste0('Human delay - ', tolower(x$other_delay[idx]))
+  idx <- x$parameter_type %in% "Human delay - time symptom to outcome"
+  x$parameter_type[idx] <- paste0("Human delay - ", tolower(x$other_delay[idx]))
 
-  if (! missing(parameter_type_full) & ! missing(parameter_type_short)) {
+  if (!missing(parameter_type_full) & !missing(parameter_type_short)) {
     idx <- match(x$parameter_type, parameter_type_full)
     if (any(is.na(idx))) {
-      cli_alert_warning("Some parameter types in the data do not have a short 
+      cli_alert_warning("Some parameter types in the data do not have a short
         label. Using the full parameter type instead.")
     }
     x$parameter_type_short <- NA_character_
-    x$parameter_type_short[! is.na(idx)] <- 
-      parameter_type_short[idx[! is.na(idx)]]
-  } else if (! missing(parameter_type_full) & missing(parameter_type_short)) {
+    x$parameter_type_short[!is.na(idx)] <-
+      parameter_type_short[idx[!is.na(idx)]]
+  } else if (!missing(parameter_type_full) & missing(parameter_type_short)) {
     cli_abort("Please specify both parameter_type_full and parameter_type_short")
-  } else if ( missing(parameter_type_full) & ! missing(parameter_type_short)) {
+  } else if (missing(parameter_type_full) & !missing(parameter_type_short)) {
     cli_abort("Please specify both parameter_type_full and parameter_type_short")
   }
 
@@ -64,7 +63,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' The data extracted in the systematic review has been stored in four
 #' files - one each for articles, parameters, outbreaks, and transmission models.
 #' Data in these files can be linked using article identifier.
-#' This function will read in the pathogen-specific files and join them into a 
+#' This function will read in the pathogen-specific files and join them into a
 #' data.frame. This function also
 #' creates user-friendly short labels for the "parameter_type" column in params
 #' data.frame. See \code{\link{short_parameter_type}} for more details.
@@ -74,7 +73,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' priority pathogens currently included in the package by calling the function
 #' \code{\link{priority_pathogens}}.
 #' @param mark_multiple logical. If TRUE, multiple studies from the same
-#' author in the same year will be marked with an numeric suffix to 
+#' author in the same year will be marked with an numeric suffix to
 #' distinguish them. See \code{\link{mark_multiple_estimates}} for more details.
 #' @return a list of length 4. The first element is a data.frame called "articles"
 #' which contains all of the information about the articles extracted for this
@@ -91,7 +90,6 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 #' @importFrom cli cli_alert_info cli_alert_warning cli_abort cli_alert_success
 #' @export
 load_epidata <- function(pathogen, mark_multiple = TRUE) {
-
   pathogen <- tolower(pathogen)
   assert_pathogen(pathogen)
 
@@ -105,25 +103,25 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   outbreaks_extracted <- TRUE
   params_extracted <- TRUE
 
-  if (! inherits(articles, "data.frame")) {
+  if (!inherits(articles, "data.frame")) {
     cli_abort(paste("No article information found for", pathogen))
   }
 
-  if (! inherits(models, "data.frame")) {
-    cli_alert_warning(paste(pathogen, "does not have any extracted model 
+  if (!inherits(models, "data.frame")) {
+    cli_alert_warning(paste(pathogen, "does not have any extracted model
       information. Models will be set to NULL."))
     ## flip the flag to indicate that no models were found
     models_extracted <- FALSE
   }
 
-  if (! inherits(outbreaks, "data.frame")) {
-    cli_alert_info(paste(pathogen, "does not have any extracted outbreaks 
+  if (!inherits(outbreaks, "data.frame")) {
+    cli_alert_info(paste(pathogen, "does not have any extracted outbreaks
       information. Outbreaks will be set to NULL."))
     outbreaks_extracted <- FALSE
   }
 
-  if (! inherits(params, "data.frame")) {
-    cli_alert_warning(paste(pathogen, "does not have any extracted parameter 
+  if (!inherits(params, "data.frame")) {
+    cli_alert_warning(paste(pathogen, "does not have any extracted parameter
       information. Parameters will be set to NULL."))
     params_extracted <- FALSE
   }
@@ -140,8 +138,8 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
   )
   articles_everything <- articles
   articles <- articles[, cols]
-  
-  param_names <- epireview_read_file("param_name.csv")  
+
+  param_names <- epireview_read_file("param_name.csv")
   params <- short_parameter_type(
     params, param_names$parameter_type_full, param_names$parameter_type_short
   )
@@ -151,19 +149,25 @@ load_epidata <- function(pathogen, mark_multiple = TRUE) {
     params <- make_unique_id(articles_everything, params, "params")
     params <- left_join(params, articles, by = "id") |>
       mark_multiple_estimates("parameter_type", label_type = "numbers")
-  } else params <- NULL
+  } else {
+    params <- NULL
+  }
 
   if (models_extracted) {
     models <- make_unique_id(articles_everything, models, "models")
     models <- left_join(models, articles, by = "id") |>
       mark_multiple_estimates("model_type", label_type = "numbers")
-  } else models <- NULL
+  } else {
+    models <- NULL
+  }
 
   if (outbreaks_extracted) {
     outbreaks <- make_unique_id(articles_everything, outbreaks, "outbreaks")
     outbreaks <- left_join(outbreaks, articles, by = "id") |>
       mark_multiple_estimates("outbreak_country", label_type = "numbers")
-  } else outbreaks <- NULL
+  } else {
+    outbreaks <- NULL
+  }
 
   cli_alert_success(paste("Data loaded for", pathogen))
 

@@ -12,14 +12,17 @@
 #' - articles_screened: number of titles and abstracts screened for inclusion
 #' - articles_extracted: number of articles from which data were extracted
 #' - doi: doi of the accompanying systematic review
+#' @examples priority_pathogens()
 #' @export
 priority_pathogens <- function() {
-
   data.frame(
-    pathogen = c("marburg", "ebola", "lassa","sars"),
-    articles_screened = c(4460, 9563,5414,14929),
-    articles_extracted = c(42, 520,157,288),
-    doi = c("10.1016/S1473-3099(23)00515-7", "10.1016/S1473-3099(24)00374-8", "10.1101/2024.03.23.24304596", "10.1101/2024.08.13.24311934"),
+    pathogen = c("marburg", "ebola", "lassa", "sars"),
+    articles_screened = c(4460, 9563, 5414, 14929),
+    articles_extracted = c(42, 520, 157, 288),
+    doi = c("10.1016/S1473-3099(23)00515-7", 
+      "10.1016/S1473-3099(24)00374-8", 
+      "10.1016/S2214-109X(24)00379-6", 
+      "10.1101/2024.08.13.24311934"),
     articles_file = c(
       "marburg_article.csv",
       "ebola_articles.csv",
