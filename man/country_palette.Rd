@@ -20,6 +20,7 @@ This function returns a color palette for countries.
 # Get color palette for all countries
 country_palette()
 #' # Get color palette for specific countries
-country_palette(c('Liberia', 'Guinea', 'Sierra Leone'))
+country_palette(c("Liberia", "Guinea", "Sierra Leone"))
 
+country_palette()
 }

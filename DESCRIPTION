@@ -26,7 +26,7 @@ Depends:
     epitrix,
     ggplot2,
     ggforce,
-    R (>= 3.3.0)
+    R (>= 4.1.0)
 Imports:
     dplyr,
     readr,

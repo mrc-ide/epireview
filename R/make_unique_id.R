@@ -1,7 +1,7 @@
 #' Ensure that each article gets a unique id across all tables
 #' @details
 #' In some instances, an article is associated with more than one id in the
-#' parameters, models, or outbreaks tables. 
+#' parameters, models, or outbreaks tables.
 #' This can lead to unexpected failures because we use the id to join the
 #' articles with other dataframes. This function will resolve the issue by
 #' first checking if a covidence id is mapped to more than one id. If it is, we
@@ -9,7 +9,7 @@
 #' articles, models, outbreaks, and parameters. This function is not expected to
 #' be used directly by the user, but is called by \code{\link{load_epidata}}. Hence
 #' checks on arguments are not implemented.
-#' @section Need for article ids: 
+#' @section Need for article ids:
 #' Why do we need article ids in the first place? Why not use covidence id?
 #' To ease the process of data extraction, we created a separate database for
 #' each extractor, with the goal of then merging the databases into a single
@@ -32,28 +32,30 @@
 #' Because an article that has been double extracted will have been aasigned two
 #' ids, it is also possible that the retained id in articles is not the same as
 #' the retained id in parameters, models, or outbreaks. This can lead to rows
-#' in parameters, models, or outbreaks that are not linked to any article. 
+#' in parameters, models, or outbreaks that are not linked to any article.
 #' @param articles A dataframe with the articles table
 #' @param df A dataframe with the table that needs to be checked for duplicate
-#' covidence ids. Both articles and df will be loaded through 
+#' covidence ids. Both articles and df will be loaded through
 #' \code{\link{load_epidata}}.
-#' @param df_name A the name of the df that will be loaded through 
+#' @param df_name A the name of the df that will be loaded through
 #' \code{\link{load_epidata}}.
-#' 
+#'
 #' @return A dataframe with the same structure as df, but with unique ids for
 #' each covidence id.
 #' @importFrom cli cli_inform
 #'
 make_unique_id <- function(articles, df, df_name) {
   ## Can happen for marburg
-  if (! "covidence_id" %in% colnames(df)) {
-    cli_inform(sprintf("Note: the %s dataframe does not have a covidence_id column",
-                       df_name))
+  if (!"covidence_id" %in% colnames(df)) {
+    cli_inform(sprintf(
+      "Note: the %s dataframe does not have a covidence_id column",
+      df_name
+    ))
     return(df)
   }
   ## Check if there are any duplicate covidence ids in the articles table.
   ## Generally, you can expect that there won't be any duplicates in articles
-  ## and duplicates in one or all of the other tables. 
+  ## and duplicates in one or all of the other tables.
   dups <- do.call(what = "rbind", args = by(
     df, df$covidence_id,
     function(x1) {
@@ -62,13 +64,13 @@ make_unique_id <- function(articles, df, df_name) {
       )
     }
   ))
-  
+
   dups <- dups[dups$n_ids > 1, ]
-  
+
   if (nrow(dups) == 0) {
     return(df)
   }
-  
+
   ## If there are duplicates, we need to replace one of the ids. We will make
   ## a lookup table of covidence ids to ids and use it to fix all the tables.
   dups$id <- articles$id[match(dups$covidence_id, articles$covidence_id)]
@@ -84,7 +86,7 @@ make_unique_id <- function(articles, df, df_name) {
     id = articles$id[match(cov_ids, articles$covidence_id)]
   )
   dups <- rbind(dups, more_fixes)
-  ## For each covidence id in dups, find all rows in df with that 
+  ## For each covidence id in dups, find all rows in df with that
   ## covidence id and replace the id with the id in dups.
   for (i in 1:nrow(dups)) {
     cov_id <- dups$covidence_id[i]

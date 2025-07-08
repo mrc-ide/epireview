@@ -27,3 +27,6 @@ figures. Palettes are currently defined for
 parameters and countries. Any other variable will
 return NULL
 }
+\examples{
+color_palette("parameter_type")
+}

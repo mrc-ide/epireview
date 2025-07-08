@@ -20,9 +20,10 @@
 #' load_epidata_raw(pathogen = "marburg", table = "outbreak")
 #' @importFrom cli cli_warn cli_abort
 #' @export
-load_epidata_raw <- function(pathogen, table = c("article", "parameter",
-                                                "outbreak", "model", "param_name")) {
-
+load_epidata_raw <- function(pathogen, table = c(
+                               "article", "parameter",
+                               "outbreak", "model", "param_name"
+                             )) {
   # assertions
 
   if (missing(pathogen) | missing(table)) {
@@ -35,20 +36,18 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 
   pps <- priority_pathogens()
 
-  fname <- switch(
-    table,
-    article =  pps[pps$pathogen == pathogen, "articles_file"],
+  fname <- switch(table,
+    article = pps[pps$pathogen == pathogen, "articles_file"],
     parameter = pps[pps$pathogen == pathogen, "params_file"],
     outbreak = pps[pps$pathogen == pathogen, "outbreaks_file"],
     model = pps[pps$pathogen == pathogen, "models_file"]
   )
   ## Get column types based on table type
-  col_types <- switch(
-    table,
+  col_types <- switch(table,
     article = article_column_type(),
     parameter = parameter_column_type(),
     outbreak = outbreak_column_type(),
-    model = model_column_type()    
+    model = model_column_type()
   )
 
   if (is.na(fname)) {
@@ -67,11 +66,11 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     col_types <- col_types[cols]
     check_column_types(fname, col_types, colnames(tmp))
     out <- epireview_read_file(
-      fname, col_types = col_types, col_select = colnames(tmp)
+      fname,
+      col_types = col_types, col_select = colnames(tmp)
     )
   }
   out
-
 }
 
 
@@ -88,7 +87,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' The function is intended to be used
 #' internally by \code{load_epidata_raw} where the files are being read.
-#' @param fname The name of the csv file for which the column types are to 
+#' @param fname The name of the csv file for which the column types are to
 #' be checked
 #' @param col_types The column types expected by epireview. These are specified
 #' in the column type functions (e.g., article_column_type, parameter_column_type)
@@ -97,43 +96,49 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' @importFrom readr write_csv
 #' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
 #' @importFrom vroom problems
-#' @seealso article_column_type parameter_column_type, outbreak_column_type, 
+#' @seealso article_column_type parameter_column_type, outbreak_column_type,
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
-  
   tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
-  if (NROW(tmp_problem) > 0){
+  if (NROW(tmp_problem) > 0) {
     # update the values in col to the actual column names
-    tmp_problem$col<- sapply(tmp_problem["col"],
-                                 function(i) raw_colnames[i])
+    tmp_problem$col <- sapply(
+      tmp_problem["col"],
+      function(i) raw_colnames[i]
+    )
 
 
     # update the file to only the csv; assumes no "/" in the csv filename
-    cli_alert_danger(paste("There is an issue with",
-                           basename(tmp_problem$file[1]),
-                           ". The following columns have (n) issues:"))
+    cli_alert_danger(paste(
+      "There is an issue with",
+      basename(tmp_problem$file[1]),
+      ". The following columns have (n) issues:"
+    ))
 
     olid <- cli_ol()
 
-    problem_col_df <-as.data.frame(table(tmp_problem$col))
-    for (i in 1:NROW(problem_col_df)){
-      cli_li(paste(problem_col_df[i,1], " (n=", problem_col_df[i,2], ")", sep=""))
+    problem_col_df <- as.data.frame(table(tmp_problem$col))
+    for (i in 1:NROW(problem_col_df)) {
+      cli_li(paste(problem_col_df[i, 1], " (n=", problem_col_df[i, 2], ")", sep = ""))
     }
 
     cli_end(olid)
 
     tmpfile <- tempfile(fileext = ".csv")
-    write_csv(tmp_problem, file=tmpfile)
+    write_csv(tmp_problem, file = tmpfile)
 
     cli_alert_info(
-      paste("The errors have been written to a temporary csv that you can find here:",
-            tmpfile)
+      paste(
+        "The errors have been written to a temporary csv that you can find here:",
+        tmpfile
       )
+    )
     cli_abort("The data cannot be loaded until these errors are fixed.",
-              call=NULL)
+      call = NULL
+    )
   }
 }
 
@@ -143,10 +148,10 @@ check_column_types <- function(fname, col_types, raw_colnames) {
 #' This function defines the column types for the article data frame used in the epireview package.
 #' vroom is generally good at guessing the
 #' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
-#' is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where 
+#' is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where
 #' the files are being read.
-#' 
-#' 
+#'
+#'
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
 #' @importFrom vroom col_character col_integer col_logical
@@ -269,27 +274,27 @@ parameter_column_type <- function() {
 #' outbreak_column_type()
 outbreak_column_type <- function() {
   out <- list(
-    outbreak_id     = col_character(),
+    outbreak_id = col_character(),
     id = col_character(),
-    article_id           = col_integer(),
-    outbreak_start_day   = col_double(),
+    article_id = col_integer(),
+    outbreak_start_day = col_double(),
     outbreak_start_month = col_character(),
-    outbreak_start_year  = col_double(),
-    outbreak_end_day     = col_double(),
-    outbreak_end_month   = col_character(),
-    outbreak_date_year   = col_double(),
+    outbreak_start_year = col_double(),
+    outbreak_end_day = col_double(),
+    outbreak_end_month = col_character(),
+    outbreak_date_year = col_double(),
     outbreak_duration_months = col_double(),
-    outbreak_size        = col_double(),
+    outbreak_size = col_double(),
     asymptomatic_transmission = col_logical(),
-    outbreak_country     = col_character(),
-    outbreak_location    = col_character(),
-    cases_confirmed      = col_double(),
+    outbreak_country = col_character(),
+    outbreak_location = col_character(),
+    cases_confirmed = col_double(),
     cases_mode_detection = col_character(),
-    cases_suspected      = col_integer(),
-    cases_asymptomatic   = col_integer(),
-    deaths               = col_integer(),
+    cases_suspected = col_integer(),
+    cases_asymptomatic = col_integer(),
+    deaths = col_integer(),
     cases_severe_hospitalised = col_integer(),
-    covidence_id         = col_integer()
+    covidence_id = col_integer()
   )
   out
 }
@@ -306,22 +311,21 @@ outbreak_column_type <- function() {
 #' @examples
 #' model_column_type()
 model_column_type <- function() {
-
   out <- list(
     id = col_character(),
-    model_data_id       = col_character(),
-    article_id          = col_integer(),
-    pathogen            = col_character(),
-    ebola_variant       = col_character(),
-    model_type          = col_character(),
-    compartmental_type  = col_character(),
-    stoch_deter         = col_character(),
-    theoretical_model   = col_logical(),
-    interventions_type  = col_character(),
-    code_available      = col_logical(),
-    transmission_route  = col_character(),
-    assumptions         = col_character(),
-    covidence_id        = col_integer()
+    model_data_id = col_character(),
+    article_id = col_integer(),
+    pathogen = col_character(),
+    ebola_variant = col_character(),
+    model_type = col_character(),
+    compartmental_type = col_character(),
+    stoch_deter = col_character(),
+    theoretical_model = col_logical(),
+    interventions_type = col_character(),
+    code_available = col_logical(),
+    transmission_route = col_character(),
+    assumptions = col_character(),
+    covidence_id = col_integer()
   )
 
   out

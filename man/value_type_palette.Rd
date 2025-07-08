@@ -2,7 +2,10 @@
 % Please edit documentation in R/fig_utils.R
 \name{value_type_palette}
 \alias{value_type_palette}
-\title{Define a consistent shape palette for use in forest plots}
+\title{Define a consistent shape palette for use in forest plots
+We map shape aesthetic to value type i.e., mean, median etc.
+This function defines a shape palette that can be used in forest
+plots}
 \usage{
 value_type_palette(x = NULL)
 }
@@ -14,9 +17,13 @@ a named list of shapes where names are value types (mean,
 median, std dev etc.)
 }
 \description{
+Define a consistent shape palette for use in forest plots
 We map shape aesthetic to value type i.e., mean, median etc.
 This function defines a shape palette that can be used in forest
 plots
+}
+\examples{
+value_type_palette()
 }
 \author{
 Sangeeta Bhatia
