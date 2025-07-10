@@ -36,7 +36,7 @@ devtools::load_all()
 load_epidata(<your pathogen name>)
 ```
 
-You should not say any errors (and ideally no warnings).
+You should see no errors (and ideally no warnings).
 
 7. **Package Maintenance** Before raising a PR to add the data in {epireview}:
    - Increment the package version in `DESCRIPTION`.
