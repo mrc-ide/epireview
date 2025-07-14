@@ -48,7 +48,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     article = article_column_type(),
     parameter = parameter_column_type(),
     outbreak = outbreak_column_type(),
-    model = model_column_type()    
+    model = model_column_type()
   )
 
   if (is.na(fname)) {
@@ -88,7 +88,7 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #'
 #' The function is intended to be used
 #' internally by \code{load_epidata_raw} where the files are being read.
-#' @param fname The name of the csv file for which the column types are to 
+#' @param fname The name of the csv file for which the column types are to
 #' be checked
 #' @param col_types The column types expected by epireview. These are specified
 #' in the column type functions (e.g., article_column_type, parameter_column_type)
@@ -97,11 +97,11 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
 #' @importFrom readr write_csv
 #' @importFrom cli  cli_alert_info cli_alert_danger cli_ol cli_li cli_end cli_abort
 #' @importFrom vroom problems
-#' @seealso article_column_type parameter_column_type, outbreak_column_type, 
+#' @seealso article_column_type parameter_column_type, outbreak_column_type,
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
-  
+
   tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
@@ -143,10 +143,10 @@ check_column_types <- function(fname, col_types, raw_colnames) {
 #' This function defines the column types for the article data frame used in the epireview package.
 #' vroom is generally good at guessing the
 #' column types, but it is better to be explicit. Moreover, it reads a column of NAs as a logical vector, which
-#' is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where 
+#' is particularly undesirable for us. This function is intended to be used internally by \code{load_epidata_raw} where
 #' the files are being read.
-#' 
-#' 
+#'
+#'
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
 #' @importFrom vroom col_character col_integer col_logical
@@ -175,7 +175,8 @@ article_column_type <- function(pathogen) {
     qa_a4 = col_character(),
     qa_d5 = col_character(),
     qa_d6 = col_character(),
-    qa_d7 = col_character()
+    qa_d7 = col_character(),
+    article_label = col_character()
   )
 
   out
@@ -249,7 +250,30 @@ parameter_column_type <- function() {
     genome_site = col_character(),
     genomic_sequence_available = col_logical(),
     parameter_class = col_character(),
-    covidence_id = col_integer()
+    covidence_id = col_integer(),
+    exponent = col_integer(),
+    case_definition = col_character(),
+    data_available = col_character(),
+    inverse_param = col_logical(),
+    parameter_from_figure = col_logical(),
+    r_pathway = col_character(),
+    seroprevalence_adjusted = col_character(),
+    third_sample_param_yn = col_logical(),
+    trimester_exposed = col_character(),
+    urban_rural_area = col_character(),
+    parameter_bounds = col_character(),
+    comb_uncertainty_type = col_character(),
+    comb_uncertainty = col_character(),
+    population_country_original = col_character(),
+    delay_short = col_character(),
+    genomic_lineage = col_character(),
+    prnt_on_elisa = col_logical(),
+    metaanalysis_inclusion = col_character(),
+    women_or_infants = col_character(),
+    pregnancy_outcome_type = col_character(),
+    survey_start_date = col_character(),
+    survey_end_date = col_character(),
+    survey_date = col_character()
   )
 
   out
@@ -289,7 +313,18 @@ outbreak_column_type <- function() {
     cases_asymptomatic   = col_integer(),
     deaths               = col_integer(),
     cases_severe_hospitalised = col_integer(),
-    covidence_id         = col_integer()
+    covidence_id         = col_integer(),
+    cases_severe         = col_integer(),
+    cases_unspecified    = col_integer(),
+    female_cases         = col_integer(),
+    male_cases           = col_integer(),
+    ongoing              = col_logical(),
+    population_size      = col_integer(),
+    pre_outbreak         = col_character(),
+    prop_female_cases    = col_double(),
+    prop_male_cases      = col_double(),
+    type_cases_sex_disagg = col_integer(),
+    outbreak_start_date = col_character()
   )
   out
 }
