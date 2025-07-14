@@ -1,3 +1,6 @@
+# epireview 1.4.5
+* Added DOI to Zika preprint
+
 # epireview 1.4.4
 
 * Updated dataset for SARS-CoV-1
