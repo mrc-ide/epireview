@@ -16,33 +16,43 @@
 priority_pathogens <- function() {
 
   data.frame(
-    pathogen = c("marburg", "ebola", "lassa","sars"),
-    articles_screened = c(4460, 9563,5414,14929),
-    articles_extracted = c(42, 520,157,288),
-    doi = c("10.1016/S1473-3099(23)00515-7", "10.1016/S1473-3099(24)00374-8", "10.1101/2024.03.23.24304596", "10.1101/2024.08.13.24311934"),
+    pathogen = c("marburg", "ebola", "lassa","sars", "zika"),
+    articles_screened = c(4460, 9563,5414,14929, 27491),
+    articles_extracted = c(42, 520,157,288, 574),
+    doi = c(
+      "10.1016/S1473-3099(23)00515-7",
+      "10.1016/S1473-3099(24)00374-8",
+      "10.1101/2024.03.23.24304596",
+      "10.1101/2024.08.13.24311934",
+      NA
+    ),
     articles_file = c(
       "marburg_article.csv",
       "ebola_articles.csv",
       "lassa_articles.csv",
-      "sars_articles.csv"
+      "sars_articles.csv",
+      "zika_articles.csv"
     ),
     params_file = c(
       "marburg_parameter.csv",
       "ebola_parameters.csv",
       "lassa_parameters.csv",
-      "sars_parameters.csv"
+      "sars_parameters.csv",
+      "zika_parameters.csv"
     ),
     models_file = c(
       "marburg_model.csv",
       "ebola_models.csv",
       "lassa_models.csv",
-      "sars_models.csv"
+      "sars_models.csv",
+      "zika_models.csv"
     ),
     outbreaks_file = c(
       "marburg_outbreak.csv",
       NA,
       "lassa_outbreaks.csv",
-      NA
+      NA,
+      "zika_outbreaks.csv"
     )
   )
 }
