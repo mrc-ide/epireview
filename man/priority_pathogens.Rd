@@ -24,3 +24,6 @@ as used in the package and associated information with the review.
 \details{
 Data on the priority pathogens included in the systematic review
 }
+\examples{
+priority_pathogens()
+}

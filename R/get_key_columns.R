@@ -20,50 +20,52 @@
 #' )
 #' get_key_columns(data = cfr_lassa, parameter_name = "cfr")
 get_key_columns <- function(data,
-                            parameter_name = c("cfr",
-                                               "delays",
-                                               "sero",
-                                               "risk_factors",
-                                               "reproduction_number",
-                                               "genomic",
-                                               "attack_rate",
-                                               "doubling_time",
-                                               "growth_rate",
-                                               "overdispersion",
-                                               "relative_contribution"),
+                            parameter_name = c(
+                              "cfr",
+                              "delays",
+                              "sero",
+                              "risk_factors",
+                              "reproduction_number",
+                              "genomic",
+                              "attack_rate",
+                              "doubling_time",
+                              "growth_rate",
+                              "overdispersion",
+                              "relative_contribution"
+                            ),
                             all_columns = FALSE) {
-
   if (!is.data.frame(data)) {
     stop("Please provide the epireview parameter table.")
   }
 
-  if(! isTRUE(all_columns)){
-
-  parameter_name <- match.arg(parameter_name)
-  cols_func <- switch(parameter_name,
-                      cfr = cfr_key_columns,
-                      delays = delay_key_columns,
-                      sero = sero_key_columns,
-                      risk_factors = risk_factors_key_columns,
-                      reproduction_number = reproduction_number_key_columns,
-                      genomic = genomic_key_columns,
-                      attack_rate = attack_double_growth_key_columns,
-                      doubling_time = attack_double_growth_key_columns,
-                      growth_rate = attack_double_growth_key_columns,
-                      overdispersion = overdispersion_contribution_key_columns,
-                      relative_contribution = overdispersion_contribution_key_columns
-                      )
-  cols <- do.call(cols_func, args = list())
-  if (!all(cols %in% colnames(data))) {
-    warning(
-    "THIS FUNCTIONALITY IS UNDER ACTIVE DEVELOPMENT\n" ,
-    "Some of the key columns are not found in the data, only returning ",
-    "those found",
-    call. = FALSE
+  if (!isTRUE(all_columns)) {
+    parameter_name <- match.arg(parameter_name)
+    cols_func <- switch(parameter_name,
+      cfr = cfr_key_columns,
+      delays = delay_key_columns,
+      sero = sero_key_columns,
+      risk_factors = risk_factors_key_columns,
+      reproduction_number = reproduction_number_key_columns,
+      genomic = genomic_key_columns,
+      attack_rate = attack_double_growth_key_columns,
+      doubling_time = attack_double_growth_key_columns,
+      growth_rate = attack_double_growth_key_columns,
+      overdispersion = overdispersion_contribution_key_columns,
+      relative_contribution = overdispersion_contribution_key_columns
     )
-    cols <- cols[cols %in% colnames(data)]
+    cols <- do.call(cols_func, args = list())
+    if (!all(cols %in% colnames(data))) {
+      warning(
+        "THIS FUNCTIONALITY IS UNDER ACTIVE DEVELOPMENT\n",
+        "Some of the key columns are not found in the data, only returning ",
+        "those found",
+        call. = FALSE
+      )
+      cols <- cols[cols %in% colnames(data)]
+    }
+  } else {
+    cols <- colnames(data)
   }
-} else cols <- colnames(data)
 
   data <- data[, cols]
 
@@ -89,7 +91,7 @@ key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 cfr_key_columns <- function() {
-  c(key_columns(),  c(
+  c(key_columns(), c(
     "parameter_value", "cfr_ifr_numerator", "cfr_ifr_denominator",
     "cfr_ifr_method"
   ))
@@ -104,7 +106,7 @@ delay_key_columns <- function() {
   c(key_columns(), c(
     "parameter_value", "parameter_unit", "distribution_type",
     "distribution_par1_value", "distribution_par2_value",
-    "other_delay_start","other_delay_end"
+    "other_delay_start", "other_delay_end"
   ))
 }
 
@@ -114,9 +116,12 @@ delay_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 sero_key_columns <- function() {
-  c(key_columns(),
-    c("parameter_value",
-      "cfr_ifr_numerator", "cfr_ifr_denominator")
+  c(
+    key_columns(),
+    c(
+      "parameter_value",
+      "cfr_ifr_numerator", "cfr_ifr_denominator"
+    )
   )
 }
 
@@ -126,7 +131,8 @@ sero_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 risk_factors_key_columns <- function() {
-  c(key_columns(),
+  c(
+    key_columns(),
     c(
       "riskfactor_outcome", "riskfactor_name", "riskfactor_significant",
       "riskfactor_adjusted"
@@ -140,7 +146,8 @@ risk_factors_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 reproduction_number_key_columns <- function() {
-  c(key_columns(),
+  c(
+    key_columns(),
     c(
       "parameter_value", "method_r", "parameter_unit"
     )
@@ -153,7 +160,8 @@ reproduction_number_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 genomic_key_columns <- function() {
-  c(key_columns(),
+  c(
+    key_columns(),
     c(
       "parameter_value",
       "parameter_unit", "exponent", "genome_site",
@@ -168,7 +176,8 @@ genomic_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 attack_double_growth_key_columns <- function() {
-  c(key_columns(),
+  c(
+    key_columns(),
     c(
       "parameter_value",
       "parameter_unit", "exponent"
@@ -184,12 +193,11 @@ attack_double_growth_key_columns <- function() {
 #' @return A `character` vector.
 #' @keywords internal
 overdispersion_contribution_key_columns <- function() {
-  c(key_columns(),
+  c(
+    key_columns(),
     c(
       "parameter_value",
       "parameter_unit", "exponent"
     )
   )
 }
-
-

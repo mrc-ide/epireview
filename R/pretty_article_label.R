@@ -23,11 +23,11 @@
 #' @importFrom cli cli_warn
 #' @export
 pretty_article_label <- function(articles, mark_multiple) {
-    assert_articles(articles)
+  assert_articles(articles)
   ## Warning if there are missing values for first_author_surname
   surname_missing <- is.na(articles$first_author_surname)
 
-  is_are  <- c("is", "are")
+  is_are <- c("is", "are")
   article_articles <- c("article", "articles")
 
   if (sum(surname_missing) > 0) {
@@ -51,8 +51,9 @@ pretty_article_label <- function(articles, mark_multiple) {
     plural <- (n_both_missing > 1) + 1
 
     cli_warn(
-      paste("There", is_are[plural], n_both_missing, article_articles[plural],
-            "with missing first author surname and first author first name."
+      paste(
+        "There", is_are[plural], n_both_missing, article_articles[plural],
+        "with missing first author surname and first author first name."
       )
     )
   }
@@ -60,65 +61,68 @@ pretty_article_label <- function(articles, mark_multiple) {
   ## If both names are missing and covidence id is NA, prefix will be NA
   all_missing <- both_missing & is.na(articles$covidence_id)
   if (sum(all_missing) > 0) {
-
     n_all_missing <- sum(all_missing)
     plural <- (n_all_missing > 1) + 1
 
     cli_warn(
-      paste("There", is_are[plural], n_all_missing, article_articles[plural],
-            "with missing first author surname, first author first name, and covidence id."
+      paste(
+        "There", is_are[plural], n_all_missing, article_articles[plural],
+        "with missing first author surname, first author first name, and covidence id."
       )
-      )
-    }
-    ## If year_publication is missing
-    year_missing <- is.na(articles$year_publication)
-    if (sum(year_missing) > 0) {
-      n_year_missing <- sum(year_missing)
-      plural <- (n_year_missing > 1) + 1
-
-      cli_warn(
-        paste("There", is_are[plural], n_year_missing, article_articles[plural],
-              "with missing year of publication."
-        )
-      )
-    }
-    ## If year_publication is missing and covidence id is NA, suffix will be NA
-    all_missing <- year_missing & is.na(articles$covidence_id)
-    if (sum(all_missing) > 0) {
-      n_all_missing <- sum(all_missing)
-      plural <- (n_all_missing > 1) + 1
-
-      cli_warn(
-        paste("There", is_are[plural], n_all_missing, article_articles[plural],
-              "with missing year of publication and covidence id."
-        )
-      )
-    }
-    prefix <- ifelse(
-        ! is.na(articles$first_author_surname),
-        articles$first_author_surname,
-        ifelse(
-            ! is.na(articles$first_author_first_name),
-            articles$first_author_first_name,
-            articles$covidence_id
-        )
     )
-    suffix <- ifelse(
-        ! is.na(articles$year_publication),
-        articles$year_publication,
-        articles$covidence_id
-    )
-    articles$article_label <- paste(prefix, suffix)
+  }
+  ## If year_publication is missing
+  year_missing <- is.na(articles$year_publication)
+  if (sum(year_missing) > 0) {
+    n_year_missing <- sum(year_missing)
+    plural <- (n_year_missing > 1) + 1
 
-    if (mark_multiple) {
-      ## If there is more than one study from the same author in the same
-      ## year, they will end up with the same label. This is not ideal, so
-      ## we will mark these studies with a number.
-      articles <- mark_multiple_estimates(
-        articles, "article_label", label_type = "letters"
+    cli_warn(
+      paste(
+        "There", is_are[plural], n_year_missing, article_articles[plural],
+        "with missing year of publication."
       )
-    }
-    articles
+    )
+  }
+  ## If year_publication is missing and covidence id is NA, suffix will be NA
+  all_missing <- year_missing & is.na(articles$covidence_id)
+  if (sum(all_missing) > 0) {
+    n_all_missing <- sum(all_missing)
+    plural <- (n_all_missing > 1) + 1
+
+    cli_warn(
+      paste(
+        "There", is_are[plural], n_all_missing, article_articles[plural],
+        "with missing year of publication and covidence id."
+      )
+    )
+  }
+  prefix <- ifelse(
+    !is.na(articles$first_author_surname),
+    articles$first_author_surname,
+    ifelse(
+      !is.na(articles$first_author_first_name),
+      articles$first_author_first_name,
+      articles$covidence_id
+    )
+  )
+  suffix <- ifelse(
+    !is.na(articles$year_publication),
+    articles$year_publication,
+    articles$covidence_id
+  )
+  articles$article_label <- paste(prefix, suffix)
+
+  if (mark_multiple) {
+    ## If there is more than one study from the same author in the same
+    ## year, they will end up with the same label. This is not ideal, so
+    ## we will mark these studies with a number.
+    articles <- mark_multiple_estimates(
+      articles, "article_label",
+      label_type = "letters"
+    )
+  }
+  articles
 }
 
 
@@ -143,16 +147,13 @@ pretty_article_label <- function(articles, mark_multiple) {
 #' articles <- data.frame(
 #'   doi = c("10.123", NA, "10.234"),
 #'   article_label = c("Smith 2020", "Smith 1979", "Smith 2023"),
-#'
 #'   journal = c("Science", "Nature", "The Lancet")
 #' )
 #' update_article_info(articles)
 #'
-#'
-update_article_info <- function(articles){
-
+update_article_info <- function(articles) {
   ## does article_label column exist
-  if(!"article_label" %in% colnames(articles)){
+  if (!"article_label" %in% colnames(articles)) {
     cli_abort("Dataframe does not include article_label column. Please use function
     pretty_article_label before proceeding.")
   }
@@ -174,8 +175,4 @@ update_article_info <- function(articles){
   )
 
   articles
-
 }
-
-
-

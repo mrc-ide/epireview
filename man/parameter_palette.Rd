@@ -5,7 +5,7 @@
 \title{Define a consistent color palette for use in
 figures}
 \usage{
-parameter_palette(x)
+parameter_palette(x = NULL)
 }
 \arguments{
 \item{x}{a list of parameters. Optional. If missing, the entire
@@ -20,6 +20,9 @@ with for example
 \description{
 Define a consistent color palette for use in
 figures
+}
+\examples{
+parameter_palette()
 }
 \author{
 Sangeeta Bhatia
