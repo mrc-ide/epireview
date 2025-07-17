@@ -170,7 +170,7 @@ check_column_types <- function(fname, col_types, raw_colnames) {
 #'
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
-#' @importFrom vroom col_character col_integer col_logical
+#' @importFrom vroom col_character col_integer col_logical 
 #' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
 article_column_type <- function(pathogen) {
@@ -214,7 +214,7 @@ article_column_type <- function(pathogen) {
 #' @examples
 #' parameter_column_type()
 #'
-#' @importFrom vroom col_integer col_character col_double col_logical
+#' @importFrom vroom col_integer col_character col_double col_logical col_double
 #'
 #' @keywords dataset, column types
 parameter_column_type <- function() {
@@ -294,7 +294,8 @@ parameter_column_type <- function() {
     pregnancy_outcome_type = col_character(),
     survey_start_date = col_character(),
     survey_end_date = col_character(),
-    survey_date = col_character()
+    survey_date = col_character(),
+    article_qa_score = col_double()
   )
 
   out

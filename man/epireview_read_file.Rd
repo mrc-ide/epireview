@@ -10,7 +10,7 @@ epireview_read_file(fname, ...)
 \arguments{
 \item{fname}{The name of the file to be read in.}
 
-\item{...}{Additional arguments to be passed to \code{\link{read_delim}}.}
+\item{...}{Additional arguments to be passed to \code{\link[vroom]{vroom}}.}
 }
 \value{
 A data frame read in from the file.

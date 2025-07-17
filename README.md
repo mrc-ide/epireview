@@ -71,7 +71,7 @@ One output of this project will be a database initially populated with all the i
 | Nipah virus  |           1842 | s.bhatia@imperial.ac.uk, tmn21@ic.ac.uk||Oct 2024||
 | SARS-CoV-1    |        14,929 | acori@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html)|Jun 2024|https://doi.org/10.1101/2024.08.13.24311934|
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||2019||
-| Zika virus|              4,518| kem22@ic.ac.uk||Feb 2024||
+| Zika virus|              4,518| kem22@ic.ac.uk||Oct 2024| https://doi.org/10.1101/2025.07.10.25331254|
 | Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||2019||
 | MERS-CoV|               10,382| rom116@ic.ac.uk||2019||
 | Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||||

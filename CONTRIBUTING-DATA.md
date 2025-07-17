@@ -16,7 +16,7 @@ Thank you for your interest in contributing to {epireview}. Please follow the st
    - In `R/data.R`, edit the `priority_pathogens()` function:
      - Add your new pathogen as a valid argument.
      - Update the number of studies **screened** and **extracted**.
-     - Include the DOI if available. If not, use `NA`.
+     - Include the DOI if available. If not, use `NA`. When you do have the DOI, update it in this file as well as in the README.
 
 4. **Ensure Column Consistency**
    - Make sure the column names in the new files match those in existing files.
@@ -44,8 +44,8 @@ You should see no errors (and ideally no warnings).
    - Run `devtools::document()` to regenerate documentation.
    - Run `devtools::check()` and ensure there are no errors or warnings.
 
-7. **Submit a Pull Request**
-   - Open a pull request (PR) to merge your branch into `develop`.
+8. **Submit a Pull Request**
+   - Open a pull request (PR) to merge your branch into `develop`. 
    - Include a brief summary of your changes and what data was added.
 
 ---
