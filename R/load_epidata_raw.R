@@ -65,6 +65,21 @@ load_epidata_raw <- function(pathogen, table = c(
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
     check_column_types(fname, col_types, colnames(tmp))
+    ## If a column has not been specified in col_types, default to
+    ## character and bypass the check. Only warn the user
+    cols_not_set <- colnames(tmp)[!colnames(tmp) %in% names(col_types)]
+
+    if (length(cols_not_set) > 0) {
+      cli_warn(paste("The following columns were not specified in col_types:",
+                     paste(cols_not_set, collapse = ", ")))
+      cli_warn("These columns will be read in as character vectors.")
+      cli_warn("Data contributors: please carefully check that this does not
+               lead to loss of information. If it does, please update the
+               column types in the epireview package and submit a PR.")
+      for (col in cols_not_set) {
+        col_types[[col]] <- col_character()
+      }
+    }
     out <- epireview_read_file(
       fname,
       col_types = col_types, col_select = colnames(tmp)
@@ -100,6 +115,7 @@ load_epidata_raw <- function(pathogen, table = c(
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
+  
   tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
@@ -180,7 +196,8 @@ article_column_type <- function(pathogen) {
     qa_a4 = col_character(),
     qa_d5 = col_character(),
     qa_d6 = col_character(),
-    qa_d7 = col_character()
+    qa_d7 = col_character(),
+    article_label = col_character()
   )
 
   out
@@ -254,7 +271,30 @@ parameter_column_type <- function() {
     genome_site = col_character(),
     genomic_sequence_available = col_logical(),
     parameter_class = col_character(),
-    covidence_id = col_integer()
+    covidence_id = col_integer(),
+    exponent = col_integer(),
+    case_definition = col_character(),
+    data_available = col_character(),
+    inverse_param = col_logical(),
+    parameter_from_figure = col_logical(),
+    r_pathway = col_character(),
+    seroprevalence_adjusted = col_character(),
+    third_sample_param_yn = col_logical(),
+    trimester_exposed = col_character(),
+    urban_rural_area = col_character(),
+    parameter_bounds = col_character(),
+    comb_uncertainty_type = col_character(),
+    comb_uncertainty = col_character(),
+    population_country_original = col_character(),
+    delay_short = col_character(),
+    genomic_lineage = col_character(),
+    prnt_on_elisa = col_logical(),
+    metaanalysis_inclusion = col_character(),
+    women_or_infants = col_character(),
+    pregnancy_outcome_type = col_character(),
+    survey_start_date = col_character(),
+    survey_end_date = col_character(),
+    survey_date = col_character()
   )
 
   out
@@ -294,7 +334,19 @@ outbreak_column_type <- function() {
     cases_asymptomatic = col_integer(),
     deaths = col_integer(),
     cases_severe_hospitalised = col_integer(),
-    covidence_id = col_integer()
+    covidence_id         = col_integer(),
+    cases_severe         = col_integer(),
+    cases_unspecified    = col_integer(),
+    female_cases         = col_integer(),
+    male_cases           = col_integer(),
+    ongoing              = col_logical(),
+    population_size      = col_integer(),
+    pre_outbreak         = col_character(),
+    prop_female_cases    = col_double(),
+    prop_male_cases      = col_double(),
+    type_cases_sex_disagg = col_character(),
+    outbreak_start_date = col_character(),
+    pathogen = col_character()
   )
   out
 }
