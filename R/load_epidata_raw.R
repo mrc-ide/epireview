@@ -323,7 +323,7 @@ outbreak_column_type <- function() {
     pre_outbreak         = col_character(),
     prop_female_cases    = col_double(),
     prop_male_cases      = col_double(),
-    type_cases_sex_disagg = col_integer(),
+    type_cases_sex_disagg = col_character(),
     outbreak_start_date = col_character(),
     pathogen = col_character()
   )
