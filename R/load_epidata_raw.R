@@ -66,6 +66,21 @@ load_epidata_raw <- function(pathogen, table = c("article", "parameter",
     cols <- intersect(colnames(tmp), names(col_types))
     col_types <- col_types[cols]
     check_column_types(fname, col_types, colnames(tmp))
+    ## If a column has not been specified in col_types, default to
+    ## character and bypass the check. Only warn the user
+    cols_not_set <- colnames(tmp)[!colnames(tmp) %in% names(col_types)]
+
+    if (length(cols_not_set) > 0) {
+      cli_warn(paste("The following columns were not specified in col_types:",
+                     paste(cols_not_set, collapse = ", ")))
+      cli_warn("These columns will be read in as character vectors.")
+      cli_warn("Data contributors: please carefully check that this does not
+               lead to loss of information. If it does, please update the
+               column types in the epireview package and submit a PR.")
+      for (col in cols_not_set) {
+        col_types[[col]] <- col_character()
+      }
+    }
     out <- epireview_read_file(
       fname, col_types = col_types, col_select = colnames(tmp)
     )
