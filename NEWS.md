@@ -1,3 +1,7 @@
+# epireview 1.4.6
+
+* Added temporary Oropouche data sets for Quito workshop
+
 # epireview 1.4.5
 
 * Added Zika data sets
