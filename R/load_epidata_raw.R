@@ -115,7 +115,7 @@ load_epidata_raw <- function(pathogen, table = c(
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
-  
+
   tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
@@ -170,7 +170,7 @@ check_column_types <- function(fname, col_types, raw_colnames) {
 #'
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
-#' @importFrom vroom col_character col_integer col_logical 
+#' @importFrom vroom col_character col_integer col_logical
 #' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
 article_column_type <- function(pathogen) {
@@ -197,7 +197,8 @@ article_column_type <- function(pathogen) {
     qa_d5 = col_character(),
     qa_d6 = col_character(),
     qa_d7 = col_character(),
-    article_label = col_character()
+    article_label = col_character(),
+    article_preprint = col_character()
   )
 
   out
@@ -242,13 +243,13 @@ parameter_column_type <- function() {
     distribution_par2_value = col_double(),
     distribution_par2_type = col_character(),
     distribution_par2_uncertainty = col_logical(),
-    method_from_supplement = col_logical(),
+    method_from_supplement = col_character(),
     method_moment_value = col_character(),
     cfr_ifr_method = col_character(),
     method_r = col_character(),
     method_disaggregated_by = col_character(),
-    method_disaggregated = col_logical(),
-    method_disaggregated_only = col_logical(),
+    method_disaggregated = col_character(),
+    method_disaggregated_only = col_character(),
     riskfactor_outcome = col_character(),
     riskfactor_name = col_character(),
     riskfactor_occupation = col_character(),
@@ -269,7 +270,7 @@ parameter_column_type <- function() {
     population_study_end_month = col_character(),
     population_study_end_year = col_integer(),
     genome_site = col_character(),
-    genomic_sequence_available = col_logical(),
+    genomic_sequence_available = col_character(),
     parameter_class = col_character(),
     covidence_id = col_integer(),
     exponent = col_integer(),
@@ -295,7 +296,35 @@ parameter_column_type <- function() {
     survey_start_date = col_character(),
     survey_end_date = col_character(),
     survey_date = col_character(),
-    article_qa_score = col_double()
+    article_qa_score = col_double(),
+    parameter_statistical = col_character(),
+    parameter_hd_from = col_character(),
+    other_delay_start = col_character(),
+    parameter_hd_to	= col_character(),
+    other_delay_end = col_character(),
+    parameter_context_human = col_character(),
+    parameter_context_nonhuman = col_character(),
+    parameter_context_genotype = col_character(),
+    parameter_context_sample_type = col_character(),
+    parameter_notes = col_character(),
+    parameter_paired = col_character(),
+    parameter_type_2 = col_character(),
+    parameter_value_2	= col_double(),
+    parameter_range_low_2 = col_double(),
+    parameter_range_upper_2	= col_double(),
+    parameter_inverse_2	= col_character(),
+    parameter_unit_2 = col_character(),
+    parameter_value_type_2 = col_character(),
+    parameter_supplement_2 = col_character(),
+    parameter_statistical_2 = col_character(),
+    parameter_unc_single_type_2 = col_character(),
+    parameter_unc_single_value_2 = col_double(),
+    parameter_unc_pair_type_2	= col_character(),
+    parameter_unc_pair_value_low_2 = col_double(),
+    parameter_unc_pair_value_up_2	= col_double(),
+    distribution_par2_type = col_character(),
+    distribution_par2_value = col_double(),
+    genome_site = col_character()
   )
 
   out
