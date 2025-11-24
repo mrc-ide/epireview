@@ -3,14 +3,17 @@
 #' @inheritParams ggplot2::theme_bw
 #' @export
 theme_epireview <- function(
-    base_size = 11,
-    base_family = "",
-    base_line_size = base_size / 22,
-    base_rect_size = base_size / 22) {
+   base_size = 11,
+   base_family = "",
+   header_family = NULL,
+   base_line_size = base_size / 22,
+   base_rect_size = base_size / 22) {
   update_geom_defaults("point", list(size = 3))
   update_geom_defaults("segment", list(lwd = 3, alpha = 0.4))
   update_geom_defaults("errorbar", list(lwd = 0.5, width = 0.4))
-  th <- theme_bw(base_size, base_family, base_line_size, base_rect_size)
+  th <- theme_bw(
+    base_size, base_family, header_family, base_line_size, base_rect_size
+  )
   th <- th + theme(
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5),
