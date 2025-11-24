@@ -8,6 +8,7 @@ A standard theme for figures in epireview.}
 theme_epireview(
   base_size = 11,
   base_family = "",
+  header_family = NULL,
   base_line_size = base_size/22,
   base_rect_size = base_size/22
 )
@@ -16,6 +17,10 @@ theme_epireview(
 \item{base_size}{base font size, given in pts.}
 
 \item{base_family}{base font family}
+
+\item{header_family}{font family for titles and headers. The default, \code{NULL},
+uses theme inheritance to set the font. This setting affects axis titles,
+legend titles, the plot title and tag text.}
 
 \item{base_line_size}{base size for line elements}
 

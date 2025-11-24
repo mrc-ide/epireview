@@ -1,3 +1,7 @@
+# epireview 1.4.5
+
+* Added Zika data sets
+
 # epireview 1.4.4
 
 * Updated dataset for SARS-CoV-1
