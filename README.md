@@ -69,7 +69,8 @@ One output of this project will be a database initially populated with all the i
 | Ebola virus   | 14,690 | hunwin@ic.ac.uk, rknash@ic.ac.uk|| Jul 2023|https://doi.org/10.1016/S1473-3099(24)00374-8|
 | Lassa Mammarenavirus  | 2,817 | pd315@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)| Jun 2024|https://doi.org/10.1016/S2214-109X(24)00379-6|
 | Nipah virus  |           1842 | s.bhatia@imperial.ac.uk, tmn21@ic.ac.uk||Oct 2024||
-| SARS-CoV-1    |        14,929 | acori@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html)|Jun 2024|https://doi.org/10.1101/2024.08.13.24311934|
+| SARS-CoV-1    |        14,929 | acori@ic.ac.uk, cm401@ic.ac.uk |[link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html)|Jun 2024|https://doi.org/10.1016/
+j.lanmic.2025.101144|
 | Nairo virus (CCHF) |     1,967| dn620@ic.ac.uk, svanelsl@ic.ac.uk||2019||
 | Zika virus|              4,518| kem22@ic.ac.uk, av1421@ic.ac.uk||Oct 2024| https://doi.org/10.1101/2025.07.10.25331254|
 | Rift Valley Fever Virus| 3,341| gc.4018@ic.ac.uk||2019||
