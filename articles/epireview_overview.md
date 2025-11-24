@@ -1,0 +1,33 @@
+# epireview
+
+***epireview*** contains the latest open access pathogen data from the
+Pathogen Epidemiology Review Group (PERG), who aim to extract modelling
+parameters for nine priority pathogens as defined by WHO. This R package
+contains tools to update pathogen databases with new peer-reviewed data
+as it becomes available, and to summarise the latest data using tables
+and figures.
+
+There are several vignettes available:
+
+- [**Pathogen database
+  options**](https://mrc-ide.github.io/epireview/articles/pathogen_database_field_options.html)
+  which lists the options for each model, outbreak, or parameter field
+  and describes how to access them using a function in the package.
+
+- [**How to update the database with new article
+  data**](https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html)
+  to explain the process of updating the database with new article,
+  model, outbreak, or pathogen data.
+
+In addition to this, the github repo has a
+[**wiki**](https://github.com/mrc-ide/epireview/wiki) which provides
+details on the data extraction process together with examples and an
+overview of the quality assessment measures.
+
+We also provide an empty [access database
+file](https://github.com/mrc-ide/epireview/blob/main/miscellaneous_files/DIDE%20Priority%20Pathogens%20-%20BLANK.accdb)
+which can be used as a starting point for any new pathogens which are
+not already covered by this review. For updates to the existing datasets
+please follow the [*How to update the database with new article
+data*](https://mrc-ide.github.io/epireview/articles/pathogen_database_update.html)
+guide.

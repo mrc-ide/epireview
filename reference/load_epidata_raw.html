@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">epireview</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,6 +87,12 @@ use <code>load_epidata</code> instead.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">load_epidata_raw</span><span class="op">(</span>pathogen <span class="op">=</span> <span class="st">"marburg"</span>, table <span class="op">=</span> <span class="st">"outbreak"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following columns were not specified in col_types: covidence_id.x,</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> outbreak_data_id, covidence_id.y</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>These columns will be read in as character vectors.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Data contributors: please carefully check that this does not lead to loss of</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> information. If it does, please update the column types in the epireview</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> package and submit a PR.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 23 × 24</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    outbreak_id article_id outbreak_start_day outbreak_start_month</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
@@ -118,7 +124,7 @@ use <code>load_epidata</code> instead.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

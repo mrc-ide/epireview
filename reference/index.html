@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">epireview</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,8 +41,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -53,301 +52,351 @@
 
         </dt>
         <dd>Define the column types for the article data frame</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="assign_qa_score.html">assign_qa_score()</a></code>
 
         </dt>
         <dd>Assign quality assessment score to each article</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="check_column_types.html">check_column_types()</a></code>
 
         </dt>
         <dd>Checks that the column types of the input csv matches the column types expected by epireview.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="check_df_for_meta.html">check_df_for_meta()</a></code>
 
         </dt>
         <dd>Sanity checks before meta-analysis</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="check_ulim.html">check_ulim()</a></code>
 
         </dt>
         <dd>Check upper limit of parameter values</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="color_palette.html">color_palette()</a></code>
 
         </dt>
         <dd>Define a consistent color palette for use in figures. Palettes are currently defined for parameters and countries. Any other variable will return NULL</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="country_palette.html">country_palette()</a></code>
 
         </dt>
         <dd>country_palette Function</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="custom_palette.html">custom_palette()</a></code>
 
         </dt>
         <dd>Create a custom color palette.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="delays_to_days.html">delays_to_days()</a></code>
 
         </dt>
         <dd>This function converts delays in different units (hours, weeks, months) to days. It checks if all delays are in days and warns the user if not. It then converts hours to days by dividing by 24, weeks to days by multiplying by 7, and months to days by multiplying by 30.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="epireview_read_file.html">epireview_read_file()</a></code>
 
         </dt>
         <dd>Intended for internal use only; setting desirable defaults for reading in data files.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="filter_cols.html">filter_cols()</a></code>
 
         </dt>
         <dd>Filter columns of a data frame based on specified conditions.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="filter_df_for_metamean.html">filter_df_for_metamean()</a></code>
 
         </dt>
         <dd>Prepare parameter dataframe for meta analysis of means</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="filter_df_for_metaprop.html">filter_df_for_metaprop()</a></code>
 
         </dt>
         <dd>Prepare parameter dataframe for meta analysis of proportions</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot.html">forest_plot()</a></code>
 
         </dt>
         <dd>Basic forest plot</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_delay_int.html">forest_plot_delay_int()</a></code>
 
         </dt>
         <dd>Create forest plot for human delays</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_doubling_time.html">forest_plot_doubling_time()</a></code>
 
         </dt>
         <dd>Forest plot for doubling time</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_incubation_period.html">forest_plot_incubation_period()</a></code>
 
         </dt>
         <dd>Create forest plot for incubation period</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_infectious_period.html">forest_plot_infectious_period()</a></code>
 
         </dt>
         <dd>Create forest plot for infectious period</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_r0.html">forest_plot_r0()</a></code>
 
         </dt>
         <dd>forest_plot_r0 function</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_rt.html">forest_plot_rt()</a></code>
 
         </dt>
         <dd>Generate a forest plot for effective reproduction number (Rt)</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="forest_plot_serial_interval.html">forest_plot_serial_interval()</a></code>
 
         </dt>
         <dd>Create forest plot for serial interval</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_key_columns.html">get_key_columns()</a></code>
 
         </dt>
         <dd>Subset the epidemiological parameter columns by parameter type</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_parameter.html">get_parameter()</a></code>
 
         </dt>
         <dd>retrieve all parameters of specified type or class</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="get_specific.html">get_incubation_period()</a></code> <code><a href="get_specific.html">get_serial_interval()</a></code> <code><a href="get_specific.html">get_generation_time()</a></code> <code><a href="get_specific.html">get_delays()</a></code> <code><a href="get_specific.html">get_cfr()</a></code> <code><a href="get_specific.html">get_risk_factors()</a></code> <code><a href="get_specific.html">get_genomic()</a></code> <code><a href="get_specific.html">get_reproduction_number()</a></code> <code><a href="get_specific.html">get_seroprevalence()</a></code> <code><a href="get_specific.html">get_doubling_time()</a></code> <code><a href="get_specific.html">get_attack_rate()</a></code> <code><a href="get_specific.html">get_growth_rate()</a></code> <code><a href="get_specific.html">get_overdispersion()</a></code> <code><a href="get_specific.html">get_relative_contribution()</a></code>
 
         </dt>
         <dd>Retrieve all incubation period parameters for a given pathogen</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="invert_inverse_params.html">invert_inverse_params()</a></code>
 
         </dt>
         <dd>Inverts the values of selected parameters in a data frame. Sometimes parameters are reported in inverse form (e.g., a delay might be reported as per day instead of days). Here we carry out a very simple transformation to convert these to the correct form by inverting the parameter value and the uncertainty bounds. This may not be appropriate in all cases, and must be checked on a case-by-case basis. This function takes a data frame as input and inverts the values of selected parameters. The selected parameters are identified by the column 'inverse_param'. The function performs the following operations: <ul><li><p>Inverts the parameter values of the selected parameters.</p></li> <li><p>Swaps the upper and lower bounds of the selected parameters.</p></li> <li><p>Inverts the uncertainty values of the selected parameters.</p></li> <li><p>Updates the logical vector to indicate that the parameters are no longer inverted.</p></li> <li><p>Does not change the unit of the parameters, as it remains the same as the original parameter.</p></li> </ul></dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="load_epidata.html">load_epidata()</a></code>
 
         </dt>
         <dd>Retrieve pathogen-specific data</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="load_epidata_raw.html">load_epidata_raw()</a></code>
 
         </dt>
         <dd>Loads raw data for a particular pathogen</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="make_unique_id.html">make_unique_id()</a></code>
 
         </dt>
         <dd>Ensure that each article gets a unique id across all tables</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_article.html">marburg_article</a></code>
 
         </dt>
         <dd>Data on the articles identified and included in the systematic review of articles related to Marburg virus disease.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_dropdown_models.html">marburg_dropdown_models</a></code>
 
         </dt>
         <dd>Dropdown menu options for model extractions in the systematic review of articles related to Marburg virus disease (MVD).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_dropdown_outbreaks.html">marburg_dropdown_outbreaks</a></code>
 
         </dt>
         <dd>Dropdown menu options for outbreak extractions in the systematic review of articles related to Marburg virus disease (MVD).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_dropdown_parameters.html">marburg_dropdown_parameters</a></code>
 
         </dt>
         <dd>Dropdown menu options for parameter extractions in the systematic review of articles related to Marburg virus disease (MVD).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_model.html">marburg_model</a></code>
 
         </dt>
         <dd>Data on the models identified in the systematic review of articles related to Marburg virus disease.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_outbreak.html">marburg_outbreak</a></code>
 
         </dt>
         <dd>Data on the outbreaks identified in the systematic review of articles related to Marburg virus disease.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="marburg_parameter.html">marburg_parameter</a></code>
 
         </dt>
         <dd>Data on the parameters identified in the systematic review of articles related to Marburg virus disease.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="mark_multiple_estimates.html">mark_multiple_estimates()</a></code>
 
         </dt>
         <dd>Distinguish multiple estimates from the same study</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="model_column_type.html">model_column_type()</a></code>
 
         </dt>
         <dd>model_column_type</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="outbreak_column_type.html">outbreak_column_type()</a></code>
 
         </dt>
         <dd>outbreak_column_type</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="param_pm_uncertainty.html">param_pm_uncertainty()</a></code>
 
         </dt>
         <dd>Update parameter uncertainty columns in a data frame</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="parameter_column_type.html">parameter_column_type()</a></code>
 
         </dt>
         <dd>parameter_column_type</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="parameter_palette.html">parameter_palette()</a></code>
 
         </dt>
         <dd>Define a consistent color palette for use in figures</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="pretty_article_label.html">pretty_article_label()</a></code>
 
         </dt>
         <dd>Make pretty labels for articles</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="priority_pathogens.html">priority_pathogens()</a></code>
 
         </dt>
         <dd>priority_pathogens</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="qa_questions.html">qa_questions()</a></code>
 
         </dt>
         <dd>Quality assessment questionnaire This function returns the list of 7 questions used to assess quality of articles.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="reorder_studies.html">reorder_studies()</a></code>
 
         </dt>
         <dd>Reorder articles based on parameter value</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="reparam_gamma.html">reparam_gamma()</a></code>
 
         </dt>
         <dd>Reparameterize Gamma Distribution</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="shape_palette.html">shape_palette()</a></code>
 
         </dt>
         <dd>shape_palette function</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="short_parameter_type.html">short_parameter_type()</a></code>
 
         </dt>
         <dd>Short labels parameters for use in figures</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="theme_epireview.html">theme_epireview()</a></code>
 
         </dt>
         <dd>Plotting theme for epireview A standard theme for figures in epireview.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="update_article_info.html">update_article_info()</a></code>
 
         </dt>
         <dd>Include key article information when DOI is missing</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="value_type_palette.html">value_type_palette()</a></code>
 
@@ -362,7 +411,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
