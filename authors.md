@@ -39,7 +39,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mrc-ide/epireview/blob/v1.4.5/inst/CITATION)
+[`inst/CITATION`](https://github.com/mrc-ide/epireview/blob/main/inst/CITATION)
 
 Naidoo T, Nash R, Morgenstern C, Doohan P, McCabe R, Lambert J, Sheppard
 R, Santoni C, Rawson T, Ruybal-Pesántez S, Unwin J, Cuomo-Dannenburg G,

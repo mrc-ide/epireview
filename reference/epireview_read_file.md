@@ -18,7 +18,7 @@ epireview_read_file(fname, ...)
 - ...:
 
   Additional arguments to be passed to
-  [`vroom`](https://vroom.r-lib.org/reference/vroom.html).
+  [`vroom`](https://vroom.tidyverse.org/reference/vroom.html).
 
 ## Value
 
