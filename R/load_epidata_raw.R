@@ -82,7 +82,7 @@ load_epidata_raw <- function(pathogen, table = c(
     }
     out <- epireview_read_file(
       fname,
-      col_types = col_types, col_select = colnames(tmp)
+      col_types = col_types, col_select = cols
     )
   }
   out

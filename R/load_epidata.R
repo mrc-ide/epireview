@@ -20,6 +20,20 @@
 #' @export
 #' @author Sangeeta Bhatia
 short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
+
+  cols_needed <- c("other_delay_start", "other_delay_end")
+  cols_missing <- FALSE
+  if (! all(cols_needed %in% colnames(x))) {
+    cols_missing <- TRUE
+    cli_alert_warning(
+      "The dataset does not contain the columns `other_delay_start` and/or
+       `other_delay_end`. Parameter types
+       `Human delay - other human delay (go to section)` and
+       `Human delay - time symptom to outcome`, if they exist, will not be
+       renamed."
+    )
+  }
+  
   x$other_delay <- NA_character_
   idx <- x$parameter_type %in% "Human delay - time symptom to outcome" &
     x$riskfactor_outcome %in% "Death"
@@ -30,14 +44,19 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
   x$other_delay[idx] <- "Time symptom to outcome (Other)"
 
   idx <- x$parameter_type %in% "Human delay - other human delay (go to section)"
-  x$other_delay[idx] <- paste0(
-    tolower(gsub("Other: ", "", x$other_delay_start[idx])), " to ",
-    tolower(gsub("Other: ", "", x$other_delay_end[idx]))
-  )
-  x$parameter_type[idx] <- paste0("Human delay - ", x$other_delay[idx])
+  if (!cols_missing) {
+    x$other_delay[idx] <- paste0(
+      tolower(gsub("Other: ", "", x$other_delay_start[idx])), " to ",
+      tolower(gsub("Other: ", "", x$other_delay_end[idx]))
+    )
+    x$parameter_type[idx] <- paste0("Human delay - ", x$other_delay[idx])
 
-  idx <- x$parameter_type %in% "Human delay - time symptom to outcome"
-  x$parameter_type[idx] <- paste0("Human delay - ", tolower(x$other_delay[idx]))
+    idx <- x$parameter_type %in% "Human delay - time symptom to outcome"
+    x$parameter_type[idx] <- paste0(
+      "Human delay - ", tolower(x$other_delay[idx])
+    )
+    
+  }
 
   if (!missing(parameter_type_full) & !missing(parameter_type_short)) {
     idx <- match(x$parameter_type, parameter_type_full)
