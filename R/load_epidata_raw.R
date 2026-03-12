@@ -82,7 +82,7 @@ load_epidata_raw <- function(pathogen, table = c(
     }
     out <- epireview_read_file(
       fname,
-      col_types = col_types, col_select = cols
+      col_types = col_types, col_select = colnames(tmp)
     )
   }
   out
@@ -297,7 +297,8 @@ parameter_column_type <- function() {
     survey_date = col_character(),
     article_qa_score = col_double(),
     other_delay_start = col_character(),
-    other_delay_end = col_character()
+    other_delay_end = col_character(),
+    pathogen = col_character()
   )
 
   out
