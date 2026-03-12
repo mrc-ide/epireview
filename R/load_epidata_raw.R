@@ -295,7 +295,9 @@ parameter_column_type <- function() {
     survey_start_date = col_character(),
     survey_end_date = col_character(),
     survey_date = col_character(),
-    article_qa_score = col_double()
+    article_qa_score = col_double(),
+    other_delay_start = col_character(),
+    other_delay_end = col_character()
   )
 
   out

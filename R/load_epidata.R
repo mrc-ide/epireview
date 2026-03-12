@@ -23,6 +23,7 @@ short_parameter_type <- function(x, parameter_type_full, parameter_type_short) {
 
   cols_needed <- c("other_delay_start", "other_delay_end")
   cols_missing <- FALSE
+
   if (! all(cols_needed %in% colnames(x))) {
     cols_missing <- TRUE
     cli_alert_warning(
