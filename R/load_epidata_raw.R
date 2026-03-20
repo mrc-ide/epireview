@@ -230,6 +230,7 @@ parameter_column_type <- function() {
     parameter_value_type = col_character(),
     parameter_uncertainty_single_value = col_double(),
     parameter_uncertainty_singe_type = col_character(),
+    parameter_uncertainty_single_type = col_character(),
     parameter_uncertainty_lower_value = col_double(),
     parameter_uncertainty_upper_value = col_double(),
     parameter_uncertainty_type = col_character(),
