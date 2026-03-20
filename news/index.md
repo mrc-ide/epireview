@@ -1,5 +1,9 @@
 # Changelog
 
+## epireview 1.4.6
+
+- Added Nipah data
+
 ## epireview 1.4.5
 
 - Added Zika data sets

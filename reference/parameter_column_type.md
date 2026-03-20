@@ -55,6 +55,9 @@ parameter_column_type()
 #> $parameter_uncertainty_singe_type
 #> <collector_character>
 #> 
+#> $parameter_uncertainty_single_type
+#> <collector_character>
+#> 
 #> $parameter_uncertainty_lower_value
 #> <collector_double>
 #> 
