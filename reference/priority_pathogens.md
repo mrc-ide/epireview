@@ -38,7 +38,7 @@ priority_pathogens()
 #> 3    lassa              5414                157    10.1101/2024.03.23.24304596
 #> 4     sars             14929                288    10.1101/2024.08.13.24311934
 #> 5     zika             27491                574    10.1101/2025.07.10.25331254
-#> 6    nipah              2863                119 10.64898/2026.03.19.26348815v1
+#> 6    nipah              1970                119 10.64898/2026.03.19.26348815v1
 #>         articles_file           params_file       models_file
 #> 1 marburg_article.csv marburg_parameter.csv marburg_model.csv
 #> 2  ebola_articles.csv  ebola_parameters.csv  ebola_models.csv
