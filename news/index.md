@@ -2,6 +2,10 @@
 
 ## epireview 1.4.6
 
+Added two additional parameters for Ebola BVD strain
+
+## epireview 1.4.6
+
 - Added Nipah data
 
 ## epireview 1.4.5

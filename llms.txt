@@ -22,6 +22,7 @@ submitted via a pull-request and will be checked by our team.
 To install the latest version of epireview, use:
 
 ``` r
+
 remotes::install_github('mrc-ide/epireview')
 ```
 
@@ -30,6 +31,7 @@ remotes::install_github('mrc-ide/epireview')
 To load pathogen-specific data, do
 
 ``` r
+
 ebola <- epireview::load_epidata("ebola")
 ```
 
@@ -41,6 +43,7 @@ outbreaks, models).
 To visualise parameter values,
 
 ``` r
+
 params <- ebola[["params"]]
 forest_plot_rt(params, col_by = "population_country", shape_by = "parameter_value_type")
 ```
@@ -48,6 +51,7 @@ forest_plot_rt(params, col_by = "population_country", shape_by = "parameter_valu
 Some other functions of interest are
 
 ``` r
+
 forest_plot_r0(params)
 forest_plot_serial_interval(params)
 forest_plot_incubation_period(params)
@@ -112,18 +116,18 @@ become available.
 
 ## Pathogen overview and timeline
 
-| Pathogen                                | Titles & Abstracts screened | Contact                                     | Living review                                                                       | last lit review update | doi                                                              |
-|-----------------------------------------|----------------------------:|---------------------------------------------|-------------------------------------------------------------------------------------|------------------------|------------------------------------------------------------------|
-| Marburg virus                           |                       4,460 | <cm401@ic.ac.uk>, <gc4018@ic.ac.uk>         | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html) | Mar 2023               | <https://doi.org/10.1016/S1473-3099(23)00515-7>                  |
-| Ebola virus                             |                      14,690 | <hunwin@ic.ac.uk>, <rknash@ic.ac.uk>        |                                                                                     | Jul 2023               | <https://doi.org/10.1016/S1473-3099(24)00374-8>                  |
-| Lassa Mammarenavirus                    |                       2,817 | <pd315@ic.ac.uk>, <cm401@ic.ac.uk>          | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html)   | Jun 2024               | <https://doi.org/10.1016/S2214-109X(24)00379-6>                  |
-| Nipah virus                             |                        1970 | <s.bhatia@imperial.ac.uk>, <tmn21@ic.ac.uk> |                                                                                     | Mar 2025               | <https://www.medrxiv.org/content/10.64898/2026.03.19.26348815v1> |
-| SARS-CoV-1                              |                      14,929 | <acori@ic.ac.uk>, <cm401@ic.ac.uk>          | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html)    | Jun 2024               | <https://doi.org/10.1101/2024.08.13.24311934>                    |
-| Nairo virus (CCHF)                      |                       1,967 | <dn620@ic.ac.uk>, <svanelsl@ic.ac.uk>       |                                                                                     | 2019                   |                                                                  |
-| Zika virus                              |                       4,518 | <kem22@ic.ac.uk>, <av1421@ic.ac.uk>         |                                                                                     | Oct 2024               | <https://doi.org/10.1101/2025.07.10.25331254>                    |
-| Rift Valley Fever Virus                 |                       3,341 | <gc.4018@ic.ac.uk>                          |                                                                                     | 2019                   |                                                                  |
-| MERS-CoV                                |                      10,382 | <rom116@ic.ac.uk>                           |                                                                                     | 2019                   |                                                                  |
-| Comprehensive paper comparing pathogens |                      47,115 | <acori@ic.ac.uk>                            |                                                                                     |                        |                                                                  |
+| Pathogen | Titles & Abstracts screened | Contact | Living review | last lit review update | doi |
+|----|---:|----|----|----|----|
+| Marburg virus | 4,460 | <cm401@ic.ac.uk>, <gc4018@ic.ac.uk> | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_marburg.html) | Mar 2023 | <https://doi.org/10.1016/S1473-3099(23)00515-7> |
+| Ebola virus | 14,690 | <hunwin@ic.ac.uk>, <rknash@ic.ac.uk> |  | Jul 2023 | <https://doi.org/10.1016/S1473-3099(24)00374-8> |
+| Lassa Mammarenavirus | 2,817 | <pd315@ic.ac.uk>, <cm401@ic.ac.uk> | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_lassa.html) | Jun 2024 | <https://doi.org/10.1016/S2214-109X(24)00379-6> |
+| Nipah virus | 1970 | <s.bhatia@imperial.ac.uk>, <tmn21@ic.ac.uk> |  | Mar 2025 | <https://www.medrxiv.org/content/10.64898/2026.03.19.26348815v1> |
+| SARS-CoV-1 | 14,929 | <acori@ic.ac.uk>, <cm401@ic.ac.uk> | [link](https://mrc-ide.github.io/priority-pathogens/articles/pathogen_sars.html) | Jun 2024 | <https://doi.org/10.1101/2024.08.13.24311934> |
+| Nairo virus (CCHF) | 1,967 | <dn620@ic.ac.uk>, <svanelsl@ic.ac.uk> |  | 2019 |  |
+| Zika virus | 4,518 | <kem22@ic.ac.uk>, <av1421@ic.ac.uk> |  | Oct 2024 | <https://doi.org/10.1101/2025.07.10.25331254> |
+| Rift Valley Fever Virus | 3,341 | <gc.4018@ic.ac.uk> |  | 2019 |  |
+| MERS-CoV | 10,382 | <rom116@ic.ac.uk> |  | 2019 |  |
+| Comprehensive paper comparing pathogens | 47,115 | <acori@ic.ac.uk> |  |  |  |
 
 If you are interested in adding any other pathogen to the database
 please feel free to [contact
