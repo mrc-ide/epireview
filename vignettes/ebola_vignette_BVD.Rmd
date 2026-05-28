@@ -27,49 +27,14 @@ knitr::opts_chunk$set(
 
 # --- Core data wrangling ---
 library(tidyverse)
-library(readxl)
-library(stringr)
 
 # --- Epidemiological tools ---
 library(epireview)
-library(metafor)
-library(meta)
-library(estmeansd)
-library(mixdist)
-library(epitrix)
 
 # --- Visualisation ---
 library(ggplot2)
-library(ggsci)
-library(ggrepel)
-library(ggforce)
-library(ggpubr)
-library(ggpattern)
-library(patchwork)
-library(cowplot)
-library(harrypotter)
-library(scales)
-library(ragg)
-library(png)
-library(grid)
-library(gridExtra)
-
-# --- Spatial ---
-library(sf)
-library(ggspatial)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(maps)
-library(tidygeocoder)
-library(countrycode)
-
 # --- Tables ---
 library(DT)
-library(gt)
-
-# --- Database ---
-library(RSQLite)
-library(gpkg)
 
 TEXT_SIZE <- 11
 
