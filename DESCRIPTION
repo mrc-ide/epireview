@@ -35,6 +35,7 @@ Imports:
     cli,
     vroom
 Suggests:
+    DT,
     knitr,
     lifecycle,
     tidyverse,

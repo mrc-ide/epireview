@@ -14,6 +14,10 @@ output:
     theme: flatly
     highlight: tango
     code_folding: hide
+vignette: >
+  %\VignetteIndexEntry{Epidemiological Parameters: Ebola Bundibugyo Virus (BVD)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -33,6 +37,7 @@ library(epireview)
 
 # --- Visualisation ---
 library(ggplot2)
+
 # --- Tables ---
 library(DT)
 
