@@ -45,6 +45,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+Config/Needs/website:DT, tidyverse, ggplot2
 URL: https://mrc-ide.github.io/epireview/
 LazyData: true
 BugReports: https://github.com/mrc-ide/epireview/issues
