@@ -306,7 +306,14 @@ human delays, mutations, risk factors) and information on population settings.
 
 ---
 
-## Results
+## Results {.tabset .tabset-pills}
+
+> **How to navigate:** Use the tabs below to switch between the main figure
+> and the parameter tables. Click **Figure** to view the parameter plot,
+> or select any of the **Table** tabs to explore, filter, and export the
+> underlying data. Click **Previous** and **Next** to explore all tables
+> entries. Click on **CSV** or **Excel** to download the relative data or
+> copy the data by clicking on **Copy**.
 
 ### Figure
 
@@ -314,29 +321,21 @@ human delays, mutations, risk factors) and information on population settings.
 knitr::include_graphics("EBOLA_plot.png")
 ```
 
-### Tables {.tabset .tabset-pills}
-
-> **How to navigate:** Use the tabs below to switch between the parameter tables. 
-> Select any of the **Table** tabs to explore, filter, and export the
-> underlying data. Click **Previous** and **Next** to explore all tables
-> entries. Click on **CSV** or **Excel** to download the relative data or
-> copy the data by clicking on **Copy**.
-
-#### Table 1 — Reference Papers
+### Table 1 — Reference Papers
 
 ```{r table-references, echo=FALSE}
 df <- read.csv("Summary_tab_Bundibugyo.csv")
 make_table(df, caption = "Table 1. Reference papers included in the BVD parameter review.")
 ```
 
-#### Table 2 — Parameters
+### Table 2 — Parameters
 
 ```{r table-parameters, echo=FALSE}
 df2 <- read.csv("EBOLA_BVD_pars.csv")
 make_table(df2, caption = "Table 2. Human delays, reproduction numbers, mutations, CFRs and attack rates extracted for Ebola Bundibugyo virus.")
 ```
 
-#### Table 3 — Risk Factors
+### Table 3 — Risk Factors
 
 ```{r table-riskfactors, echo=FALSE}
 df3 <- read.csv("EBOLA_BVD_riskfactors.csv")
