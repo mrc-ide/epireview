@@ -1,4 +1,8 @@
-# epireview 1.4.6
+# epireview 1.4.8
+
+Minor corrections to parameters for Ebola BVD strain
+
+# epireview 1.4.7
 
 Added two additional parameters for Ebola BVD strain
 
