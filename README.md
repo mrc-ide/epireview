@@ -9,8 +9,9 @@
 <!-- badges: end -->
 
 
-_Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
-Update 29 May 2026: We have compiled an overview of Bundibugyo virus disease parameters (collected as part of our ([published Ebola review](https://doi.org/10.1016/S1473-3099(24)00374-8)) ([here](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.html)). Please check back here for further updates throughout the ongoing outbreak. 
+Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
+
+Update 29 May 2026: We have compiled an [overview of Bundibugyo virus disease parameters](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.html) (collected as part of our [published Ebola review](https://doi.org/10.1016/S1473-3099(24)00374-8) ). Please check back here for further updates throughout the ongoing outbreak. 
 
 epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
