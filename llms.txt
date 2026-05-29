@@ -4,14 +4,14 @@
 
 *Please note that epireview is currently under active development. This
 means that data format, software interface, and features are evolving
-and are likely to change. The version used in our publication on Marburg
-virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424))
-is tagged as V0.1.0 and is available
-[here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You
-can use this version and accompanying data (with appropriate citation)
-but if you plan to make extensive use of epireview, please first get in
-touch with by
-[email](https://mrc-ide.github.io/epireview/s.bhatia@imperial.ac.uk).*
+and are likely to change.*
+
+*Update 29 May 2026: We have compiled an [overview of Bundibugyo virus
+disease
+parameters](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.html)
+(collected as part of our [published Ebola
+review](https://doi.org/10.1016/S1473-3099(24)00374-8) ). Please check
+back here for further updates throughout the ongoing outbreak.*
 
 epireview is a tool to obtain the latest data, figures and tables from
 the Pathogen Epidemiology Review Group (PERG). This package also
@@ -132,6 +132,15 @@ become available.
 If you are interested in adding any other pathogen to the database
 please feel free to [contact
 us](https://mrc-ide.github.io/epireview/s.bhatia@imperial.ac.uk).
+
+*Note that the version of epireview used in our publication on Marburg
+virus disease ([paper](https://doi.org/10.1016/S1473-3099(23)00515-7))
+is tagged as V0.1.0 and is available
+[here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You
+can use this version and accompanying data (with appropriate citation)
+but if you plan to make extensive use of epireview, please first get in
+touch with by
+[email](https://mrc-ide.github.io/epireview/s.bhatia@imperial.ac.uk).*
 
 ## License
 
@@ -356,5 +365,5 @@ the public domain. See the `LICENSE-CC0` file for details.
 
 ### All vignettes
 
-- [epireview](https://mrc-ide.github.io/epireview/articles/epireview_overview.md):
-- [load-filter-view-epidata](https://mrc-ide.github.io/epireview/articles/load-filter-view-epidata.md):
+- [Epidemiological Parameters: Ebola Bundibugyo Virus
+  (BVD)](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.md):

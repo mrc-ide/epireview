@@ -2,9 +2,8 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  epireview_overview: epireview_overview.html
-  load-filter-view-epidata: load-filter-view-epidata.html
-last_built: 2026-05-28T13:10Z
+  ebola_vignette_BVD: ebola_vignette_BVD.html
+last_built: 2026-05-29T12:18Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles

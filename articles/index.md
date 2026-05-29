@@ -2,5 +2,5 @@
 
 ### All vignettes
 
-- [epireview](https://mrc-ide.github.io/epireview/articles/epireview_overview.md):
-- [load-filter-view-epidata](https://mrc-ide.github.io/epireview/articles/load-filter-view-epidata.md):
+- [Epidemiological Parameters: Ebola Bundibugyo Virus
+  (BVD)](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.md):

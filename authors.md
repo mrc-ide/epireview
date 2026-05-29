@@ -36,6 +36,8 @@
 - **Shazia Ruybal-Pesántez**. Author.
   [](https://orcid.org/0000-0002-0495-179X)
 
+- **Anna Vicco**. Author. [](https://orcid.org/0000-0002-6555-3090)
+
 ## Citation
 
 Source:
