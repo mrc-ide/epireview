@@ -4,7 +4,7 @@ subtitle: "Based on the Epireview database — Nash et al. (2024)"
 author:
   - name: "A.Vicco, R. McCabe, T. Naidoo, R.K. Nash, S. Bhatia, H.J.T. Unwin, A. Cori"
   - name: "on behalf of the PERG group"
-date: "28/05/2026"
+date: "29/05/2026"
 output:
   html_document:
     toc: true
@@ -19,6 +19,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+**DOI:** https://doi.org/10.5281/zenodo.20443136
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -66,6 +68,11 @@ make_table <- function(df, caption = "") {
 ```{r load-data, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 # Uncomment to install the package from GitHub:
 # remotes::install_github("mrc-ide/epireview@develop")
+
+library(tidyverse)
+library(epireview)
+library(ggplot2)
+library(DT)
 
 articles <- epireview::load_epidata_raw("ebola", "article")
 models   <- epireview::load_epidata_raw("ebola", "model")
