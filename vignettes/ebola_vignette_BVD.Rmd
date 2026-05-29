@@ -67,7 +67,7 @@ make_table <- function(df, caption = "") {
 <!-- Runs code first -->
 ```{r load-data, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 # Uncomment to install the package from GitHub:
-# remotes::install_github("mrc-ide/epireview@develop")
+# remotes::install_github("mrc-ide/epireview")
 
 library(tidyverse)
 library(epireview)
