@@ -3,15 +3,15 @@
 <a href="https://github.com/mrc-ide/epireview"><img src="man/figures/hex-epireview.png" align="right" width="200" style="padding: 20px;"></a>
 
 <!-- badges: start -->
-[![R build status](https://github.com/mrc-ide/epireview/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/epireview/actions)
+[![R-CMD-check](https://github.com/mrc-ide/epireview/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrc-ide/epireview/actions/workflows/R-CMD-check.yaml)
 [![DOI](https://zenodo.org/badge/655602716.svg)](https://zenodo.org/badge/latestdoi/655602716)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 
-_Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change.
-The version used in our publication on Marburg virus disease ([preprint](https://doi.org/10.1101/2023.07.10.23292424)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with by [email](s.bhatia@imperial.ac.uk)._
+_Please note that epireview is currently under active development. This means that data format, software interface, and features are evolving and are likely to change._
 
+_Update 29 May 2026: We have compiled an [overview of Bundibugyo virus disease parameters](https://mrc-ide.github.io/epireview/articles/ebola_vignette_BVD.html) (collected as part of our [published Ebola review](https://doi.org/10.1016/S1473-3099(24)00374-8) ). Please check back here for further updates throughout the ongoing outbreak._
 
 epireview is a tool to obtain the latest data, figures and tables from the Pathogen Epidemiology Review Group (PERG). This package also contains functions to update pathogen-specific databases with new data from peer-reviewed papers as they become available. This can be submitted via a pull-request and will be checked by our team.
 
@@ -77,6 +77,9 @@ One output of this project will be a database initially populated with all the i
 | Comprehensive paper comparing pathogens |47,115| acori@ic.ac.uk||||
 
 If you are interested in adding any other pathogen to the database please feel free to [contact us](s.bhatia@imperial.ac.uk).
+
+_Note that the version of epireview used in our publication on Marburg virus disease ([paper](https://doi.org/10.1016/S1473-3099(23)00515-7)) is tagged as V0.1.0 and is available [here](https://github.com/mrc-ide/epireview/releases/tag/v0.1.0). You can use this version and accompanying data (with appropriate citation) but if you plan to make extensive use of epireview, please first get in touch with by [email](s.bhatia@imperial.ac.uk)._
+
 
 ## License
 
