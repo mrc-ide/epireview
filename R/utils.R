@@ -53,7 +53,7 @@ check_df_for_meta <- function(df, cols_needed) {
   remove <- sum(idx)
   if (any(idx)) {
     cli_inform("parameter_value must be present if parameter_unit is present.
-            {remove} row{?s} with non-NA parameter_value and NA parameter_unit
+            {remove} row{?s} with NA parameter_value and non-NA parameter_unit
             will be removed.")
     df <- df[!(is.na(df$parameter_value) & !is.na(df$parameter_unit)), ]
   }
