@@ -9,7 +9,7 @@ filter_df_for_metamean(df)
 \arguments{
 \item{df}{a parameter dataframe. This must have columns for each of the
 following: parameter_value, parameter_unit, population_sample_size,
-parameter_value_type, parameter_uncertainty_singe_type,
+parameter_value_type, parameter_uncertainty_single_type,
 parameter_uncertainty_type, parameter_uncertainty_lower_value,
 parameter_uncertainty_upper_value. This will typically be the \code{params}
 data.frame from the output of \code{load_epidata}.}

@@ -29,7 +29,7 @@ df <- data.frame(
   parameter_uncertainty_lower_value = c(5, 15, 25),
   parameter_uncertainty_upper_value = c(15, 25, 35),
   parameter_uncertainty_type = c(NA, NA, NA),
-  parameter_uncertainty_singe_type = c("Standard Deviation", "Standard Error", NA)
+  parameter_uncertainty_single_type = c("Standard Deviation", "Standard Error", NA)
 )
 updated_df <- param_pm_uncertainty(df)
 updated_df

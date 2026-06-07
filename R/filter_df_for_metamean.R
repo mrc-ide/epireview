@@ -11,7 +11,7 @@
 #' reported for each parameter value.
 #' @param df a parameter dataframe. This must have columns for each of the
 #' following: parameter_value, parameter_unit, population_sample_size,
-#' parameter_value_type, parameter_uncertainty_singe_type,
+#' parameter_value_type, parameter_uncertainty_single_type,
 #' parameter_uncertainty_type, parameter_uncertainty_lower_value,
 #' parameter_uncertainty_upper_value. This will typically be the `params`
 #' data.frame from the output of \code{load_epidata}.
@@ -36,7 +36,7 @@
 filter_df_for_metamean <- function(df) {
   cols_needed <- c(
     "parameter_value", "parameter_unit", "population_sample_size",
-    "parameter_value_type", "parameter_uncertainty_singe_type",
+    "parameter_value_type", "parameter_uncertainty_single_type",
     "parameter_uncertainty_type", "parameter_uncertainty_lower_value",
     "parameter_uncertainty_upper_value"
   )
@@ -47,7 +47,7 @@ filter_df_for_metamean <- function(df) {
   df <- df[!is.na(df[["parameter_value"]]), ]
   df <- df[df[["parameter_value_type"]] %in% "Mean" &
     grepl(
-      x = tolower(df[["parameter_uncertainty_singe_type"]]),
+      x = tolower(df[["parameter_uncertainty_single_type"]]),
       pattern = "standard deviation"
     ) |
     df[["parameter_value_type"]] %in% "Median" &

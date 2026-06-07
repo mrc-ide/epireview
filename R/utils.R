@@ -136,7 +136,7 @@ check_ulim <- function(df, ulim, param) {
 #'   parameter_uncertainty_lower_value = c(5, 15, 25),
 #'   parameter_uncertainty_upper_value = c(15, 25, 35),
 #'   parameter_uncertainty_type = c(NA, NA, NA),
-#'   parameter_uncertainty_singe_type = c("Standard Deviation", "Standard Error", NA)
+#'   parameter_uncertainty_single_type = c("Standard Deviation", "Standard Error", NA)
 #' )
 #' updated_df <- param_pm_uncertainty(df)
 #' updated_df
@@ -210,7 +210,7 @@ param_pm_uncertainty <- function(df) {
 
   df$uncertainty_type <- NA
   df$uncertainty_type[single_uc_not_na] <-
-    df$parameter_uncertainty_singe_type[single_uc_not_na]
+    df$parameter_uncertainty_single_type[single_uc_not_na]
   df$uncertainty_type[paired_not_na] <-
     df$parameter_uncertainty_type[paired_not_na]
   df$uncertainty_type[!paired_not_na & range_not_na] <- "Range**"
@@ -246,8 +246,8 @@ reparam_gamma <- function(df) {
   )
   ## for these rows, set parameter_value_type to "Mean"
   df$parameter_value_type[idx] <- "Mean"
-  ## for these rows, set parameter_uncertainty_singe_type to "Standard Deviation"
-  df$parameter_uncertainty_singe_type[idx] <- "Standard Deviation"
+  ## for these rows, set parameter_uncertainty_single_type to "Standard Deviation"
+  df$parameter_uncertainty_single_type[idx] <- "Standard Deviation"
   ## for these rows, get mean and cv using gamma_shapescale2mucv
   new_params <- gamma_shapescale2mucv(
     df$distribution_par1_value[idx],
@@ -262,11 +262,11 @@ reparam_gamma <- function(df) {
   ## we set the parameter_uncertainty_single_value to distribution_par2_value
   idx <- which(
     df$distribution_type == "Gamma" &
-      is.na(df$parameter_uncertainty_singe_type) &
+      is.na(df$parameter_uncertainty_single_type) &
       df$distribution_par2_type == "Mean sd"
   )
   df$parameter_uncertainty_single_value[idx] <- df$distribution_par2_value[idx]
-  df$parameter_uncertainty_singe_type[idx] <- "Standard Deviation"
+  df$parameter_uncertainty_single_type[idx] <- "Standard Deviation"
 
   df
 }

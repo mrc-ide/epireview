@@ -97,7 +97,7 @@ test_that("reparam_gamma correctly reparameterizes the data frame", {
     distribution_par1_value = 1,
     distribution_par2_value = 10,
     parameter_value_type = NA,
-    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_type = NA,
     parameter_uncertainty_single_value = NA
   )
 
@@ -106,7 +106,7 @@ test_that("reparam_gamma correctly reparameterizes the data frame", {
 
   # Check if the reparameterization is correct
   expect_equal(df$parameter_value_type, "Mean")
-  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_type, "Standard Deviation")
   expect_equal(df$parameter_uncertainty_single_value, 10)
   expect_equal(df$parameter_value, 10)
 
@@ -126,7 +126,7 @@ test_that("reparam_gamma correctly reparameterizes the data frame", {
   g <- p[idx, ]
 
   expect_equal(unique(g$parameter_value_type), "Mean")
-  expect_equal(unique(g$parameter_uncertainty_singe_type), "Standard Deviation")
+  expect_equal(unique(g$parameter_uncertainty_single_type), "Standard Deviation")
 
 })
 
@@ -140,7 +140,7 @@ test_that("reparam_gamma handles gamma distribution with Mean sd", {
     distribution_par1_value = 2,
     distribution_par2_value = 3,
     parameter_value_type = NA,
-    parameter_uncertainty_singe_type = NA,
+    parameter_uncertainty_single_type = NA,
     parameter_uncertainty_single_value = NA
   )
 
@@ -148,7 +148,7 @@ test_that("reparam_gamma handles gamma distribution with Mean sd", {
   df <- reparam_gamma(df)
 
   # Check if the reparameterization is correct
-  expect_equal(df$parameter_uncertainty_singe_type, "Standard Deviation")
+  expect_equal(df$parameter_uncertainty_single_type, "Standard Deviation")
   expect_equal(df$parameter_uncertainty_single_value, 3)
 })
 
