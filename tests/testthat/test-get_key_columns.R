@@ -5,6 +5,8 @@ suppressWarnings({
   marburg_params <- marburg_data$params
   ebola_data <- epireview::load_epidata("ebola")
   ebola_params <- ebola_data$params
+  mers_data <- epireview::load_epidata("mers")
+  mers_params <- mers_data$params
 })
 
 test_that("get_key_columns works for lassa cfr", {
@@ -281,11 +283,96 @@ test_that("get_key_columns returns all columns when all_columns = TRUE", {
   expect_lt(ncol(df_key),ncol(df_all))
   expect_identical(dim(df_key),c(440L, 12L))
   ## load_epidata creates an extra column article_info
-  expect_identical(dim(df_all),c(440L, 68L)) 
+  expect_identical(dim(df_all),c(440L, 68L))
 
 })
 
+## MERS tests
+test_that("get_key_columns works for mers cfr", {
+  df <- get_key_columns(data = mers_params, parameter_name = "cfr")
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 12L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "parameter_value", "cfr_ifr_numerator", "cfr_ifr_denominator",
+      "cfr_ifr_method")
+  )
+})
 
+test_that("get_key_columns works for mers delays", {
+  df <- get_key_columns(data = mers_params, parameter_name = "delays")
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 15L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "parameter_value", "parameter_unit", "distribution_type",
+      "distribution_par1_value", "distribution_par2_value", "other_delay_start",
+      "other_delay_end")
+  )
+})
+
+test_that("get_key_columns works for mers sero", {
+  df <- get_key_columns(data = mers_params, parameter_name = "sero")
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 11L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "parameter_value", "cfr_ifr_numerator", "cfr_ifr_denominator")
+  )
+})
+
+test_that("get_key_columns works for mers risk", {
+  df <- get_key_columns(data = mers_params, parameter_name = "risk")
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 12L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "riskfactor_outcome", "riskfactor_name", "riskfactor_significant",
+      "riskfactor_adjusted")
+  )
+})
+
+test_that("get_key_columns works for mers reproduction_number", {
+  df <- get_key_columns(
+    data = mers_params,
+    parameter_name = "reproduction_number"
+  )
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 11L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "parameter_value", "method_r", "parameter_unit")
+  )
+})
+
+test_that("get_key_columns works for mers genomic", {
+  df <- get_key_columns(data = mers_params,  parameter_name = "genomic")
+  expect_s3_class(df, class = "data.frame")
+  expect_identical(dim(df), c(1049L, 13L))
+  expect_identical(
+    colnames(df),
+    c("article_label", "article_info", "population_country","population_sample_size",
+      "population_sample_type", "population_group",
+      "method_disaggregated", "parameter_type",
+      "parameter_value", "parameter_unit", "exponent", "genome_site",
+      "genomic_sequence_available")
+  )
+})
 
 
 

@@ -18,4 +18,5 @@ test_that("load_epidata loads data as expected", {
   # Check that the data loads without error
   expect_no_error(suppressMessages(suppressWarnings(load_epidata("ebola"))))
   expect_no_error(suppressMessages(suppressWarnings(load_epidata("lassa"))))
+  expect_no_error(suppressMessages(suppressWarnings(load_epidata("mers"))))
 })
