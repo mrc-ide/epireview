@@ -115,7 +115,7 @@ load_epidata_raw <- function(pathogen, table = c(
 #' model_column_type
 #' @export
 check_column_types <- function(fname, col_types, raw_colnames) {
-  
+
   tmp_vroom <- epireview_read_file(fname, col_types = col_types)
   tmp_problem <- problems(tmp_vroom)
 
@@ -170,7 +170,7 @@ check_column_types <- function(fname, col_types, raw_colnames) {
 #'
 #' @inheritParams load_epidata_raw
 #' @return A list of column types for the article data frame
-#' @importFrom vroom col_character col_integer col_logical 
+#' @importFrom vroom col_character col_integer col_logical
 #' @seealso parameter_column_type, outbreak_column_type, model_column_type
 #' @export
 article_column_type <- function(pathogen) {
@@ -375,6 +375,9 @@ model_column_type <- function() {
     stoch_deter = col_character(),
     theoretical_model = col_logical(),
     interventions_type = col_character(),
+    model_uncertainty = col_logical(),
+    model_spatial = col_logical(),
+    model_spillover = col_logical(),
     code_available = col_logical(),
     transmission_route = col_character(),
     assumptions = col_character(),
