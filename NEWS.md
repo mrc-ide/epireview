@@ -1,3 +1,12 @@
+# epireview 1.4.9
+
+Corrections to two Ebola Zaire strain parameters:
+
+* Frasso & Lambert 2016 latent period (`021746a2c6159bf249ed733d28b7f79f`): value is reported as a duration in days,
+* Yang et al. 2015  (doi: 10.1098/rsif.2015.0536) - incubation period (`6f5cb18602d0dfec49e4cdbb416f475a`):
+    - Corrects inverse flag: TRUE -> FALSE
+    - Corrects typo in lower bound: 9.34 -> 9.64
+
 # epireview 1.4.8
 
 Minor corrections to parameters for Ebola BVD strain
