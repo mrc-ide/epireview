@@ -1,9 +1,9 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   ebola_vignette_BVD: ebola_vignette_BVD.html
-last_built: 2026-05-29T12:18Z
+last_built: 2026-11-17T16:52Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles

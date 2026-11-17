@@ -43,6 +43,8 @@ number (Rt).
 df <- load_epidata("ebola")[["params"]]
 #> ℹ ebola does not have any extracted outbreaks
 #> information. Outbreaks will be set to NULL.
+#> ! Some parameter types in the data do not have a short
+#> label. Using the full parameter type instead.
 #> ✔ Data loaded for ebola
 forest_plot_rt(df)
 #> Warning: Removed 24 rows containing missing values or values outside the scale range

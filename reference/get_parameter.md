@@ -30,6 +30,8 @@ dataframe with all parameter estimates and columns
 df <- load_epidata(pathogen = "ebola")
 #> ℹ ebola does not have any extracted outbreaks
 #> information. Outbreaks will be set to NULL.
+#> ! Some parameter types in the data do not have a short
+#> label. Using the full parameter type instead.
 #> ✔ Data loaded for ebola
 get_parameter(data = df$params, parameter_name = "Human delay - serial interval")
 #> # A tibble: 19 × 78

@@ -44,6 +44,8 @@ The reordered dataframe
 ebola <- load_epidata("ebola")
 #> ℹ ebola does not have any extracted outbreaks
 #> information. Outbreaks will be set to NULL.
+#> ! Some parameter types in the data do not have a short
+#> label. Using the full parameter type instead.
 #> ✔ Data loaded for ebola
 params <- ebola$params
 rt <- params[params$parameter_type == "Reproduction number (Effective, Re)", ]

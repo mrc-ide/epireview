@@ -42,6 +42,8 @@ A forest plot object.
 df <- load_epidata("ebola")[["params"]]
 #> ℹ ebola does not have any extracted outbreaks
 #> information. Outbreaks will be set to NULL.
+#> ! Some parameter types in the data do not have a short
+#> label. Using the full parameter type instead.
 #> ✔ Data loaded for ebola
 forest_plot_doubling_time(df, ulim = 20, reorder_studies = TRUE)
 #> Warning: The maximum doubling time is 61 ; the ulim is set to 20 . Some points may not

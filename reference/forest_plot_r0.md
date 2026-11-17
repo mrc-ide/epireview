@@ -43,6 +43,8 @@ ggplot2 object.
 df <- load_epidata("ebola")[["params"]]
 #> ℹ ebola does not have any extracted outbreaks
 #> information. Outbreaks will be set to NULL.
+#> ! Some parameter types in the data do not have a short
+#> label. Using the full parameter type instead.
 #> ✔ Data loaded for ebola
 forest_plot_r0(df, ulim = 2.5, reorder_studies = TRUE)
 #> Warning: The maximum basic reproduction number is 10 ; the ulim is set to 2.5 . Some
