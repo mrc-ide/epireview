@@ -3,7 +3,7 @@ pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   ebola_vignette_BVD: ebola_vignette_BVD.html
-last_built: 2026-11-17T16:52Z
+last_built: 2026-11-17T16:54Z
 urls:
   reference: https://mrc-ide.github.io/epireview/reference
   article: https://mrc-ide.github.io/epireview/articles
