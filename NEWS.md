@@ -1,3 +1,7 @@
+# epireview 1.4.6
+
+* Added MERS data sets
+
 # epireview 1.4.5
 
 * Added Zika data sets
