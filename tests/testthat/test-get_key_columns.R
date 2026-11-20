@@ -291,7 +291,7 @@ test_that("get_key_columns returns all columns when all_columns = TRUE", {
 test_that("get_key_columns works for mers cfr", {
   df <- get_key_columns(data = mers_params, parameter_name = "cfr")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 12L))
+  expect_identical(dim(df), c(1045L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -305,7 +305,7 @@ test_that("get_key_columns works for mers cfr", {
 test_that("get_key_columns works for mers delays", {
   df <- get_key_columns(data = mers_params, parameter_name = "delays")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 15L))
+  expect_identical(dim(df), c(1045L, 15L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -320,7 +320,7 @@ test_that("get_key_columns works for mers delays", {
 test_that("get_key_columns works for mers sero", {
   df <- get_key_columns(data = mers_params, parameter_name = "sero")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 11L))
+  expect_identical(dim(df), c(1045L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -333,7 +333,7 @@ test_that("get_key_columns works for mers sero", {
 test_that("get_key_columns works for mers risk", {
   df <- get_key_columns(data = mers_params, parameter_name = "risk")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 12L))
+  expect_identical(dim(df), c(1045L, 12L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -350,7 +350,7 @@ test_that("get_key_columns works for mers reproduction_number", {
     parameter_name = "reproduction_number"
   )
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 11L))
+  expect_identical(dim(df), c(1045L, 11L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
@@ -363,7 +363,7 @@ test_that("get_key_columns works for mers reproduction_number", {
 test_that("get_key_columns works for mers genomic", {
   df <- get_key_columns(data = mers_params,  parameter_name = "genomic")
   expect_s3_class(df, class = "data.frame")
-  expect_identical(dim(df), c(1049L, 13L))
+  expect_identical(dim(df), c(1045L, 13L))
   expect_identical(
     colnames(df),
     c("article_label", "article_info", "population_country","population_sample_size",
